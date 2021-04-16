@@ -1,22 +1,21 @@
 package atdit_ibait_20.database.model.implementation;
 
+import atdit_ibait_20.database.model.AccountingData;
 import atdit_ibait_20.database.model.Person;
 
 public class BasicPerson implements Person {
     private final int Sozialversicherungsnummer;
     private final String Vorname;
     private final String Nachname;
-    private final int GeburtsdatumTag;
-    private final int GeburtsdatumMonat;
-    private final int GeburtsdatumJahr;
+    private final String Geburtsdatum;
+    private final AccountingData accountingData;
 
-    public BasicPerson(int sozialversicherungsnummer, String vorname, String nachname, int geburtsdatumTag, int geburtsdatumMonat, int geburtsdatumJahr) {
-        Sozialversicherungsnummer = sozialversicherungsnummer;
-        Vorname = vorname;
-        Nachname = nachname;
-        GeburtsdatumTag = geburtsdatumTag;
-        GeburtsdatumMonat = geburtsdatumMonat;
-        GeburtsdatumJahr = geburtsdatumJahr;
+    public BasicPerson(int sozialversicherungsnummer, String vorname, String nachname, int geburtsdatumTag, int geburtsdatumMonat, int geburtsdatumJahr, String geburtsdatum, AccountingData accountingData) {
+        this.Sozialversicherungsnummer = sozialversicherungsnummer;
+        this.Vorname = vorname;
+        this.Nachname = nachname;
+        Geburtsdatum = geburtsdatum;
+        this.accountingData = accountingData;
     }
 
     @Override
@@ -33,19 +32,14 @@ public class BasicPerson implements Person {
     public String getNachname() {
         return this.Nachname;
     }
-
     @Override
-    public int getGeburtsdatumTag() {
-        return this.GeburtsdatumTag;
+    public String getGeburtsdatum() {
+        return this.Geburtsdatum;
     }
 
-    @Override
-    public int getGeburtsdatumMonat() {
-        return this.GeburtsdatumMonat;
-    }
 
     @Override
-    public int getGeburtsdatumJahr() {
-        return this.GeburtsdatumJahr;
+    public AccountingData getAccountingData() {
+        return this.accountingData;
     }
 }

@@ -4,7 +4,6 @@ public interface Person {
     public int getSozialversicherungsnummer();
     public String getVorname();
     public String getNachname();
-    public int getGeburtsdatumTag();
-    public int getGeburtsdatumMonat();
-    public int getGeburtsdatumJahr() ;
+    public String getGeburtsdatum();
+    public AccountingData getAccountingData();
 }

@@ -126,9 +126,7 @@ public class BasicGUI {
 
     }
 
-    public static void main (String[] args) {
-        new BasicGUI();
-    }
+
     class ZurückButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if(woBinIch == 1) {
@@ -169,8 +167,8 @@ public class BasicGUI {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            BasicGeburtsdatum neuesGebursDatum = new BasicGeburtsdatum((Interger)GeburtsdatumTag.getSelectedItem(),(Integer)GeburtsdatumMonat.getSelectedItem(),(Integer)GeburtsdatumJahr.getSelectedItem());
-            new BasicPerson((Interger)tfVersicherungsNummer.getText(),tfName.getText(),tfNachName.getText(),neuesGebursDatum,null);
+            //BasicGeburtsdatum neuesGebursDatum = new BasicGeburtsdatum((Integer)GeburtsdatumTag.getSelectedItem(),(Integer)GeburtsdatumMonat.getSelectedItem(),(Integer)GeburtsdatumJahr.getSelectedItem());
+          //  new BasicPerson((Integer)tfVersicherungsNummer.getText(),tfName.getText(),tfNachName.getText(),neuesGebursDatum,null);
 
         }
 

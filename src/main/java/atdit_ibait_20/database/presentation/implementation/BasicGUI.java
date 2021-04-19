@@ -1,5 +1,8 @@
 package atdit_ibait_20.database.presentation.implementation;
 
+import atdit_ibait_20.database.model.implementation.BasicGeburtsdatum;
+import atdit_ibait_20.database.model.implementation.BasicPerson;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -166,7 +169,8 @@ public class BasicGUI {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
+            BasicGeburtsdatum neuesGebursDatum = new BasicGeburtsdatum((Interger)GeburtsdatumTag.getSelectedItem(),(Integer)GeburtsdatumMonat.getSelectedItem(),(Integer)GeburtsdatumJahr.getSelectedItem());
+            new BasicPerson((Interger)tfVersicherungsNummer.getText(),tfName.getText(),tfNachName.getText(),neuesGebursDatum,null);
 
         }
 

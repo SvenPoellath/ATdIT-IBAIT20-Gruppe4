@@ -24,6 +24,7 @@ public class BasicGUI {
     JLabel passwort = new JLabel("Passwort : ");
     JLabel versicherungsNummer = new JLabel("VersicherungsNummer : ");
     JLabel anrede = new JLabel("Anrede : ");
+    JLabel geburtsDatum = new JLabel("Geburtsdatum(tt.mm.jjjj) : ");
 
     JButton registrierenFensterButton = new JButton("Registrieren");
     JButton anmeldenFensterButton = new JButton("Anmelden");
@@ -40,8 +41,6 @@ public class BasicGUI {
     JTextField tfNachName = new JTextField();
     JTextField tfAnmeldeName = new JTextField();
     JTextField tfpasswort = new JTextField();
-    JLabel geburtsDatum = new JLabel("Geburtsdatum(tt.mm.jjjj) : ");
-    JTextField tfGeburtsDatum = new JTextField();
     JTextField tfVersicherungsNummer = new JTextField();
 
     static int woBinIch = 0;
@@ -102,7 +101,6 @@ public class BasicGUI {
         datenPanel.add(tfName);
         datenPanel.add(nachName);
         datenPanel.add(tfNachName);
-
         datenPanel.add(versicherungsNummer);
         datenPanel.add(tfVersicherungsNummer);
         datenPanel.add(passwort);

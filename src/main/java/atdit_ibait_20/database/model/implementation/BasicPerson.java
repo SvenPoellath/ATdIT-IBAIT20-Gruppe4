@@ -7,14 +7,14 @@ public class BasicPerson implements Person {
     private final int Sozialversicherungsnummer;
     private final String Vorname;
     private final String Nachname;
-    private final String Geburtsdatum;
+    private final BasicGeburtsdatum Geburtsdatum;
     private final AccountingData accountingData;
 
-    public BasicPerson(int sozialversicherungsnummer, String vorname, String nachname, int geburtsdatumTag, int geburtsdatumMonat, int geburtsdatumJahr, String geburtsdatum, AccountingData accountingData) {
+    public BasicPerson(int sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, AccountingData accountingData) {
         this.Sozialversicherungsnummer = sozialversicherungsnummer;
         this.Vorname = vorname;
         this.Nachname = nachname;
-        Geburtsdatum = geburtsdatum;
+        this.Geburtsdatum = geburtsdatum;
         this.accountingData = accountingData;
     }
 
@@ -34,7 +34,7 @@ public class BasicPerson implements Person {
     }
     @Override
     public String getGeburtsdatum() {
-        return this.Geburtsdatum;
+        return Geburtsdatum.getGeburtsdatumTag()+"."+ Geburtsdatum.getGeburtsdatumMonat()+"."+ Geburtsdatum.getGeburtsdatumJahr();
     }
 
 

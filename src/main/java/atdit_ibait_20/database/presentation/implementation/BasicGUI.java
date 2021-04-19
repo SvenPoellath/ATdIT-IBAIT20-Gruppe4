@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicButtonListener;
 
 public class BasicGUI {
     JFrame fenster = new JFrame();
@@ -16,7 +15,7 @@ public class BasicGUI {
     JPanel registrierButtonPanel = new JPanel();
     JPanel datenPanel = new JPanel();
     JPanel geburtsDatumsPanel = new JPanel();
-    JPanel zurückPanel = new JPanel();
+    JPanel zurueckPanel = new JPanel();
     JPanel anmeldungsPanel = new JPanel();
     JPanel anmeldungsButtonPanel = new JPanel();
 
@@ -24,14 +23,15 @@ public class BasicGUI {
     JLabel name = new JLabel("Vorname : ");
     JLabel nachName = new JLabel("Nachname : ");
     JLabel anmeldeName = new JLabel("Anmeldename : ");
-    JLabel passwort = new JLabel("Passwort : ");
-    JLabel versicherungsNummer = new JLabel("VersicherungsNummer : ");
+    JLabel anmeldePasswort = new JLabel("Passwort : ");
+    JLabel registrierPasswort = new JLabel("Passwort : ");
+    JLabel versicherungsNummer = new JLabel("Sozialversicherungsnummer : ");
     JLabel anrede = new JLabel("Anrede : ");
     JLabel geburtsDatum = new JLabel("Geburtsdatum(tt.mm.jjjj) : ");
 
     JButton registrierenFensterButton = new JButton("Registrieren");
     JButton anmeldenFensterButton = new JButton("Anmelden");
-    JButton zurückButton = new JButton("<--");
+    JButton zurueckButton = new JButton("<--");
     JButton registrierenButton = new JButton("Registrieren");
     JButton anmeldeButton = new JButton("Anmelden");
 
@@ -43,7 +43,8 @@ public class BasicGUI {
     JTextField tfName = new JTextField();
     JTextField tfNachName = new JTextField();
     JTextField tfAnmeldeName = new JTextField();
-    JTextField tfpasswort = new JTextField();
+    JTextField tfAnmeldePasswort = new JTextField();
+    JTextField tfRegistrierPasswort = new JTextField();
     JTextField tfVersicherungsNummer = new JTextField();
 
     static int woBinIch = 0;
@@ -62,19 +63,19 @@ public class BasicGUI {
         Integer[] monate = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12};
         Integer[] jahre = new Integer[] {1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004};
 
-        titel = new JComboBox<String>(namen);
-        GeburtsdatumTag = new JComboBox<Integer>(tage);
-        GeburtsdatumMonat = new JComboBox<Integer>(monate);
-        GeburtsdatumJahr = new JComboBox<Integer>(jahre);
+        titel = new JComboBox<>(namen);
+        GeburtsdatumTag = new JComboBox<>(tage);
+        GeburtsdatumMonat = new JComboBox<>(monate);
+        GeburtsdatumJahr = new JComboBox<>(jahre);
 
-        ZurückButtonListener zurückButtonListener = new ZurückButtonListener();
+        ZurueckButtonListener zurueckButtonListener = new ZurueckButtonListener();
         AnfangsButtonListener anfangsButtonListener = new AnfangsButtonListener();
         RegistrierButtonListener registrierButtonListener = new RegistrierButtonListener();
         AnmeldeButtonListener anmeldeButtonListener = new AnmeldeButtonListener();
 
         registrierenFensterButton.addActionListener(anfangsButtonListener);
         anmeldenFensterButton.addActionListener(anfangsButtonListener);
-        zurückButton.addActionListener(zurückButtonListener);
+        zurueckButton.addActionListener(zurueckButtonListener);
         registrierenButton.addActionListener(registrierButtonListener);
         anmeldeButton.addActionListener(anmeldeButtonListener);
 
@@ -82,8 +83,8 @@ public class BasicGUI {
         willkommenPanel.setLayout(new FlowLayout());
         eingangsButtonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         eingangsButtonsPanel.setLayout(new GridLayout(0,1));
-        zurückPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 0));
-        zurückPanel.setLayout(new FlowLayout());
+        zurueckPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+        zurueckPanel.setLayout(new FlowLayout());
         registrierButtonPanel.setBorder(BorderFactory.createEmptyBorder(0,30, 10, 30));
         datenPanel.setLayout(new GridLayout(0,2));
         geburtsDatumsPanel.setLayout(new GridLayout(0,3));
@@ -100,23 +101,25 @@ public class BasicGUI {
         eingangsButtonsPanel.add(registrierenFensterButton);
         eingangsButtonsPanel.add(anmeldenFensterButton);
         registrierButtonPanel.add(registrierenButton);
+        datenPanel.add(anrede);
+        datenPanel.add(titel);
         datenPanel.add(name);
         datenPanel.add(tfName);
         datenPanel.add(nachName);
         datenPanel.add(tfNachName);
         datenPanel.add(versicherungsNummer);
         datenPanel.add(tfVersicherungsNummer);
-        datenPanel.add(passwort);
-        datenPanel.add(tfpasswort);
+        datenPanel.add(registrierPasswort);
+        datenPanel.add(tfRegistrierPasswort);
         datenPanel.add(geburtsDatum);
         geburtsDatumsPanel.add(GeburtsdatumTag);
         geburtsDatumsPanel.add(GeburtsdatumMonat);
         geburtsDatumsPanel.add(GeburtsdatumJahr);
-        zurückPanel.add(zurückButton);
+        zurueckPanel.add(zurueckButton);
         anmeldungsPanel.add(anmeldeName);
         anmeldungsPanel.add(tfAnmeldeName);
-        anmeldungsPanel.add(passwort);
-        anmeldungsPanel.add(tfpasswort);
+        anmeldungsPanel.add(anmeldePasswort);
+        anmeldungsPanel.add(tfAnmeldePasswort);
         anmeldungsButtonPanel.add(anmeldeButton);
 
         fenster.add(willkommenPanel);
@@ -127,7 +130,7 @@ public class BasicGUI {
     }
 
 
-    class ZurückButtonListener implements ActionListener {
+    class ZurueckButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if(woBinIch == 1) {
                 fenster.remove(registrierButtonPanel);
@@ -138,14 +141,14 @@ public class BasicGUI {
                 fenster.remove(anmeldungsPanel);
                 fenster.remove(anmeldungsButtonPanel);
             }
-            fenster.remove(zurückPanel);
+            fenster.remove(zurueckPanel);
             fenster.add(willkommenPanel);
             fenster.add(eingangsButtonsPanel);
         }
     }
     class AnfangsButtonListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
-            fenster.add(zurückPanel);
+            fenster.add(zurueckPanel);
             if(e.getSource().equals(registrierenFensterButton) || e.getSource().equals(anmeldenFensterButton)) {
                 fenster.remove(willkommenPanel);
                 fenster.remove(eingangsButtonsPanel);
@@ -167,9 +170,12 @@ public class BasicGUI {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            //BasicGeburtsdatum neuesGebursDatum = new BasicGeburtsdatum((Integer)GeburtsdatumTag.getSelectedItem(),(Integer)GeburtsdatumMonat.getSelectedItem(),(Integer)GeburtsdatumJahr.getSelectedItem());
-          //  new BasicPerson((Integer)tfVersicherungsNummer.getText(),tfName.getText(),tfNachName.getText(),neuesGebursDatum,null);
-
+            try {
+                BasicGeburtsdatum neuesGebursDatum = new BasicGeburtsdatum((Integer) GeburtsdatumTag.getSelectedItem(), (Integer) GeburtsdatumMonat.getSelectedItem(), (Integer) GeburtsdatumJahr.getSelectedItem());
+                new BasicPerson(Integer.parseInt(tfVersicherungsNummer.getText()), tfName.getText(), tfNachName.getText(), neuesGebursDatum, null, tfRegistrierPasswort.getText());
+            }catch (NullPointerException npe){
+                System.out.println("Überprüfen sie ihre eingaben");
+            }
         }
 
     }

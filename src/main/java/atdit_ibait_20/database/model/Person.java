@@ -6,4 +6,5 @@ public interface Person {
     public String getNachname();
     public String getGeburtsdatum();
     public AccountingData getAccountingData();
+    public String getPasswort();
 }

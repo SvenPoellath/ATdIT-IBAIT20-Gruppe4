@@ -9,13 +9,15 @@ public class BasicPerson implements Person {
     private final String Nachname;
     private final BasicGeburtsdatum Geburtsdatum;
     private final AccountingData accountingData;
+    private final String Passwort;
 
-    public BasicPerson(int sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, AccountingData accountingData) {
+    public BasicPerson(int sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, AccountingData accountingData, String passwort) {
         this.Sozialversicherungsnummer = sozialversicherungsnummer;
         this.Vorname = vorname;
         this.Nachname = nachname;
         this.Geburtsdatum = geburtsdatum;
         this.accountingData = accountingData;
+        this.Passwort = passwort;
     }
 
     @Override
@@ -41,5 +43,10 @@ public class BasicPerson implements Person {
     @Override
     public AccountingData getAccountingData() {
         return this.accountingData;
+    }
+
+    @Override
+    public String getPasswort() {
+        return this.Passwort;
     }
 }

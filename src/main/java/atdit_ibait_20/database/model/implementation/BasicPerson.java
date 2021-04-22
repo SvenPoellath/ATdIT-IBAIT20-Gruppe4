@@ -36,7 +36,7 @@ public class BasicPerson implements Person {
     }
     @Override
     public String getGeburtsdatum() {
-        return Geburtsdatum.getGeburtsdatumTag()+"."+ Geburtsdatum.getGeburtsdatumMonat()+"."+ Geburtsdatum.getGeburtsdatumJahr();
+        return  Geburtsdatum.getGeburtsdatumJahr()+ "-" + Geburtsdatum.getGeburtsdatumMonat() + "-" + Geburtsdatum.getGeburtsdatumTag();
     }
 
 

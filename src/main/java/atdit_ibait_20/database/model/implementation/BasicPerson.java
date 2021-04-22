@@ -4,14 +4,14 @@ import atdit_ibait_20.database.model.AccountingData;
 import atdit_ibait_20.database.model.Person;
 
 public class BasicPerson implements Person {
-    private final int Sozialversicherungsnummer;
+    private final String Sozialversicherungsnummer;
     private final String Vorname;
     private final String Nachname;
     private final BasicGeburtsdatum Geburtsdatum;
     private final AccountingData accountingData;
     private final String Passwort;
 
-    public BasicPerson(int sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, AccountingData accountingData, String passwort) {
+    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, AccountingData accountingData, String passwort) {
         this.Sozialversicherungsnummer = sozialversicherungsnummer;
         this.Vorname = vorname;
         this.Nachname = nachname;
@@ -21,7 +21,7 @@ public class BasicPerson implements Person {
     }
 
     @Override
-    public int getSozialversicherungsnummer() {
+    public String getSozialversicherungsnummer() {
         return this.Sozialversicherungsnummer;
     }
 

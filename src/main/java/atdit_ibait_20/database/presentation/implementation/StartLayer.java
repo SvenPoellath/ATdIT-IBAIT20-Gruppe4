@@ -1,23 +1,28 @@
 package atdit_ibait_20.database.presentation.implementation;
 
+import atdit_ibait_20.database.App;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
-public class StartLayer {
+public class StartLayer{
+    private final ResourceBundle resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH);
+
     static JFrame fenster = new JFrame();
     JPanel willkommenPanel = new JPanel();
     JPanel eingangsButtonsPanel = new JPanel();
 
-    JLabel willkommenSchrift = new JLabel("Willkommen in unserer App");
+    JLabel willkommenSchrift = new JLabel(resourceBundle.getString("welcome.to.our.app"));
 
-    JButton registrierenFensterButton = new JButton("Registrieren");
-    JButton anmeldenFensterButton = new JButton("Anmelden");
+    JButton registrierenFensterButton = new JButton(resourceBundle.getString("register"));
+    JButton anmeldenFensterButton = new JButton(resourceBundle.getString("sign.in"));
 
     public StartLayer(){
         fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fenster.setTitle("Krankenkassenapp");
+        fenster.setTitle(resourceBundle.getString("health.insurance.app"));
         fenster.pack();
         fenster.setVisible(true);
         fenster.setSize(500, 250);

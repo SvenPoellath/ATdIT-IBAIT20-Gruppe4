@@ -1,16 +1,16 @@
 package atdit_ibait_20.database.model.implementation;
 
-import atdit_ibait_20.database.model.AccountingData;
+import atdit_ibait_20.database.model.Vertrag;
 
-public class BasicAccountingData implements AccountingData {
+public class BasicVertrag implements Vertrag {
     private final String Versicherungsart;
-    private final int Versicherungsnummer;
+    private final int Auftragsnummer;
     private final String Buchungsart;
     private final int EURBetrag;
 
-    public BasicAccountingData(String versicherungsart, int versicherungsnummer, String buchungsart, int eurBetrag) {
+    public BasicVertrag(String versicherungsart, int versicherungsnummer, String buchungsart, int eurBetrag) {
         Versicherungsart = versicherungsart;
-        Versicherungsnummer = versicherungsnummer;
+        Auftragsnummer = versicherungsnummer;
         Buchungsart = buchungsart;
         EURBetrag = eurBetrag;
     }
@@ -22,7 +22,7 @@ public class BasicAccountingData implements AccountingData {
 
     @Override
     public int getVersicherungsnummer() {
-        return this.Versicherungsnummer;
+        return this.Auftragsnummer;
     }
 
     @Override

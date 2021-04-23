@@ -70,14 +70,12 @@ public class RegistrierLayer {
         StartLayer.fenster.add(datenPanel);
         StartLayer.fenster.add(geburtsDatumsPanel);
         StartLayer.fenster.add(registrierButtonPanel);
-        StartLayer.fenster.setSize(300,1000);
+        StartLayer.fenster.setSize(400,550);
 
         zurueckButton.addActionListener(new ZurueckButtonListener());
         registrierenButton.addActionListener(new RegistrierButtonListener());
 
-        zurueckPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
         zurueckPanel.setLayout(new FlowLayout());
-        registrierButtonPanel.setBorder(BorderFactory.createEmptyBorder(0,30, 10, 30));
         datenPanel.setLayout(new GridLayout(0,2));
         geburtsDatumsPanel.setLayout(new GridLayout(0,3));
 

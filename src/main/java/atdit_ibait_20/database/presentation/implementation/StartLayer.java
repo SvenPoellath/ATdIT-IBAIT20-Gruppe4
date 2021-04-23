@@ -25,8 +25,9 @@ public class StartLayer{
         fenster.setTitle(resourceBundle.getString("health.insurance.app"));
         fenster.pack();
         fenster.setVisible(true);
-        fenster.setSize(500, 250);
-        fenster.setLayout(new GridLayout(0,1));
+        fenster.setSize(200, 250);
+        //fenster.setLayout(new GridLayout(0,1));
+        fenster.setLayout(new FlowLayout());
 
         willkommenPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         willkommenPanel.setLayout(new FlowLayout());

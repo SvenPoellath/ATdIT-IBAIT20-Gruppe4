@@ -19,7 +19,7 @@ public class AnmeldeLayer {
     JLabel anmeldePasswort = new JLabel(resourceBundle.getString("password"));
 
     JButton zurueckButton = new JButton("<--");
-    JButton anmeldeButton = new JButton(resourceBundle.getString("sing.in"));
+    JButton anmeldeButton = new JButton(resourceBundle.getString("sign.in"));
 
     JTextField tfAnmeldeName = new JTextField();
     JPasswordField tfAnmeldePasswort = new JPasswordField();
@@ -44,6 +44,7 @@ public class AnmeldeLayer {
         StartLayer.fenster.add(zurueckPanel);
         StartLayer.fenster.add(anmeldungsPanel);
         StartLayer.fenster.add(anmeldungsButtonPanel);
+        StartLayer.fenster.setSize(250,250);
 
     }
 

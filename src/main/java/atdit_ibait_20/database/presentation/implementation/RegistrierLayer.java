@@ -1,6 +1,7 @@
 package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
+import atdit_ibait_20.database.model.implementation.BasicDatabase;
 import atdit_ibait_20.database.model.implementation.BasicGeburtsdatum;
 import atdit_ibait_20.database.model.implementation.BasicPerson;
 
@@ -127,10 +128,12 @@ public class RegistrierLayer {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                BasicGeburtsdatum neuesGebursDatum = new BasicGeburtsdatum((Integer) GeburtsdatumTag.getSelectedItem(), (Integer) GeburtsdatumMonat.getSelectedItem(), (Integer) GeburtsdatumJahr.getSelectedItem());
-                new BasicPerson(tfVersicherungsNummer.getText(), tfName.getText(), tfNachName.getText(), neuesGebursDatum,tfRegistrierPasswort.getText(), cbAnrede.getSelectedItem().toString(), Integer.parseInt(tfPlz.getText()), tfOrt.getText(), Integer.parseInt(tfHausnummer.getText()), tfFamilienstand.getText(), tfEmailadresse.getText(), Integer.parseInt(tfTelefonnummer.getText()), tfStaatsangehoerigkeit.getText(), tfStrasse.getText());
-            }catch (NullPointerException npe){
+                BasicGeburtsdatum neuesGeburtsDatum = new BasicGeburtsdatum((Integer) GeburtsdatumTag.getSelectedItem(), (Integer) GeburtsdatumMonat.getSelectedItem(), (Integer) GeburtsdatumJahr.getSelectedItem());
+                BasicPerson person = new BasicPerson(tfVersicherungsNummer.getText(), tfName.getText(), tfNachName.getText(), neuesGeburtsDatum,tfRegistrierPasswort.getText(), cbAnrede.getSelectedItem().toString(), Integer.parseInt(tfPlz.getText()), tfOrt.getText(), tfHausnummer.getText(), tfFamilienstand.getText(), tfEmailadresse.getText(), Integer.parseInt(tfTelefonnummer.getText()), tfStaatsangehoerigkeit.getText(), tfStrasse.getText());
+                BasicDatabase.create_person_entry(person);
+            }catch (Exception exp){
                 StartLayer.fenster.add(falscheAngabePanel);
+                System.out.println(exp.getMessage());
             }
         }
 

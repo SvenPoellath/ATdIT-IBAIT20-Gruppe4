@@ -21,12 +21,12 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
             System.out.println(e.getMessage());
         }
 
+        create_tables(conn);
+
         return conn;
     }
 
-    public static void execute(String sql) {
-        Connection conn = connect();
-
+    public static void execute(String sql, Connection conn) {
         try {
             if (conn != null) {
                 Statement stmt = conn.createStatement();
@@ -36,8 +36,6 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
         } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-
-        close(conn);
         }
 
     public static void close(Connection conn) {
@@ -50,26 +48,48 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
         }
     }
 
-    public static void create_tables() {
+    public static void create_tables(Connection conn) {
         String sql = """
                 CREATE TABLE IF NOT EXISTS person (
-                 id         text(12) PRIMARY KEY, \s
-                 first_name text     NOT NULL,    \s
-                 last_name  text     NOT NULL,    \s
-                 birth_date DATE     NOT NULL     \s
+                 id              text(12) PRIMARY KEY, \s
+                 form_of_address text     NOT NULL,    \s
+                 first_name      text     NOT NULL,    \s
+                 last_name       text     NOT NULL,    \s
+                 birth_date      DATE     NOT NULL,    \s
+                 nationality     text     NOT NULL,    \s
+                 marital_status  text     NOT NULL,    \s
+                 zip_code        int(5)   NOT NULL,    \s
+                 city            text     NOT NULL,    \s
+                 street          text     NOT NULL,    \s
+                 house_number    text     NOT NULL,    \s
+                 email_address   text     NOT NULL,    \s
+                 phone_number    int      NOT NULL,    \s
+                 password        text     NOT NULL,    \s
+                 salt            text     NOT NULL     \s
                 );""";
-        execute(sql);
+        execute(sql, conn);
     }
 
     public static void create_person_entry(BasicPerson person) {
         Connection conn = connect();
 
-        String sql = "INSERT INTO person(id,first_name,last_name,birth_date) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO person(id,form_of_address,first_name,last_name,birth_date,nationality,marital_status,zip_code,city,street,house_number,email_address,phone_number,password,salt) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, person.getSozialversicherungsnummer());
-            pstmt.setString(2, person.getVorname());
-            pstmt.setString(3, person.getNachname());
-            pstmt.setString(4, person.getGeburtsdatum());
+            pstmt.setString(2, person.getAnrede());
+            pstmt.setString(3, person.getVorname());
+            pstmt.setString(4, person.getNachname());
+            pstmt.setString(5, person.getGeburtsdatum());
+            pstmt.setString(6, person.getStaatsangehoerigkeit());
+            pstmt.setString(7, person.getFamilienstand());
+            pstmt.setString(8, String.valueOf(person.getPLZ()));
+            pstmt.setString(9, person.getOrt());
+            pstmt.setString(10, person.getStrasse());
+            pstmt.setString(11, person.getHausnummer());
+            pstmt.setString(12, person.getMailAdresse());
+            pstmt.setString(13, String.valueOf(person.getTelefonnummer()));
+            pstmt.setString(14, person.getPasswort());
+            pstmt.setString(15, person.getGeburtsdatum());
             pstmt.executeUpdate();
             System.out.println("Entry successfully added." + pstmt);
         } catch (SQLException e) {
@@ -77,10 +97,5 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
         }
 
         close(conn);
-    }
-
-    public static void main(String[] args) {
-        create_tables();
-
     }
 }

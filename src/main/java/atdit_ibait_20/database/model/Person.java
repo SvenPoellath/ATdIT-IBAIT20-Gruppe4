@@ -13,7 +13,7 @@ public interface Person {
     public int getPLZ();
     public String getOrt();
     public String getStrasse();
-    public int getHausnummer();
+    public String getHausnummer();
     public String getFamilienstand();
     public String getMailAdresse();
     public int getTelefonnummer();

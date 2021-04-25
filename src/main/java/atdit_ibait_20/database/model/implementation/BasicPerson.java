@@ -10,12 +10,12 @@ public class BasicPerson implements Person {
     private final String Vorname;
     private final String Nachname;
     private final BasicGeburtsdatum Geburtsdatum;
-    private final ArrayList<Vertrag> Vertraege;
+    private       ArrayList<Vertrag> Vertraege;
     private final String Passwort;
     private final String Anrede;
     private final int PLZ;
     private final String Ort;
-    private final int Hausnummer;
+    private final String Hausnummer;
     private final String Familienstand;
     private final String Mailadresse;
     private final int telefonnummer;
@@ -24,11 +24,12 @@ public class BasicPerson implements Person {
     private final int IBAN;
 
 
-    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, int hausnummer, String familienstand, String mailadresse, int telefonnummer, String staatsangehoerigkeit, String strasse, ArrayList<Vertrag> vertraege, int iban) {
+    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, int telefonnummer, String staatsangehoerigkeit, String strasse, ArrayList<Vertrag> vertraege, int iban) {
         this.Sozialversicherungsnummer = sozialversicherungsnummer;
         this.Vorname = vorname;
         this.Nachname = nachname;
         this.Geburtsdatum = geburtsdatum;
+        if (vertraege != null)
         this.Vertraege = new ArrayList<>(vertraege);
         this.Passwort = passwort;
         this.Anrede = anrede;
@@ -42,10 +43,14 @@ public class BasicPerson implements Person {
         this.Strasse = strasse;
         this.IBAN = iban;
     }
-    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, int hausnummer, String familienstand, String mailadresse, int telefonnummer, String staatsangehoerigkeit, String strasse, ArrayList<Vertrag> vertraege) {
+
+
+
+
+    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, int telefonnummer, String staatsangehoerigkeit, String strasse, ArrayList<Vertrag> vertraege) {
         this(sozialversicherungsnummer,vorname,nachname,geburtsdatum,passwort,anrede,plz,ort,hausnummer,familienstand,mailadresse,telefonnummer,staatsangehoerigkeit,strasse,vertraege,0);
     }
-    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, int hausnummer, String familienstand, String mailadresse, int telefonnummer, String staatsangehoerigkeit, String strasse) {
+    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, int telefonnummer, String staatsangehoerigkeit, String strasse) {
         this(sozialversicherungsnummer,vorname,nachname,geburtsdatum,passwort,anrede,plz,ort,hausnummer,familienstand,mailadresse,telefonnummer, staatsangehoerigkeit,strasse,null);
     }
 
@@ -102,7 +107,7 @@ public class BasicPerson implements Person {
     }
 
     @Override
-    public int getHausnummer() {
+    public String getHausnummer() {
         return this.Hausnummer;
     }
 

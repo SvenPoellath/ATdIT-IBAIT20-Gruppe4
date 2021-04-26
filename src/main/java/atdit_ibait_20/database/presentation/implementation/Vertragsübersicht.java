@@ -38,26 +38,28 @@ public class Vertragsübersicht {
     }
 
     public void addVorhandeneVertraegetoGUI(Person person){
-        for(int i = 0; i < person.getVertraege().size(); i++){
-            JPanel jp = new JPanel();
-            jp.setLayout(new GridLayout(0,2));
-            JLabel auftragsnummerText = new JLabel(App.resourceBundle.getString("contract"));
-            JLabel auftragsNummer = new JLabel(String.valueOf(person.getVertraege().get(i).getAuftragsnummer()));
-            JLabel versicherungArtText = new JLabel(App.resourceBundle.getString("insurance.type"));
-            JLabel versicherungsArt = new JLabel(String.valueOf(person.getVertraege().get(i).getVersicherungsart()));
-            JLabel buchungsArtText = new JLabel(App.resourceBundle.getString("payment.type"));
-            JLabel buchungsArt = new JLabel(String.valueOf(person.getVertraege().get(i).getBuchungsart()));
-            JLabel betragText = new JLabel(App.resourceBundle.getString("payment.amount"));
-            JLabel betrag = new JLabel(String.valueOf(person.getVertraege().get(i).getEURBetrag()));
-            jp.add(auftragsnummerText);
-            jp.add(auftragsNummer);
-            jp.add(versicherungArtText);
-            jp.add(versicherungsArt);
-            jp.add(buchungsArtText);
-            jp.add(buchungsArt);
-            jp.add(betragText);
-            jp.add(betrag);
-            StartLayer.fenster.add(jp);
+        if(person.getVertraege() != null) {
+            for (int i = 0; i < person.getVertraege().size(); i++) {
+                JPanel jp = new JPanel();
+                jp.setLayout(new GridLayout(0, 2));
+                JLabel auftragsnummerText = new JLabel(App.resourceBundle.getString("contract"));
+                JLabel auftragsNummer = new JLabel(String.valueOf(person.getVertraege().get(i).getAuftragsnummer()));
+                JLabel versicherungArtText = new JLabel(App.resourceBundle.getString("insurance.type"));
+                JLabel versicherungsArt = new JLabel(String.valueOf(person.getVertraege().get(i).getVersicherungsart()));
+                JLabel buchungsArtText = new JLabel(App.resourceBundle.getString("payment.type"));
+                JLabel buchungsArt = new JLabel(String.valueOf(person.getVertraege().get(i).getBuchungsart()));
+                JLabel betragText = new JLabel(App.resourceBundle.getString("payment.amount"));
+                JLabel betrag = new JLabel(String.valueOf(person.getVertraege().get(i).getEURBetrag()));
+                jp.add(auftragsnummerText);
+                jp.add(auftragsNummer);
+                jp.add(versicherungArtText);
+                jp.add(versicherungsArt);
+                jp.add(buchungsArtText);
+                jp.add(buchungsArt);
+                jp.add(betragText);
+                jp.add(betrag);
+                StartLayer.fenster.add(jp);
+            }
         }
     }
     class VertragHinzufuegenButton implements ActionListener{

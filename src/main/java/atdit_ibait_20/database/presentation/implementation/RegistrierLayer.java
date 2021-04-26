@@ -122,10 +122,16 @@ public class RegistrierLayer {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
             try {
+
                 BasicGeburtsdatum neuesGeburtsDatum = new BasicGeburtsdatum((Integer) GeburtsdatumTag.getSelectedItem(), (Integer) GeburtsdatumMonat.getSelectedItem(), (Integer) GeburtsdatumJahr.getSelectedItem());
                 BasicPerson person = new BasicPerson(tfVersicherungsNummer.getText(), tfName.getText(), tfNachName.getText(), neuesGeburtsDatum,tfRegistrierPasswort.getText(), cbAnrede.getSelectedItem().toString(), Integer.parseInt(tfPlz.getText()), tfOrt.getText(), tfHausnummer.getText(), tfFamilienstand.getText(), tfEmailadresse.getText(), Integer.parseInt(tfTelefonnummer.getText()), tfStaatsangehoerigkeit.getText(), tfStrasse.getText());
                 BasicDatabase.create_person_entry(person);
+                StartLayer.fenster.remove(registrierButtonPanel);
+                StartLayer.fenster.remove(datenPanel);
+                StartLayer.fenster.remove(geburtsDatumsPanel);
+                StartLayer.fenster.remove(zurueckPanel);
                 new Vertragsübersicht(person);
             }catch (Exception exp){
                 StartLayer.fenster.add(falscheAngabePanel);

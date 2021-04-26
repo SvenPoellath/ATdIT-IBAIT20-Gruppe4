@@ -6,25 +6,86 @@ import atdit_ibait_20.database.model.Person;
 import java.util.ArrayList;
 
 public class BasicPerson implements Person {
-    private final String Sozialversicherungsnummer;
-    private final String Vorname;
-    private final String Nachname;
-    private final BasicGeburtsdatum Geburtsdatum;
-    private       ArrayList<Vertrag> Vertraege;
-    private final String Passwort;
-    private final String Anrede;
-    private final int PLZ;
-    private final String Ort;
-    private final String Hausnummer;
-    private final String Familienstand;
-    private final String Mailadresse;
-    private final int telefonnummer;
-    private final String Staatsangehoerigkeit;
-    private final String Strasse;
-    private final int IBAN;
+    private String Sozialversicherungsnummer;
+    private String Vorname;
+    private String Nachname;
+    private BasicGeburtsdatum Geburtsdatum;
+    private ArrayList<Vertrag> Vertraege;
+    private String Passwort;
+    private String Anrede;
+    private int PLZ;
+    private String Ort;
+    private String Hausnummer;
+    private String Familienstand;
+    private String Mailadresse;
+    private int telefonnummer;
+    private String Staatsangehoerigkeit;
+    private String Strasse;
+
+    public void setSozialversicherungsnummer(String sozialversicherungsnummer) {
+        Sozialversicherungsnummer = sozialversicherungsnummer;
+    }
+
+    public void setVorname(String vorname) {
+        Vorname = vorname;
+    }
+
+    public void setNachname(String nachname) {
+        Nachname = nachname;
+    }
+
+    public void setGeburtsdatum(BasicGeburtsdatum geburtsdatum) {
+        Geburtsdatum = geburtsdatum;
+    }
+
+    public void setPasswort(String passwort) {
+        Passwort = passwort;
+    }
+
+    public void setAnrede(String anrede) {
+        Anrede = anrede;
+    }
+
+    public void setPLZ(int PLZ) {
+        this.PLZ = PLZ;
+    }
+
+    public void setOrt(String ort) {
+        Ort = ort;
+    }
+
+    public void setHausnummer(String hausnummer) {
+        Hausnummer = hausnummer;
+    }
+
+    public void setFamilienstand(String familienstand) {
+        Familienstand = familienstand;
+    }
+
+    public void setMailAdresse(String mailadresse) {
+        Mailadresse = mailadresse;
+    }
+
+    public void setTelefonnummer(int telefonnummer) {
+        this.telefonnummer = telefonnummer;
+    }
+
+    public void setStaatsangehoerigkeit(String staatsangehoerigkeit) {
+        Staatsangehoerigkeit = staatsangehoerigkeit;
+    }
+
+    public void setStrasse(String strasse) {
+        Strasse = strasse;
+    }
+
+    public void setIBAN(String IBAN) {
+        this.IBAN = IBAN;
+    }
+
+    private String IBAN;
 
 
-    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, int telefonnummer, String staatsangehoerigkeit, String strasse, ArrayList<Vertrag> vertraege, int iban) {
+    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, int telefonnummer, String staatsangehoerigkeit, String strasse, ArrayList<Vertrag> vertraege, String iban) {
         this.Sozialversicherungsnummer = sozialversicherungsnummer;
         this.Vorname = vorname;
         this.Nachname = nachname;
@@ -48,14 +109,17 @@ public class BasicPerson implements Person {
 
 
     public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, int telefonnummer, String staatsangehoerigkeit, String strasse, ArrayList<Vertrag> vertraege) {
-        this(sozialversicherungsnummer,vorname,nachname,geburtsdatum,passwort,anrede,plz,ort,hausnummer,familienstand,mailadresse,telefonnummer,staatsangehoerigkeit,strasse,vertraege,0);
+        this(sozialversicherungsnummer,vorname,nachname,geburtsdatum,passwort,anrede,plz,ort,hausnummer,familienstand,mailadresse,telefonnummer,staatsangehoerigkeit,strasse,vertraege,null);
     }
     public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, int telefonnummer, String staatsangehoerigkeit, String strasse) {
         this(sozialversicherungsnummer,vorname,nachname,geburtsdatum,passwort,anrede,plz,ort,hausnummer,familienstand,mailadresse,telefonnummer, staatsangehoerigkeit,strasse,null);
     }
 
 
+    public void addVertrag(int index,Vertrag vertrag){
+        Vertraege.add(index,vertrag);
 
+    }
     @Override
     public String getSozialversicherungsnummer() {
         return this.Sozialversicherungsnummer;
@@ -132,7 +196,7 @@ public class BasicPerson implements Person {
     }
 
     @Override
-    public int getIBAN() {
+    public String getIBAN() {
         return this.IBAN;
     }
 

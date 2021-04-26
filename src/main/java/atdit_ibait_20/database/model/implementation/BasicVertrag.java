@@ -21,7 +21,7 @@ public class BasicVertrag implements Vertrag {
     }
 
     @Override
-    public int getVersicherungsnummer() {
+    public int getAuftragsnummer() {
         return this.Auftragsnummer;
     }
 

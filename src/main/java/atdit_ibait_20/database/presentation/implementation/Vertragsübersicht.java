@@ -68,19 +68,23 @@ public class Vertragsübersicht {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            for(int i=1;i<StartLayer.fenster.getComponentCount();i++)
-                StartLayer.fenster.remove(i);
+
             StartLayer.fenster.remove(add);
             new VertragHinzufuegen(angemeldetePerson);
+            StartLayer.fenster.validate();
         }
     }
     class menuItemListener implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            for(int i=1;i<StartLayer.fenster.getComponentCount();i++)
-                StartLayer.fenster.remove(i);
             StartLayer.fenster.remove(add);
+            StartLayer.fenster.remove(Einstellungen.einstellungen);
+            StartLayer.fenster.remove(Einstellungen.datenAendern);
+            StartLayer.fenster.remove(Einstellungen.geburtsdatum);
+            StartLayer.fenster.remove(VertragHinzufuegen.vertragsDaten);
+            StartLayer.fenster.remove(VertragHinzufuegen.hinzufuegen);
+            StartLayer.fenster.remove(VertragHinzufuegen.preise);
             if(e.getSource().equals(einstellungen))
                 new Einstellungen(angemeldetePerson);
             else if(e.getSource().equals(home)) {

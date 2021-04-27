@@ -1,7 +1,6 @@
 package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
-import com.sun.javafx.scene.control.GlobalMenuAdapter;
 
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
@@ -32,7 +31,7 @@ public class StartLayer{
         fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
         fenster.pack();
         fenster.setVisible(true);
-        fenster.setSize(200, 250);
+        fenster.setSize(200, 300);
         fenster.setLayout(new FlowLayout());
 
 
@@ -59,6 +58,7 @@ public class StartLayer{
         fenster.add(sprache);
         fenster.add(willkommenPanel);
         fenster.add(eingangsButtonsPanel);
+        fenster.validate();
 
 
     }

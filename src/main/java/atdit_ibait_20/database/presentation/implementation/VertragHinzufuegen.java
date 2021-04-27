@@ -16,9 +16,9 @@ public class VertragHinzufuegen {
     final int monatlicherPreis = 300;
     final int jahresPreis =3000;
 
-    private final JPanel vertragsDaten = new JPanel();
-    private final JPanel hinzufuegen = new JPanel();
-    private final JPanel preise = new JPanel();
+    static final JPanel vertragsDaten = new JPanel();
+    static final JPanel hinzufuegen = new JPanel();
+    static final JPanel preise = new JPanel();
 
 
     private final JLabel versicherungArtText = new JLabel(App.resourceBundle.getString("insurance.type"));
@@ -39,10 +39,11 @@ public class VertragHinzufuegen {
     static Integer tagesPreis;
     static int betrag;
     private Person angemeldetePerson;
-
+    JLabel preisEinmalig;
     public VertragHinzufuegen(Person person){
         angemeldetePerson = person;
         vertragsDaten.setLayout(new GridLayout(0,2));
+        preise.setBorder(BorderFactory.createEmptyBorder(0,60,0,0));
         String[] versicherungsArten = new String[]{"*",App.resourceBundle.getString("luggage.insurance")};
         String[] buchungsArten = new String[]{"*",App.resourceBundle.getString("monthly"),App.resourceBundle.getString("yearly"),App.resourceBundle.getString("per.trip")};
         Integer[] tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
@@ -78,19 +79,20 @@ public class VertragHinzufuegen {
                         preise.add(preisJahr);
                         betrag = jahresPreis;
                     if(buchungsArt.getSelectedIndex()==3){
-                        tagesPreis = (buchungsArt.getSelectedIndex()+1)*50;
-                        JLabel preisEinmalig = new JLabel(tagesPreis+App.resourceBundle.getString("currency"));
+                        tagesPreis = (anzahlDerTage.getSelectedIndex()+1)*50;
+                        preisEinmalig = new JLabel(tagesPreis+App.resourceBundle.getString("currency"));
+                        preise.removeAll();
                         preise.add(preisEinmalig);
                         betrag = tagesPreis;
                     }
 
                 }
-                hinzufuegen.remove(preis);
                 hinzufuegen.add(hinzufuegenButton);
+                StartLayer.fenster.validate();
             }
             if(e.getSource().equals(hinzufuegenButton)) {
 
-                BasicVertrag vertrag = new BasicVertrag((String) versicherungsArt.getSelectedItem(), (int) Math.random(),(String) buchungsArt.getSelectedItem(),betrag);
+                BasicVertrag vertrag = new BasicVertrag(versicherungsArt.getSelectedItem().toString(), (int) Math.random(),buchungsArt.getSelectedItem().toString(),betrag);
                 angemeldetePerson.getSozialversicherungsnummer();
             }
         }
@@ -102,6 +104,7 @@ public class VertragHinzufuegen {
             if(e.getSource().equals(versicherungsArt)) {
                 vertragsDaten.add(buchungsArtText);
                 vertragsDaten.add(buchungsArt);
+                StartLayer.fenster.validate();
             }
             else if(e.getSource().equals(buchungsArt)){
                 if(e.getItem().equals(App.resourceBundle.getString("per.trip"))) {
@@ -109,6 +112,7 @@ public class VertragHinzufuegen {
                     vertragsDaten.add(anzahlDerTage);
                     vertragsDaten.add(landText);
                     vertragsDaten.add(land);
+                    StartLayer.fenster.setSize(600,400);
                 }
             }
         }

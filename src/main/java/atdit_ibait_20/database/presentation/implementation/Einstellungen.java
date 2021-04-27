@@ -10,9 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Einstellungen {
-    JPanel einstellungen = new JPanel();
-    JPanel datenAendern = new JPanel();
-    JPanel geburtsdatum = new JPanel();
+    static final JPanel einstellungen = new JPanel();
+    static final JPanel datenAendern = new JPanel();
+    static final JPanel geburtsdatum = new JPanel();
 
     JLabel einstellungenText = new JLabel(App.resourceBundle.getString("welcome.to.your.settings"));
     JLabel veraenderungen = new JLabel(App.resourceBundle.getString("make.changes.here"));
@@ -39,7 +39,6 @@ public class Einstellungen {
     JTextField strasseNeu = new JTextField();
     JTextField hausnummerNeu = new JTextField();
     JTextField telefonnummerNeu = new JTextField();
-    JTextField familienstandNeu = new JTextField();
     JTextField mailNeu = new JTextField();
     JTextField staatsangehoerigkeitNeu = new JTextField();
 
@@ -111,7 +110,7 @@ public class Einstellungen {
         datenAendern.add(telefonnummerNeu);
         datenAendern.add(telefonnummerAendern);
         datenAendern.add(familienstandAendernText);
-        datenAendern.add(familienstandNeu);
+        datenAendern.add(RegistrierLayer.cbFamilienstand);
         datenAendern.add(familienstandAendern);
         datenAendern.add(staatsangehörigkeitAendernText);
         datenAendern.add(staatsangehoerigkeitNeu);
@@ -122,7 +121,7 @@ public class Einstellungen {
         geburtsdatum.add(RegistrierLayer.GeburtsdatumJahr);
         geburtsdatum.add(geburtsdatumAendern);
 
-        StartLayer.fenster.setSize(800,500);
+        StartLayer.fenster.setSize(1300,500);
         StartLayer.fenster.add(einstellungen);
         StartLayer.fenster.add(datenAendern);
         StartLayer.fenster.add(geburtsdatum);
@@ -152,7 +151,7 @@ public class Einstellungen {
             if(e.getSource().equals(hausnummerAendern))
                 angemeldetePerson.setHausnummer(hausnummerNeu.getText());
             if(e.getSource().equals(familienstandAendern))
-                angemeldetePerson.setFamilienstand(familienstandNeu.getText());
+                angemeldetePerson.setFamilienstand(RegistrierLayer.cbFamilienstand.getSelectedItem().toString());
             if(e.getSource().equals(mailAendern))
                 angemeldetePerson.setMailAdresse(mailNeu.getText());
             if(e.getSource().equals(telefonnummerAendern))

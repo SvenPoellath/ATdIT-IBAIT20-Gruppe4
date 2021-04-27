@@ -63,7 +63,7 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
                  street          text     NOT NULL,    \s
                  house_number    text     NOT NULL,    \s
                  email_address   text     NOT NULL,    \s
-                 phone_number    int      NOT NULL,    \s
+                 phone_number    long     NOT NULL,    \s
                  password        text     NOT NULL,    \s
                  salt            text     NOT NULL     \s
                 );""";
@@ -98,4 +98,5 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
 
         close(conn);
     }
+
 }

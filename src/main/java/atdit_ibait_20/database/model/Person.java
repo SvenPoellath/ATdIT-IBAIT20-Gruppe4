@@ -18,7 +18,7 @@ public interface Person {
     public String getHausnummer();
     public String getFamilienstand();
     public String getMailAdresse();
-    public int getTelefonnummer();
+    public long getTelefonnummer();
     public String getStaatsangehoerigkeit();
     public String getIBAN();
     public void addVertrag(Vertrag vertrag);
@@ -34,7 +34,7 @@ public interface Person {
     public void setHausnummer(String hausnummer);
     public void setFamilienstand(String familienstand);
     public void setMailAdresse(String mailAdresse);
-    public void setTelefonnummer(int telefonnummer);
+    public void setTelefonnummer(long telefonnummer);
     public void setStaatsangehoerigkeit(String staatsangehoerigkeit);
     public void setIBAN(String iban);
 }

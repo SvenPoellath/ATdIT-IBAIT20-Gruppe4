@@ -25,7 +25,6 @@ public class RegistrierLayer {
     private final JTextField tfOrt = new JTextField();
     private final JTextField tfStrasse = new JTextField();
     private final JTextField tfHausnummer = new JTextField();
-    private final JTextField tfFamilienstand = new JTextField();
     private final JTextField tfEmailadresse = new JTextField();
     private final JTextField tfTelefonnummer = new JTextField();
     private final JTextField tfStaatsangehoerigkeit = new JTextField();
@@ -36,11 +35,13 @@ public class RegistrierLayer {
     private static final Integer[] tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
     private static final Integer[] monate = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12};
     private static final Integer[] jahre = new Integer[] {1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004};
+    private static final String [] familienstandArten = new String[]{App.resourceBundle.getString("single"),App.resourceBundle.getString("married"),App.resourceBundle.getString("divorced"),App.resourceBundle.getString("widowed")};
 
     public static final JComboBox<String> cbAnrede = new JComboBox<>(namen);
     public static final JComboBox<Integer> GeburtsdatumTag = new JComboBox<>(tage);
     public static final JComboBox<Integer> GeburtsdatumMonat = new JComboBox<>(monate);
     public static final JComboBox<Integer> GeburtsdatumJahr = new JComboBox<>(jahre);
+    public static final JComboBox<String> cbFamilienstand = new JComboBox<>(familienstandArten);
 
 
 
@@ -75,7 +76,7 @@ public class RegistrierLayer {
         datenPanel.add(tfStaatsangehoerigkeit);
         JLabel familienstand = new JLabel(App.resourceBundle.getString("marital.status"));
         datenPanel.add(familienstand);
-        datenPanel.add(tfFamilienstand);
+        datenPanel.add(cbFamilienstand);
         JLabel plz = new JLabel(App.resourceBundle.getString("postcode"));
         datenPanel.add(plz);
         datenPanel.add(tfPlz);
@@ -126,7 +127,7 @@ public class RegistrierLayer {
             try {
 
                 BasicGeburtsdatum neuesGeburtsDatum = new BasicGeburtsdatum((Integer) GeburtsdatumTag.getSelectedItem(), (Integer) GeburtsdatumMonat.getSelectedItem(), (Integer) GeburtsdatumJahr.getSelectedItem());
-                BasicPerson person = new BasicPerson(tfVersicherungsNummer.getText(), tfName.getText(), tfNachName.getText(), neuesGeburtsDatum,new String(tfRegistrierPasswort.getPassword()), cbAnrede.getSelectedItem().toString(), Integer.parseInt(tfPlz.getText()), tfOrt.getText(), tfHausnummer.getText(), tfFamilienstand.getText(), tfEmailadresse.getText(), Long.parseLong(tfTelefonnummer.getText()), tfStaatsangehoerigkeit.getText(), tfStrasse.getText());
+                BasicPerson person = new BasicPerson(tfVersicherungsNummer.getText(), tfName.getText(), tfNachName.getText(), neuesGeburtsDatum,new String(tfRegistrierPasswort.getPassword()), cbAnrede.getSelectedItem().toString(), Integer.parseInt(tfPlz.getText()), tfOrt.getText(), tfHausnummer.getText(), cbFamilienstand.getSelectedItem().toString(), tfEmailadresse.getText(), Long.parseLong(tfTelefonnummer.getText()), tfStaatsangehoerigkeit.getText(), tfStrasse.getText());
                 BasicDatabase.create_person_entry(person);
                 StartLayer.fenster.remove(registrierButtonPanel);
                 StartLayer.fenster.remove(datenPanel);

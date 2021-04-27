@@ -43,7 +43,7 @@ public class AnmeldeLayer {
         StartLayer.fenster.add(zurueckPanel);
         StartLayer.fenster.add(anmeldungsPanel);
         StartLayer.fenster.add(anmeldungsButtonPanel);
-        StartLayer.fenster.setSize(250,250);
+        StartLayer.fenster.setSize(250,300);
 
     }
 
@@ -63,6 +63,7 @@ public class AnmeldeLayer {
                     StartLayer.fenster.remove(anmeldungsPanel);
                     StartLayer.fenster.remove(anmeldungsButtonPanel);
                     StartLayer.fenster.remove(StartLayer.sprache);
+                    StartLayer.fenster.remove(zurueckPanel);
                     person = BasicDatabase.get_person_by_id(tfAnmeldeName.getText());
                     System.out.println("Anmeldung erfolgreich.");
                     new Vertragsübersicht(person);

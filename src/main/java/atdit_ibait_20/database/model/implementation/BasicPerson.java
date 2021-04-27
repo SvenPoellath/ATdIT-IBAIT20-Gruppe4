@@ -105,8 +105,9 @@ public class BasicPerson implements Person {
         this.IBAN = iban;
     }
 
+    public BasicPerson() {
 
-
+    }
 
     public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, long telefonnummer, String staatsangehoerigkeit, String strasse, ArrayList<Vertrag> vertraege) {
         this(sozialversicherungsnummer,vorname,nachname,geburtsdatum,passwort,anrede,plz,ort,hausnummer,familienstand,mailadresse,telefonnummer,staatsangehoerigkeit,strasse,vertraege,null);

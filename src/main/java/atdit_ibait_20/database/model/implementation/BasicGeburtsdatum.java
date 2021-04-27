@@ -13,6 +13,13 @@ public class BasicGeburtsdatum implements Geburtsdatum {
         GeburtsdatumJahr = geburtsdatumJahr;
     }
 
+    public BasicGeburtsdatum(String database_entry) {
+        String[] geburtstag = database_entry.split("-");
+        GeburtsdatumJahr = Integer.parseInt(geburtstag[0]);
+        GeburtsdatumMonat = Integer.parseInt(geburtstag[1]);
+        GeburtsdatumTag = Integer.parseInt(geburtstag[2]);
+    }
+
 
     @Override
     public int getGeburtsdatumTag() {

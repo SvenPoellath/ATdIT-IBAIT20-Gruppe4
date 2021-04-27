@@ -6,6 +6,8 @@ import atdit_ibait_20.database.model.Person;
 import java.sql.*;
 import java.util.*;
 
+import static atdit_ibait_20.database.persistence.implementation.PasswordService.*;
+
 public class BasicDatabase extends ArrayList<Person> implements Database {
 
     public static final String URL = "jdbc:sqlite:test.db";
@@ -31,7 +33,7 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
             if (conn != null) {
                 Statement stmt = conn.createStatement();
                 stmt.execute(sql);
-                System.out.println("Command successfully executed: " + sql);
+                System.out.println("Command successfully executed: create_tables");
             }
         } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -73,6 +75,10 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
     public static void create_person_entry(BasicPerson person) {
         Connection conn = connect();
 
+        String salt = getSalt();
+        String securePassword = generateSecurePassword(person.getPasswort(),salt);
+
+
         String sql = "INSERT INTO person(id,form_of_address,first_name,last_name,birth_date,nationality,marital_status,zip_code,city,street,house_number,email_address,phone_number,password,salt) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, person.getSozialversicherungsnummer());
@@ -88,8 +94,8 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
             pstmt.setString(11, person.getHausnummer());
             pstmt.setString(12, person.getMailAdresse());
             pstmt.setString(13, String.valueOf(person.getTelefonnummer()));
-            pstmt.setString(14, person.getPasswort());
-            pstmt.setString(15, person.getGeburtsdatum());
+            pstmt.setString(14, securePassword);
+            pstmt.setString(15, salt);
             pstmt.executeUpdate();
             System.out.println("Entry successfully added." + pstmt);
         } catch (SQLException e) {
@@ -99,4 +105,55 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
         close(conn);
     }
 
+    public static BasicPerson get_person_by_id(String id) {
+        String sql = "SELECT id, form_of_address, first_name, last_name, birth_date, nationality, marital_status, zip_code, city, street, house_number, email_address, phone_number FROM person WHERE id = ?";
+        Connection conn = connect();
+        BasicPerson returnPerson = new BasicPerson();
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1,id);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                returnPerson.setSozialversicherungsnummer(rs.getString("id"));
+                returnPerson.setAnrede(rs.getString("form_of_address"));
+                returnPerson.setVorname(rs.getString("first_name"));
+                returnPerson.setNachname(rs.getString("last_name"));
+                returnPerson.setGeburtsdatum(new BasicGeburtsdatum(rs.getString("birth_date")));
+                returnPerson.setStaatsangehoerigkeit(rs.getString("nationality"));
+                returnPerson.setFamilienstand(rs.getString("marital_status"));
+                returnPerson.setPLZ(rs.getInt("zip_code"));
+                returnPerson.setOrt(rs.getString("city"));
+                returnPerson.setStrasse(rs.getString("street"));
+                returnPerson.setHausnummer(rs.getString("house_number"));
+                returnPerson.setMailAdresse(rs.getString("email_address"));
+                returnPerson.setTelefonnummer(rs.getInt("phone_number"));
+
+            }
+            System.out.println("Data for id: " + id + " successfully received.");
+        } catch (SQLException exp) {
+            System.out.println(exp.getMessage());
+        }
+    return returnPerson;
+    }
+
+    public static boolean check_Login(String id, String providedPassword) {
+
+        String salt = null;
+        String securePassword = null;
+
+    String sql = "SELECT password, salt FROM person WHERE id = ?";
+    Connection conn = connect();
+    try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+        pstmt.setString(1,id);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            securePassword = rs.getString("password");
+            salt = rs.getString("salt");
+        }
+        System.out.println("Password Data for id: " + id + " retrieved from database.");
+    } catch (SQLException exp) {
+        System.out.println(exp.getMessage());
+    }
+
+    return verifyUserPassword(providedPassword,securePassword,salt);
+    }
 }

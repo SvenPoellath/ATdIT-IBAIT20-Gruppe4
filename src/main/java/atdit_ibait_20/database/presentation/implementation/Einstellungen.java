@@ -16,19 +16,19 @@ public class Einstellungen {
 
     JLabel einstellungenText = new JLabel(App.resourceBundle.getString("welcome.to.your.settings"));
     JLabel veraenderungen = new JLabel(App.resourceBundle.getString("make.changes.here"));
-    JLabel vornameAendernText = new JLabel(App.resourceBundle.getString("new.1")+App.resourceBundle.getString("first.name"));
-    JLabel nachnameAendernText = new JLabel(App.resourceBundle.getString("new.1")+App.resourceBundle.getString("last.name"));
-    JLabel geburtsdatumAendernText = new JLabel(App.resourceBundle.getString("new.2")+App.resourceBundle.getString("date.of.birth"));
-    JLabel passwortAendernText = new JLabel(App.resourceBundle.getString("new.2")+App.resourceBundle.getString("password"));
-    JLabel anredeAendernText = new JLabel(App.resourceBundle.getString("new.3")+App.resourceBundle.getString("title"));
-    JLabel plzAendernText = new JLabel(App.resourceBundle.getString("new.3")+App.resourceBundle.getString("postcode"));
-    JLabel ortAendernText = new JLabel(App.resourceBundle.getString("new.1")+App.resourceBundle.getString("city"));
-    JLabel strasseAendernText = new JLabel(App.resourceBundle.getString("new.3")+App.resourceBundle.getString("street"));
-    JLabel hausnummerAendernText = new JLabel(App.resourceBundle.getString("new.3")+App.resourceBundle.getString("house.number"));
-    JLabel familienstandAendernText = new JLabel(App.resourceBundle.getString("new.1")+App.resourceBundle.getString("marital.status"));
-    JLabel mailAendernText = new JLabel(App.resourceBundle.getString("new.3")+App.resourceBundle.getString("e.mail.address"));
-    JLabel telefonnummerAendernText = new JLabel(App.resourceBundle.getString("new.3")+App.resourceBundle.getString("phone.number"));
-    JLabel staatsangehörigkeitAendernText = new JLabel(App.resourceBundle.getString("new.3")+App.resourceBundle.getString("nationality"));
+    JLabel vornameAendernText = new JLabel(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("first.name"));
+    JLabel nachnameAendernText = new JLabel(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("last.name"));
+    JLabel geburtsdatumAendernText = new JLabel(App.resourceBundle.getString("new.2")+" "+App.resourceBundle.getString("date.of.birth"));
+    JLabel passwortAendernText = new JLabel(App.resourceBundle.getString("new.2")+" "+App.resourceBundle.getString("password"));
+    JLabel anredeAendernText = new JLabel(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("title"));
+    JLabel plzAendernText = new JLabel(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("postcode"));
+    JLabel ortAendernText = new JLabel(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("city"));
+    JLabel strasseAendernText = new JLabel(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("street"));
+    JLabel hausnummerAendernText = new JLabel(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("house.number"));
+    JLabel familienstandAendernText = new JLabel(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("marital.status"));
+    JLabel mailAendernText = new JLabel(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("e.mail.address"));
+    JLabel telefonnummerAendernText = new JLabel(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("phone.number"));
+    JLabel staatsangehörigkeitAendernText = new JLabel(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("nationality"));
 
     JTextField vornameNeu = new JTextField();
     JTextField nachnameNeu = new JTextField();
@@ -43,19 +43,19 @@ public class Einstellungen {
     JTextField mailNeu = new JTextField();
     JTextField staatsangehoerigkeitNeu = new JTextField();
 
-    JButton vornameAendern = new JButton(App.resourceBundle.getString("change")+App.resourceBundle.getString("first.name"));
-    JButton nachnameAendern = new JButton(App.resourceBundle.getString("change")+App.resourceBundle.getString("last.name"));
-    JButton geburtsdatumAendern = new JButton(App.resourceBundle.getString("change")+App.resourceBundle.getString("date.of.birth"));
-    JButton passwortAendern = new JButton(App.resourceBundle.getString("change")+App.resourceBundle.getString("password"));
-    JButton anredeAendern = new JButton(App.resourceBundle.getString("change")+App.resourceBundle.getString("title"));
-    JButton plzAendern = new JButton(App.resourceBundle.getString("change")+App.resourceBundle.getString("postcode"));
-    JButton ortAendern = new JButton(App.resourceBundle.getString("change")+App.resourceBundle.getString("city"));
-    JButton strasseAendern = new JButton(App.resourceBundle.getString("change")+App.resourceBundle.getString("street"));
-    JButton hausnummerAendern = new JButton(App.resourceBundle.getString("change")+App.resourceBundle.getString("house.number"));
-    JButton familienstandAendern = new JButton(App.resourceBundle.getString("change")+App.resourceBundle.getString("marital.status"));
-    JButton mailAendern = new JButton(App.resourceBundle.getString("change")+App.resourceBundle.getString("e.mail.address"));
-    JButton telefonnummerAendern = new JButton(App.resourceBundle.getString("change")+App.resourceBundle.getString("phone.number"));
-    JButton staatsangehörigkeitAendern = new JButton(App.resourceBundle.getString("change")+App.resourceBundle.getString("nationality"));
+    JButton vornameAendern = new JButton(App.resourceBundle.getString("first.name")+" "+App.resourceBundle.getString("change"));
+    JButton nachnameAendern = new JButton(App.resourceBundle.getString("last.name")+" "+App.resourceBundle.getString("change"));
+    JButton geburtsdatumAendern = new JButton(App.resourceBundle.getString("date.of.birth")+" "+App.resourceBundle.getString("change"));
+    JButton passwortAendern = new JButton(App.resourceBundle.getString("password")+" "+App.resourceBundle.getString("change"));
+    JButton anredeAendern = new JButton(App.resourceBundle.getString("title")+" "+App.resourceBundle.getString("change"));
+    JButton plzAendern = new JButton(App.resourceBundle.getString("postcode")+" "+App.resourceBundle.getString("change"));
+    JButton ortAendern = new JButton(App.resourceBundle.getString("city")+" "+App.resourceBundle.getString("change"));
+    JButton strasseAendern = new JButton(App.resourceBundle.getString("street")+" "+App.resourceBundle.getString("change"));
+    JButton hausnummerAendern = new JButton(App.resourceBundle.getString("house.number")+" "+App.resourceBundle.getString("change"));
+    JButton familienstandAendern = new JButton(App.resourceBundle.getString("marital.status")+" "+App.resourceBundle.getString("change"));
+    JButton mailAendern = new JButton(App.resourceBundle.getString("change")+" "+App.resourceBundle.getString("e.mail.address"));
+    JButton telefonnummerAendern = new JButton(App.resourceBundle.getString("phone.number")+" "+App.resourceBundle.getString("change"));
+    JButton staatsangehörigkeitAendern = new JButton(App.resourceBundle.getString("nationality")+" "+App.resourceBundle.getString("change"));
 
     Person angemeldetePerson;
     public Einstellungen(Person person){
@@ -115,14 +115,17 @@ public class Einstellungen {
         datenAendern.add(familienstandAendern);
         datenAendern.add(staatsangehörigkeitAendernText);
         datenAendern.add(staatsangehoerigkeitNeu);
-        datenAendern.add(strasseAendern);
+        datenAendern.add(staatsangehörigkeitAendern);
         geburtsdatum.add(geburtsdatumAendernText);
         geburtsdatum.add(RegistrierLayer.GeburtsdatumTag);
         geburtsdatum.add(RegistrierLayer.GeburtsdatumMonat);
         geburtsdatum.add(RegistrierLayer.GeburtsdatumJahr);
         geburtsdatum.add(geburtsdatumAendern);
 
-
+        StartLayer.fenster.setSize(800,500);
+        StartLayer.fenster.add(einstellungen);
+        StartLayer.fenster.add(datenAendern);
+        StartLayer.fenster.add(geburtsdatum);
 
 
     }

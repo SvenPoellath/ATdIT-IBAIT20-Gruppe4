@@ -21,6 +21,7 @@ public class Vertragsübersicht {
 
     private final Person angemeldetePerson;
     public Vertragsübersicht(Person person){
+        add.setLayout(new GridLayout(0,1));
         einstellungen.addActionListener(new menuItemListener());
         home.addActionListener(new menuItemListener());
         plusButton.addActionListener(new VertragHinzufuegenButton());
@@ -32,7 +33,7 @@ public class Vertragsübersicht {
         addVorhandeneVertraegetoGUI(person);
         add.add(vertragsUebersicht);
         add.add(plusButton);
-
+        StartLayer.fenster.setSize(400,400);
         StartLayer.fenster.add(add);
         angemeldetePerson = person;
     }
@@ -42,6 +43,7 @@ public class Vertragsübersicht {
             for (int i = 0; i < person.getVertraege().size(); i++) {
                 JPanel jp = new JPanel();
                 jp.setLayout(new GridLayout(0, 2));
+                jp.setBorder(BorderFactory.createEmptyBorder(0,0,10,0));
                 JLabel auftragsnummerText = new JLabel(App.resourceBundle.getString("contract"));
                 JLabel auftragsNummer = new JLabel(String.valueOf(person.getVertraege().get(i).getAuftragsnummer()));
                 JLabel versicherungArtText = new JLabel(App.resourceBundle.getString("insurance.type"));
@@ -68,6 +70,7 @@ public class Vertragsübersicht {
         public void actionPerformed(ActionEvent e) {
             for(int i=1;i<StartLayer.fenster.getComponentCount();i++)
                 StartLayer.fenster.remove(i);
+            StartLayer.fenster.remove(add);
             new VertragHinzufuegen(angemeldetePerson);
         }
     }
@@ -77,6 +80,7 @@ public class Vertragsübersicht {
         public void actionPerformed(ActionEvent e) {
             for(int i=1;i<StartLayer.fenster.getComponentCount();i++)
                 StartLayer.fenster.remove(i);
+            StartLayer.fenster.remove(add);
             if(e.getSource().equals(einstellungen))
                 new Einstellungen(angemeldetePerson);
             else if(e.getSource().equals(home)) {

@@ -4,13 +4,13 @@ import atdit_ibait_20.database.model.Vertrag;
 
 public class BasicVertrag implements Vertrag {
     private final String Versicherungsart;
-    private final int Auftragsnummer;
+    private final String Auftragsnummer;
     private final String Buchungsart;
     private final int EURBetrag;
 
-    public BasicVertrag(String versicherungsart, int versicherungsnummer, String buchungsart, int eurBetrag) {
+    public BasicVertrag(String versicherungsart,String buchungsart, int eurBetrag) {
         Versicherungsart = versicherungsart;
-        Auftragsnummer = versicherungsnummer;
+        Auftragsnummer = "0";
         Buchungsart = buchungsart;
         EURBetrag = eurBetrag;
     }
@@ -21,7 +21,7 @@ public class BasicVertrag implements Vertrag {
     }
 
     @Override
-    public int getAuftragsnummer() {
+    public String getAuftragsnummer() {
         return this.Auftragsnummer;
     }
 

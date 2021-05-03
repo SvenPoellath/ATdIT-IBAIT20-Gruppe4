@@ -60,7 +60,7 @@ public class Vertragsübersicht {
                 jp.add(buchungsArt);
                 jp.add(betragText);
                 jp.add(betrag);
-                StartLayer.fenster.add(jp);
+                add.add(jp);
             }
         }
     }
@@ -78,6 +78,8 @@ public class Vertragsübersicht {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            StartLayer.fenster.remove(VertragHinzufuegen.neueIBAN);
+            StartLayer.fenster.remove(VertragHinzufuegen.hinzugefuegt);
             StartLayer.fenster.remove(add);
             StartLayer.fenster.remove(Einstellungen.einstellungen);
             StartLayer.fenster.remove(Einstellungen.datenAendern);
@@ -90,6 +92,7 @@ public class Vertragsübersicht {
             else if(e.getSource().equals(home)) {
                 new Vertragsübersicht(angemeldetePerson);
             }
+            StartLayer.fenster.validate();
         }
     }
 }

@@ -37,6 +37,7 @@ public class StartLayer{
 
 
 
+
         willkommenPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         willkommenPanel.setLayout(new FlowLayout());
         eingangsButtonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));

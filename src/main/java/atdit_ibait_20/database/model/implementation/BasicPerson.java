@@ -10,7 +10,7 @@ public class BasicPerson implements Person {
     private String Vorname;
     private String Nachname;
     private BasicGeburtsdatum Geburtsdatum;
-    private ArrayList<Vertrag> Vertraege;
+    private ArrayList<Vertrag> Vertraege = new ArrayList<>();
     private String Passwort;
     private String Anrede;
     private int PLZ;
@@ -91,7 +91,7 @@ public class BasicPerson implements Person {
         this.Nachname = nachname;
         this.Geburtsdatum = geburtsdatum;
         if (vertraege != null)
-        this.Vertraege = new ArrayList<>(vertraege);
+            this.Vertraege = new ArrayList<>(vertraege);
         this.Passwort = passwort;
         this.Anrede = anrede;
         this.PLZ = plz;
@@ -110,17 +110,18 @@ public class BasicPerson implements Person {
     }
 
     public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, long telefonnummer, String staatsangehoerigkeit, String strasse, ArrayList<Vertrag> vertraege) {
-        this(sozialversicherungsnummer,vorname,nachname,geburtsdatum,passwort,anrede,plz,ort,hausnummer,familienstand,mailadresse,telefonnummer,staatsangehoerigkeit,strasse,vertraege,null);
+        this(sozialversicherungsnummer, vorname, nachname, geburtsdatum, passwort, anrede, plz, ort, hausnummer, familienstand, mailadresse, telefonnummer, staatsangehoerigkeit, strasse, vertraege, null);
     }
+
     public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, long telefonnummer, String staatsangehoerigkeit, String strasse) {
-        this(sozialversicherungsnummer,vorname,nachname,geburtsdatum,passwort,anrede,plz,ort,hausnummer,familienstand,mailadresse,telefonnummer, staatsangehoerigkeit,strasse,null);
+        this(sozialversicherungsnummer, vorname, nachname, geburtsdatum, passwort, anrede, plz, ort, hausnummer, familienstand, mailadresse, telefonnummer, staatsangehoerigkeit, strasse, null);
     }
 
 
-    public void addVertrag(int index,Vertrag vertrag){
-        Vertraege.add(index,vertrag);
-
+    public void addVertrag(Vertrag vertrag) {
+        Vertraege.add(vertrag);
     }
+
     @Override
     public String getSozialversicherungsnummer() {
         return this.Sozialversicherungsnummer;
@@ -135,9 +136,10 @@ public class BasicPerson implements Person {
     public String getNachname() {
         return this.Nachname;
     }
+
     @Override
     public String getGeburtsdatum() {
-        return  Geburtsdatum.getGeburtsdatumJahr()+ "-" + Geburtsdatum.getGeburtsdatumMonat() + "-" + Geburtsdatum.getGeburtsdatumTag();
+        return Geburtsdatum.getGeburtsdatumJahr() + "-" + Geburtsdatum.getGeburtsdatumMonat() + "-" + Geburtsdatum.getGeburtsdatumTag();
     }
 
 
@@ -200,9 +202,6 @@ public class BasicPerson implements Person {
     public String getIBAN() {
         return this.IBAN;
     }
-
-    @Override
-    public void addVertrag(Vertrag vertrag) {
-        Vertraege.add(vertrag);
-    }
 }
+
+

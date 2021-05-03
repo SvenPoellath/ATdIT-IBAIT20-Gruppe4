@@ -87,12 +87,16 @@ public class Vertragsübersicht {
             StartLayer.fenster.remove(VertragHinzufuegen.vertragsDaten);
             StartLayer.fenster.remove(VertragHinzufuegen.hinzufuegen);
             StartLayer.fenster.remove(VertragHinzufuegen.preise);
-            if(e.getSource().equals(einstellungen))
+            if(e.getSource().equals(einstellungen)) {
                 new Einstellungen(angemeldetePerson);
+                StartLayer.fenster.validate();
+            }
             else if(e.getSource().equals(home)) {
                 new Vertragsübersicht(angemeldetePerson);
+                StartLayer.fenster.validate();
+
             }
-            StartLayer.fenster.validate();
+
         }
     }
 }

@@ -51,6 +51,11 @@ public class VertragHinzufuegen {
         vertragsDaten.setLayout(new GridLayout(0,2));
         neueIBAN.setLayout(new GridLayout(0,2));
         preise.setBorder(BorderFactory.createEmptyBorder(0,60,0,0));
+        vertragsDaten.removeAll();
+        hinzufuegen.removeAll();
+        preise.removeAll();
+        neueIBAN.removeAll();
+        hinzugefuegt.removeAll();
         String[] versicherungsArten = new String[]{"*",App.resourceBundle.getString("luggage.insurance")};
         String[] buchungsArten = new String[]{"*",App.resourceBundle.getString("monthly"),App.resourceBundle.getString("yearly"),App.resourceBundle.getString("per.trip")};
         Integer[] tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
@@ -63,6 +68,7 @@ public class VertragHinzufuegen {
         buchungsArt.addItemListener(new ComboBoxListener());
         hinzufuegenButton.addActionListener(new hinzufuegenButtonListener());
         preis.addActionListener(new hinzufuegenButtonListener());
+        addIBAN.addActionListener(new hinzufuegenButtonListener());
        vertragsDaten.add(versicherungArtText);
        vertragsDaten.add(versicherungsArt);
        hinzufuegen.add(preis);
@@ -112,7 +118,8 @@ public class VertragHinzufuegen {
                     StartLayer.fenster.add(neueIBAN);
                     StartLayer.fenster.add(hinzufuegen);
                     StartLayer.fenster.validate();
-                }else {
+                }
+                if (angemeldetePerson.getIBAN()!=null){
                     BasicVertrag vertrag = new BasicVertrag(versicherungsArt.getSelectedItem().toString(),buchungsArt.getSelectedItem().toString(),betrag);
                     angemeldetePerson.getSozialversicherungsnummer();
                     angemeldetePerson.addVertrag(vertrag);
@@ -136,6 +143,10 @@ public class VertragHinzufuegen {
                 StartLayer.fenster.validate();
             }
             else if(e.getSource().equals(buchungsArt)){
+                vertragsDaten.remove(tageText);
+                vertragsDaten.remove(anzahlDerTage);
+                vertragsDaten.remove(landText);
+                vertragsDaten.remove(land);
                 if(e.getItem().equals(App.resourceBundle.getString("per.trip"))) {
                     vertragsDaten.add(tageText);
                     vertragsDaten.add(anzahlDerTage);
@@ -143,6 +154,7 @@ public class VertragHinzufuegen {
                     vertragsDaten.add(land);
                     StartLayer.fenster.setSize(600,400);
                 }
+                StartLayer.fenster.validate();
             }
         }
     }

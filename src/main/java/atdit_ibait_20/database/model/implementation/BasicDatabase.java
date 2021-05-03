@@ -33,7 +33,7 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
             if (conn != null) {
                 Statement stmt = conn.createStatement();
                 stmt.execute(sql);
-                System.out.println("Command successfully executed: create_tables");
+                System.out.println("Command successfully executed: " + sql);
             }
         } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -67,7 +67,8 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
                  email_address   text     NOT NULL,    \s
                  phone_number    long     NOT NULL,    \s
                  password        text     NOT NULL,    \s
-                 salt            text     NOT NULL     \s
+                 salt            text     NOT NULL,    \s
+                 IBAN            text(22)              \s
                 );""";
         execute(sql, conn);
     }
@@ -126,13 +127,40 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
                 returnPerson.setHausnummer(rs.getString("house_number"));
                 returnPerson.setMailAdresse(rs.getString("email_address"));
                 returnPerson.setTelefonnummer(rs.getInt("phone_number"));
-
+                returnPerson.setIBAN(rs.getString("IBAN"));
             }
             System.out.println("Data for id: " + id + " successfully received.");
         } catch (SQLException exp) {
             System.out.println(exp.getMessage());
         }
     return returnPerson;
+    }
+
+    public static void update_person_by_id( String id, String entry, String value) {
+        String sql = "UPDATE person SET " + entry + "='" + value + "' WHERE id='" + id + "'";
+        Connection conn = connect();
+        execute(sql,conn);
+    }
+
+    public static void update_person_by_id(String id, String entry, Integer value) {
+        String sql = "UPDATE person SET " + entry + "=" + value + " WHERE id='" + id + "'";
+        Connection conn = connect();
+        execute(sql,conn);
+    }
+
+    public static void update_person_by_id(String id, String entry, Long value) {
+        String sql = "UPDATE person SET " + entry + "=" + value + " WHERE id='" + id + "'";
+        Connection conn = connect();
+        execute(sql,conn);
+    }
+
+    public static void update_password_by_id(String id, String password) {
+        String salt = getSalt();
+        String securePassword = generateSecurePassword(password,salt);
+
+        update_person_by_id(id,"password",securePassword);
+        update_person_by_id(id,"salt",salt);
+
     }
 
     public static boolean check_Login(String id, String providedPassword) {

@@ -25,7 +25,7 @@ public class PasswordService implements DatabaseService {
     public static String getSalt() {
         StringBuilder returnValue = new StringBuilder(32);
 
-        for (int i = 0; i < 32; i++)
+        for (int i = 0; i < LENGTH; i++)
             returnValue.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
     return new String (returnValue);
     }

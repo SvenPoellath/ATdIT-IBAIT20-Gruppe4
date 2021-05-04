@@ -2,6 +2,7 @@ package atdit_ibait_20.database.model.implementation;
 
 import atdit_ibait_20.database.model.Database;
 import atdit_ibait_20.database.model.Person;
+import atdit_ibait_20.database.model.Vertrag;
 
 import java.sql.*;
 import java.util.*;
@@ -71,6 +72,17 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
                  IBAN            text(22)              \s
                 );""";
         execute(sql, conn);
+
+        sql = """
+              CREATE TABLE IF NOT EXISTS contract (
+                order_number text(12) PRIMARY KEY,             \s
+                person_id    text(12)   NOT NULL,
+                insurance_type text    NOT NULL,  \s
+                booking_type    text    NOT NULL,  \s
+                price           int     NOT NULL,  \s
+                FOREIGN KEY (person_id) REFERENCES person(id) \s
+                );""";
+        execute(sql,conn);
     }
 
     public static void create_person_entry(BasicPerson person) {
@@ -106,8 +118,26 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
         close(conn);
     }
 
+    public static void create_contract_entry(BasicVertrag contract, String person_id) {
+        Connection conn = connect();
+        String sql = "INSERT INTO contract(order_number,person_id,insurance_type,booking_type,price) VALUES(?,?,?,?,?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, contract.getAuftragsnummer());
+            pstmt.setString(2, person_id);
+            pstmt.setString(3, contract.getVersicherungsart());
+            pstmt.setString(4, contract.getBuchungsart());
+            pstmt.setInt(5, contract.getEURBetrag());
+            pstmt.executeUpdate();
+            System.out.println("Entry successfully added." + pstmt);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        close(conn);
+    }
+
     public static BasicPerson get_person_by_id(String id) {
-        String sql = "SELECT id, form_of_address, first_name, last_name, birth_date, nationality, marital_status, zip_code, city, street, house_number, email_address, phone_number FROM person WHERE id = ?";
+        String sql = "SELECT id, form_of_address, first_name, last_name, birth_date, nationality, marital_status, zip_code, city, street, house_number, email_address, phone_number, IBAN FROM person WHERE id = ?";
         Connection conn = connect();
         BasicPerson returnPerson = new BasicPerson();
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -133,7 +163,23 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
         } catch (SQLException exp) {
             System.out.println(exp.getMessage());
         }
+    get_contract_by_id(returnPerson);
     return returnPerson;
+    }
+
+    public static void get_contract_by_id(BasicPerson person) {
+        String sql = "SELECT order_number,person_id,insurance_type,booking_type,price FROM contract WHERE person_id = ?";
+        try (PreparedStatement pstmt = connect().prepareStatement(sql)) {
+            pstmt.setString(1,person.getSozialversicherungsnummer());
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                person.addVertrag(new BasicVertrag(rs.getString("order_number"),rs.getString("insurance_type"),rs.getString("booking_type"),rs.getInt("price")));
+                System.out.println("Contract " + rs.getString("order_number") + " added.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("All contracts for id: " + person.getSozialversicherungsnummer() + " added.");
     }
 
     public static void update_person_by_id( String id, String entry, String value) {
@@ -183,5 +229,32 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
     }
 
     return verifyUserPassword(providedPassword,securePassword,salt);
+    }
+
+    public static boolean check_order_number(String orderNumber) {
+        boolean returnValue = true;
+        Connection conn = connect();
+        String sql = "SELECT (count(*) > 0) as found FROM contract WHERE order_number=?";
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,orderNumber);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    boolean found = rs.getBoolean(1);
+                    if (found) {
+                        System.out.println("Auftragsnummer vergeben");
+                        returnValue = false;
+                    } else {
+                        System.out.println("Auftragsnummer frei");
+                        returnValue = true;
+                    }
+                    }
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return returnValue;
     }
 }

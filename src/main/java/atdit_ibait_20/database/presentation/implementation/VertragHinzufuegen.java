@@ -2,6 +2,7 @@ package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
 import atdit_ibait_20.database.model.Person;
+import atdit_ibait_20.database.model.implementation.BasicDatabase;
 import atdit_ibait_20.database.model.implementation.BasicVertrag;
 
 
@@ -120,8 +121,9 @@ public class VertragHinzufuegen {
                     StartLayer.fenster.validate();
                 }
                 if (angemeldetePerson.getIBAN()!=null){
+                    System.out.println("Contract added.");
                     BasicVertrag vertrag = new BasicVertrag(versicherungsArt.getSelectedItem().toString(),buchungsArt.getSelectedItem().toString(),betrag);
-                    angemeldetePerson.getSozialversicherungsnummer();
+                    BasicDatabase.create_contract_entry(vertrag,angemeldetePerson.getSozialversicherungsnummer());
                     angemeldetePerson.addVertrag(vertrag);
                     StartLayer.fenster.add(hinzugefuegt);
                     StartLayer.fenster.validate();
@@ -129,6 +131,7 @@ public class VertragHinzufuegen {
             }
             if(e.getSource().equals(addIBAN)){
                 angemeldetePerson.setIBAN(tfIBAN.getText());
+                BasicDatabase.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),"IBAN",angemeldetePerson.getIBAN());
                 neueIBAN.removeAll();
             }
         }

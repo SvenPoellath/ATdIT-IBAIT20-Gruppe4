@@ -31,7 +31,7 @@ public class RegistrierLayer {
 
     private final JPasswordField tfRegistrierPasswort = new JPasswordField();
 
-    private static final String[] namen = new String[]{ "*",App.resourceBundle.getString("mister"), App.resourceBundle.getString("mrs"), App.resourceBundle.getString("doctor"), App.resourceBundle.getString("professor" )};
+    private static final String[] namen = new String[]{ "*",App.resourceBundle.getString("mister"), App.resourceBundle.getString("mrs")};
     private static final Integer[] tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
     private static final Integer[] monate = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12};
     private static final Integer[] jahre = new Integer[] {1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004};
@@ -108,6 +108,7 @@ public class RegistrierLayer {
         geburtsDatumsPanel.add(GeburtsdatumJahr);
         zurueckPanel.add(zurueckButton);
         JLabel falscheAngabe = new JLabel(App.resourceBundle.getString("check.your.inputs"));
+        falscheAngabe.setForeground(Color.red);
         falscheAngabePanel.add(falscheAngabe);
     }
     class ZurueckButtonListener implements ActionListener {
@@ -125,7 +126,9 @@ public class RegistrierLayer {
         public void actionPerformed(ActionEvent e) {
 
             try {
-
+                if(tfVersicherungsNummer.getText().length()==11){
+                    throw new Exception("length of social security number invalid");
+                }
                 BasicGeburtsdatum neuesGeburtsDatum = new BasicGeburtsdatum((Integer) GeburtsdatumTag.getSelectedItem(), (Integer) GeburtsdatumMonat.getSelectedItem(), (Integer) GeburtsdatumJahr.getSelectedItem());
                 BasicPerson person = new BasicPerson(tfVersicherungsNummer.getText(), tfName.getText(), tfNachName.getText(), neuesGeburtsDatum,new String(tfRegistrierPasswort.getPassword()), cbAnrede.getSelectedItem().toString(), Integer.parseInt(tfPlz.getText()), tfOrt.getText(), tfHausnummer.getText(), cbFamilienstand.getSelectedItem().toString(), tfEmailadresse.getText(), Long.parseLong(tfTelefonnummer.getText()), tfStaatsangehoerigkeit.getText(), tfStrasse.getText());
                 BasicDatabase.create_person_entry(person);
@@ -133,10 +136,12 @@ public class RegistrierLayer {
                 StartLayer.fenster.remove(datenPanel);
                 StartLayer.fenster.remove(geburtsDatumsPanel);
                 StartLayer.fenster.remove(zurueckPanel);
+                StartLayer.fenster.remove(falscheAngabePanel);
                 new Vertragsübersicht(person);
             }catch (Exception exp){
                 StartLayer.fenster.add(falscheAngabePanel);
                 System.out.println(exp.getMessage());
+                StartLayer.fenster.validate();
             }
         }
 

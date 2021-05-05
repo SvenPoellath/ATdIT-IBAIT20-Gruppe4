@@ -34,7 +34,6 @@ public class Einstellungen {
     JTextField vornameNeu = new JTextField();
     JTextField nachnameNeu = new JTextField();
     JTextField passwortNeu = new JPasswordField();
-    JTextField anredeNeu = new JTextField();
     JTextField plzNeu = new JTextField();
     JTextField ortNeu = new JTextField();
     JTextField strasseNeu = new JTextField();

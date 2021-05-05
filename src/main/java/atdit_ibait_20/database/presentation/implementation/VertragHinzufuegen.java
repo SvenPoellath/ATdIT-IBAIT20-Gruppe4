@@ -31,6 +31,7 @@ public class VertragHinzufuegen {
     private final JLabel preisMonatlich = new JLabel(monatlicherPreis+App.resourceBundle.getString("currency"));
     private final JLabel preisJahr = new JLabel(jahresPreis+App.resourceBundle.getString("currency"));
     private final JLabel IBAN = new JLabel("IBAN");
+    private final JLabel falscheIBAN = new JLabel(App.resourceBundle.getString("failed.to.add.IBAN"));
     private final JLabel fertig = new JLabel(App.resourceBundle.getString("successfully.added.new.contract"));
 
     JTextField tfIBAN = new JTextField();
@@ -57,6 +58,7 @@ public class VertragHinzufuegen {
         preise.removeAll();
         neueIBAN.removeAll();
         hinzugefuegt.removeAll();
+        falscheIBAN.setForeground(Color.red);
         String[] versicherungsArten = new String[]{"*",App.resourceBundle.getString("luggage.insurance")};
         String[] buchungsArten = new String[]{"*",App.resourceBundle.getString("monthly"),App.resourceBundle.getString("yearly"),App.resourceBundle.getString("per.trip")};
         Integer[] tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
@@ -90,17 +92,17 @@ public class VertragHinzufuegen {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource().equals(preis)){
                 if(versicherungsArt.getSelectedIndex()==1){
-                    if(buchungsArt.getSelectedIndex()==1) {
+                    if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("monthly"))) {
                         preise.removeAll();
                         preise.add(preisMonatlich);
                         betrag = monatlicherPreis;
                     }
-                    if(buchungsArt.getSelectedIndex()==2) {
+                    if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("yearly"))) {
                         preise.removeAll();
                         preise.add(preisJahr);
                         betrag = jahresPreis;
                     }
-                    if(buchungsArt.getSelectedIndex()==3){
+                    if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("per.trip"))){
                         tagesPreis = (anzahlDerTage.getSelectedIndex()+1)*50;
                         preisEinmalig = new JLabel(tagesPreis+App.resourceBundle.getString("currency"));
                         preise.removeAll();
@@ -120,7 +122,7 @@ public class VertragHinzufuegen {
                     StartLayer.fenster.add(hinzufuegen);
                     StartLayer.fenster.validate();
                 }
-                if (angemeldetePerson.getIBAN()!=null){
+                else if (angemeldetePerson.getIBAN()!=null){
                     System.out.println("Contract added.");
                     BasicVertrag vertrag = new BasicVertrag(versicherungsArt.getSelectedItem().toString(),buchungsArt.getSelectedItem().toString(),betrag);
                     BasicDatabase.create_contract_entry(vertrag,angemeldetePerson.getSozialversicherungsnummer());
@@ -130,9 +132,16 @@ public class VertragHinzufuegen {
                 }
             }
             if(e.getSource().equals(addIBAN)){
-                angemeldetePerson.setIBAN(tfIBAN.getText());
-                BasicDatabase.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),"IBAN",angemeldetePerson.getIBAN());
-                neueIBAN.removeAll();
+                if(tfIBAN.getText().length()==22) {
+                    angemeldetePerson.setIBAN(tfIBAN.getText());
+                    BasicDatabase.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "IBAN", angemeldetePerson.getIBAN());
+                    neueIBAN.removeAll();
+                    StartLayer.fenster.validate();
+                }
+                else{
+                    neueIBAN.add(falscheIBAN);
+                    StartLayer.fenster.validate();
+                }
             }
         }
     }

@@ -29,7 +29,7 @@ public class Einstellungen {
     JLabel familienstandAendernText = new JLabel(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("marital.status"));
     JLabel mailAendernText = new JLabel(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("e.mail.address"));
     JLabel telefonnummerAendernText = new JLabel(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("phone.number"));
-    JLabel staatsangehörigkeitAendernText = new JLabel(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("nationality"));
+    JLabel staatsangehoerigkeitAendernText = new JLabel(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("nationality"));
 
     JTextField vornameNeu = new JTextField();
     JTextField nachnameNeu = new JTextField();
@@ -54,7 +54,7 @@ public class Einstellungen {
     JButton familienstandAendern = new JButton(App.resourceBundle.getString("marital.status")+" "+App.resourceBundle.getString("change"));
     JButton mailAendern = new JButton(App.resourceBundle.getString("change")+" "+App.resourceBundle.getString("e.mail.address"));
     JButton telefonnummerAendern = new JButton(App.resourceBundle.getString("phone.number")+" "+App.resourceBundle.getString("change"));
-    JButton staatsangehörigkeitAendern = new JButton(App.resourceBundle.getString("nationality")+" "+App.resourceBundle.getString("change"));
+    JButton staatsangehoerigkeitAendern = new JButton(App.resourceBundle.getString("nationality")+" "+App.resourceBundle.getString("change"));
 
     Person angemeldetePerson;
     public Einstellungen(Person person){
@@ -68,7 +68,7 @@ public class Einstellungen {
         strasseNeu.setText(angemeldetePerson.getStrasse());
         hausnummerNeu.setText(angemeldetePerson.getHausnummer());
         mailNeu.setText(angemeldetePerson.getMailAdresse());
-        telefonnummerNeu.setText("0" + String.valueOf(angemeldetePerson.getTelefonnummer()));
+        telefonnummerNeu.setText("0" + angemeldetePerson.getTelefonnummer());
         RegistrierLayer.cbFamilienstand.setSelectedItem(angemeldetePerson.getFamilienstand());
         staatsangehoerigkeitNeu.setText(angemeldetePerson.getStaatsangehoerigkeit());
 
@@ -88,7 +88,7 @@ public class Einstellungen {
         hausnummerAendern.addActionListener(new aendern());
         familienstandAendern.addActionListener(new aendern());
         mailAendern.addActionListener(new aendern());
-        staatsangehörigkeitAendern.addActionListener(new aendern());
+        staatsangehoerigkeitAendern.addActionListener(new aendern());
         telefonnummerAendern.addActionListener(new aendern());
 
         einstellungen.setLayout(new GridLayout(0,1));
@@ -130,9 +130,9 @@ public class Einstellungen {
         datenAendern.add(familienstandAendernText);
         datenAendern.add(RegistrierLayer.cbFamilienstand);
         datenAendern.add(familienstandAendern);
-        datenAendern.add(staatsangehörigkeitAendernText);
+        datenAendern.add(staatsangehoerigkeitAendernText);
         datenAendern.add(staatsangehoerigkeitNeu);
-        datenAendern.add(staatsangehörigkeitAendern);
+        datenAendern.add(staatsangehoerigkeitAendern);
         geburtsdatum.add(geburtsdatumAendernText);
         geburtsdatum.add(RegistrierLayer.GeburtsdatumTag);
         geburtsdatum.add(RegistrierLayer.GeburtsdatumMonat);
@@ -198,7 +198,7 @@ public class Einstellungen {
                 angemeldetePerson.setTelefonnummer(Integer.parseInt(telefonnummerNeu.getText()));
                 BasicDatabase.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "phone_number", angemeldetePerson.getTelefonnummer());
             }
-            if(e.getSource().equals(staatsangehörigkeitAendern)) {
+            if(e.getSource().equals(staatsangehoerigkeitAendern)) {
                 angemeldetePerson.setStaatsangehoerigkeit(staatsangehoerigkeitNeu.getText());
                 BasicDatabase.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "nationality", angemeldetePerson.getStaatsangehoerigkeit());
             }

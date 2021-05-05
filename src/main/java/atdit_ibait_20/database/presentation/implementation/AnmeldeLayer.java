@@ -15,32 +15,34 @@ public class AnmeldeLayer {
     private final JPanel anmeldungsPanel = new JPanel();
     private final JPanel anmeldungsButtonPanel = new JPanel();
     private final JPanel fehlerPanel = new JPanel();
+
     private final JTextField tfAnmeldeName = new JTextField();
     private final JPasswordField tfAnmeldePasswort = new JPasswordField();
-    JButton zurueckButton = new JButton("<--");
-    JButton anmeldeButton = new JButton(App.resourceBundle.getString("sign.in"));
+
+    private final JButton zurueckButton = new JButton("<--");
+    private final JButton anmeldeButton = new JButton(App.resourceBundle.getString("sign.in"));
 
     public AnmeldeLayer() {
-
-        anmeldeButton.addActionListener(new ButtonListener());
-
-        zurueckButton.addActionListener(new ButtonListener());
-
         zurueckPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
         zurueckPanel.setLayout(new FlowLayout());
         anmeldungsPanel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
         anmeldungsPanel.setLayout(new GridLayout(0, 2));
         anmeldungsButtonPanel.setBorder(BorderFactory.createEmptyBorder(0, 30, 10, 30));
 
-        zurueckPanel.add(zurueckButton);
+        anmeldeButton.addActionListener(new ButtonListener());
+        zurueckButton.addActionListener(new ButtonListener());
+
         JLabel anmeldeName = new JLabel(App.resourceBundle.getString("nick.name"));
+        JLabel anmeldePasswort = new JLabel(App.resourceBundle.getString("password"));
+        JLabel falschesPasswort = new JLabel((App.resourceBundle.getString("wrong.password")));
+
+        zurueckPanel.add(zurueckButton);
         anmeldungsPanel.add(anmeldeName);
         anmeldungsPanel.add(tfAnmeldeName);
-        JLabel anmeldePasswort = new JLabel(App.resourceBundle.getString("password"));
         anmeldungsPanel.add(anmeldePasswort);
         anmeldungsPanel.add(tfAnmeldePasswort);
         anmeldungsButtonPanel.add(anmeldeButton);
-        JLabel falschesPasswort = new JLabel((App.resourceBundle.getString("wrong.password")));
+
         falschesPasswort.setForeground(Color.red);
         fehlerPanel.add(falschesPasswort);
 
@@ -53,7 +55,7 @@ public class AnmeldeLayer {
 
     class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            BasicPerson person = new BasicPerson();
+            BasicPerson person;
             StartLayer.fenster.remove(anmeldungsPanel);
             StartLayer.fenster.remove(anmeldungsButtonPanel);
             StartLayer.fenster.remove(StartLayer.sprache);
@@ -66,7 +68,7 @@ public class AnmeldeLayer {
                 if (BasicDatabase.check_Login(tfAnmeldeName.getText(),new String(tfAnmeldePasswort.getPassword()))) {
                     person = BasicDatabase.get_person_by_id(tfAnmeldeName.getText());
                     System.out.println("Anmeldung erfolgreich.");
-                    new Vertragsübersicht(person);
+                    new Vertragsuebersicht(person);
                 } else
                     StartLayer.fenster.add(fehlerPanel);
                     System.out.println("Wrong password entered.");

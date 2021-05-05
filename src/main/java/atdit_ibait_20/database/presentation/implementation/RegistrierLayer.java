@@ -137,7 +137,7 @@ public class RegistrierLayer {
                 StartLayer.fenster.remove(geburtsDatumsPanel);
                 StartLayer.fenster.remove(zurueckPanel);
                 StartLayer.fenster.remove(falscheAngabePanel);
-                new Vertragsübersicht(person);
+                new Vertragsuebersicht(person);
             }catch (Exception exp){
                 StartLayer.fenster.add(falscheAngabePanel);
                 System.out.println(exp.getMessage());

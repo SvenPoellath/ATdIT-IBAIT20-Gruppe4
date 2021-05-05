@@ -8,29 +8,27 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Vertragsübersicht {
+public class Vertragsuebersicht {
     private final JPanel add = new JPanel();
-    private final JMenuBar menuBar = new JMenuBar();
-    private final JMenu menu = new JMenu(App.resourceBundle.getString("menu"));
     private final JMenuItem einstellungen = new JMenuItem(App.resourceBundle.getString("settings"));
     private final JMenuItem home = new JMenuItem(App.resourceBundle.getString("home"));
 
-    private final JLabel vertragsUebersicht = new JLabel(App.resourceBundle.getString("welcome.to.your.contract.overview"));
-
-    private final JButton plusButton = new JButton("+");
-
     private final Person angemeldetePerson;
-    public Vertragsübersicht(Person person){
+    public Vertragsuebersicht(Person person){
         add.setLayout(new GridLayout(0,1));
         einstellungen.addActionListener(new menuItemListener());
         home.addActionListener(new menuItemListener());
+        JButton plusButton = new JButton("+");
         plusButton.addActionListener(new VertragHinzufuegenButton());
+        JMenu menu = new JMenu(App.resourceBundle.getString("menu"));
         menu.add(home);
         menu.add(einstellungen);
+        JMenuBar menuBar = new JMenuBar();
         menuBar.add(menu);
 
         StartLayer.fenster.setJMenuBar(menuBar);
         addVorhandeneVertraegetoGUI(person);
+        JLabel vertragsUebersicht = new JLabel(App.resourceBundle.getString("welcome.to.your.contract.overview"));
         add.add(vertragsUebersicht);
         add.add(plusButton);
         StartLayer.fenster.setSize(400,400);
@@ -92,7 +90,7 @@ public class Vertragsübersicht {
                 StartLayer.fenster.validate();
             }
             else if(e.getSource().equals(home)) {
-                new Vertragsübersicht(angemeldetePerson);
+                new Vertragsuebersicht(angemeldetePerson);
                 StartLayer.fenster.validate();
 
             }

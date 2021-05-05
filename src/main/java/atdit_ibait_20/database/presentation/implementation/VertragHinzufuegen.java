@@ -24,30 +24,28 @@ public class VertragHinzufuegen {
     static final JPanel hinzugefuegt = new JPanel();
 
 
-    private final JLabel versicherungArtText = new JLabel(App.resourceBundle.getString("insurance.type"));
     private final JLabel buchungsArtText = new JLabel(App.resourceBundle.getString("payment.type"));
     private final JLabel tageText = new JLabel(App.resourceBundle.getString("days.of.visiting"));
     private final JLabel landText = new JLabel(App.resourceBundle.getString("country"));
     private final JLabel preisMonatlich = new JLabel(monatlicherPreis+App.resourceBundle.getString("currency"));
     private final JLabel preisJahr = new JLabel(jahresPreis+App.resourceBundle.getString("currency"));
-    private final JLabel IBAN = new JLabel("IBAN");
     private final JLabel falscheIBAN = new JLabel(App.resourceBundle.getString("failed.to.add.IBAN"));
-    private final JLabel fertig = new JLabel(App.resourceBundle.getString("successfully.added.new.contract"));
 
     JTextField tfIBAN = new JTextField();
 
-    private JComboBox <String> versicherungsArt;
-    private JComboBox <String> buchungsArt;
-    private JComboBox <Integer> anzahlDerTage;
-    private JComboBox <String> land;
+    private final JComboBox <String> versicherungsArt;
+    private final JComboBox <String> buchungsArt;
+    private final JComboBox <Integer> anzahlDerTage;
+    private final JComboBox <String> land;
 
-    JButton hinzufuegenButton = new JButton(App.resourceBundle.getString("add.contract"));
-    JButton preis = new JButton(App.resourceBundle.getString("get.price"));
-    JButton addIBAN = new JButton(App.resourceBundle.getString("add.iban"));
-    static Integer tagesPreis;
+    private final JButton hinzufuegenButton = new JButton(App.resourceBundle.getString("add.contract"));
+    private final JButton preis = new JButton(App.resourceBundle.getString("get.price"));
+    private final JButton addIBAN = new JButton(App.resourceBundle.getString("add.iban"));
+
+    private static Integer tagesPreis;
     static int betrag;
-    private Person angemeldetePerson;
-    JLabel preisEinmalig;
+    private final Person angemeldetePerson;
+
     public VertragHinzufuegen(Person person){
         angemeldetePerson = person;
         vertragsDaten.setLayout(new GridLayout(0,2));
@@ -72,13 +70,16 @@ public class VertragHinzufuegen {
         hinzufuegenButton.addActionListener(new hinzufuegenButtonListener());
         preis.addActionListener(new hinzufuegenButtonListener());
         addIBAN.addActionListener(new hinzufuegenButtonListener());
-       vertragsDaten.add(versicherungArtText);
+        JLabel versicherungArtText = new JLabel(App.resourceBundle.getString("insurance.type"));
+        vertragsDaten.add(versicherungArtText);
        vertragsDaten.add(versicherungsArt);
        hinzufuegen.add(preis);
-       neueIBAN.add(IBAN);
+        JLabel IBAN = new JLabel("IBAN");
+        neueIBAN.add(IBAN);
        neueIBAN.add(tfIBAN);
        neueIBAN.add(addIBAN);
-       hinzugefuegt.add(fertig);
+        JLabel fertig = new JLabel(App.resourceBundle.getString("successfully.added.new.contract"));
+        hinzugefuegt.add(fertig);
        StartLayer.fenster.setSize(400,400);
        StartLayer.fenster.add(vertragsDaten);
        StartLayer.fenster.add(preise);
@@ -104,7 +105,7 @@ public class VertragHinzufuegen {
                     }
                     if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("per.trip"))){
                         tagesPreis = (anzahlDerTage.getSelectedIndex()+1)*50;
-                        preisEinmalig = new JLabel(tagesPreis+App.resourceBundle.getString("currency"));
+                        JLabel preisEinmalig = new JLabel(tagesPreis + App.resourceBundle.getString("currency"));
                         preise.removeAll();
                         preise.add(preisEinmalig);
                         betrag = tagesPreis;
@@ -136,12 +137,10 @@ public class VertragHinzufuegen {
                     angemeldetePerson.setIBAN(tfIBAN.getText());
                     BasicDatabase.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "IBAN", angemeldetePerson.getIBAN());
                     neueIBAN.removeAll();
-                    StartLayer.fenster.validate();
-                }
-                else{
+                } else{
                     neueIBAN.add(falscheIBAN);
-                    StartLayer.fenster.validate();
                 }
+                StartLayer.fenster.validate();
             }
         }
     }

@@ -1,7 +1,7 @@
 package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
-import atdit_ibait_20.database.model.implementation.BasicDatabase;
+import atdit_ibait_20.database.persistence.implementation.DatabaseService;
 import atdit_ibait_20.database.model.implementation.BasicPerson;
 
 import javax.swing.*;
@@ -49,7 +49,7 @@ public class AnmeldeLayer {
         StartLayer.fenster.add(zurueckPanel);
         StartLayer.fenster.add(anmeldungsPanel);
         StartLayer.fenster.add(anmeldungsButtonPanel);
-        StartLayer.fenster.setSize(250,325);
+        StartLayer.fenster.setSize(250, 325);
 
     }
 
@@ -61,19 +61,22 @@ public class AnmeldeLayer {
             StartLayer.fenster.remove(StartLayer.sprache);
             StartLayer.fenster.remove(zurueckPanel);
             StartLayer.fenster.remove(fehlerPanel);
-            if(e.getSource().equals(zurueckButton)) {
+            if (e.getSource().equals(zurueckButton)) {
                 new StartLayer();
-            }
-            else if(e.getSource().equals(anmeldeButton)){
-                if (BasicDatabase.check_Login(tfAnmeldeName.getText(),new String(tfAnmeldePasswort.getPassword()))) {
-                    person = BasicDatabase.get_person_by_id(tfAnmeldeName.getText());
+            } else if (e.getSource().equals(anmeldeButton)) {
+                if (DatabaseService.check_Login(tfAnmeldeName.getText(), new String(tfAnmeldePasswort.getPassword()))) {
+                    person = DatabaseService.get_person_by_id(tfAnmeldeName.getText());
                     System.out.println("Anmeldung erfolgreich.");
                     new Vertragsuebersicht(person);
-                } else
+                } else {
+                    StartLayer.fenster.add(anmeldungsPanel);
+                    StartLayer.fenster.add(anmeldungsButtonPanel);
+                    StartLayer.fenster.add(StartLayer.sprache);
+                    StartLayer.fenster.add(zurueckPanel);
                     StartLayer.fenster.add(fehlerPanel);
-                    System.out.println("Wrong password entered.");
+                    System.out.println("Wrong id/password entered.");
                     StartLayer.fenster.validate();
-
+                }
             }
         }
     }

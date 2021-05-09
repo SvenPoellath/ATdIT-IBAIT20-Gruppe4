@@ -1,15 +1,15 @@
-package atdit_ibait_20.database.model.implementation;
+package atdit_ibait_20.database.persistence.implementation;
 
-import atdit_ibait_20.database.model.Database;
-import atdit_ibait_20.database.model.Person;
-import atdit_ibait_20.database.model.Vertrag;
+import atdit_ibait_20.database.model.implementation.BasicGeburtsdatum;
+import atdit_ibait_20.database.model.implementation.BasicPerson;
+import atdit_ibait_20.database.model.implementation.BasicVertrag;
+import atdit_ibait_20.database.persistence.Database;
 
 import java.sql.*;
-import java.util.*;
 
 import static atdit_ibait_20.database.persistence.implementation.PasswordService.*;
 
-public class BasicDatabase extends ArrayList<Person> implements Database {
+public class DatabaseService implements Database {
 
     public static final String URL = "jdbc:sqlite:test.db";
 
@@ -257,4 +257,6 @@ public class BasicDatabase extends ArrayList<Person> implements Database {
         }
         return returnValue;
     }
+
+
 }

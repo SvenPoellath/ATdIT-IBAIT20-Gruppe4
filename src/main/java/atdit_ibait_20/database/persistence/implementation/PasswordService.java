@@ -1,11 +1,9 @@
 package atdit_ibait_20.database.persistence.implementation;
 
-import atdit_ibait_20.database.persistence.DatabaseService;
+import atdit_ibait_20.database.persistence.Database;
 
-import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -13,7 +11,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Random;
 
-public class PasswordService implements DatabaseService {
+public class PasswordService implements Database {
 
     private static final int LENGTH = 32;
     private static final int ITERATIONS = 10000;
@@ -43,17 +41,17 @@ public class PasswordService implements DatabaseService {
         }
     }
 
-
     public static String generateSecurePassword(String password, String salt) {
-        String returnValue = null;
+        String returnValue;
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
         returnValue = Base64.getEncoder().encodeToString(securePassword);
         return returnValue;
     }
 
     public static boolean verifyUserPassword(String providedPassword, String securePassword, String salt) {
-        boolean returnValue = false;
-
+        boolean returnValue;
+        if (salt == null)
+           return false;
         String passwordToTest = generateSecurePassword(providedPassword,salt);
         returnValue = passwordToTest.equalsIgnoreCase(securePassword);
         return returnValue;

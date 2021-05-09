@@ -12,17 +12,20 @@ public class Vertragsuebersicht {
     private final JPanel add = new JPanel();
     private final JMenuItem einstellungen = new JMenuItem(App.resourceBundle.getString("settings"));
     private final JMenuItem home = new JMenuItem(App.resourceBundle.getString("home"));
+    private final JMenuItem logout = new JMenuItem(App.resourceBundle.getString("logout"));
 
-    private final Person angemeldetePerson;
+    private Person angemeldetePerson;
     public Vertragsuebersicht(Person person){
         add.setLayout(new GridLayout(0,1));
         einstellungen.addActionListener(new menuItemListener());
+        logout.addActionListener(new menuItemListener());
         home.addActionListener(new menuItemListener());
         JButton plusButton = new JButton("+");
         plusButton.addActionListener(new VertragHinzufuegenButton());
         JMenu menu = new JMenu(App.resourceBundle.getString("menu"));
         menu.add(home);
         menu.add(einstellungen);
+        menu.add(logout);
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(menu);
 
@@ -93,6 +96,11 @@ public class Vertragsuebersicht {
                 new Vertragsuebersicht(angemeldetePerson);
                 StartLayer.fenster.validate();
 
+            }
+            else if(e.getSource().equals(logout)) {
+                StartLayer.fenster.setJMenuBar(null);
+                angemeldetePerson = null;
+                new StartLayer();
             }
 
         }

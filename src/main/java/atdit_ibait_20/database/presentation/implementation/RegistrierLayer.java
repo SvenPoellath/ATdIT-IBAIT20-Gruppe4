@@ -1,7 +1,7 @@
 package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
-import atdit_ibait_20.database.model.implementation.BasicDatabase;
+import atdit_ibait_20.database.persistence.implementation.DatabaseService;
 import atdit_ibait_20.database.model.implementation.BasicGeburtsdatum;
 import atdit_ibait_20.database.model.implementation.BasicPerson;
 
@@ -131,7 +131,7 @@ public class RegistrierLayer {
                 }
                 BasicGeburtsdatum neuesGeburtsDatum = new BasicGeburtsdatum((Integer) GeburtsdatumTag.getSelectedItem(), (Integer) GeburtsdatumMonat.getSelectedItem(), (Integer) GeburtsdatumJahr.getSelectedItem());
                 BasicPerson person = new BasicPerson(tfVersicherungsNummer.getText(), tfName.getText(), tfNachName.getText(), neuesGeburtsDatum,new String(tfRegistrierPasswort.getPassword()), cbAnrede.getSelectedItem().toString(), Integer.parseInt(tfPlz.getText()), tfOrt.getText(), tfHausnummer.getText(), cbFamilienstand.getSelectedItem().toString(), tfEmailadresse.getText(), Long.parseLong(tfTelefonnummer.getText()), tfStaatsangehoerigkeit.getText(), tfStrasse.getText());
-                BasicDatabase.create_person_entry(person);
+                DatabaseService.create_person_entry(person);
                 StartLayer.fenster.remove(registrierButtonPanel);
                 StartLayer.fenster.remove(datenPanel);
                 StartLayer.fenster.remove(geburtsDatumsPanel);

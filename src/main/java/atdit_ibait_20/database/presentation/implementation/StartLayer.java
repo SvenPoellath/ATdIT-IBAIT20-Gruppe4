@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class StartLayer{
 
@@ -40,7 +41,7 @@ public class StartLayer{
 
         registrierenFensterButton.addActionListener(new AnfangsButtonListener());
         anmeldenFensterButton.addActionListener(new AnfangsButtonListener());
-        spracheWaelen.addItemListener(new SpracheWaelen());
+        spracheWaelen.addItemListener(new SpracheWaehlen());
 
         JLabel willkommenSchrift = new JLabel(App.resourceBundle.getString("welcome.to.our.app"));
 
@@ -53,7 +54,6 @@ public class StartLayer{
         fenster.add(willkommenPanel);
         fenster.add(eingangsButtonsPanel);
         fenster.validate();
-
 
     }
     class AnfangsButtonListener implements ActionListener {
@@ -70,16 +70,18 @@ public class StartLayer{
     }
 
 
-    static class SpracheWaelen implements ItemListener{
+    static class SpracheWaehlen implements ItemListener{
 
         @Override
         public void itemStateChanged(ItemEvent e) {
             JComboBox<String> cb = (JComboBox<String>) e.getSource();
             if(cb.getSelectedIndex()==1){
-                Locale.setDefault(Locale.GERMANY);
+                Locale.setDefault(Locale.GERMAN);
+                App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());
             }
             else if(cb.getSelectedIndex()==2){
                 Locale.setDefault(Locale.ENGLISH);
+                App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());
             }
 
         }

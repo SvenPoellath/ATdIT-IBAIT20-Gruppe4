@@ -10,7 +10,7 @@ Die  Versicherungsgruppe - Moritz Schley, Joshua Senski, Fabian Kuhne, Jana Walc
 * **[Einloggen](#einloggen)**   
 * **[Registrieren](#registrieren)**  
 
-### [Sonstiges](#sonstiges)  
+### [Sonstiges](#sonstiges)    
 * **[Aufruf der Daten](#aufruf-der-daten)**    
 * **[Datenschutz](#datenschutz)**    
  
@@ -76,9 +76,9 @@ Bereits registrierte Kunden können sich mithilfe des "Einloggen"-Buttons in ihr
 Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnummer und e-Mail-Adresse angeben. Sie erhalten Ihr **individuelles** Passwort per Mail und können sich als registrierter Kunde fortan über die [Einloggen](#einloggen)-Funktion anmelden.
 
 
-<a name="sonstiges"/> 
+<a name="sonstiges"/>   
 
-# Sonstiges  
+# Sonstiges   
 
 <a name="aufruf-der-daten"/> 
 
@@ -86,13 +86,13 @@ Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnu
 
 All Ihre Daten werden verschlüsselt in unserer Datenbank abgespeichert. Zu dieser Datenbank haben nur die erforderlichsten Personen Zugriff, damit ein reibungsloser Betrieb gewährleistet werden kann. Somit können Sie versichert sein, dass Ihre Daten streng vertraulich behandelt werden.
 
-<a name="datenschutz"/> 
+<a name="datenschutz"/>   
 
  ## Datenschutz
 
 Wir legen höchsten Wert auf die Sicherheit Ihrer Daten. Deswegen halten wir uns stets an die [Datenschutz-Grundverordnung](https://dsgvo-gesetz.de/)
 
-<a name="probleme-was-nun?"/> 
+<a name="probleme-was-nun?"/>  
 
 # Probleme-Was nun?
 

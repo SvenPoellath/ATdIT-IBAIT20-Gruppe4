@@ -74,11 +74,13 @@ Bereits registrierte Kunden können sich mithilfe des "Einloggen"-Buttons in ihr
 ## Registrieren   
 
 Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnummer und e-Mail-Adresse angeben. Sie erhalten Ihr **individuelles** Passwort per Mail und können sich als registrierter Kunde fortan über die [Einloggen](#einloggen)-Funktion anmelden.
-<a name="funktionsweise"/> 
+
+
+<a name="sonstiges"/> 
 
 # Sonstiges  
 
-<a name="sonstiges"/> 
+<a name="aufruf-der-daten"/> 
 
  ## Aufruf der Daten
 

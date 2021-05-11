@@ -82,7 +82,7 @@ Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnu
 
  ## Aufruf der Daten
 
-All Ihre Daten werden verschlüsselt in unserer Datenbank abgespeichert. Zu dieser Datenbank haben nur die erforderlichsten Personen Zugriff, damit ein reibungsloser Betrieb gewährleistet sein kann. Somit können Sie versichert sein, dass Ihre Daten streng vertraulich behandelt werden.
+All Ihre Daten werden verschlüsselt in unserer Datenbank abgespeichert. Zu dieser Datenbank haben nur die erforderlichsten Personen Zugriff, damit ein reibungsloser Betrieb gewährleistet werden kann. Somit können Sie versichert sein, dass Ihre Daten streng vertraulich behandelt werden.
 
 <a name="datenschutz"/> 
 

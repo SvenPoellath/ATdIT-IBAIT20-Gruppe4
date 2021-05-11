@@ -49,9 +49,9 @@ Für weitere Infos besuchen Sie bitte unsere [Dokumentationsseite](https://githu
 
 # Anwendung  
 
-Ihnen stehen 2 Optionen zur Verfügung:
-[Einloggen](#einloggen) für bereits registrierte Kunden
-[Registrieren](#registrieren)(Erstanmeldung) für noch nichtregistrierte Kunden
+Ihnen stehen 2 Optionen zur Verfügung:   
+[Einloggen](#einloggen) für bereits registrierte Kunden  
+[Registrieren](#registrieren)(Erstanmeldung) für noch nichtregistrierte Kunden  
 
 <a name="einloggen"/> 
 

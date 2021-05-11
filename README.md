@@ -7,6 +7,9 @@ Die  Versicherungsgruppe - Moritz Schley, Joshua Senski, Fabian Kuhne, Jana Walc
 [benötige Hardware](#benötigte-hardware)  
 [benötigte Software](#benötigte-software)  
 [Anwendung](#anwendung)  
+* [Einloggen](#einloggen)
+* [Registrieren](#registrieren) 
+
 [Funktionsweise](#funktionsweise)  
  * [Aufruf der Daten](#aufruf-der-daten)  
  * [Datenschutz](#datenschutz)  
@@ -45,6 +48,20 @@ Für weitere Infos besuchen Sie bitte unsere [Dokumentationsseite](https://githu
 <a name="anwendung"/> 
 
 # Anwendung  
+
+Ihnen stehen 2 Optionen zur Verfügung:
+[Einloggen](#einloggen) für bereits registrierte Kunden
+Registrieren (Erstanmeldung) für noch nichtregistrierte Kunden
+
+<a name="einloggen"/> 
+
+## Einloggen
+
+
+<a name="registrieren"/> 
+
+## Registrieren 
+
 
 <a name="funktionsweise"/> 
 

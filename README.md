@@ -51,16 +51,16 @@ Für weitere Infos besuchen Sie bitte unsere [Dokumentationsseite](https://githu
 
 Ihnen stehen 2 Optionen zur Verfügung:
 [Einloggen](#einloggen) für bereits registrierte Kunden
-Registrieren (Erstanmeldung) für noch nichtregistrierte Kunden
+[Registrieren](#registrieren)(Erstanmeldung) für noch nichtregistrierte Kunden
 
 <a name="einloggen"/> 
 
-## Einloggen
+## Einloggen  
 
 
 <a name="registrieren"/> 
 
-## Registrieren 
+## Registrieren   
 
 
 <a name="funktionsweise"/> 

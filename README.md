@@ -40,7 +40,7 @@ Für weitere Infos besuchen Sie bitte unsere [Dokumentationsseite](https://githu
 
 # Benötigte Hardware  
 
-Die App ist mit jedem Rechner (Windows 8), Tablet und Smartphone (Android/iOS) mit Internetverbindung aufrufbar.
+Die App ist mit jedem Rechner (Windows 8/MacOS), Tablet oder Smartphone (Android/iOS) mit Internetverbindung aufrufbar.
 
 
 <a name="benötigte-software"/>   

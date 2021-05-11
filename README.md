@@ -47,7 +47,7 @@ Die App ist mit jedem Rechner (Windows 8), Tablet und Smartphone (Android/iOS) m
 
 # Benötigte Software  
 
-Außer der App ist keine weitere Software notwendig.
+Internetbrowser zum Aufrufen der App.
 
 <a name="anwendung"/> 
 

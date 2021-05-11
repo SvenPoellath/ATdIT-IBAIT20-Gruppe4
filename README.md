@@ -88,7 +88,7 @@ All Ihre Daten werden verschlüsselt in unserer Datenbank abgespeichert.
 
  ## Datenschutz
 
-Wir legen höchsten Wert auf die Sicherheit Ihrer Daten. Deswegen halten wir uns stets an die [Datenschutz-Grundverordnung](#https://dsgvo-gesetz.de/)
+Wir legen höchsten Wert auf die Sicherheit Ihrer Daten. Deswegen halten wir uns stets an die [Datenschutz-Grundverordnung](https://dsgvo-gesetz.de/)
 
 <a name="probleme-was-nun?"/> 
 

@@ -16,7 +16,7 @@ Die  Versicherungsgruppe - Moritz Schley, Joshua Senski, Fabian Kuhne, Jana Walc
  
 ### [Probleme-Was nun?](#probleme-was-nun?)  
 * #### [Probleme](#probleme)  
-* #### [Lösungen](#lösungen)  
+* [Lösungen](#lösungen)  
  
 ### [Fragen & Antworten](#f&a)  
 

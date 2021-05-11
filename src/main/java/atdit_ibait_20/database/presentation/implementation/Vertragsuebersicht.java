@@ -9,18 +9,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Vertragsuebersicht {
-    private final JPanel add = new JPanel();
-    private final JMenuItem einstellungen = new JMenuItem(App.resourceBundle.getString("settings"));
-    private final JMenuItem home = new JMenuItem(App.resourceBundle.getString("home"));
-    private final JMenuItem logout = new JMenuItem(App.resourceBundle.getString("logout"));
+    private static final JPanel add = new JPanel();
+    private static final JMenuItem einstellungen = new JMenuItem();
+    private static final JMenuItem home = new JMenuItem();
+    private static final JMenuItem logout = new JMenuItem();
+    private static final JLabel vertragsUebersicht = new JLabel();
 
-    private Person angemeldetePerson;
+    private static final JButton plusButton = new JButton("+");
+
+    private static Person angemeldetePerson;
     public Vertragsuebersicht(Person person){
+        angemeldetePerson = person;
+        setStringsVertragsuebersicht();
         add.setLayout(new GridLayout(0,1));
         einstellungen.addActionListener(new menuItemListener());
         logout.addActionListener(new menuItemListener());
         home.addActionListener(new menuItemListener());
-        JButton plusButton = new JButton("+");
+
         plusButton.addActionListener(new VertragHinzufuegenButton());
         JMenu menu = new JMenu(App.resourceBundle.getString("menu"));
         menu.add(home);
@@ -30,16 +35,12 @@ public class Vertragsuebersicht {
         menuBar.add(menu);
 
         StartLayer.fenster.setJMenuBar(menuBar);
-        addVorhandeneVertraegetoGUI(person);
-        JLabel vertragsUebersicht = new JLabel(App.resourceBundle.getString("welcome.to.your.contract.overview"));
-        add.add(vertragsUebersicht);
-        add.add(plusButton);
         StartLayer.fenster.setSize(400,400);
         StartLayer.fenster.add(add);
-        angemeldetePerson = person;
+
     }
 
-    public void addVorhandeneVertraegetoGUI(Person person){
+    public static void addVorhandeneVertraegetoGUI(Person person){
         if(person.getVertraege() != null) {
             for (int i = 0; i < person.getVertraege().size(); i++) {
                 JPanel jp = new JPanel();
@@ -51,7 +52,7 @@ public class Vertragsuebersicht {
                 JLabel versicherungsArt = new JLabel(String.valueOf(person.getVertraege().get(i).getVersicherungsart()));
                 JLabel buchungsArtText = new JLabel(App.resourceBundle.getString("payment.type"));
                 JLabel buchungsArt = new JLabel(String.valueOf(person.getVertraege().get(i).getBuchungsart()));
-                JLabel betragText = new JLabel(App.resourceBundle.getString("payment.amount"));
+                JLabel betragText = new JLabel(App.resourceBundle.getString("payment.amount")+App.resourceBundle.getString("currency"));
                 JLabel betrag = new JLabel(String.valueOf(person.getVertraege().get(i).getEURBetrag()));
                 jp.add(auftragsnummerText);
                 jp.add(auftragsNummer);
@@ -64,6 +65,16 @@ public class Vertragsuebersicht {
                 add.add(jp);
             }
         }
+    }
+    static void setStringsVertragsuebersicht(){
+        einstellungen.setText(App.resourceBundle.getString("settings"));
+        home.setText(App.resourceBundle.getString("home"));
+        logout.setText(App.resourceBundle.getString("logout"));
+        vertragsUebersicht.setText(App.resourceBundle.getString("welcome.to.your.contract.overview"));
+        add.removeAll();
+        addVorhandeneVertraegetoGUI(angemeldetePerson);
+        add.add(vertragsUebersicht);
+        add.add(plusButton);
     }
     class VertragHinzufuegenButton implements ActionListener{
 

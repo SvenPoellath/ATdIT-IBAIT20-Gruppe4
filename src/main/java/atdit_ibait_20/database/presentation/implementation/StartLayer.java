@@ -20,10 +20,13 @@ public class StartLayer{
     private final JPanel eingangsButtonsPanel = new JPanel();
     static final JPanel sprache = new JPanel();
 
-    private final JButton registrierenFensterButton = new JButton(App.resourceBundle.getString("register"));
-    private final JButton anmeldenFensterButton = new JButton(App.resourceBundle.getString("sign.in"));
+    private static String[] sprachen;
+    private static final JLabel willkommenSchrift = new JLabel();
+    private static final JButton registrierenFensterButton = new JButton();
+    private static final JButton anmeldenFensterButton = new JButton();
 
     public StartLayer(){
+        setStringsInStartLayer();
         fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
         fenster.pack();
@@ -36,14 +39,13 @@ public class StartLayer{
         eingangsButtonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         eingangsButtonsPanel.setLayout(new GridLayout(0,1));
 
-        String[] sprachen = {App.resourceBundle.getString("choose.your.language"),App.resourceBundle.getString("german"),App.resourceBundle.getString("english")};
         JComboBox<String> spracheWaelen = new JComboBox<>(sprachen);
 
         registrierenFensterButton.addActionListener(new AnfangsButtonListener());
         anmeldenFensterButton.addActionListener(new AnfangsButtonListener());
         spracheWaelen.addItemListener(new SpracheWaehlen());
 
-        JLabel willkommenSchrift = new JLabel(App.resourceBundle.getString("welcome.to.our.app"));
+
 
         sprache.removeAll();
         sprache.add(spracheWaelen);
@@ -55,6 +57,13 @@ public class StartLayer{
         fenster.add(eingangsButtonsPanel);
         fenster.validate();
 
+    }
+    private static void setStringsInStartLayer(){
+        fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
+        anmeldenFensterButton.setText(App.resourceBundle.getString("sign.in"));
+        willkommenSchrift.setText(App.resourceBundle.getString("welcome.to.our.app"));
+        registrierenFensterButton.setText(App.resourceBundle.getString("register"));
+        sprachen = new String[]{App.resourceBundle.getString("choose.your.language"), App.resourceBundle.getString("german"), App.resourceBundle.getString("english")};
     }
     class AnfangsButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -83,7 +92,12 @@ public class StartLayer{
                 Locale.setDefault(Locale.ENGLISH);
                 App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());
             }
-
+            setStringsInStartLayer();
+            RegistrierLayer.setStringsInRegistrierLayer();
+            AnmeldeLayer.setStringsInAnmeldeLayer();
+            Einstellungen.setStringsInEinstellungen();
+            VertragHinzufuegen.setStringsInVertragHinzufuegen();
+            Vertragsuebersicht.setStringsVertragsuebersicht();
         }
     }
 }

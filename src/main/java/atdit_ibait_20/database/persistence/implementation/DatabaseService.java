@@ -11,7 +11,7 @@ import static atdit_ibait_20.database.persistence.implementation.PasswordService
 
 public class DatabaseService implements Database {
 
-    public static final String URL = "jdbc:sqlite:test.db";
+    public static final String URL = "jdbc:sqlite:src/main/java/atdit_ibait_20/database/persistence/database.sqlite";
 
     public static Connection connect() {
 
@@ -23,9 +23,6 @@ public class DatabaseService implements Database {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
-        create_tables(conn);
-
         return conn;
     }
 

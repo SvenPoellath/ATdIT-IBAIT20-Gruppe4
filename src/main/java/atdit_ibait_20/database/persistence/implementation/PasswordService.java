@@ -53,7 +53,7 @@ public class PasswordService implements Database {
         if (salt == null)
            return false;
         String passwordToTest = generateSecurePassword(providedPassword,salt);
-        returnValue = passwordToTest.equalsIgnoreCase(securePassword);
+        returnValue = passwordToTest.equals(securePassword);
         return returnValue;
     }
 }

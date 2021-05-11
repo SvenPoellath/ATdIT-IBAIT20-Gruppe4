@@ -12,6 +12,7 @@
 
 #database_files
 *.db
+*.sqlite
 
 # Package Files #
 *.jar

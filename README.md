@@ -25,7 +25,7 @@ Die  Versicherungsgruppe - Moritz Schley, Joshua Senski, Fabian Kuhne, Jana Walc
 
 # Allgemeine Info  
 
-_**Die App befindet sich momentan noch in der Entwicklung und wird somit stetig verbessert.  
+**_Die App befindet sich momentan noch in der Entwicklung und wird somit stetig verbessert.  
 Es handelt sich hierbei um eine Betaversion und kann somit gelegentlich Probleme herbeiführen. 
 Für weitere Infos siehe_ [Probleme-Was nun?](#probleme-was-nun?))**
 
@@ -41,9 +41,14 @@ Für weitere Infos besuchen Sie bitte unsere [Dokumentationsseite](https://githu
 
 # Benötigte Hardware  
 
+Die App ist mit jedem Rechner (Windows 8), Tablet und Smartphone (Android/iOS) mit Internetverbindung aufrufbar.
+
+
 <a name="benötigte-software"/>   
 
 # Benötigte Software  
+
+Auér der App ist keine weitere Software notwendig.
 
 <a name="anwendung"/> 
 
@@ -57,12 +62,19 @@ Ihnen stehen 2 Optionen zur Verfügung:
 
 ## Einloggen  
 
+Bereits registrierte Kunden können sich mithilfe des "Einloggen"-Buttons in ihrem Konto anmelden. Dazu geben Sie die Versicherungsnummer und Ihr Passwort ein. Nach erfolgreichem Einloggen haben Sie mehrere Optionen:
+
+- Neuer Vertragsabsachluss
+- Übersicht aktuell laufender Verträge
+- Kündigung eines Vertrages
+- Benutzerkontoeinstellungen
+- Übersicht der Kontaktdaten Ihres ERGO-Beraters 
 
 <a name="registrieren"/> 
 
 ## Registrieren   
 
-
+Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnummer und e-Mail-Adresse angeben. Sie erhalten Ihr **individuelles** Passwort per Mail und können sich als registrierter Kunde fortan über die [Einloggen](#einloggen)-Funktion anmelden
 <a name="funktionsweise"/> 
 
 # Funktionsweise  

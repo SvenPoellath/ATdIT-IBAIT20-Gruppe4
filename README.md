@@ -7,16 +7,16 @@ Die  Versicherungsgruppe - Moritz Schley, Joshua Senski, Fabian Kuhne, Jana Walc
 ### [benötige Hardware](#benötigte-hardware)  
 ### [benötigte Software](#benötigte-software)  
 ### [Anwendung](#anwendung)  
-* #### [Einloggen](#einloggen)  
-* #### [Registrieren](#registrieren) 
+* **[Einloggen](#einloggen)**   
+* **[Registrieren](#registrieren)**  
 
 ### [Funktionsweise](#funktionsweise)  
-* #### [Aufruf der Daten](#aufruf-der-daten)  
-* #### [Datenschutz](#datenschutz)  
+* **[Aufruf der Daten](#aufruf-der-daten)**    
+* **[Datenschutz](#datenschutz)**    
  
 ### [Probleme-Was nun?](#probleme-was-nun?)  
-* #### [Probleme](#probleme)  
-* [Lösungen](#lösungen)  
+* **[Probleme](#probleme)**    
+* **[Lösungen](#lösungen)**  
  
 ### [Fragen & Antworten](#f&a)  
 

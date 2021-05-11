@@ -48,7 +48,7 @@ Die App ist mit jedem Rechner (Windows 8), Tablet und Smartphone (Android/iOS) m
 
 # Benötigte Software  
 
-Auér der App ist keine weitere Software notwendig.
+Außer der App ist keine weitere Software notwendig.
 
 <a name="anwendung"/> 
 
@@ -83,9 +83,12 @@ Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnu
 
  ## Aufruf der Daten
 
+All Ihre Daten werden verschlüsselt in unserer Datenbank abgespeichert.
 <a name="datenschutz"/> 
 
  ## Datenschutz
+
+Wir legen höchsten Wert auf die Sicherheit Ihrer Daten. Deswegen halten wir uns stets an die [Datenschutz-Grundverordnung](#https://dsgvo-gesetz.de/)
 
 <a name="probleme-was-nun?"/> 
 

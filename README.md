@@ -73,7 +73,7 @@ Bereits registrierte Kunden können sich mithilfe des "Einloggen"-Buttons in ihr
 
 ## Registrieren   
 
-Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnummer und e-Mail-Adresse angeben. Sie erhalten Ihr **individuelles** Passwort per Mail und können sich als registrierter Kunde fortan über die [Einloggen](#einloggen)-Funktion anmelden
+Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnummer und e-Mail-Adresse angeben. Sie erhalten Ihr **individuelles** Passwort per Mail und können sich als registrierter Kunde fortan über die [Einloggen](#einloggen)-Funktion anmelden.
 <a name="funktionsweise"/> 
 
 # Funktionsweise  
@@ -82,7 +82,7 @@ Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnu
 
  ## Aufruf der Daten
 
-All Ihre Daten werden verschlüsselt in unserer Datenbank abgespeichert. Zu dieser Datenbank haben nur die erforderlichsten Personen Zugriff, damit ein reibungsloser Betrieb gewährleistet sein kann.Somit können Sie versichert sein, dass Ihre Daten streng vertraulich behandelt werden
+All Ihre Daten werden verschlüsselt in unserer Datenbank abgespeichert. Zu dieser Datenbank haben nur die erforderlichsten Personen Zugriff, damit ein reibungsloser Betrieb gewährleistet sein kann. Somit können Sie versichert sein, dass Ihre Daten streng vertraulich behandelt werden.
 
 <a name="datenschutz"/> 
 

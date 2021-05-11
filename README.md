@@ -3,22 +3,22 @@
 Die  Versicherungsgruppe - Moritz Schley, Joshua Senski, Fabian Kuhne, Jana Walcher, Sven Pöllath
 ***
 ## Inhaltsverzeichnis
-[Allgemeine Info](#allgemeine-info)  
-[benötige Hardware](#benötigte-hardware)  
-[benötigte Software](#benötigte-software)  
-[Anwendung](#anwendung)  
-* [Einloggen](#einloggen)
-* [Registrieren](#registrieren) 
+### [Allgemeine Info](#allgemeine-info)  
+### [benötige Hardware](#benötigte-hardware)  
+### [benötigte Software](#benötigte-software)  
+### [Anwendung](#anwendung)  
+#### * [Einloggen](#einloggen)
+#### * [Registrieren](#registrieren) 
 
-[Funktionsweise](#funktionsweise)  
- * [Aufruf der Daten](#aufruf-der-daten)  
- * [Datenschutz](#datenschutz)  
+### [Funktionsweise](#funktionsweise)  
+#### * [Aufruf der Daten](#aufruf-der-daten)  
+#### * [Datenschutz](#datenschutz)  
  
-[Probleme-Was nun?](#probleme-was-nun?)  
- * [Probleme](#probleme)  
- * [Lösungen](#lösungen)  
+### [Probleme-Was nun?](#probleme-was-nun?)  
+#### * [Probleme](#probleme)  
+#### * [Lösungen](#lösungen)  
  
-[Fragen & Antworten](#f&a)  
+### [Fragen & Antworten](#f&a)  
 
 
 <a name="allgemeine-info"/> 

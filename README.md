@@ -22,6 +22,18 @@ Die  Versicherungsgruppe - Moritz Schley, Joshua Senski, Fabian Kuhne, Jana Walc
 
 # Allgemeine Info  
 
+_**Die App befindet sich momentan noch in der Entwicklung und wird somit stetig verbessert.  
+Es handelt sich hierbei um eine Betaversion und kann somit gelegentlich Probleme herbeiführen. 
+Für weitere Infos siehe_ [Probleme-Was nun?](#probleme-was-nun?))**
+
+Die MODVER App der Ergo Versicherungen ist eine kostenlose App zur erleichterten Verwaltung von Versicherungsangelegenheiten. Sie können eine Versicherung online von überall aus abschließen.  
+
+
+
+
+Für weitere Infos besuchen Sie bitte unsere [Dokumentationsseite](https://github.com/SvenPoellath/ATdIT-IBAIT20-Gruppe4/tree/main/Documentation)
+
+
 <a name="benötigte-hardware"/> 
 
 # Benötigte Hardware  

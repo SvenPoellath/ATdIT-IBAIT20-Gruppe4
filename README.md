@@ -29,7 +29,7 @@ Die  Versicherungsgruppe - Moritz Schley, Joshua Senski, Fabian Kuhne, Jana Walc
 Es handelt sich hierbei um eine Betaversion und kann somit gelegentlich Probleme herbeiführen. 
 Für weitere Infos siehe_ [Probleme-Was nun?](#probleme-was-nun?))**
 
-Die MODVER App der Ergo Versicherungen ist eine kostenlose App zur erleichterten Verwaltung von Versicherungsangelegenheiten. Sie können eine Versicherung uvm. online von überall aus abschließen. Die Grundidee ist es, unseren Kunden versicherungstechnische Angelegenheiten so angenehm und zeitsparend wie möglich zu gestalten. Sie benötigen keinen Termin in einer unserer Filialen und können Verträge ganz alleine abschließen
+Die MODVER App der Ergo Versicherungen ist eine kostenlose App zur erleichterten Verwaltung von Versicherungsangelegenheiten. Sie können eine Versicherung uvm. online von überall aus abschließen. Die Grundidee ist es, unseren Kunden versicherungstechnische Angelegenheiten so angenehm und zeitsparend wie möglich zu gestalten. Sie benötigen keinen Termin in einer unserer Filialen und können Verträge ganz alleine abschließen.
 
 
 

@@ -22,7 +22,6 @@
 
 
 
-
 <a name="das-entwicklerteam"/> 
 
 # Das Entwicklerteam
@@ -47,12 +46,14 @@ Für weitere Infos besuchen Sie bitte unsere [Dokumentationsseite](https://githu
 
 <a name="benötigte-hardware"/> 
 
+
 # Benötigte Hardware  
 
 Die App ist mit jedem Rechner (Windows 8/MacOS), Tablet oder Smartphone (Android/iOS) mit Internetverbindung aufrufbar.
 
 
 <a name="benötigte-software"/>   
+
 
 # Benötigte Software  
 

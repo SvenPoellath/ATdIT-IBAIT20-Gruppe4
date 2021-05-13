@@ -1,6 +1,5 @@
 ### ATdIT-IBAIT20-Gruppe4
 # MODVER-Modern Versichern mit ERGO
-Die  Versicherungsgruppe - , Sven Pöllath
 ***
 ## Inhaltsverzeichnis
 ### [Das Entwicklerteam](#das-entwicklerteam)

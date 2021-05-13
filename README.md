@@ -23,7 +23,6 @@
 
 
 <a name="das-entwicklerteam"/> 
-
 # Das Entwicklerteam
 _Das Team der App MODVER (anfangs "die Versicherungsgruppe", Gruppe 4) besteht aus Sven Pöllath, Moritz Schley, Joshua Senski, Fabian Kuhne und Jana Walcher._   
 

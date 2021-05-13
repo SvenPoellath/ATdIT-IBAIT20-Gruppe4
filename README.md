@@ -1,8 +1,9 @@
 ### ATdIT-IBAIT20-Gruppe4
 # MODVER-Modern Versichern mit ERGO
-Die  Versicherungsgruppe - Moritz Schley, Joshua Senski, Fabian Kuhne, Jana Walcher, Sven Pöllath
+Die  Versicherungsgruppe - , Sven Pöllath
 ***
 ## Inhaltsverzeichnis
+### [Das Entwicklerteam](#das-entwicklerteam)
 ### [Allgemeine Info](#allgemeine-info)  
 ### [benötige Hardware](#benötigte-hardware)  
 ### [benötigte Software](#benötigte-software)  
@@ -19,6 +20,13 @@ Die  Versicherungsgruppe - Moritz Schley, Joshua Senski, Fabian Kuhne, Jana Walc
 * **[Lösungen](#lösungen)**  
  
 ### [Fragen & Antworten](#f&a)  
+
+
+<a name="das-entwicklerteam"/> 
+
+# Das Entwicklerteam
+_Das Team der App MODVER (anfangs "die Versicherungsgruppe", Gruppe 4) besteht aus Sven Pöllath, Moritz Schley, Joshua Senski, Fabian Kuhne und Jana Walcher._   
+
 
 
 <a name="allgemeine-info"/> 

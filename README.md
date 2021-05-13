@@ -62,6 +62,7 @@ Internetbrowser zum Aufrufen der App.
 
 <a name="anwendung"/> 
 
+
 # Anwendung  
 
 Ihnen stehen 2 Optionen zur Verfügung:   
@@ -70,6 +71,7 @@ Ihnen stehen 2 Optionen zur Verfügung:
 
 
 <a name="einloggen"/> 
+
 
 ## Einloggen  
 
@@ -83,12 +85,14 @@ Bereits registrierte Kunden können sich mithilfe des "Einloggen"-Buttons in ihr
 
 <a name="registrieren"/> 
 
+
 ## Registrieren   
 
 Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnummer und e-Mail-Adresse angeben. Sie erhalten Ihr **individuelles** Passwort per Mail und können sich als registrierter Kunde fortan über die [Einloggen](#einloggen)-Funktion anmelden.
 
 
 <a name="sonstiges"/>   
+
 
 # Sonstiges   
 
@@ -100,6 +104,7 @@ Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnu
 All Ihre Daten werden verschlüsselt in unserer Datenbank abgespeichert. Zu dieser Datenbank haben nur die erforderlichsten Personen Zugriff, damit ein reibungsloser Betrieb gewährleistet werden kann. Somit können Sie versichert sein, dass Ihre Daten streng vertraulich behandelt werden.
 
 <a name="datenschutz"/>   
+
 
  ## Datenschutz
 

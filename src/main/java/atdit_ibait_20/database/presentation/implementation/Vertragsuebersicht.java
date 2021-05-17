@@ -2,14 +2,17 @@ package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
 import atdit_ibait_20.database.model.Person;
+import atdit_ibait_20.database.presentation.SwingPresentation;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Vertragsuebersicht {
+public class Vertragsuebersicht implements SwingPresentation {
     private static final JPanel add = new JPanel();
+    private static final JMenuBar menuBar = new JMenuBar();
+    private static final JMenu menu = new JMenu(App.resourceBundle.getString("menu"));
     private static final JMenuItem einstellungen = new JMenuItem();
     private static final JMenuItem home = new JMenuItem();
     private static final JMenuItem logout = new JMenuItem();
@@ -20,24 +23,11 @@ public class Vertragsuebersicht {
     private static Person angemeldetePerson;
     public Vertragsuebersicht(Person person){
         angemeldetePerson = person;
-        setStringsVertragsuebersicht();
-        add.setLayout(new GridLayout(0,1));
-        einstellungen.addActionListener(new menuItemListener());
-        logout.addActionListener(new menuItemListener());
-        home.addActionListener(new menuItemListener());
-
-        plusButton.addActionListener(new VertragHinzufuegenButton());
-        JMenu menu = new JMenu(App.resourceBundle.getString("menu"));
-        menu.add(home);
-        menu.add(einstellungen);
-        menu.add(logout);
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.add(menu);
-
-        StartLayer.fenster.setJMenuBar(menuBar);
-        StartLayer.fenster.setSize(400,400);
-        StartLayer.fenster.add(add);
-
+        setStrings();
+        setLayout();
+        addComponentsToPanels();
+        addPanelsToFrame();
+        setFrame();
     }
 
     public static void addVorhandeneVertraegetoGUI(Person person){
@@ -66,7 +56,7 @@ public class Vertragsuebersicht {
             }
         }
     }
-    static void setStringsVertragsuebersicht(){
+    static void setStrings(){
         einstellungen.setText(App.resourceBundle.getString("settings"));
         home.setText(App.resourceBundle.getString("home"));
         logout.setText(App.resourceBundle.getString("logout"));
@@ -76,6 +66,39 @@ public class Vertragsuebersicht {
         add.add(vertragsUebersicht);
         add.add(plusButton);
     }
+
+    @Override
+    public void setFrame() {
+        StartLayer.fenster.setSize(400,400);
+    }
+
+    @Override
+    public void setLayout() {
+        add.setLayout(new GridLayout(0,1));
+    }
+
+    @Override
+    public void addListeners() {
+        einstellungen.addActionListener(new menuItemListener());
+        logout.addActionListener(new menuItemListener());
+        home.addActionListener(new menuItemListener());
+        plusButton.addActionListener(new VertragHinzufuegenButton());
+    }
+
+    @Override
+    public void addComponentsToPanels() {
+        menu.add(home);
+        menu.add(einstellungen);
+        menu.add(logout);
+        menuBar.add(menu);
+    }
+
+    @Override
+    public void addPanelsToFrame() {
+        StartLayer.fenster.setJMenuBar(menuBar);
+        StartLayer.fenster.add(add);
+    }
+
     class VertragHinzufuegenButton implements ActionListener{
 
         @Override

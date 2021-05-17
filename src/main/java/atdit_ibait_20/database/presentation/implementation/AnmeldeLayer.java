@@ -3,13 +3,14 @@ package atdit_ibait_20.database.presentation.implementation;
 import atdit_ibait_20.database.App;
 import atdit_ibait_20.database.persistence.implementation.DatabaseService;
 import atdit_ibait_20.database.model.implementation.BasicPerson;
+import atdit_ibait_20.database.presentation.SwingPresentation;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AnmeldeLayer {
+public class AnmeldeLayer implements SwingPresentation {
 
     private final JPanel zurueckPanel = new JPanel();
     private final JPanel anmeldungsPanel = new JPanel();
@@ -26,42 +27,62 @@ public class AnmeldeLayer {
     private static final JButton zurueckButton = new JButton("<--");
     private static final JButton anmeldeButton = new JButton();
 
-    public AnmeldeLayer() {
-        setStringsInAnmeldeLayer();
+    public AnmeldeLayer(){
+        setStrings();
+        setLayout();
+        addListeners();
+        addComponentsToPanels();
+        addPanelsToFrame();
+        setFrame();
+    }
+    static void setStrings(){
+        anmeldeName.setText(App.resourceBundle.getString("nick.name"));
+        anmeldePasswort.setText(App.resourceBundle.getString("password"));
+        falschesPasswort.setText(App.resourceBundle.getString("wrong.password"));
+        anmeldeButton.setText(App.resourceBundle.getString("sign.in"));
+    }
+
+    @Override
+    public void setFrame() {
+        StartLayer.fenster.setSize(250, 325);
+    }
+
+    @Override
+    public void setLayout() {
         zurueckPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
         zurueckPanel.setLayout(new FlowLayout());
         anmeldungsPanel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
         anmeldungsPanel.setLayout(new GridLayout(0, 2));
         anmeldungsButtonPanel.setBorder(BorderFactory.createEmptyBorder(0, 30, 10, 30));
+        falschesPasswort.setForeground(Color.red);
+    }
 
-        anmeldungsPanel.remove(tfAnmeldeName);
-        anmeldungsPanel.remove(tfAnmeldePasswort);
-
+    @Override
+    public void addListeners() {
         anmeldeButton.addActionListener(new ButtonListener());
         zurueckButton.addActionListener(new ButtonListener());
+    }
 
+    @Override
+    public void addComponentsToPanels() {
+        anmeldungsPanel.remove(tfAnmeldeName);
+        anmeldungsPanel.remove(tfAnmeldePasswort);
         zurueckPanel.add(zurueckButton);
         anmeldungsPanel.add(anmeldeName);
         anmeldungsPanel.add(tfAnmeldeName);
         anmeldungsPanel.add(anmeldePasswort);
         anmeldungsPanel.add(tfAnmeldePasswort);
         anmeldungsButtonPanel.add(anmeldeButton);
-
-        falschesPasswort.setForeground(Color.red);
         fehlerPanel.add(falschesPasswort);
+    }
 
+    @Override
+    public void addPanelsToFrame() {
         StartLayer.fenster.add(zurueckPanel);
         StartLayer.fenster.add(anmeldungsPanel);
         StartLayer.fenster.add(anmeldungsButtonPanel);
-        StartLayer.fenster.setSize(250, 325);
+    }
 
-    }
-    static void setStringsInAnmeldeLayer(){
-        anmeldeName.setText(App.resourceBundle.getString("nick.name"));
-        anmeldePasswort.setText(App.resourceBundle.getString("password"));
-        falschesPasswort.setText(App.resourceBundle.getString("wrong.password"));
-        anmeldeButton.setText(App.resourceBundle.getString("sign.in"));
-    }
     class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             BasicPerson person;

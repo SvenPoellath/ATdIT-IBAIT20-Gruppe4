@@ -1,6 +1,7 @@
 package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
+import atdit_ibait_20.database.presentation.SwingPresentation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +12,7 @@ import java.awt.event.ItemListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class StartLayer{
+public class StartLayer implements SwingPresentation {
 
 
     static final JFrame fenster = new JFrame();
@@ -21,49 +22,66 @@ public class StartLayer{
     static final JPanel sprache = new JPanel();
 
     private static String[] sprachen;
+    private static JComboBox<String> spracheWaelen;
     private static final JLabel willkommenSchrift = new JLabel();
     private static final JButton registrierenFensterButton = new JButton();
     private static final JButton anmeldenFensterButton = new JButton();
 
     public StartLayer(){
-        setStringsInStartLayer();
+        setStrings();
+        setFrame();
+        setLayout();
+        addListeners();
+        addComponentsToPanels();
+        addPanelsToFrame();
+        fenster.validate();
+
+
+
+
+
+
+
+
+    }
+    public void setFrame(){
         fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
         fenster.pack();
         fenster.setVisible(true);
         fenster.setSize(200, 300);
         fenster.setLayout(new FlowLayout());
-
+    }
+    public void setLayout(){
         willkommenPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         willkommenPanel.setLayout(new FlowLayout());
         eingangsButtonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         eingangsButtonsPanel.setLayout(new GridLayout(0,1));
-
-        JComboBox<String> spracheWaelen = new JComboBox<>(sprachen);
-
+    }
+    public void addListeners(){
         registrierenFensterButton.addActionListener(new AnfangsButtonListener());
         anmeldenFensterButton.addActionListener(new AnfangsButtonListener());
         spracheWaelen.addItemListener(new SpracheWaehlen());
-
-
-
+    }
+    public void addComponentsToPanels(){
         sprache.removeAll();
         sprache.add(spracheWaelen);
         willkommenPanel.add(willkommenSchrift);
         eingangsButtonsPanel.add(registrierenFensterButton);
         eingangsButtonsPanel.add(anmeldenFensterButton);
+    }
+    public void addPanelsToFrame(){
         fenster.add(sprache);
         fenster.add(willkommenPanel);
         fenster.add(eingangsButtonsPanel);
-        fenster.validate();
-
     }
-    private static void setStringsInStartLayer(){
+    private static void setStrings(){
         fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
         anmeldenFensterButton.setText(App.resourceBundle.getString("sign.in"));
         willkommenSchrift.setText(App.resourceBundle.getString("welcome.to.our.app"));
         registrierenFensterButton.setText(App.resourceBundle.getString("register"));
         sprachen = new String[]{App.resourceBundle.getString("choose.your.language"), App.resourceBundle.getString("german"), App.resourceBundle.getString("english")};
+        spracheWaelen = new JComboBox<>(sprachen);
     }
     class AnfangsButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -92,12 +110,12 @@ public class StartLayer{
                 Locale.setDefault(Locale.ENGLISH);
                 App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());
             }
-            setStringsInStartLayer();
-            RegistrierLayer.setStringsInRegistrierLayer();
-            AnmeldeLayer.setStringsInAnmeldeLayer();
-            Einstellungen.setStringsInEinstellungen();
-            VertragHinzufuegen.setStringsInVertragHinzufuegen();
-            Vertragsuebersicht.setStringsVertragsuebersicht();
+            setStrings();
+            RegistrierLayer.setStrings();
+            AnmeldeLayer.setStrings();
+            Einstellungen.setStrings();
+            VertragHinzufuegen.setStrings();
+            Vertragsuebersicht.setStrings();
         }
     }
 }

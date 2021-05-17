@@ -5,13 +5,17 @@ import atdit_ibait_20.database.persistence.implementation.DatabaseService;
 
 import java.security.SecureRandom;
 import java.util.Random;
-
+/**
+* Es wird eine Klasse BasicVertrag angelegt, die alle Attribute aus der Datenbank von Vertrag implementiert
+**/
 public class BasicVertrag implements Vertrag {
     private final String Versicherungsart;
     private final String Auftragsnummer;
     private final String Buchungsart;
     private final int EURBetrag;
-
+/**
+* generateAuftragsnummer ist eine Methode, die eine zufällige Nummer für die Buchung der Versicherung generiert
+**/
     public String generateAuftragsnummer() {
         int LENGTH = 12;
         int ITERATIONS = 1;
@@ -28,7 +32,9 @@ public class BasicVertrag implements Vertrag {
 
     }
 
-
+/**
+* Ein Konstruktor für den Vertrag wird angelegt in den dem Vertrag die zufällig generierte Auftragsnummer übergeben wird. 
+**/
     public BasicVertrag(String versicherungsart,String buchungsart, int eurBetrag) {
         Versicherungsart = versicherungsart;
         String auftragsNummer;

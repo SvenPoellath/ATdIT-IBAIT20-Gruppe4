@@ -8,7 +8,10 @@ import atdit_ibait_20.database.persistence.Database;
 import java.sql.*;
 
 import static atdit_ibait_20.database.persistence.implementation.PasswordService.*;
-
+/**
+* Die Klasse DatabaseService wird erstellt um eine Verbindung mit der Datenbank herzustellen. 
+* Es wird versucht eine Verbindung über den String URL herzustellen und darüber auf die Datenbank zuzugreifen.
+**/
 public class DatabaseService implements Database {
 
     public static final String URL = "jdbc:sqlite:src/main/java/atdit_ibait_20/database/persistence/database.sqlite";
@@ -47,7 +50,9 @@ public class DatabaseService implements Database {
             System.out.println(e.getMessage());
         }
     }
-
+/**
+* Die Methode @create_tables erlaubt es verschiedene Tabellen in der Datenbank anzulegen und mit Attributen zu befüllen.
+**/
     public static void create_tables(Connection conn) {
         String sql = """
                 CREATE TABLE IF NOT EXISTS person (
@@ -81,7 +86,9 @@ public class DatabaseService implements Database {
                 );""";
         execute(sql,conn);
     }
-
+/**
+* Die Methode @create_person erlaubt es Personen mit verschiedenen Attributen anzulegen und direkt in der Datenbank zu speichern
+**/
     public static void create_person_entry(BasicPerson person) {
         Connection conn = connect();
 
@@ -114,7 +121,9 @@ public class DatabaseService implements Database {
 
         close(conn);
     }
-
+/**
+* @create_contract_entry erlaubt es neue Verträge anzulegen und in der Datenbank zu speichern
+**/
     public static void create_contract_entry(BasicVertrag contract, String person_id) {
         Connection conn = connect();
         String sql = "INSERT INTO contract(order_number,person_id,insurance_type,booking_type,price) VALUES(?,?,?,?,?)";
@@ -132,7 +141,9 @@ public class DatabaseService implements Database {
 
         close(conn);
     }
-
+/**
+* @get_person_by_id erlaubt es auf die Datenbank zuzugreifen und mit Hilfe der ID die Daten einer Person abzufragen
+**/
     public static BasicPerson get_person_by_id(String id) {
         String sql = "SELECT id, form_of_address, first_name, last_name, birth_date, nationality, marital_status, zip_code, city, street, house_number, email_address, phone_number, IBAN FROM person WHERE id = ?";
         Connection conn = connect();
@@ -163,7 +174,9 @@ public class DatabaseService implements Database {
     get_contract_by_id(returnPerson);
     return returnPerson;
     }
-
+/**
+* @get_contract_by_id erlaubt es mithilfe der ID des Vertrages alle weiteren Informationen des Vertrages von der Datenbank einzusehen, die Daten zu ändern und neue Verträge anzulegen
+**/
     public static void get_contract_by_id(BasicPerson person) {
         String sql = "SELECT order_number,person_id,insurance_type,booking_type,price FROM contract WHERE person_id = ?";
         try (PreparedStatement pstmt = connect().prepareStatement(sql)) {
@@ -205,7 +218,10 @@ public class DatabaseService implements Database {
         update_person_by_id(id,"salt",salt);
 
     }
-
+/**
+* @check_Login überprüft ob die vom Nutzer eingegebenen Anmeldeinformationen mit den in der Datenbank übereinstimmen.
+* Wenn das Passwort stimmt, wird der Nutzer erfolgreich verifiziert. 
+**/
     public static boolean check_Login(String id, String providedPassword) {
 
         String salt = null;
@@ -227,7 +243,9 @@ public class DatabaseService implements Database {
 
     return verifyUserPassword(providedPassword,securePassword,salt);
     }
-
+/**
+* @check_order_number überprüft ob die Bestellnummer des Kunden noch frei ist.
+**/
     public static boolean check_order_number(String orderNumber) {
         boolean returnValue = true;
         Connection conn = connect();

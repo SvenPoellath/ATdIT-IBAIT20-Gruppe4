@@ -4,7 +4,9 @@ import atdit_ibait_20.database.model.Vertrag;
 import atdit_ibait_20.database.model.Person;
 
 import java.util.ArrayList;
-
+/**
+* Es wird eine Klasse Person erstellt, die das Interface Person implementiert. Weiterhin werden verschiedene Attribute angelegt
+**/
 public class BasicPerson implements Person {
     private String Sozialversicherungsnummer;
     private String Vorname;
@@ -21,7 +23,9 @@ public class BasicPerson implements Person {
     private long telefonnummer;
     private String Staatsangehoerigkeit;
     private String Strasse;
-
+/**
+* Im folgenden werden jeder Methode die richtigen Variablen zugeordnet
+**/
     public void setSozialversicherungsnummer(String sozialversicherungsnummer) {
         Sozialversicherungsnummer = sozialversicherungsnummer;
     }
@@ -83,7 +87,9 @@ public class BasicPerson implements Person {
     }
 
     private String IBAN;
-
+    /**
+    * Es wird ein Konstruktur für BasicPerson angelegt. Darin werden alle Attribute übergeben.
+    **/
 
     public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, long telefonnummer, String staatsangehoerigkeit, String strasse, ArrayList<Vertrag> vertraege, String iban) {
         this.Sozialversicherungsnummer = sozialversicherungsnummer;

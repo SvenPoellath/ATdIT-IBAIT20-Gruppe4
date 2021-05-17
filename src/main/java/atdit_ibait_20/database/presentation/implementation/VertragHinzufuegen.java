@@ -114,54 +114,16 @@ public class VertragHinzufuegen {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource().equals(preis)){
-                if(versicherungsArt.getSelectedIndex()==1){
-                    if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("monthly"))) {
-                        preise.removeAll();
-                        preise.add(preisMonatlich);
-                        betrag = monatlicherPreis;
-                    }
-                    if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("yearly"))) {
-                        preise.removeAll();
-                        preise.add(preisJahr);
-                        betrag = jahresPreis;
-                    }
-                    if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("per.trip"))){
-                        tagesPreis = (anzahlDerTage.getSelectedIndex()+1)*50;
-                        JLabel preisEinmalig = new JLabel(tagesPreis + App.resourceBundle.getString("currency"));
-                        preise.removeAll();
-                        preise.add(preisEinmalig);
-                        betrag = tagesPreis;
-                    }
-
-                }
+                preise.removeAll();
+                VersicherungsIf();
                 hinzufuegen.add(hinzufuegenButton);
                 StartLayer.fenster.validate();
             }
             if(e.getSource().equals(hinzufuegenButton)) {
-
-                if(angemeldetePerson.getIBAN()==null){
-                    StartLayer.fenster.remove(hinzufuegen);
-                    StartLayer.fenster.add(neueIBAN);
-                    StartLayer.fenster.add(hinzufuegen);
-                    StartLayer.fenster.validate();
-                }
-                else if (angemeldetePerson.getIBAN()!=null){
-                    System.out.println("Contract added.");
-                    BasicVertrag vertrag = new BasicVertrag(versicherungsArt.getSelectedItem().toString(),buchungsArt.getSelectedItem().toString(),betrag);
-                    DatabaseService.create_contract_entry(vertrag,angemeldetePerson.getSozialversicherungsnummer());
-                    angemeldetePerson.addVertrag(vertrag);
-                    StartLayer.fenster.add(hinzugefuegt);
-                    StartLayer.fenster.validate();
-                }
+                PersonenIf();
             }
             if(e.getSource().equals(addIBAN)){
-                if(tfIBAN.getText().length()==22) {
-                    angemeldetePerson.setIBAN(tfIBAN.getText());
-                    DatabaseService.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "IBAN", angemeldetePerson.getIBAN());
-                    neueIBAN.removeAll();
-                } else{
-                    neueIBAN.add(falscheIBAN);
-                }
+                IBANIf();
                 StartLayer.fenster.validate();
             }
         }
@@ -192,4 +154,50 @@ public class VertragHinzufuegen {
         }
     }
 
+    public void VersicherungsIf(){
+        if(versicherungsArt.getSelectedIndex()==1){
+            ZeitraumIf();
+        }
+    }
+    public void ZeitraumIf(){
+        if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("monthly"))) {
+            preise.add(preisMonatlich);
+            betrag = monatlicherPreis;
+        }
+        if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("yearly"))) {
+            preise.add(preisJahr);
+            betrag = jahresPreis;
+        }
+        if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("per.trip"))){
+            tagesPreis = (anzahlDerTage.getSelectedIndex()+1)*50;
+            JLabel preisEinmalig = new JLabel(tagesPreis + App.resourceBundle.getString("currency"));
+            preise.add(preisEinmalig);
+            betrag = tagesPreis;
+        }
+    }
+    public void PersonenIf(){
+        if(angemeldetePerson.getIBAN()==null){
+            StartLayer.fenster.remove(hinzufuegen);
+            StartLayer.fenster.add(neueIBAN);
+            StartLayer.fenster.add(hinzufuegen);
+            StartLayer.fenster.validate();
+        }
+        else if (angemeldetePerson.getIBAN()!=null){
+            System.out.println("Contract added.");
+            BasicVertrag vertrag = new BasicVertrag(versicherungsArt.getSelectedItem().toString(),buchungsArt.getSelectedItem().toString(),betrag);
+            DatabaseService.create_contract_entry(vertrag,angemeldetePerson.getSozialversicherungsnummer());
+            angemeldetePerson.addVertrag(vertrag);
+            StartLayer.fenster.add(hinzugefuegt);
+            StartLayer.fenster.validate();
+        }
+    }
+    public void IBANIf(){
+        if(tfIBAN.getText().length()==22) {
+            angemeldetePerson.setIBAN(tfIBAN.getText());
+            DatabaseService.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "IBAN", angemeldetePerson.getIBAN());
+            neueIBAN.removeAll();
+        } else{
+            neueIBAN.add(falscheIBAN);
+        }
+    }
 }

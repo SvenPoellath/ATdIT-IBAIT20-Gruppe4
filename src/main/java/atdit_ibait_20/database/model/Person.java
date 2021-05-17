@@ -3,7 +3,10 @@ package atdit_ibait_20.database.model;
 import atdit_ibait_20.database.model.implementation.BasicGeburtsdatum;
 
 import java.util.ArrayList;
-
+/**
+* Es wird ein Interface für Person geschaffen, damit später leichter auf die primitiven Datentypen zugegriffen werden kann. 
+* Zusätzlich dazu wird auch eine @ArrayList Vertrag angelegt. 
+**/
 public interface Person {
     public String getSozialversicherungsnummer();
     public String getVorname();

@@ -11,7 +11,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
+/**
+* Die Klasse legt das Startfenster fest was erscheint, wenn der Nutzer die Applikation startet
+**/
 public class StartLayer implements SwingPresentation {
 
 
@@ -44,6 +46,9 @@ public class StartLayer implements SwingPresentation {
 
 
     }
+    /**
+    * @setFrame Legt den Rahmen für das Fester fest
+    **/
     public void setFrame(){
         fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
@@ -52,17 +57,27 @@ public class StartLayer implements SwingPresentation {
         fenster.setSize(200, 300);
         fenster.setLayout(new FlowLayout());
     }
+    /**
+    * @setLayout Legt fest welche Art von Layout die Nutzeroberfläche hat
+    **/
     public void setLayout(){
         willkommenPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         willkommenPanel.setLayout(new FlowLayout());
         eingangsButtonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         eingangsButtonsPanel.setLayout(new GridLayout(0,1));
     }
+    /**
+    * @addListeners Fügt die einzelnen Buttons dem Layout hinzu
+    **/
     public void addListeners(){
         registrierenFensterButton.addActionListener(new AnfangsButtonListener());
         anmeldenFensterButton.addActionListener(new AnfangsButtonListener());
         spracheWaelen.addItemListener(new SpracheWaehlen());
     }
+    
+    /**
+    * @addComponentsToPanels verknüpft die Buttons mit den Funktionen die passieren sollen, wenn sie gedrückt werden
+    **/
     public void addComponentsToPanels(){
         sprache.removeAll();
         sprache.add(spracheWaelen);
@@ -70,11 +85,18 @@ public class StartLayer implements SwingPresentation {
         eingangsButtonsPanel.add(registrierenFensterButton);
         eingangsButtonsPanel.add(anmeldenFensterButton);
     }
+    
+    /**
+    * @addPanelsToFrame fügt die Buttons dem Rahmen hinzu
+    **/
     public void addPanelsToFrame(){
         fenster.add(sprache);
         fenster.add(willkommenPanel);
         fenster.add(eingangsButtonsPanel);
     }
+    /**
+    * @setString Legt die Schriftzüge der einzelnen Elemente des Layouts fest
+    **/
     private static void setStrings(){
         fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
         anmeldenFensterButton.setText(App.resourceBundle.getString("sign.in"));
@@ -83,6 +105,9 @@ public class StartLayer implements SwingPresentation {
         sprachen = new String[]{App.resourceBundle.getString("choose.your.language"), App.resourceBundle.getString("german"), App.resourceBundle.getString("english")};
         spracheWaelen = new JComboBox<>(sprachen);
     }
+    /**
+    * Die Klasse liefert die Funktionalität, die es dem Nutzer ermöglicht die Applikation zu schließen
+    **/
     class AnfangsButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             fenster.remove(willkommenPanel);
@@ -97,6 +122,9 @@ public class StartLayer implements SwingPresentation {
     }
 
 
+    /**
+    * Die Klasse ermöglicht es die Sprache zu ändern
+    **/
     static class SpracheWaehlen implements ItemListener{
 
         @Override

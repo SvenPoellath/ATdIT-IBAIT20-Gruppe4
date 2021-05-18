@@ -10,7 +10,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+* In der Klasse wird das Layout für die Einstellungen festgelegt. Es werden Textfelder angelegt und Buttons,
+* die dem Nutzer später die Möglichkeit bieten sollen seine Nutzerdaten zu ändern.
+**/
 public class Einstellungen implements SwingPresentation {
     static final JPanel einstellungen = new JPanel();
     static final JPanel datenAendern = new JPanel();
@@ -67,6 +70,9 @@ public class Einstellungen implements SwingPresentation {
         addPanelsToFrame();
         setFrame();
     }
+/**
+* @setString ermöglicht es dem Nutzer seine Daten zu ändern.
+**/
     static void setStrings(){
         einstellungenText.setText(App.resourceBundle.getString("welcome.to.your.settings"));
         veraenderungen.setText(App.resourceBundle.getString("make.changes.here"));
@@ -115,7 +121,9 @@ public class Einstellungen implements SwingPresentation {
         RegistrierLayer.GeburtsdatumMonat.setSelectedItem(transfer.getGeburtsdatumMonat());
         RegistrierLayer.GeburtsdatumJahr.setSelectedItem(transfer.getGeburtsdatumJahr());
     }
-
+/**
+* Die folgenden @Override Methoden legen fest wie sich das Layout ändert, wenn der Nutzer seine Informationen ändert.
+**/
     @Override
     public void setFrame() {
         StartLayer.fenster.setSize(1300,500);
@@ -199,6 +207,10 @@ public class Einstellungen implements SwingPresentation {
         StartLayer.fenster.add(geburtsdatum);
     }
 
+    
+/**
+* Wenn der Nutzer die Daten seiner Person ändert, ermöglicht diese Klasse es die Änderungen in der Datenbank zu speichern
+**/
     class aendern implements ActionListener{
 
         @Override

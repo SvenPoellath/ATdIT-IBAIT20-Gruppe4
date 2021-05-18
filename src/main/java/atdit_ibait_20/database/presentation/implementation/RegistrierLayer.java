@@ -11,6 +11,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+* Die Klasse legt das Layout für die Registrierseite fest und regelt im Detail welche Eingaben für welches Feld zulässig sind
+**/
 public class RegistrierLayer implements SwingPresentation {
 
     private final JPanel datenPanel = new JPanel();
@@ -70,6 +73,9 @@ public class RegistrierLayer implements SwingPresentation {
         addPanelsToFrame();
         setFrame();
     }
+    /**
+* @setString legt die dem Nutzer angezeigten Namen der einzelnen Felder fest sowie die Auswahloptionen des Geburtsdatums
+**/
     static void setStrings(){
         anrede.setText(App.resourceBundle.getString("title"));
         name.setText(App.resourceBundle.getString("first.name"));
@@ -161,7 +167,9 @@ public class RegistrierLayer implements SwingPresentation {
         StartLayer.fenster.add(geburtsDatumsPanel);
         StartLayer.fenster.add(registrierButtonPanel);
     }
-
+/**
+* @checkInputs überprüft ob gültige Daten eingegeben wurden und gibt dem Nutzer bei Problemen eine Fehlermeldung zurück
+**/
     boolean checkInputs(){
         falscheAngabe.setText(null);
         if(tfVersicherungsNummer.getText().length()!=12){
@@ -185,6 +193,9 @@ public class RegistrierLayer implements SwingPresentation {
             return true;
         }
     }
+    /**
+* Die Klasse ermöglicht es dem Nutzer eine Seite zurück zu gehen in der Registrierung
+**/
     class ZurueckButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             StartLayer.fenster.remove(registrierButtonPanel);
@@ -195,6 +206,10 @@ public class RegistrierLayer implements SwingPresentation {
             new StartLayer();
         }
     }
+    /**
+* Die Klasse wird vom Nutzer gedrückt wenn er alle seine Daten eingegeben hat. Das bisherige Layout verschwindet. 
+* Wenn der Nutzer ungültige Eingaben getätigt hat, weisst das Programm ihn an dieser Stelle darauf hin.
+**/
     class RegistrierButtonListener implements ActionListener{
 
         @Override

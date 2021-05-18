@@ -14,6 +14,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+    /**
+    * Legt fest welche Elemente das Layout enthalten soll, wenn man einen Vertrag hinzufügen will.
+    **/
 public class VertragHinzufuegen implements SwingPresentation {
     static final int monatlicherPreis = 300;
     static final int jahresPreis =3000;
@@ -65,6 +68,10 @@ public class VertragHinzufuegen implements SwingPresentation {
         addPanelsToFrame();
         setFrame();
     }
+    
+    /**
+    * @setStringt legt fest welche Schriftzüge die einzelnen Elemente tragen
+    **/
     static void setStrings(){
         buchungsArtText.setText(App.resourceBundle.getString("payment.type"));
         tageText.setText(App.resourceBundle.getString("days.of.visiting"));
@@ -87,11 +94,17 @@ public class VertragHinzufuegen implements SwingPresentation {
         buchungsArt = new JComboBox<>(buchungsArten);
     }
 
+    /**
+    * @setFrame Legt die Größe des Fensters, welches dem Nutzer angezeigt wird fest
+    **/
     @Override
     public void setFrame() {
         StartLayer.fenster.setSize(400,400);
     }
 
+    /**
+    * @setLayout Legt fest welche Art das Layout haben soll
+    **/
     @Override
     public void setLayout() {
         vertragsDaten.setLayout(new GridLayout(0,2));
@@ -100,6 +113,9 @@ public class VertragHinzufuegen implements SwingPresentation {
         falscheIBAN.setForeground(Color.red);
     }
 
+    /**
+    * @addListener Verbindet die Elemtente mit der Art ihres Auswahlmenüs
+    **/
     @Override
     public void addListeners() {
         versicherungsArt.addItemListener(new ComboBoxListener());
@@ -132,6 +148,9 @@ public class VertragHinzufuegen implements SwingPresentation {
         StartLayer.fenster.add(hinzufuegen);
     }
 
+    /**
+    * Legt die Funktionsweise fest was passiert wenn der Nutzer den Hinzufügen Button drückt
+    **/
     class hinzufuegenButtonListener implements ActionListener{
 
         @Override
@@ -151,6 +170,10 @@ public class VertragHinzufuegen implements SwingPresentation {
             }
         }
     }
+    
+    /**
+    * Verbindet die Daten mit den Parametern
+    **/
     class ComboBoxListener implements ItemListener{
 
         @Override
@@ -182,6 +205,9 @@ public class VertragHinzufuegen implements SwingPresentation {
             ZeitraumIf();
         }
     }
+    /**
+    * @ZeitraumIf Gibt die monatlichen oder jährlichen Preise der Versicherung aus
+    **/
     public void ZeitraumIf(){
         if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("monthly"))) {
             preise.add(preisMonatlich);
@@ -198,6 +224,9 @@ public class VertragHinzufuegen implements SwingPresentation {
             betrag = tagesPreis;
         }
     }
+    /**
+    * @PersonenIf fügt bei der Person die IBAN zu bzw. ändert sie
+    **/
     public void PersonenIf(){
         if(angemeldetePerson.getIBAN()==null){
             StartLayer.fenster.remove(hinzufuegen);
@@ -214,6 +243,10 @@ public class VertragHinzufuegen implements SwingPresentation {
             StartLayer.fenster.validate();
         }
     }
+    
+    /**
+    * @IBANIf überträgt die Änderung der IBAN an die Datenbank
+    **/
     public void IBANIf(){
         if(tfIBAN.getText().length()==22) {
             angemeldetePerson.setIBAN(tfIBAN.getText());

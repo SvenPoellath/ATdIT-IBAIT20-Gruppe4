@@ -11,6 +11,9 @@ public class App {
     public static final String RESOURCE_BUNDLE_PATH = "i18n/GUI/GUI";
     public static ResourceBundle resourceBundle = ResourceBundle.getBundle(RESOURCE_BUNDLE_PATH,Locale.getDefault());
 
+    /**
+    * @main Methode, die die Applikation startet und die Verbindung zur Datenbank aufbaut
+    **/
     public static void main (String[] args) {
         new StartLayer();
         Connection conn = DatabaseService.connect();

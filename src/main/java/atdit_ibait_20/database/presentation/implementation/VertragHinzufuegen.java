@@ -157,7 +157,7 @@ public class VertragHinzufuegen implements SwingPresentation {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource().equals(preis)){
                 preise.removeAll();
-                getSelectedVersicherungsArt();
+                setPreis();
                 hinzufuegen.add(hinzufuegenButton);
                 StartLayer.fenster.validate();
             }
@@ -200,31 +200,28 @@ public class VertragHinzufuegen implements SwingPresentation {
         }
     }
 
-    public String getSelectedVersicherungsArt(){
-        if(versicherungsArt.getSelectedItem().equals("luggage.insurance")){
-            betrag = getPreis();
+    public void setPreis(){
+        if(versicherungsArt.getSelectedItem().equals(App.resourceBundle.getString("luggage.insurance"))){
+            setPreisForLuggageInsurance();
         }
-        return versicherungsArt.getSelectedItem().toString();
     }
     /**
     * @ZeitraumIf Gibt die monatlichen oder jährlichen Preise der Versicherung aus
     **/
-    public int getPreis(){
+    public void setPreisForLuggageInsurance(){
         if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("monthly"))) {
             preise.add(preisMonatlich);
-            return monatlicherPreis;
+            betrag = monatlicherPreis;
         }
         else if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("yearly"))) {
             preise.add(preisJahr);
-            return jahresPreis;
+            betrag = jahresPreis;
         }
         else if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("per.trip"))){
             tagesPreis = (anzahlDerTage.getSelectedIndex()+1)*50;
             JLabel preisEinmalig = new JLabel(tagesPreis + App.resourceBundle.getString("currency"));
             preise.add(preisEinmalig);
-            return tagesPreis;
-        }else{
-            return 0;
+            betrag = tagesPreis;
         }
     }
     /**

@@ -9,7 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+* Die Klasse legt fest welche Komponenten die Anmeldeseite für den Nutzer hat und wie diese am Ende aussieht.
+**/
 public class AnmeldeLayer implements SwingPresentation {
 
     private final JPanel zurueckPanel = new JPanel();
@@ -26,7 +28,9 @@ public class AnmeldeLayer implements SwingPresentation {
 
     private static final JButton zurueckButton = new JButton("<--");
     private static final JButton anmeldeButton = new JButton();
-
+/**
+* Das Verhalten der einzelnen Komponenten des Layouts für verschiedene Eingaben des Nutzers wird festgelegt
+**/
     public AnmeldeLayer(){
         setStrings();
         setLayout();
@@ -82,7 +86,11 @@ public class AnmeldeLayer implements SwingPresentation {
         StartLayer.fenster.add(anmeldungsPanel);
         StartLayer.fenster.add(anmeldungsButtonPanel);
     }
-
+/**
+* Die Eingaben des Nutzers werden eingelesen und mit den in der Datenbank hinterlegten Daten abgeglichen. Wenn die Daten übereinstimmen bekommen der Nutzer die Ausgabe
+* "Anmeldung erfolgreich". Wenn die Daten nicht übereinstimmen bekommt der Nutzer die Ausgabe "Wrong id/password entered" und hat die Möglichkeit wieder auf die 
+* Anmeldungsseite zurück zu gehen.
+**/
     class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             BasicPerson person;

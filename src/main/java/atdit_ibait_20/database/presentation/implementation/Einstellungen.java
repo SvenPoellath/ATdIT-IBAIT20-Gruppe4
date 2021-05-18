@@ -4,13 +4,17 @@ import atdit_ibait_20.database.App;
 import atdit_ibait_20.database.model.Person;
 import atdit_ibait_20.database.persistence.implementation.DatabaseService;
 import atdit_ibait_20.database.model.implementation.BasicGeburtsdatum;
+import atdit_ibait_20.database.presentation.SwingPresentation;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-public class Einstellungen {
+/**
+* In der Klasse wird das Layout für die Einstellungen festgelegt. Es werden Textfelder angelegt und Buttons,
+* die dem Nutzer später die Möglichkeit bieten sollen seine Nutzerdaten zu ändern.
+**/
+public class Einstellungen implements SwingPresentation {
     static final JPanel einstellungen = new JPanel();
     static final JPanel datenAendern = new JPanel();
     static final JPanel geburtsdatum = new JPanel();
@@ -31,16 +35,16 @@ public class Einstellungen {
     private static final JLabel telefonnummerAendernText = new JLabel();
     private static final JLabel staatsangehoerigkeitAendernText = new JLabel();
 
-    JTextField vornameNeu = new JTextField();
-    JTextField nachnameNeu = new JTextField();
-    JTextField passwortNeu = new JPasswordField();
-    JTextField plzNeu = new JTextField();
-    JTextField ortNeu = new JTextField();
-    JTextField strasseNeu = new JTextField();
-    JTextField hausnummerNeu = new JTextField();
-    JTextField telefonnummerNeu = new JTextField();
-    JTextField mailNeu = new JTextField();
-    JTextField staatsangehoerigkeitNeu = new JTextField();
+    private static final JTextField vornameNeu = new JTextField();
+    private static final  JTextField nachnameNeu = new JTextField();
+    private static final  JTextField passwortNeu = new JPasswordField();
+    private static final  JTextField plzNeu = new JTextField();
+    private static final  JTextField ortNeu = new JTextField();
+    private static final  JTextField strasseNeu = new JTextField();
+    private static final  JTextField hausnummerNeu = new JTextField();
+    private static final  JTextField telefonnummerNeu = new JTextField();
+    private static final  JTextField mailNeu = new JTextField();
+    private static final  JTextField staatsangehoerigkeitNeu = new JTextField();
 
     private static final JButton vornameAendern = new JButton();
     private static final JButton nachnameAendern = new JButton();
@@ -56,10 +60,49 @@ public class Einstellungen {
     private static final JButton telefonnummerAendern = new JButton();
     private static final JButton staatsangehoerigkeitAendern = new JButton();
 
-    Person angemeldetePerson;
+    static Person angemeldetePerson;
     public Einstellungen(Person person){
-        setStringsInEinstellungen();
         angemeldetePerson = person;
+        setStrings();
+        setLayout();
+        addListeners();
+        addComponentsToPanels();
+        addPanelsToFrame();
+        setFrame();
+    }
+/**
+* @setString ermöglicht es dem Nutzer seine Daten zu ändern.
+**/
+    static void setStrings(){
+        einstellungenText.setText(App.resourceBundle.getString("welcome.to.your.settings"));
+        veraenderungen.setText(App.resourceBundle.getString("make.changes.here"));
+        vornameAendernText.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("first.name"));
+        nachnameAendernText.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("last.name"));
+        geburtsdatumAendernText.setText(App.resourceBundle.getString("new.2")+" "+App.resourceBundle.getString("date.of.birth"));
+        passwortAendernText.setText(App.resourceBundle.getString("new.2")+" "+App.resourceBundle.getString("password"));
+        anredeAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("title"));
+        plzAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("postcode"));
+        ortAendernText.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("city"));
+        strasseAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("street"));
+        hausnummerAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("house.number"));
+        familienstandAendernText.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("marital.status"));
+        mailAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("e.mail.address"));
+        telefonnummerAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("phone.number"));
+        staatsangehoerigkeitAendern.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("nationality"));
+
+        vornameAendern.setText(App.resourceBundle.getString("first.name")+" "+App.resourceBundle.getString("change"));
+        nachnameAendern.setText(App.resourceBundle.getString("last.name")+" "+App.resourceBundle.getString("change"));
+        geburtsdatumAendern.setText(App.resourceBundle.getString("date.of.birth")+" "+App.resourceBundle.getString("change"));
+        passwortAendern.setText(App.resourceBundle.getString("password")+" "+App.resourceBundle.getString("change"));
+        anredeAendern.setText(App.resourceBundle.getString("title")+" "+App.resourceBundle.getString("change"));
+        plzAendern.setText(App.resourceBundle.getString("postcode")+" "+App.resourceBundle.getString("change"));
+        ortAendern.setText(App.resourceBundle.getString("city")+" "+App.resourceBundle.getString("change"));
+        strasseAendern.setText(App.resourceBundle.getString("street")+" "+App.resourceBundle.getString("change"));
+        hausnummerAendern.setText(App.resourceBundle.getString("house.number")+" "+App.resourceBundle.getString("change"));
+        familienstandAendern.setText(App.resourceBundle.getString("marital.status")+" "+App.resourceBundle.getString("change"));
+        mailAendern.setText(App.resourceBundle.getString("change")+" "+App.resourceBundle.getString("e.mail.address"));
+        telefonnummerAendern.setText(App.resourceBundle.getString("phone.number")+" "+App.resourceBundle.getString("change"));
+        staatsangehoerigkeitAendern.setText(App.resourceBundle.getString("nationality")+" "+App.resourceBundle.getString("change"));
 
         RegistrierLayer.cbAnrede.setSelectedItem(angemeldetePerson.getAnrede());
         vornameNeu.setText(angemeldetePerson.getVorname());
@@ -77,7 +120,24 @@ public class Einstellungen {
         RegistrierLayer.GeburtsdatumTag.setSelectedItem(transfer.getGeburtsdatumTag());
         RegistrierLayer.GeburtsdatumMonat.setSelectedItem(transfer.getGeburtsdatumMonat());
         RegistrierLayer.GeburtsdatumJahr.setSelectedItem(transfer.getGeburtsdatumJahr());
+    }
+/**
+* Die folgenden @Override Methoden legen fest wie sich das Layout ändert, wenn der Nutzer seine Informationen ändert.
+**/
+    @Override
+    public void setFrame() {
+        StartLayer.fenster.setSize(1300,500);
+    }
 
+    @Override
+    public void setLayout() {
+        einstellungen.setLayout(new GridLayout(0,1));
+        datenAendern.setLayout(new GridLayout(0,3));
+        geburtsdatum.setLayout(new GridLayout(0,5));
+    }
+
+    @Override
+    public void addListeners() {
         vornameAendern.addActionListener(new aendern());
         nachnameAendern.addActionListener(new aendern());
         geburtsdatumAendern.addActionListener(new aendern());
@@ -91,11 +151,10 @@ public class Einstellungen {
         mailAendern.addActionListener(new aendern());
         staatsangehoerigkeitAendern.addActionListener(new aendern());
         telefonnummerAendern.addActionListener(new aendern());
+    }
 
-        einstellungen.setLayout(new GridLayout(0,1));
-        datenAendern.setLayout(new GridLayout(0,3));
-        geburtsdatum.setLayout(new GridLayout(0,5));
-
+    @Override
+    public void addComponentsToPanels() {
         einstellungen.add(einstellungenText);
         einstellungen.add(veraenderungen);
         datenAendern.add(anredeAendernText);
@@ -139,45 +198,19 @@ public class Einstellungen {
         geburtsdatum.add(RegistrierLayer.GeburtsdatumMonat);
         geburtsdatum.add(RegistrierLayer.GeburtsdatumJahr);
         geburtsdatum.add(geburtsdatumAendern);
+    }
 
-        StartLayer.fenster.setSize(1300,500);
+    @Override
+    public void addPanelsToFrame() {
         StartLayer.fenster.add(einstellungen);
         StartLayer.fenster.add(datenAendern);
         StartLayer.fenster.add(geburtsdatum);
-
-
     }
-    static void setStringsInEinstellungen(){
-        einstellungenText.setText(App.resourceBundle.getString("welcome.to.your.settings"));
-        veraenderungen.setText(App.resourceBundle.getString("make.changes.here"));
-        vornameAendernText.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("first.name"));
-        nachnameAendernText.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("last.name"));
-        geburtsdatumAendernText.setText(App.resourceBundle.getString("new.2")+" "+App.resourceBundle.getString("date.of.birth"));
-        passwortAendernText.setText(App.resourceBundle.getString("new.2")+" "+App.resourceBundle.getString("password"));
-        anredeAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("title"));
-        plzAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("postcode"));
-        ortAendernText.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("city"));
-        strasseAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("street"));
-        hausnummerAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("house.number"));
-        familienstandAendernText.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("marital.status"));
-        mailAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("e.mail.address"));
-        telefonnummerAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("phone.number"));
-        staatsangehoerigkeitAendern.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("nationality"));
 
-        vornameAendern.setText(App.resourceBundle.getString("first.name")+" "+App.resourceBundle.getString("change"));
-        nachnameAendern.setText(App.resourceBundle.getString("last.name")+" "+App.resourceBundle.getString("change"));
-        geburtsdatumAendern.setText(App.resourceBundle.getString("date.of.birth")+" "+App.resourceBundle.getString("change"));
-        passwortAendern.setText(App.resourceBundle.getString("password")+" "+App.resourceBundle.getString("change"));
-        anredeAendern.setText(App.resourceBundle.getString("title")+" "+App.resourceBundle.getString("change"));
-        plzAendern.setText(App.resourceBundle.getString("postcode")+" "+App.resourceBundle.getString("change"));
-        ortAendern.setText(App.resourceBundle.getString("city")+" "+App.resourceBundle.getString("change"));
-        strasseAendern.setText(App.resourceBundle.getString("street")+" "+App.resourceBundle.getString("change"));
-        hausnummerAendern.setText(App.resourceBundle.getString("house.number")+" "+App.resourceBundle.getString("change"));
-        familienstandAendern.setText(App.resourceBundle.getString("marital.status")+" "+App.resourceBundle.getString("change"));
-        mailAendern.setText(App.resourceBundle.getString("change")+" "+App.resourceBundle.getString("e.mail.address"));
-        telefonnummerAendern.setText(App.resourceBundle.getString("phone.number")+" "+App.resourceBundle.getString("change"));
-        staatsangehoerigkeitAendern.setText(App.resourceBundle.getString("nationality")+" "+App.resourceBundle.getString("change"));
-    }
+    
+/**
+* Wenn der Nutzer die Daten seiner Person ändert, ermöglicht diese Klasse es die Änderungen in der Datenbank zu speichern
+**/
     class aendern implements ActionListener{
 
         @Override

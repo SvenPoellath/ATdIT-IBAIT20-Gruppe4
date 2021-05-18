@@ -7,7 +7,9 @@ import atdit_ibait_20.database.model.implementation.BasicVertrag;
 import java.sql.*;
 
 import static atdit_ibait_20.database.persistence.implementation.PasswordService.*;
-
+/**
+* @interface legt verschiedene Methoden an mit deren Hilfe bei implementierung die Datenbank leichter bearbeitet werden
+**/
 public interface Database {
 
     static Connection connect() {

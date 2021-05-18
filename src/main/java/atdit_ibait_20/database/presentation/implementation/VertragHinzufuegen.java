@@ -4,6 +4,7 @@ import atdit_ibait_20.database.App;
 import atdit_ibait_20.database.model.Person;
 import atdit_ibait_20.database.persistence.implementation.DatabaseService;
 import atdit_ibait_20.database.model.implementation.BasicVertrag;
+import atdit_ibait_20.database.presentation.SwingPresentation;
 
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-public class VertragHinzufuegen {
+public class VertragHinzufuegen implements SwingPresentation {
     static final int monatlicherPreis = 300;
     static final int jahresPreis =3000;
 
@@ -41,10 +42,10 @@ public class VertragHinzufuegen {
     private static Integer[] tage;
     private static String[] laender;
 
-    private final JComboBox <String> versicherungsArt;
-    private final JComboBox <String> buchungsArt;
-    private final JComboBox <Integer> anzahlDerTage;
-    private final JComboBox <String> land;
+    private static JComboBox <String> versicherungsArt;
+    private static JComboBox <String> buchungsArt;
+    private static JComboBox <Integer> anzahlDerTage;
+    private static JComboBox <String> land;
 
     private static final JButton hinzufuegenButton = new JButton();
     private static final JButton preis = new JButton();
@@ -55,43 +56,16 @@ public class VertragHinzufuegen {
     private final Person angemeldetePerson;
 
     public VertragHinzufuegen(Person person){
-        setStringsInVertragHinzufuegen();
         angemeldetePerson = person;
-        vertragsDaten.setLayout(new GridLayout(0,2));
-        neueIBAN.setLayout(new GridLayout(0,2));
-        preise.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
-        vertragsDaten.removeAll();
-        hinzufuegen.removeAll();
-        preise.removeAll();
-        neueIBAN.removeAll();
-        hinzugefuegt.removeAll();
-        falscheIBAN.setForeground(Color.red);
-        anzahlDerTage = new JComboBox<>(tage);
-        land = new JComboBox<>(laender);
-        versicherungsArt = new JComboBox<>(versicherungsArten);
-        buchungsArt = new JComboBox<>(buchungsArten);
-        versicherungsArt.addItemListener(new ComboBoxListener());
-        buchungsArt.addItemListener(new ComboBoxListener());
-        hinzufuegenButton.addActionListener(new hinzufuegenButtonListener());
-        preis.addActionListener(new hinzufuegenButtonListener());
-        addIBAN.addActionListener(new hinzufuegenButtonListener());
-
-        vertragsDaten.add(versicherungArtText);
-        vertragsDaten.add(versicherungsArt);
-        hinzufuegen.add(preis);
-        neueIBAN.add(IBAN);
-        neueIBAN.add(tfIBAN);
-        neueIBAN.add(addIBAN);
-
-        hinzugefuegt.add(fertig);
-        StartLayer.fenster.setSize(400,400);
-        StartLayer.fenster.add(vertragsDaten);
-        StartLayer.fenster.add(preise);
-        StartLayer.fenster.add(hinzufuegen);
-
         tagesPreis=50;
+        setStrings();
+        setLayout();
+        addListeners();
+        addComponentsToPanels();
+        addPanelsToFrame();
+        setFrame();
     }
-    static void setStringsInVertragHinzufuegen(){
+    static void setStrings(){
         buchungsArtText.setText(App.resourceBundle.getString("payment.type"));
         tageText.setText(App.resourceBundle.getString("days.of.visiting"));
         landText.setText(App.resourceBundle.getString("country"));
@@ -107,8 +81,57 @@ public class VertragHinzufuegen {
         buchungsArten = new String[]{"*",App.resourceBundle.getString("monthly"),App.resourceBundle.getString("yearly"),App.resourceBundle.getString("per.trip")};
         tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
         laender = new String[]{App.resourceBundle.getString("germany"),App.resourceBundle.getString("usa"),App.resourceBundle.getString("portugal")};
-
+        anzahlDerTage = new JComboBox<>(tage);
+        land = new JComboBox<>(laender);
+        versicherungsArt = new JComboBox<>(versicherungsArten);
+        buchungsArt = new JComboBox<>(buchungsArten);
     }
+
+    @Override
+    public void setFrame() {
+        StartLayer.fenster.setSize(400,400);
+    }
+
+    @Override
+    public void setLayout() {
+        vertragsDaten.setLayout(new GridLayout(0,2));
+        neueIBAN.setLayout(new GridLayout(0,2));
+        preise.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
+        falscheIBAN.setForeground(Color.red);
+    }
+
+    @Override
+    public void addListeners() {
+        versicherungsArt.addItemListener(new ComboBoxListener());
+        buchungsArt.addItemListener(new ComboBoxListener());
+        hinzufuegenButton.addActionListener(new hinzufuegenButtonListener());
+        preis.addActionListener(new hinzufuegenButtonListener());
+        addIBAN.addActionListener(new hinzufuegenButtonListener());
+    }
+
+    @Override
+    public void addComponentsToPanels() {
+        vertragsDaten.removeAll();
+        hinzufuegen.removeAll();
+        preise.removeAll();
+        neueIBAN.removeAll();
+        hinzugefuegt.removeAll();
+        vertragsDaten.add(versicherungArtText);
+        vertragsDaten.add(versicherungsArt);
+        hinzufuegen.add(preis);
+        neueIBAN.add(IBAN);
+        neueIBAN.add(tfIBAN);
+        neueIBAN.add(addIBAN);
+        hinzugefuegt.add(fertig);
+    }
+
+    @Override
+    public void addPanelsToFrame() {
+        StartLayer.fenster.add(vertragsDaten);
+        StartLayer.fenster.add(preise);
+        StartLayer.fenster.add(hinzufuegen);
+    }
+
     class hinzufuegenButtonListener implements ActionListener{
 
         @Override

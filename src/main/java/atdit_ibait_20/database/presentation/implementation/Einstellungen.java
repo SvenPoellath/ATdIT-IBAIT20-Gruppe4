@@ -35,7 +35,7 @@ public class Einstellungen implements SwingPresentation {
     private static final JLabel telefonnummerAendernText = new JLabel();
     private static final JLabel staatsangehoerigkeitAendernText = new JLabel();
 
-    private static final JTextField vornameNeu = new JTextField();
+    private static final  JTextField vornameNeu = new JTextField();
     private static final  JTextField nachnameNeu = new JTextField();
     private static final  JTextField passwortNeu = new JPasswordField();
     private static final  JTextField plzNeu = new JTextField();
@@ -59,16 +59,23 @@ public class Einstellungen implements SwingPresentation {
     private static final JButton mailAendern = new JButton();
     private static final JButton telefonnummerAendern = new JButton();
     private static final JButton staatsangehoerigkeitAendern = new JButton();
-
+    static boolean istErsterAufruf = true;
     static Person angemeldetePerson;
     public Einstellungen(Person person){
         angemeldetePerson = person;
-        setStrings();
-        setLayout();
-        addListeners();
-        addComponentsToPanels();
-        addPanelsToFrame();
-        setFrame();
+        if(istErsterAufruf) {
+            setStrings();
+            setLayout();
+            addListeners();
+            addComponentsToPanels();
+            addPanelsToFrame();
+            setFrame();
+            istErsterAufruf = false;
+        }
+        else{
+            addPanelsToFrame();
+            setFrame();
+        }
     }
 /**
 * @setString ermöglicht es dem Nutzer seine Daten zu ändern.

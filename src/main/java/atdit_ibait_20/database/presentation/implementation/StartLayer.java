@@ -19,8 +19,8 @@ public class StartLayer implements SwingPresentation {
 
     static final JFrame fenster = new JFrame();
 
-    private final JPanel willkommenPanel = new JPanel();
-    private final JPanel eingangsButtonsPanel = new JPanel();
+    private static final JPanel willkommenPanel = new JPanel();
+    private static final JPanel eingangsButtonsPanel = new JPanel();
     static final JPanel sprache = new JPanel();
 
     private static String[] sprachen;

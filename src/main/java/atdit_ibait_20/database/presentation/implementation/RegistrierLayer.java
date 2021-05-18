@@ -16,24 +16,24 @@ import java.awt.event.ActionListener;
 **/
 public class RegistrierLayer implements SwingPresentation {
 
-    private final JPanel datenPanel = new JPanel();
-    private final JPanel geburtsDatumsPanel = new JPanel();
-    private final JPanel zurueckPanel = new JPanel();
-    private final JPanel registrierButtonPanel = new JPanel();
-    private final JPanel falscheAngabePanel = new JPanel();
+    private static final JPanel datenPanel = new JPanel();
+    private static final JPanel geburtsDatumsPanel = new JPanel();
+    private static final JPanel zurueckPanel = new JPanel();
+    private static final JPanel registrierButtonPanel = new JPanel();
+    private static final JPanel falscheAngabePanel = new JPanel();
 
-    private final JTextField tfName = new JTextField();
-    private final JTextField tfNachName = new JTextField();
-    private final JTextField tfVersicherungsNummer = new JTextField();
-    private final JTextField tfPlz = new JTextField();
-    private final JTextField tfOrt = new JTextField();
-    private final JTextField tfStrasse = new JTextField();
-    private final JTextField tfHausnummer = new JTextField();
-    private final JTextField tfEmailadresse = new JTextField();
-    private final JTextField tfTelefonnummer = new JTextField();
-    private final JTextField tfStaatsangehoerigkeit = new JTextField();
+    private static final JTextField tfName = new JTextField();
+    private static final JTextField tfNachName = new JTextField();
+    private static final JTextField tfVersicherungsNummer = new JTextField();
+    private static final JTextField tfPlz = new JTextField();
+    private static final JTextField tfOrt = new JTextField();
+    private static final JTextField tfStrasse = new JTextField();
+    private static final JTextField tfHausnummer = new JTextField();
+    private static final JTextField tfEmailadresse = new JTextField();
+    private static final JTextField tfTelefonnummer = new JTextField();
+    private static final JTextField tfStaatsangehoerigkeit = new JTextField();
 
-    private final JPasswordField tfRegistrierPasswort = new JPasswordField();
+    private static final JPasswordField tfRegistrierPasswort = new JPasswordField();
 
     private static final JLabel falscheAngabe = new JLabel();
     private static final JLabel anrede = new JLabel();
@@ -65,13 +65,17 @@ public class RegistrierLayer implements SwingPresentation {
     static JComboBox<Integer> GeburtsdatumMonat = new JComboBox<>(monate);
     static JComboBox<Integer> GeburtsdatumJahr = new JComboBox<>(jahre);
     static JComboBox<String> cbFamilienstand = new JComboBox<>(familienstandArten);
-
+    static boolean istErsterAufruf = true;
     public RegistrierLayer(){
-        setStrings();
-        setLayout();
-        addComponentsToPanels();
-        addPanelsToFrame();
-        setFrame();
+        if(istErsterAufruf){
+            setStrings();
+            istErsterAufruf = false;
+        }
+            setLayout();
+            addListeners();
+            addComponentsToPanels();
+            addPanelsToFrame();
+            setFrame();
     }
     /**
 * @setString legt die dem Nutzer angezeigten Namen der einzelnen Felder fest sowie die Auswahloptionen des Geburtsdatums

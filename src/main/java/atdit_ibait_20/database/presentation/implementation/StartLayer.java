@@ -37,14 +37,6 @@ public class StartLayer implements SwingPresentation {
         addComponentsToPanels();
         addPanelsToFrame();
         fenster.validate();
-
-
-
-
-
-
-
-
     }
     /**
     * @setFrame Legt den Rahmen für das Fester fest

@@ -28,6 +28,7 @@ public class Vertragsuebersicht implements SwingPresentation {
         angemeldetePerson = person;
         setStrings();
         setLayout();
+        addListeners();
         addComponentsToPanels();
         addPanelsToFrame();
         setFrame();

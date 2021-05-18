@@ -157,7 +157,7 @@ public class VertragHinzufuegen implements SwingPresentation {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource().equals(preis)){
                 preise.removeAll();
-                VersicherungsIf();
+                getSelectedVersicherungsArt();
                 hinzufuegen.add(hinzufuegenButton);
                 StartLayer.fenster.validate();
             }
@@ -200,28 +200,31 @@ public class VertragHinzufuegen implements SwingPresentation {
         }
     }
 
-    public void VersicherungsIf(){
-        if(versicherungsArt.getSelectedIndex()==1){
-            ZeitraumIf();
+    public String getSelectedVersicherungsArt(){
+        if(versicherungsArt.getSelectedItem().equals("luggage.insurance")){
+            betrag = getPreis();
         }
+        return versicherungsArt.getSelectedItem().toString();
     }
     /**
     * @ZeitraumIf Gibt die monatlichen oder jährlichen Preise der Versicherung aus
     **/
-    public void ZeitraumIf(){
+    public int getPreis(){
         if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("monthly"))) {
             preise.add(preisMonatlich);
-            betrag = monatlicherPreis;
+            return monatlicherPreis;
         }
-        if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("yearly"))) {
+        else if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("yearly"))) {
             preise.add(preisJahr);
-            betrag = jahresPreis;
+            return jahresPreis;
         }
-        if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("per.trip"))){
+        else if(buchungsArt.getSelectedItem().equals(App.resourceBundle.getString("per.trip"))){
             tagesPreis = (anzahlDerTage.getSelectedIndex()+1)*50;
             JLabel preisEinmalig = new JLabel(tagesPreis + App.resourceBundle.getString("currency"));
             preise.add(preisEinmalig);
-            betrag = tagesPreis;
+            return tagesPreis;
+        }else{
+            return 0;
         }
     }
     /**

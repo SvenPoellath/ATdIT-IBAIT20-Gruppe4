@@ -73,7 +73,8 @@ public class Vertragsuebersicht implements SwingPresentation {
         logout.setText(App.resourceBundle.getString("logout"));
         vertragsUebersicht.setText(App.resourceBundle.getString("welcome.to.your.contract.overview"));
         add.removeAll();
-        addVorhandeneVertraegetoGUI(angemeldetePerson);
+        if (angemeldetePerson != null)
+            addVorhandeneVertraegetoGUI(angemeldetePerson);
         add.add(vertragsUebersicht);
         add.add(plusButton);
     }

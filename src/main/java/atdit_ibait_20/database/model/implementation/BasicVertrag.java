@@ -1,10 +1,13 @@
 package atdit_ibait_20.database.model.implementation;
 
 import atdit_ibait_20.database.model.Vertrag;
-import atdit_ibait_20.database.persistence.implementation.DatabaseService;
+import atdit_ibait_20.database.persistence.Database;
 
 import java.security.SecureRandom;
 import java.util.Random;
+
+import static atdit_ibait_20.database.App.DATABASE;
+
 /**
 * Es wird eine Klasse BasicVertrag angelegt, die alle Attribute aus der Datenbank von Vertrag implementiert
 **/
@@ -40,7 +43,7 @@ public class BasicVertrag implements Vertrag {
         String auftragsNummer;
         do {
             auftragsNummer = generateAuftragsnummer();
-        } while (!(DatabaseService.check_order_number(auftragsNummer)));
+        } while (!(DATABASE.check_order_number(auftragsNummer)));
         Auftragsnummer = auftragsNummer;
         Buchungsart = buchungsart;
         EURBetrag = eurBetrag;

@@ -13,7 +13,7 @@ import java.util.Random;
 /**
 * Die Klasse setzt fest welche und wie viele Zeichen das Passwort eines Nutzers enthalten darf.
 **/
-public class PasswordService implements Database {
+public class PasswordService {
 
     private static final int LENGTH = 32;
     private static final int ITERATIONS = 10000;

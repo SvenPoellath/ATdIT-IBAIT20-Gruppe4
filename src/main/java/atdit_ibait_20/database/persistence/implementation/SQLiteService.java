@@ -1,5 +1,7 @@
 package atdit_ibait_20.database.persistence.implementation;
 
+import atdit_ibait_20.database.model.Person;
+import atdit_ibait_20.database.model.Vertrag;
 import atdit_ibait_20.database.model.implementation.BasicGeburtsdatum;
 import atdit_ibait_20.database.model.implementation.BasicPerson;
 import atdit_ibait_20.database.model.implementation.BasicVertrag;
@@ -12,11 +14,11 @@ import static atdit_ibait_20.database.persistence.implementation.PasswordService
 * Die Klasse DatabaseService wird erstellt um eine Verbindung mit der Datenbank herzustellen.
 * Es wird versucht eine Verbindung über den String URL herzustellen und darüber auf die Datenbank zuzugreifen.
 **/
-public class DatabaseService implements Database {
+public class SQLiteService implements Database {
 
     public static final String URL = "jdbc:sqlite:src/main/java/atdit_ibait_20/database/persistence/database.sqlite";
 
-    public static Connection connect() {
+    public Connection connect() {
 
         Connection conn = null;
 
@@ -29,7 +31,7 @@ public class DatabaseService implements Database {
         return conn;
     }
 
-    public static void execute(String sql, Connection conn) {
+    public void execute(String sql, Connection conn) {
         try {
             if (conn != null) {
                 Statement stmt = conn.createStatement();
@@ -41,7 +43,7 @@ public class DatabaseService implements Database {
             }
         }
 
-    public static void close(Connection conn) {
+    public void close(Connection conn) {
         try {
             if (conn != null)
                 conn.close();
@@ -53,7 +55,8 @@ public class DatabaseService implements Database {
 /**
 * Die Methode @create_tables erlaubt es verschiedene Tabellen in der Datenbank anzulegen und mit Attributen zu befüllen.
 **/
-    public static void create_tables(Connection conn) {
+    public void create_tables() {
+        Connection conn = connect();
         String sql = """
                 CREATE TABLE IF NOT EXISTS person (
                  id              text(12) PRIMARY KEY, \s
@@ -85,11 +88,14 @@ public class DatabaseService implements Database {
                 FOREIGN KEY (person_id) REFERENCES person(id) \s
                 );""";
         execute(sql,conn);
+
+        close(conn);
     }
+
 /**
 * Die Methode @create_person erlaubt es Personen mit verschiedenen Attributen anzulegen und direkt in der Datenbank zu speichern
 **/
-    public static void create_person_entry(BasicPerson person) {
+    public void create_person_entry(Person person) {
         Connection conn = connect();
 
         String salt = getSalt();
@@ -124,7 +130,7 @@ public class DatabaseService implements Database {
 /**
 * @create_contract_entry erlaubt es neue Verträge anzulegen und in der Datenbank zu speichern
 **/
-    public static void create_contract_entry(BasicVertrag contract, String person_id) {
+    public void create_contract_entry(Vertrag contract, String person_id) {
         Connection conn = connect();
         String sql = "INSERT INTO contract(order_number,person_id,insurance_type,booking_type,price) VALUES(?,?,?,?,?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -144,7 +150,7 @@ public class DatabaseService implements Database {
 /**
 * @get_person_by_id erlaubt es auf die Datenbank zuzugreifen und mit Hilfe der ID die Daten einer Person abzufragen
 **/
-    public static BasicPerson get_person_by_id(String id) {
+    public BasicPerson get_person_by_id(String id) {
         String sql = "SELECT id, form_of_address, first_name, last_name, birth_date, nationality, marital_status, zip_code, city, street, house_number, email_address, phone_number, IBAN FROM person WHERE id = ?";
         Connection conn = connect();
         BasicPerson returnPerson = new BasicPerson();
@@ -177,7 +183,7 @@ public class DatabaseService implements Database {
 /**
 * @get_contract_by_id erlaubt es mithilfe der ID des Vertrages alle weiteren Informationen des Vertrages von der Datenbank einzusehen, die Daten zu ändern und neue Verträge anzulegen
 **/
-    public static void get_contract_by_id(BasicPerson person) {
+    public void get_contract_by_id(Person person) {
         String sql = "SELECT order_number,person_id,insurance_type,booking_type,price FROM contract WHERE person_id = ?";
         try (PreparedStatement pstmt = connect().prepareStatement(sql)) {
             pstmt.setString(1,person.getSozialversicherungsnummer());
@@ -192,25 +198,25 @@ public class DatabaseService implements Database {
         System.out.println("All contracts for id: " + person.getSozialversicherungsnummer() + " added.");
     }
 
-    public static void update_person_by_id( String id, String entry, String value) {
+    public void update_person_by_id( String id, String entry, String value) {
         String sql = "UPDATE person SET " + entry + "='" + value + "' WHERE id='" + id + "'";
         Connection conn = connect();
         execute(sql,conn);
     }
 
-    public static void update_person_by_id(String id, String entry, Integer value) {
+    public void update_person_by_id(String id, String entry, Integer value) {
         String sql = "UPDATE person SET " + entry + "=" + value + " WHERE id='" + id + "'";
         Connection conn = connect();
         execute(sql,conn);
     }
 
-    public static void update_person_by_id(String id, String entry, Long value) {
+    public void update_person_by_id(String id, String entry, Long value) {
         String sql = "UPDATE person SET " + entry + "=" + value + " WHERE id='" + id + "'";
         Connection conn = connect();
         execute(sql,conn);
     }
 
-    public static void update_password_by_id(String id, String password) {
+    public void update_password_by_id(String id, String password) {
         String salt = getSalt();
         String securePassword = generateSecurePassword(password,salt);
 
@@ -222,7 +228,7 @@ public class DatabaseService implements Database {
 * @check_Login überprüft ob die vom Nutzer eingegebenen Anmeldeinformationen mit den in der Datenbank übereinstimmen.
 * Wenn das Passwort stimmt, wird der Nutzer erfolgreich verifiziert.
 **/
-    public static boolean check_Login(String id, String providedPassword) {
+    public boolean check_Login(String id, String providedPassword) {
 
         String salt = null;
         String securePassword = null;
@@ -246,7 +252,7 @@ public class DatabaseService implements Database {
 /**
 * @check_order_number überprüft ob die Bestellnummer des Kunden noch frei ist.
 **/
-    public static boolean check_order_number(String orderNumber) {
+    public boolean check_order_number(String orderNumber) {
         boolean returnValue = true;
         Connection conn = connect();
         String sql = "SELECT (count(*) > 0) as found FROM contract WHERE order_number=?";

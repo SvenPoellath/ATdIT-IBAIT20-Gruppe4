@@ -1,7 +1,8 @@
 package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
-import atdit_ibait_20.database.persistence.implementation.DatabaseService;
+import atdit_ibait_20.database.model.Person;
+import atdit_ibait_20.database.persistence.Database;
 import atdit_ibait_20.database.model.implementation.BasicPerson;
 import atdit_ibait_20.database.presentation.SwingPresentation;
 
@@ -9,6 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static atdit_ibait_20.database.App.DATABASE;
+
 /**
 * Die Klasse legt fest welche Komponenten die Anmeldeseite für den Nutzer hat und wie diese am Ende aussieht.
 **/
@@ -93,7 +97,7 @@ public class AnmeldeLayer implements SwingPresentation {
 **/
     class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            BasicPerson person;
+            Person person;
             StartLayer.fenster.remove(anmeldungsPanel);
             StartLayer.fenster.remove(anmeldungsButtonPanel);
             StartLayer.fenster.remove(zurueckPanel);
@@ -102,8 +106,8 @@ public class AnmeldeLayer implements SwingPresentation {
                 StartLayer.fenster.remove(StartLayer.sprache);
                 new StartLayer();
             } else if (e.getSource().equals(anmeldeButton)) {
-                if (DatabaseService.check_Login(tfAnmeldeName.getText(), new String(tfAnmeldePasswort.getPassword()))) {
-                    person = DatabaseService.get_person_by_id(tfAnmeldeName.getText());
+                if (DATABASE.check_Login(tfAnmeldeName.getText(), new String(tfAnmeldePasswort.getPassword()))) {
+                    person = DATABASE.get_person_by_id(tfAnmeldeName.getText());
                     System.out.println("Anmeldung erfolgreich.");
                     new Vertragsuebersicht(person);
                 } else {

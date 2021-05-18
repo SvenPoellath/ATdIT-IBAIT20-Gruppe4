@@ -2,7 +2,7 @@ package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
 import atdit_ibait_20.database.model.Person;
-import atdit_ibait_20.database.persistence.implementation.DatabaseService;
+import atdit_ibait_20.database.persistence.Database;
 import atdit_ibait_20.database.model.implementation.BasicVertrag;
 import atdit_ibait_20.database.presentation.SwingPresentation;
 
@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+
+import static atdit_ibait_20.database.App.DATABASE;
 
     /**
     * Legt fest welche Elemente das Layout enthalten soll, wenn man einen Vertrag hinzufügen will.
@@ -68,7 +70,7 @@ public class VertragHinzufuegen implements SwingPresentation {
         addPanelsToFrame();
         setFrame();
     }
-    
+
     /**
     * @setStringt legt fest welche Schriftzüge die einzelnen Elemente tragen
     **/
@@ -170,7 +172,7 @@ public class VertragHinzufuegen implements SwingPresentation {
             }
         }
     }
-    
+
     /**
     * Verbindet die Daten mit den Parametern
     **/
@@ -237,20 +239,20 @@ public class VertragHinzufuegen implements SwingPresentation {
         else if (angemeldetePerson.getIBAN()!=null){
             System.out.println("Contract added.");
             BasicVertrag vertrag = new BasicVertrag(versicherungsArt.getSelectedItem().toString(),buchungsArt.getSelectedItem().toString(),betrag);
-            DatabaseService.create_contract_entry(vertrag,angemeldetePerson.getSozialversicherungsnummer());
+            DATABASE.create_contract_entry(vertrag,angemeldetePerson.getSozialversicherungsnummer());
             angemeldetePerson.addVertrag(vertrag);
             StartLayer.fenster.add(hinzugefuegt);
             StartLayer.fenster.validate();
         }
     }
-    
+
     /**
     * @IBANIf überträgt die Änderung der IBAN an die Datenbank
     **/
     public void IBANIf(){
         if(tfIBAN.getText().length()==22) {
             angemeldetePerson.setIBAN(tfIBAN.getText());
-            DatabaseService.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "IBAN", angemeldetePerson.getIBAN());
+            DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "IBAN", angemeldetePerson.getIBAN());
             neueIBAN.removeAll();
         } else{
             neueIBAN.add(falscheIBAN);

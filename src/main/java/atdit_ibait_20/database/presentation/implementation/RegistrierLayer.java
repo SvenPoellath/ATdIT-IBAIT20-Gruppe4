@@ -1,7 +1,7 @@
 package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
-import atdit_ibait_20.database.persistence.implementation.DatabaseService;
+import atdit_ibait_20.database.persistence.Database;
 import atdit_ibait_20.database.model.implementation.BasicGeburtsdatum;
 import atdit_ibait_20.database.model.implementation.BasicPerson;
 import atdit_ibait_20.database.presentation.SwingPresentation;
@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static atdit_ibait_20.database.App.DATABASE;
 
 /**
 * Die Klasse legt das Layout für die Registrierseite fest und regelt im Detail welche Eingaben für welches Feld zulässig sind
@@ -222,7 +224,7 @@ public class RegistrierLayer implements SwingPresentation {
                 try {
                     BasicGeburtsdatum neuesGeburtsDatum = new BasicGeburtsdatum((Integer) GeburtsdatumTag.getSelectedItem(), (Integer) GeburtsdatumMonat.getSelectedItem(), (Integer) GeburtsdatumJahr.getSelectedItem());
                     BasicPerson person = new BasicPerson(tfVersicherungsNummer.getText(), tfName.getText(), tfNachName.getText(), neuesGeburtsDatum, new String(tfRegistrierPasswort.getPassword()), cbAnrede.getSelectedItem().toString(), Integer.parseInt(tfPlz.getText()), tfOrt.getText(), tfHausnummer.getText(), cbFamilienstand.getSelectedItem().toString(), tfEmailadresse.getText(), Long.parseLong(tfTelefonnummer.getText()), tfStaatsangehoerigkeit.getText(), tfStrasse.getText());
-                    DatabaseService.create_person_entry(person);
+                    DATABASE.create_person_entry(person);
                     StartLayer.fenster.remove(registrierButtonPanel);
                     StartLayer.fenster.remove(datenPanel);
                     StartLayer.fenster.remove(geburtsDatumsPanel);

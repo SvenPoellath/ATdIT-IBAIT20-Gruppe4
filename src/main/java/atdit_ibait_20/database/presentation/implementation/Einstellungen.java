@@ -59,23 +59,15 @@ public class Einstellungen implements SwingPresentation {
     private static final JButton mailAendern = new JButton();
     private static final JButton telefonnummerAendern = new JButton();
     private static final JButton staatsangehoerigkeitAendern = new JButton();
-    static boolean istErsterAufruf = true;
     static Person angemeldetePerson;
     public Einstellungen(Person person){
         angemeldetePerson = person;
-        if(istErsterAufruf) {
             setStrings();
             setLayout();
             addListeners();
             addComponentsToPanels();
             addPanelsToFrame();
             setFrame();
-            istErsterAufruf = false;
-        }
-        else{
-            addPanelsToFrame();
-            setFrame();
-        }
     }
 /**
 * @setString ermöglicht es dem Nutzer seine Daten zu ändern.

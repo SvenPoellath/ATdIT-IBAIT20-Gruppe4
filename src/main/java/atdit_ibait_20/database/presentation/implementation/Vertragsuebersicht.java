@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+    /**
+    * Anlegen der Elemente für das Layout der Vertragsübersicht
+    **/
 public class Vertragsuebersicht implements SwingPresentation {
     private static final JPanel add = new JPanel();
     private static final JMenuBar menuBar = new JMenuBar();
@@ -30,6 +33,9 @@ public class Vertragsuebersicht implements SwingPresentation {
         setFrame();
     }
 
+    /**
+    * Genaue Einteilung wie vorhandene Verträge angezeigt werden sollen. 
+    **/
     public static void addVorhandeneVertraegetoGUI(Person person){
         if(person.getVertraege() != null) {
             for (int i = 0; i < person.getVertraege().size(); i++) {
@@ -56,6 +62,10 @@ public class Vertragsuebersicht implements SwingPresentation {
             }
         }
     }
+    
+    /**
+    * @setString Schriftzüge der Elemente des Layouts werden festgelegt
+    **/
     static void setStrings(){
         einstellungen.setText(App.resourceBundle.getString("settings"));
         home.setText(App.resourceBundle.getString("home"));
@@ -67,16 +77,22 @@ public class Vertragsuebersicht implements SwingPresentation {
         add.add(plusButton);
     }
 
+    /**
+    * @setFrame legt die Größe des Fensters, welches die Applikation anzeigt fest
+    **/
     @Override
     public void setFrame() {
         StartLayer.fenster.setSize(400,400);
     }
 
+    /**
+    * @setLayout Legt die Art des Layoutes fest, welches verwendet wird
+    **/
     @Override
     public void setLayout() {
         add.setLayout(new GridLayout(0,1));
     }
-
+    
     @Override
     public void addListeners() {
         einstellungen.addActionListener(new menuItemListener());
@@ -111,6 +127,10 @@ public class Vertragsuebersicht implements SwingPresentation {
     }
     class menuItemListener implements ActionListener{
 
+    /**
+    * @actionPerformed legt fest was passiert wenn der Nutzer den Vertrag hinzufügt und alle Eingaben korrekt waren.
+    * In diesem Fall wird er auf das Hauptmenü weitergeleitet
+    **/
         @Override
         public void actionPerformed(ActionEvent e) {
             StartLayer.fenster.remove(VertragHinzufuegen.neueIBAN);

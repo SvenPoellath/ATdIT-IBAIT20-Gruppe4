@@ -142,19 +142,19 @@ public class Einstellungen implements SwingPresentation {
 
     @Override
     public void addListeners() {
-        vornameAendern.addActionListener(new aendern());
-        nachnameAendern.addActionListener(new aendern());
-        geburtsdatumAendern.addActionListener(new aendern());
-        passwortAendern.addActionListener(new aendern());
-        anredeAendern.addActionListener(new aendern());
-        plzAendern.addActionListener(new aendern());
-        ortAendern.addActionListener(new aendern());
-        strasseAendern.addActionListener(new aendern());
-        hausnummerAendern.addActionListener(new aendern());
-        familienstandAendern.addActionListener(new aendern());
-        mailAendern.addActionListener(new aendern());
-        staatsangehoerigkeitAendern.addActionListener(new aendern());
-        telefonnummerAendern.addActionListener(new aendern());
+        vornameAendern.addActionListener(e->vornameAendernWurdeAusgewaelt());
+        nachnameAendern.addActionListener(e->nachnameAendernWurdeAusgewaelt());
+        geburtsdatumAendern.addActionListener(e->geburtsdatumAendernWurdeAusgewaelt());
+        passwortAendern.addActionListener(e->passwortAendernWurdeAusgewaelt());
+        anredeAendern.addActionListener(e->anredeAendernWurdeAusgewaelt());
+        plzAendern.addActionListener(e->plzAendernWurdeAusgewaelt());
+        ortAendern.addActionListener(e->ortAendernWurdeAusgewaelt());
+        strasseAendern.addActionListener(e->strasseAendernWurdeAusgewaelt());
+        hausnummerAendern.addActionListener(e->hausnummerAendernWurdeAusgewaelt());
+        familienstandAendern.addActionListener(e->familienstandAendernWurdeAusgewaelt());
+        mailAendern.addActionListener(e->mailAendernWurdeAusgewaelt());
+        staatsangehoerigkeitAendern.addActionListener(e->staatsangehoerigkeitAendernWurdeAusgewaelt());
+        telefonnummerAendern.addActionListener(e->telefonnummerAendernWurdeAusgewaelt());
     }
 
     @Override
@@ -211,66 +211,67 @@ public class Einstellungen implements SwingPresentation {
         StartLayer.fenster.add(geburtsdatum);
     }
 
-    
+    @Override
+    public void removePanelsFromFrame() {
+        StartLayer.fenster.remove(einstellungen);
+        StartLayer.fenster.remove(datenAendern);
+        StartLayer.fenster.remove(geburtsdatum);
+    }
+
+    void vornameAendernWurdeAusgewaelt(){
+        angemeldetePerson.setVorname(vornameNeu.getText());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "first_name", angemeldetePerson.getVorname());
+    }
+    void ortAendernWurdeAusgewaelt(){
+        angemeldetePerson.setOrt(ortNeu.getText());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "city", angemeldetePerson.getOrt());
+    }
+    void nachnameAendernWurdeAusgewaelt(){
+        angemeldetePerson.setNachname(nachnameNeu.getText());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "last_name", angemeldetePerson.getNachname());
+    }
+    void geburtsdatumAendernWurdeAusgewaelt(){
+        angemeldetePerson.setGeburtsdatum(new BasicGeburtsdatum((int) RegistrierLayer.GeburtsdatumTag.getSelectedItem(), (int) RegistrierLayer.GeburtsdatumMonat.getSelectedItem(), (int) RegistrierLayer.GeburtsdatumJahr.getSelectedItem()));
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "birth_date", angemeldetePerson.getGeburtsdatum());
+    }
+    void passwortAendernWurdeAusgewaelt(){
+        angemeldetePerson.setPasswort(passwortNeu.getText());
+        DATABASE.update_password_by_id(angemeldetePerson.getSozialversicherungsnummer(), angemeldetePerson.getPasswort());
+    }
+    void anredeAendernWurdeAusgewaelt(){
+        angemeldetePerson.setAnrede(RegistrierLayer.cbAnrede.getSelectedItem().toString());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "form_of_address", angemeldetePerson.getAnrede());
+    }
+    void plzAendernWurdeAusgewaelt(){
+        angemeldetePerson.setPLZ(Integer.parseInt(plzNeu.getText()));
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "zip_code", angemeldetePerson.getPLZ());
+    }
+    void strasseAendernWurdeAusgewaelt(){
+        angemeldetePerson.setStrasse(strasseNeu.getText());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "street", angemeldetePerson.getStrasse());
+    }
+    void hausnummerAendernWurdeAusgewaelt(){
+        angemeldetePerson.setHausnummer(hausnummerNeu.getText());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "house_number", angemeldetePerson.getHausnummer());
+    }
+    void familienstandAendernWurdeAusgewaelt(){
+        angemeldetePerson.setFamilienstand(RegistrierLayer.cbFamilienstand.getSelectedItem().toString());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "marital_status", angemeldetePerson.getFamilienstand());
+    }
+    void mailAendernWurdeAusgewaelt(){
+        angemeldetePerson.setMailAdresse(mailNeu.getText());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "email_address", angemeldetePerson.getMailAdresse());
+    }
+    void telefonnummerAendernWurdeAusgewaelt(){
+        angemeldetePerson.setTelefonnummer(Long.parseLong(telefonnummerNeu.getText()));
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "phone_number", angemeldetePerson.getTelefonnummer());
+    }
+    void staatsangehoerigkeitAendernWurdeAusgewaelt(){
+        angemeldetePerson.setStaatsangehoerigkeit(staatsangehoerigkeitNeu.getText());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "nationality", angemeldetePerson.getStaatsangehoerigkeit());
+    }
 /**
 * Wenn der Nutzer die Daten seiner Person ändert, ermöglicht diese Klasse es die Änderungen in der Datenbank zu speichern
 **/
-    class aendern implements ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource().equals(vornameAendern)) {
-                angemeldetePerson.setVorname(vornameNeu.getText());
-                DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "first_name", angemeldetePerson.getVorname());
-            }
-            if (e.getSource().equals(nachnameAendern)) {
-                angemeldetePerson.setNachname(nachnameNeu.getText());
-                DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "last_name", angemeldetePerson.getNachname());
-            }
-            if (e.getSource().equals(geburtsdatumAendern)) {
-                angemeldetePerson.setGeburtsdatum(new BasicGeburtsdatum((int) RegistrierLayer.GeburtsdatumTag.getSelectedItem(), (int) RegistrierLayer.GeburtsdatumMonat.getSelectedItem(), (int) RegistrierLayer.GeburtsdatumJahr.getSelectedItem()));
-                DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "birth_date", angemeldetePerson.getGeburtsdatum());
-            }
-            if (e.getSource().equals(passwortAendern)) {
-                angemeldetePerson.setPasswort(passwortNeu.getText());
-                DATABASE.update_password_by_id(angemeldetePerson.getSozialversicherungsnummer(), angemeldetePerson.getPasswort());
-            }
-            if (e.getSource().equals(anredeAendern)) {
-                angemeldetePerson.setAnrede(RegistrierLayer.cbAnrede.getSelectedItem().toString());
-                DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "form_of_address", angemeldetePerson.getAnrede());
-            }
-            if (e.getSource().equals(plzAendern)) {
-                angemeldetePerson.setPLZ(Integer.parseInt(plzNeu.getText()));
-                DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "zip_code", angemeldetePerson.getPLZ());
-            }
-            if (e.getSource().equals(ortAendern)) {
-                angemeldetePerson.setOrt(ortNeu.getText());
-                DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "city", angemeldetePerson.getOrt());
-            }
-            if (e.getSource().equals(strasseAendern)) {
-                angemeldetePerson.setStrasse(strasseNeu.getText());
-                DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "street", angemeldetePerson.getStrasse());
-            }
-            if (e.getSource().equals(hausnummerAendern)) {
-                angemeldetePerson.setHausnummer(hausnummerNeu.getText());
-                DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "house_number", angemeldetePerson.getHausnummer());
-            }
-            if (e.getSource().equals(familienstandAendern)) {
-                angemeldetePerson.setFamilienstand(RegistrierLayer.cbFamilienstand.getSelectedItem().toString());
-                DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "marital_status", angemeldetePerson.getFamilienstand());
-            }
-            if (e.getSource().equals(mailAendern)) {
-                angemeldetePerson.setMailAdresse(mailNeu.getText());
-                DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "email_address", angemeldetePerson.getMailAdresse());
-            }
-            if (e.getSource().equals(telefonnummerAendern)) {
-                angemeldetePerson.setTelefonnummer(Long.parseLong(telefonnummerNeu.getText()));
-                DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "phone_number", angemeldetePerson.getTelefonnummer());
-            }
-            if (e.getSource().equals(staatsangehoerigkeitAendern)) {
-                angemeldetePerson.setStaatsangehoerigkeit(staatsangehoerigkeitNeu.getText());
-                DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "nationality", angemeldetePerson.getStaatsangehoerigkeit());
-            }
-        }
-    }
 }

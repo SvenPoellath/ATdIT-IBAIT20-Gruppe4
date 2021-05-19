@@ -91,6 +91,14 @@ public class AnmeldeLayer implements SwingPresentation {
         StartLayer.fenster.add(anmeldungsButtonPanel);
     }
 
+    @Override
+    public void removePanelsFromFrame() {
+        StartLayer.fenster.remove(zurueckPanel);
+        StartLayer.fenster.remove(anmeldungsPanel);
+        StartLayer.fenster.remove(anmeldungsButtonPanel);
+        StartLayer.fenster.remove(fehlerPanel);
+    }
+
 
     /**
      * Die Eingaben des Nutzers werden eingelesen und mit den in der Datenbank hinterlegten Daten abgeglichen. Wenn die Daten übereinstimmen bekommen der Nutzer die Ausgabe
@@ -100,25 +108,20 @@ public class AnmeldeLayer implements SwingPresentation {
 
     public void anmelden() {
         Person person;
-        StartLayer.fenster.remove(anmeldungsPanel);
-        StartLayer.fenster.remove(anmeldungsButtonPanel);
-        StartLayer.fenster.remove(zurueckPanel);
-        StartLayer.fenster.remove(fehlerPanel);
+        removePanelsFromFrame();
         if (DATABASE.check_Login(tfAnmeldeName.getText(), new String(tfAnmeldePasswort.getPassword()))) {
             person = DATABASE.get_person_by_id(tfAnmeldeName.getText());
             System.out.println("Anmeldung erfolgreich.");
             new Vertragsuebersicht(person);
         } else {
-            StartLayer.fenster.add(anmeldungsPanel);
-            StartLayer.fenster.add(anmeldungsButtonPanel);
-            StartLayer.fenster.add(zurueckPanel);
-            StartLayer.fenster.add(fehlerPanel);
+            addPanelsToFrame();
             System.out.println("Wrong id/password entered.");
             StartLayer.fenster.validate();
         }
     }
 
     public void zurueck(){
+        removePanelsFromFrame();
         StartLayer.fenster.remove(StartLayer.sprache);
         new StartLayer();
     }

@@ -125,8 +125,8 @@ public class RegistrierLayer implements SwingPresentation {
 
     @Override
     public void addListeners() {
-        zurueckButton.addActionListener(new ZurueckButtonListener());
-        registrierenButton.addActionListener(new RegistrierButtonListener());
+        zurueckButton.addActionListener(e->zurueckButtonWurdeGedrueckt());
+        registrierenButton.addActionListener(e->registerierButtonWurdeGedrueckt());
     }
 
     @Override
@@ -202,44 +202,36 @@ public class RegistrierLayer implements SwingPresentation {
     /**
 * Die Klasse ermöglicht es dem Nutzer eine Seite zurück zu gehen in der Registrierung
 **/
-    class ZurueckButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            StartLayer.fenster.remove(registrierButtonPanel);
-            StartLayer.fenster.remove(datenPanel);
-            StartLayer.fenster.remove(geburtsDatumsPanel);
-            StartLayer.fenster.remove(zurueckPanel);
-            StartLayer.fenster.remove(falscheAngabePanel);
-            new StartLayer();
-        }
+    void zurueckButtonWurdeGedrueckt(){
+        removePanelsFromFrame();
+        new StartLayer();
     }
     /**
 * Die Klasse wird vom Nutzer gedrückt wenn er alle seine Daten eingegeben hat. Das bisherige Layout verschwindet. 
 * Wenn der Nutzer ungültige Eingaben getätigt hat, weisst das Programm ihn an dieser Stelle darauf hin.
 **/
-    class RegistrierButtonListener implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(checkInputs()) {
-                try {
-                    BasicGeburtsdatum neuesGeburtsDatum = new BasicGeburtsdatum((Integer) GeburtsdatumTag.getSelectedItem(), (Integer) GeburtsdatumMonat.getSelectedItem(), (Integer) GeburtsdatumJahr.getSelectedItem());
-                    BasicPerson person = new BasicPerson(tfVersicherungsNummer.getText(), tfName.getText(), tfNachName.getText(), neuesGeburtsDatum, new String(tfRegistrierPasswort.getPassword()), cbAnrede.getSelectedItem().toString(), Integer.parseInt(tfPlz.getText()), tfOrt.getText(), tfHausnummer.getText(), cbFamilienstand.getSelectedItem().toString(), tfEmailadresse.getText(), Long.parseLong(tfTelefonnummer.getText()), tfStaatsangehoerigkeit.getText(), tfStrasse.getText());
-                    DATABASE.create_person_entry(person);
-                    StartLayer.fenster.remove(registrierButtonPanel);
-                    StartLayer.fenster.remove(datenPanel);
-                    StartLayer.fenster.remove(geburtsDatumsPanel);
-                    StartLayer.fenster.remove(zurueckPanel);
-                    StartLayer.fenster.remove(falscheAngabePanel);
-                    new Vertragsuebersicht(person);
-                } catch (Exception exp) {
-                    falscheAngabe.setText(App.resourceBundle.getString("check.your.inputs"));
-                    StartLayer.fenster.add(falscheAngabePanel);
-                    System.out.println(exp.getMessage());
-                    StartLayer.fenster.validate();
-                }
+    void registerierButtonWurdeGedrueckt(){
+        if(checkInputs()) {
+            try {
+                BasicGeburtsdatum neuesGeburtsDatum = new BasicGeburtsdatum((Integer) GeburtsdatumTag.getSelectedItem(), (Integer) GeburtsdatumMonat.getSelectedItem(), (Integer) GeburtsdatumJahr.getSelectedItem());
+                BasicPerson person = new BasicPerson(tfVersicherungsNummer.getText(), tfName.getText(), tfNachName.getText(), neuesGeburtsDatum, new String(tfRegistrierPasswort.getPassword()), cbAnrede.getSelectedItem().toString(), Integer.parseInt(tfPlz.getText()), tfOrt.getText(), tfHausnummer.getText(), cbFamilienstand.getSelectedItem().toString(), tfEmailadresse.getText(), Long.parseLong(tfTelefonnummer.getText()), tfStaatsangehoerigkeit.getText(), tfStrasse.getText());
+                DATABASE.create_person_entry(person);
+                removePanelsFromFrame();
+                new Vertragsuebersicht(person);
+            } catch (Exception exp) {
+                falscheAngabe.setText(App.resourceBundle.getString("check.your.inputs"));
+                StartLayer.fenster.add(falscheAngabePanel);
+                System.out.println(exp.getMessage());
+                StartLayer.fenster.validate();
             }
         }
-
     }
-
+    public void removePanelsFromFrame(){
+        StartLayer.fenster.remove(registrierButtonPanel);
+        StartLayer.fenster.remove(datenPanel);
+        StartLayer.fenster.remove(geburtsDatumsPanel);
+        StartLayer.fenster.remove(zurueckPanel);
+        StartLayer.fenster.remove(falscheAngabePanel);
+    }
 }
+

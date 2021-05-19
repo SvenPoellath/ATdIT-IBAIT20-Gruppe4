@@ -7,4 +7,5 @@ public interface SwingPresentation {
     void addListeners();
     void addComponentsToPanels();
     void addPanelsToFrame();
+    void removePanelsFromFrame();
 }

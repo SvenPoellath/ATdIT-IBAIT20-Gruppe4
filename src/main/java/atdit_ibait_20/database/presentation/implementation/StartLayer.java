@@ -62,9 +62,9 @@ public class StartLayer implements SwingPresentation {
     * @addListeners Fügt die einzelnen Buttons dem Layout hinzu
     **/
     public void addListeners(){
-        registrierenFensterButton.addActionListener(new AnfangsButtonListener());
-        anmeldenFensterButton.addActionListener(new AnfangsButtonListener());
-        spracheWaelen.addItemListener(new SpracheWaehlen());
+        registrierenFensterButton.addActionListener(e->registrierenFensterButtonWurdeGedrueckt());
+        anmeldenFensterButton.addActionListener(e->anmeldenFensterButtonWurdeGedrueckt());
+        spracheWaelen.addItemListener(e->spracheWurdeGeaendert(e));
     }
     
     /**
@@ -86,6 +86,13 @@ public class StartLayer implements SwingPresentation {
         fenster.add(willkommenPanel);
         fenster.add(eingangsButtonsPanel);
     }
+
+    @Override
+    public void removePanelsFromFrame() {
+        fenster.remove(willkommenPanel);
+        fenster.remove(eingangsButtonsPanel);
+    }
+
     /**
     * @setString Legt die Schriftzüge der einzelnen Elemente des Layouts fest
     **/
@@ -100,42 +107,42 @@ public class StartLayer implements SwingPresentation {
     /**
     * Die Klasse liefert die Funktionalität, die es dem Nutzer ermöglicht die Applikation zu schließen
     **/
-    class AnfangsButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            fenster.remove(willkommenPanel);
-            fenster.remove(eingangsButtonsPanel);
-            if(e.getSource().equals(registrierenFensterButton)) {
-                new RegistrierLayer();
-            }
-            else if(e.getSource().equals(anmeldenFensterButton)) {
-                new AnmeldeLayer();
-            }
-        }
+    void registrierenFensterButtonWurdeGedrueckt(){
+        removePanelsFromFrame();
+        new RegistrierLayer();
     }
-
-
+    void anmeldenFensterButtonWurdeGedrueckt(){
+        new AnmeldeLayer();
+        removePanelsFromFrame();
+    }
     /**
     * Die Klasse ermöglicht es die Sprache zu ändern
     **/
-    static class SpracheWaehlen implements ItemListener{
-
-        @Override
-        public void itemStateChanged(ItemEvent e) {
-            JComboBox<String> cb = (JComboBox<String>) e.getSource();
-            if(cb.getSelectedIndex()==1){
-                Locale.setDefault(Locale.GERMAN);
-                App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());
-            }
-            else if(cb.getSelectedIndex()==2){
-                Locale.setDefault(Locale.ENGLISH);
-                App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());
-            }
-            setStrings();
-            RegistrierLayer.setStrings();
-            AnmeldeLayer.setStrings();
-            Einstellungen.setStrings();
-            VertragHinzufuegen.setStrings();
-            Vertragsuebersicht.setStrings();
+    void spracheWurdeGeaendert(ItemEvent e){
+        JComboBox<String> cb = (JComboBox<String>) e.getSource();
+        if(cb.getSelectedItem().equals(App.resourceBundle.getString("german"))){
+           setSpracheToGerman();
         }
+        else if(cb.getSelectedItem().equals(App.resourceBundle.getString("english"))){
+            setSpracheToEnglish();
+        }
+        resetAllStrings();
+    }
+    void setSpracheToGerman(){
+        Locale.setDefault(Locale.GERMAN);
+        App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());
+    }
+    void setSpracheToEnglish(){
+        Locale.setDefault(Locale.ENGLISH);
+        App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());
+    }
+    void resetAllStrings(){
+        setStrings();
+        RegistrierLayer.setStrings();
+        AnmeldeLayer.setStrings();
+        Einstellungen.setStrings();
+        VertragHinzufuegen.setStrings();
+        Vertragsuebersicht.setStrings();
     }
 }
+

@@ -97,10 +97,10 @@ public class Vertragsuebersicht implements SwingPresentation {
     
     @Override
     public void addListeners() {
-        einstellungen.addActionListener(new menuItemListener());
-        logout.addActionListener(new menuItemListener());
-        home.addActionListener(new menuItemListener());
-        plusButton.addActionListener(new VertragHinzufuegenButton());
+        einstellungen.addActionListener(e->einstellungenWurdenAusgewaelt());
+        logout.addActionListener(e->logoutWurdeAusgewaelt());
+        home.addActionListener(e->vertragsuebersichtWurdeAusgewaelt());
+        plusButton.addActionListener(e->vertraghinzufuegenWurdeGedrueckt());
     }
 
     @Override
@@ -117,48 +117,42 @@ public class Vertragsuebersicht implements SwingPresentation {
         StartLayer.fenster.add(add);
     }
 
-    class VertragHinzufuegenButton implements ActionListener{
-
         @Override
-        public void actionPerformed(ActionEvent e) {
-
+        public void removePanelsFromFrame() {
             StartLayer.fenster.remove(add);
-            new VertragHinzufuegen(angemeldetePerson);
-            StartLayer.fenster.validate();
         }
+
+        public void vertraghinzufuegenWurdeGedrueckt(){
+        StartLayer.fenster.remove(add);
+        new VertragHinzufuegen(angemeldetePerson);
+        StartLayer.fenster.validate();
     }
-    class menuItemListener implements ActionListener{
-
-    /**
-    * @actionPerformed legt fest was passiert wenn der Nutzer den Vertrag hinzufügt und alle Eingaben korrekt waren.
-    * In diesem Fall wird er auf das Hauptmenü weitergeleitet
-    **/
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            StartLayer.fenster.remove(VertragHinzufuegen.neueIBAN);
-            StartLayer.fenster.remove(VertragHinzufuegen.hinzugefuegt);
-            StartLayer.fenster.remove(add);
-            StartLayer.fenster.remove(Einstellungen.einstellungen);
-            StartLayer.fenster.remove(Einstellungen.datenAendern);
-            StartLayer.fenster.remove(Einstellungen.geburtsdatum);
-            StartLayer.fenster.remove(VertragHinzufuegen.vertragsDaten);
-            StartLayer.fenster.remove(VertragHinzufuegen.hinzufuegen);
-            StartLayer.fenster.remove(VertragHinzufuegen.preise);
-            if(e.getSource().equals(einstellungen)) {
-                new Einstellungen(angemeldetePerson);
-                StartLayer.fenster.validate();
-            }
-            else if(e.getSource().equals(home)) {
-                new Vertragsuebersicht(angemeldetePerson);
-                StartLayer.fenster.validate();
-
-            }
-            else if(e.getSource().equals(logout)) {
-                StartLayer.fenster.setJMenuBar(null);
-                angemeldetePerson = null;
-                new StartLayer();
-            }
-
-        }
+    public void removeAllPanelsFromFrame(){
+        removePanelsFromFrame();
+        StartLayer.fenster.remove(VertragHinzufuegen.neueIBAN);
+        StartLayer.fenster.remove(VertragHinzufuegen.hinzugefuegt);
+        StartLayer.fenster.remove(Einstellungen.einstellungen);
+        StartLayer.fenster.remove(Einstellungen.datenAendern);
+        StartLayer.fenster.remove(Einstellungen.geburtsdatum);
+        StartLayer.fenster.remove(VertragHinzufuegen.vertragsDaten);
+        StartLayer.fenster.remove(VertragHinzufuegen.hinzufuegen);
+        StartLayer.fenster.remove(VertragHinzufuegen.preise);
+    }
+    public void einstellungenWurdenAusgewaelt(){
+        removeAllPanelsFromFrame();
+        new Einstellungen(angemeldetePerson);
+        StartLayer.fenster.validate();
+    }
+    public void vertragsuebersichtWurdeAusgewaelt(){
+        removeAllPanelsFromFrame();
+        new Vertragsuebersicht(angemeldetePerson);
+        StartLayer.fenster.validate();
+    }
+    public void logoutWurdeAusgewaelt(){
+        removeAllPanelsFromFrame();
+        StartLayer.fenster.setJMenuBar(null);
+        angemeldetePerson = null;
+        new StartLayer();
+        StartLayer.fenster.validate();
     }
 }

@@ -2,7 +2,6 @@ package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
 import atdit_ibait_20.database.model.Person;
-import atdit_ibait_20.database.persistence.Database;
 import atdit_ibait_20.database.model.implementation.BasicVertrag;
 import atdit_ibait_20.database.presentation.SwingPresentation;
 
@@ -120,11 +119,11 @@ public class VertragHinzufuegen implements SwingPresentation {
     **/
     @Override
     public void addListeners() {
-        versicherungsArt.addItemListener(new ComboBoxListener());
-        buchungsArt.addItemListener(new ComboBoxListener());
-        hinzufuegenButton.addActionListener(new hinzufuegenButtonListener());
-        preis.addActionListener(new hinzufuegenButtonListener());
-        addIBAN.addActionListener(new hinzufuegenButtonListener());
+        buchungsArt.addItemListener(e->this.buchungsArtWurdeGeaendert(e));
+        versicherungsArt.addItemListener(e->this.versicherungsArtWurdeGeaendert());
+        hinzufuegenButton.addActionListener(e->this.hinzufuegeButtonWurdeGedrueckt());
+        preis.addActionListener(e->this.preisButtonWurdeGedrueckt());
+        addIBAN.addActionListener(e->this.IBANButtonWurdeGedrueckt());
     }
 
     @Override
@@ -150,58 +149,59 @@ public class VertragHinzufuegen implements SwingPresentation {
         StartLayer.fenster.add(hinzufuegen);
     }
 
-    /**
+
+        public void removePanelsFromFrame() {
+            StartLayer.fenster.remove(vertragsDaten);
+            StartLayer.fenster.remove(preise);
+            StartLayer.fenster.remove(hinzufuegen);
+        }
+
+        /**
     * Legt die Funktionsweise fest was passiert wenn der Nutzer den Hinzufügen Button drückt
     **/
-    class hinzufuegenButtonListener implements ActionListener{
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(e.getSource().equals(preis)){
-                preise.removeAll();
-                setPreis();
-                hinzufuegen.add(hinzufuegenButton);
-                StartLayer.fenster.validate();
-            }
-            if(e.getSource().equals(hinzufuegenButton)) {
-                PersonenIf();
-            }
-            if(e.getSource().equals(addIBAN)){
-                IBANIf();
-                StartLayer.fenster.validate();
-            }
+
+    public void preisButtonWurdeGedrueckt(){
+        preise.removeAll();
+        setPreis();
+        hinzufuegen.add(hinzufuegenButton);
+        StartLayer.fenster.validate();
+    }
+    public void hinzufuegeButtonWurdeGedrueckt(){
+        pruefenObIBANVorhanden();
+    }
+    public void IBANButtonWurdeGedrueckt(){
+        eingegebeneIBANPruefen();
+        StartLayer.fenster.validate();
+    }
+    public void versicherungsArtWurdeGeaendert(){
+        displayBuchungsartOptionen();
+        StartLayer.fenster.validate();
+    }
+    public void buchungsArtWurdeGeaendert(ItemEvent e){
+        hideAngabenZurReise();
+        StartLayer.fenster.validate();
+        if(e.getItem().equals(App.resourceBundle.getString("per.trip"))) {
+            displayAngabenZurReise();
+            StartLayer.fenster.setSize(600,400);
         }
     }
-
-    /**
-    * Verbindet die Daten mit den Parametern
-    **/
-    class ComboBoxListener implements ItemListener{
-
-        @Override
-        public void itemStateChanged(ItemEvent e) {
-            if(e.getSource().equals(versicherungsArt)) {
-                vertragsDaten.add(buchungsArtText);
-                vertragsDaten.add(buchungsArt);
-                StartLayer.fenster.validate();
-            }
-            else if(e.getSource().equals(buchungsArt)){
-                vertragsDaten.remove(tageText);
-                vertragsDaten.remove(anzahlDerTage);
-                vertragsDaten.remove(landText);
-                vertragsDaten.remove(land);
-                if(e.getItem().equals(App.resourceBundle.getString("per.trip"))) {
-                    vertragsDaten.add(tageText);
-                    vertragsDaten.add(anzahlDerTage);
-                    vertragsDaten.add(landText);
-                    vertragsDaten.add(land);
-                    StartLayer.fenster.setSize(600,400);
-                }
-                StartLayer.fenster.validate();
-            }
-        }
+    public void displayBuchungsartOptionen(){
+        vertragsDaten.add(buchungsArtText);
+        vertragsDaten.add(buchungsArt);
     }
-
+    public void displayAngabenZurReise(){
+        vertragsDaten.add(tageText);
+        vertragsDaten.add(anzahlDerTage);
+        vertragsDaten.add(landText);
+        vertragsDaten.add(land);
+    }
+    public void hideAngabenZurReise(){
+        vertragsDaten.remove(tageText);
+        vertragsDaten.remove(anzahlDerTage);
+        vertragsDaten.remove(landText);
+        vertragsDaten.remove(land);
+    }
     public void setPreis(){
         if(versicherungsArt.getSelectedItem().equals(App.resourceBundle.getString("luggage.insurance"))){
             setPreisForLuggageInsurance();
@@ -229,27 +229,33 @@ public class VertragHinzufuegen implements SwingPresentation {
     /**
     * @PersonenIf fügt bei der Person die IBAN zu bzw. ändert sie
     **/
-    public void PersonenIf(){
+    public void pruefenObIBANVorhanden(){
         if(angemeldetePerson.getIBAN()==null){
-            StartLayer.fenster.remove(hinzufuegen);
-            StartLayer.fenster.add(neueIBAN);
-            StartLayer.fenster.add(hinzufuegen);
-            StartLayer.fenster.validate();
+            displayIBANHinzufuegePanel();
         }
         else if (angemeldetePerson.getIBAN()!=null){
-            System.out.println("Contract added.");
-            BasicVertrag vertrag = new BasicVertrag(versicherungsArt.getSelectedItem().toString(),buchungsArt.getSelectedItem().toString(),betrag);
-            DATABASE.create_contract_entry(vertrag,angemeldetePerson.getSozialversicherungsnummer());
-            angemeldetePerson.addVertrag(vertrag);
-            StartLayer.fenster.add(hinzugefuegt);
-            StartLayer.fenster.validate();
+            neueIBANHinzufuegen();
         }
+    }
+    public void displayIBANHinzufuegePanel(){
+        StartLayer.fenster.remove(hinzufuegen);
+        StartLayer.fenster.add(neueIBAN);
+        StartLayer.fenster.add(hinzufuegen);
+        StartLayer.fenster.validate();
+    }
+    public void neueIBANHinzufuegen(){
+        System.out.println("Contract added.");
+        BasicVertrag vertrag = new BasicVertrag(versicherungsArt.getSelectedItem().toString(),buchungsArt.getSelectedItem().toString(),betrag);
+        DATABASE.create_contract_entry(vertrag,angemeldetePerson.getSozialversicherungsnummer());
+        angemeldetePerson.addVertrag(vertrag);
+        StartLayer.fenster.add(hinzugefuegt);
+        StartLayer.fenster.validate();
     }
 
     /**
     * @IBANIf überträgt die Änderung der IBAN an die Datenbank
     **/
-    public void IBANIf(){
+    public void eingegebeneIBANPruefen(){
         if(tfIBAN.getText().length()==22) {
             angemeldetePerson.setIBAN(tfIBAN.getText());
             DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "IBAN", angemeldetePerson.getIBAN());

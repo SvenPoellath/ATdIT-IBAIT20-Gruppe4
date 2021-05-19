@@ -14,8 +14,8 @@ import java.awt.event.ActionListener;
 import static atdit_ibait_20.database.App.DATABASE;
 
 /**
-* Die Klasse legt fest welche Komponenten die Anmeldeseite für den Nutzer hat und wie diese am Ende aussieht.
-**/
+ * Die Klasse legt fest welche Komponenten die Anmeldeseite für den Nutzer hat und wie diese am Ende aussieht.
+ **/
 public class AnmeldeLayer implements SwingPresentation {
 
     private final JPanel zurueckPanel = new JPanel();
@@ -32,9 +32,9 @@ public class AnmeldeLayer implements SwingPresentation {
 
     private static final JButton zurueckButton = new JButton("<--");
     private static final JButton anmeldeButton = new JButton();
-/**
-* Das Verhalten der einzelnen Komponenten des Layouts für verschiedene Eingaben des Nutzers wird festgelegt
-**/
+    /**
+     * Das Verhalten der einzelnen Komponenten des Layouts für verschiedene Eingaben des Nutzers wird festgelegt
+     **/
     public AnmeldeLayer(){
         setStrings();
         setLayout();
@@ -67,8 +67,8 @@ public class AnmeldeLayer implements SwingPresentation {
 
     @Override
     public void addListeners() {
-        anmeldeButton.addActionListener(new ButtonListener());
-        zurueckButton.addActionListener(new ButtonListener());
+        anmeldeButton.addActionListener(e->this.anmelden());
+        zurueckButton.addActionListener(e->this.zurueck());
     }
 
     @Override
@@ -90,35 +90,36 @@ public class AnmeldeLayer implements SwingPresentation {
         StartLayer.fenster.add(anmeldungsPanel);
         StartLayer.fenster.add(anmeldungsButtonPanel);
     }
-/**
-* Die Eingaben des Nutzers werden eingelesen und mit den in der Datenbank hinterlegten Daten abgeglichen. Wenn die Daten übereinstimmen bekommen der Nutzer die Ausgabe
-* "Anmeldung erfolgreich". Wenn die Daten nicht übereinstimmen bekommt der Nutzer die Ausgabe "Wrong id/password entered" und hat die Möglichkeit wieder auf die 
-* Anmeldungsseite zurück zu gehen.
-**/
-    class ButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            Person person;
-            StartLayer.fenster.remove(anmeldungsPanel);
-            StartLayer.fenster.remove(anmeldungsButtonPanel);
-            StartLayer.fenster.remove(zurueckPanel);
-            StartLayer.fenster.remove(fehlerPanel);
-            if (e.getSource().equals(zurueckButton)) {
-                StartLayer.fenster.remove(StartLayer.sprache);
-                new StartLayer();
-            } else if (e.getSource().equals(anmeldeButton)) {
-                if (DATABASE.check_Login(tfAnmeldeName.getText(), new String(tfAnmeldePasswort.getPassword()))) {
-                    person = DATABASE.get_person_by_id(tfAnmeldeName.getText());
-                    System.out.println("Anmeldung erfolgreich.");
-                    new Vertragsuebersicht(person);
-                } else {
-                    StartLayer.fenster.add(anmeldungsPanel);
-                    StartLayer.fenster.add(anmeldungsButtonPanel);
-                    StartLayer.fenster.add(zurueckPanel);
-                    StartLayer.fenster.add(fehlerPanel);
-                    System.out.println("Wrong id/password entered.");
-                    StartLayer.fenster.validate();
-                }
-            }
+
+
+    /**
+     * Die Eingaben des Nutzers werden eingelesen und mit den in der Datenbank hinterlegten Daten abgeglichen. Wenn die Daten übereinstimmen bekommen der Nutzer die Ausgabe
+     * "Anmeldung erfolgreich". Wenn die Daten nicht übereinstimmen bekommt der Nutzer die Ausgabe "Wrong id/password entered" und hat die Möglichkeit wieder auf die
+     * Anmeldungsseite zurück zu gehen.
+     **/
+
+    public void anmelden() {
+        Person person;
+        StartLayer.fenster.remove(anmeldungsPanel);
+        StartLayer.fenster.remove(anmeldungsButtonPanel);
+        StartLayer.fenster.remove(zurueckPanel);
+        StartLayer.fenster.remove(fehlerPanel);
+        if (DATABASE.check_Login(tfAnmeldeName.getText(), new String(tfAnmeldePasswort.getPassword()))) {
+            person = DATABASE.get_person_by_id(tfAnmeldeName.getText());
+            System.out.println("Anmeldung erfolgreich.");
+            new Vertragsuebersicht(person);
+        } else {
+            StartLayer.fenster.add(anmeldungsPanel);
+            StartLayer.fenster.add(anmeldungsButtonPanel);
+            StartLayer.fenster.add(zurueckPanel);
+            StartLayer.fenster.add(fehlerPanel);
+            System.out.println("Wrong id/password entered.");
+            StartLayer.fenster.validate();
         }
+    }
+
+    public void zurueck(){
+        StartLayer.fenster.remove(StartLayer.sprache);
+        new StartLayer();
     }
 }

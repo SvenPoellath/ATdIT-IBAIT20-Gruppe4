@@ -1,20 +1,17 @@
 package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
-import atdit_ibait_20.database.presentation.SwingPresentation;
+import atdit_ibait_20.database.presentation.Layer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 /**
 * Die Klasse legt das Startfenster fest was erscheint, wenn der Nutzer die Applikation startet
 **/
-public class StartLayer implements SwingPresentation {
+public class StartLayer implements Layer {
 
 
     static final JFrame fenster = new JFrame();
@@ -25,9 +22,7 @@ public class StartLayer implements SwingPresentation {
 
     private static String[] sprachen;
     private static JComboBox<String> spracheWaelen;
-    private static final JLabel willkommenSchrift = new JLabel();
-    private static final JButton registrierenFensterButton = new JButton();
-    private static final JButton anmeldenFensterButton = new JButton();
+
 
     public StartLayer(){
         setStrings();
@@ -59,23 +54,24 @@ public class StartLayer implements SwingPresentation {
         eingangsButtonsPanel.setLayout(new GridLayout(0,1));
     }
     /**
-    * @addListeners Fügt die einzelnen Buttons dem Layout hinzu
-    **/
+     * @addListeners Fügt die einzelnen Buttons dem Layout hinzu
+     *
+     * */
     public void addListeners(){
-        registrierenFensterButton.addActionListener(e->registrierenFensterButtonWurdeGedrueckt());
-        anmeldenFensterButton.addActionListener(e->anmeldenFensterButtonWurdeGedrueckt());
+        button1.addActionListener(e-> registrierenFensterButtonWurdeGedrueckt());
+        button2.addActionListener(e-> anmeldenFensterButtonWurdeGedrueckt());
         spracheWaelen.addItemListener(e->spracheWurdeGeaendert(e));
     }
-    
+
     /**
     * @addComponentsToPanels verknüpft die Buttons mit den Funktionen die passieren sollen, wenn sie gedrückt werden
     **/
     public void addComponentsToPanels(){
         sprache.removeAll();
         sprache.add(spracheWaelen);
-        willkommenPanel.add(willkommenSchrift);
-        eingangsButtonsPanel.add(registrierenFensterButton);
-        eingangsButtonsPanel.add(anmeldenFensterButton);
+        willkommenPanel.add(label1);
+        eingangsButtonsPanel.add(button1);
+        eingangsButtonsPanel.add(button2);
     }
     
     /**
@@ -87,7 +83,7 @@ public class StartLayer implements SwingPresentation {
         fenster.add(eingangsButtonsPanel);
     }
 
-    @Override
+
     public void removePanelsFromFrame() {
         fenster.remove(willkommenPanel);
         fenster.remove(eingangsButtonsPanel);
@@ -97,10 +93,10 @@ public class StartLayer implements SwingPresentation {
     * @setString Legt die Schriftzüge der einzelnen Elemente des Layouts fest
     **/
     private static void setStrings(){
+        Layer.setLabel1(App.resourceBundle.getString("welcome.to.our.app"));
         fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
-        anmeldenFensterButton.setText(App.resourceBundle.getString("sign.in"));
-        willkommenSchrift.setText(App.resourceBundle.getString("welcome.to.our.app"));
-        registrierenFensterButton.setText(App.resourceBundle.getString("register"));
+        Layer.setButton2(App.resourceBundle.getString("sign.in"));
+        Layer.setButton1(App.resourceBundle.getString("register"));
         sprachen = new String[]{App.resourceBundle.getString("choose.your.language"), App.resourceBundle.getString("german"), App.resourceBundle.getString("english")};
         spracheWaelen = new JComboBox<>(sprachen);
     }

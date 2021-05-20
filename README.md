@@ -118,6 +118,8 @@ Wir legen höchsten Wert auf die Sicherheit Ihrer Daten. Deswegen halten wir uns
 
  ## Probleme
 
+Momentan sind keine Probleme bekannt.
+
 <a name="lösungen"/> 
 
  ## Lösungen

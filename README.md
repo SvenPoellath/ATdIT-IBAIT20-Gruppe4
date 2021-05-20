@@ -11,7 +11,7 @@
 * **[Registrieren](#registrieren)**  
 
 ### [Sonstiges](#sonstiges)  
-* **[prototyp](#prototyp)**
+* **[Prototyp](#prototyp)**
 * **[Aufruf der Daten](#aufruf-der-daten)**    
 * **[Datenschutz](#datenschutz)**    
  

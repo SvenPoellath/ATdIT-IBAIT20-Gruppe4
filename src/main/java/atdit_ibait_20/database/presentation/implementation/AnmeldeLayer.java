@@ -112,6 +112,7 @@ public class AnmeldeLayer implements SwingPresentation {
             new Vertragsuebersicht(person);
         } else {
             addPanelsToFrame();
+            StartLayer.fenster.add(fehlerPanel);
             System.out.println("Wrong id/password entered.");
             StartLayer.fenster.validate();
         }

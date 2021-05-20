@@ -1,7 +1,7 @@
 package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
-import atdit_ibait_20.database.presentation.Layer;
+import atdit_ibait_20.database.presentation.SwingPresentation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,15 +11,17 @@ import java.util.ResourceBundle;
 /**
 * Die Klasse legt das Startfenster fest was erscheint, wenn der Nutzer die Applikation startet
 **/
-public class StartLayer implements Layer {
+public class StartLayer implements SwingPresentation {
 
 
     static final JFrame fenster = new JFrame();
 
     private static final JPanel willkommenPanel = new JPanel();
     private static final JPanel eingangsButtonsPanel = new JPanel();
+    private static final JLabel willkommenLabel = new JLabel();
     static final JPanel sprache = new JPanel();
-
+    private static final JButton anmeldeButton = new JButton();
+    private static final JButton registrierButton = new JButton();
     private static String[] sprachen;
     private static JComboBox<String> spracheWaelen;
 
@@ -58,8 +60,8 @@ public class StartLayer implements Layer {
      *
      * */
     public void addListeners(){
-        button1.addActionListener(e-> registrierenFensterButtonWurdeGedrueckt());
-        button2.addActionListener(e-> anmeldenFensterButtonWurdeGedrueckt());
+        registrierButton.addActionListener(e-> registrierenFensterButtonWurdeGedrueckt());
+        anmeldeButton.addActionListener(e-> anmeldenFensterButtonWurdeGedrueckt());
         spracheWaelen.addItemListener(e->spracheWurdeGeaendert(e));
     }
 
@@ -69,9 +71,9 @@ public class StartLayer implements Layer {
     public void addComponentsToPanels(){
         sprache.removeAll();
         sprache.add(spracheWaelen);
-        willkommenPanel.add(label1);
-        eingangsButtonsPanel.add(button1);
-        eingangsButtonsPanel.add(button2);
+        willkommenPanel.add(willkommenLabel);
+        eingangsButtonsPanel.add(registrierButton);
+        eingangsButtonsPanel.add(anmeldeButton);
     }
     
     /**
@@ -93,10 +95,10 @@ public class StartLayer implements Layer {
     * @setString Legt die Schriftzüge der einzelnen Elemente des Layouts fest
     **/
     private static void setStrings(){
-        Layer.setLabel1(App.resourceBundle.getString("welcome.to.our.app"));
+        willkommenLabel.setText(App.resourceBundle.getString("welcome.to.our.app"));
         fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
-        Layer.setButton2(App.resourceBundle.getString("sign.in"));
-        Layer.setButton1(App.resourceBundle.getString("register"));
+        anmeldeButton.setText(App.resourceBundle.getString("sign.in"));
+        registrierButton.setText(App.resourceBundle.getString("register"));
         sprachen = new String[]{App.resourceBundle.getString("choose.your.language"), App.resourceBundle.getString("german"), App.resourceBundle.getString("english")};
         spracheWaelen = new JComboBox<>(sprachen);
     }

@@ -4,7 +4,6 @@ import atdit_ibait_20.database.App;
 import atdit_ibait_20.database.model.Person;
 import atdit_ibait_20.database.persistence.Database;
 import atdit_ibait_20.database.model.implementation.BasicPerson;
-import atdit_ibait_20.database.presentation.Layer;
 import atdit_ibait_20.database.presentation.SwingPresentation;
 
 import javax.swing.*;
@@ -17,13 +16,17 @@ import static atdit_ibait_20.database.App.DATABASE;
 /**
  * Die Klasse legt fest welche Komponenten die Anmeldeseite für den Nutzer hat und wie diese am Ende aussieht.
  **/
-public class AnmeldeLayer implements Layer {
+public class AnmeldeLayer implements SwingPresentation {
 
     private static final JPanel zurueckPanel = new JPanel();
     private static final JPanel anmeldungsPanel = new JPanel();
     private static final JPanel anmeldungsButtonPanel = new JPanel();
     private static final JPanel fehlerPanel = new JPanel();
 
+    private static final JLabel anmeldename = new JLabel();
+    private static final JLabel passwort = new JLabel();
+    private static final JLabel falschesPasswort = new JLabel();
+    private static final JButton anmeldenButton = new JButton();
     private static final JTextField tfAnmeldeName = new JTextField();
     private static final JPasswordField tfAnmeldePasswort = new JPasswordField();
 
@@ -40,10 +43,10 @@ public class AnmeldeLayer implements Layer {
         setFrame();
     }
     static void setStrings(){
-        Layer.setLabel1(App.resourceBundle.getString("nick.name"));
-        Layer.setLabel2(App.resourceBundle.getString("password"));
-        Layer.setLabel3(App.resourceBundle.getString("wrong.password"));
-        Layer.setButton1(App.resourceBundle.getString("sign.in"));
+        anmeldename.setText(App.resourceBundle.getString("nick.name"));
+        passwort.setText(App.resourceBundle.getString("password"));
+        falschesPasswort.setText(App.resourceBundle.getString("wrong.password"));
+        anmeldenButton.setText(App.resourceBundle.getString("sign.in"));
     }
 
 
@@ -58,24 +61,24 @@ public class AnmeldeLayer implements Layer {
         anmeldungsPanel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
         anmeldungsPanel.setLayout(new GridLayout(0, 2));
         anmeldungsButtonPanel.setBorder(BorderFactory.createEmptyBorder(0, 30, 10, 30));
-        label3.setForeground(Color.red);
+        falschesPasswort.setForeground(Color.red);
     }
 
 
     public void addListeners() {
-        button1.addActionListener(e->this.anmelden());
+        anmeldenButton.addActionListener(e->this.anmelden());
         zurueckButton.addActionListener(e->this.zurueck());
     }
 
 
     public void addComponentsToPanels() {
         zurueckPanel.add(zurueckButton);
-        anmeldungsPanel.add(label1);
+        anmeldungsPanel.add(anmeldename);
         anmeldungsPanel.add(tfAnmeldeName);
-        anmeldungsPanel.add(label2);
+        anmeldungsPanel.add(passwort);
         anmeldungsPanel.add(tfAnmeldePasswort);
-        anmeldungsButtonPanel.add(button1);
-        fehlerPanel.add(label3);
+        anmeldungsButtonPanel.add(anmeldenButton);
+        fehlerPanel.add(falschesPasswort);
     }
 
 

@@ -10,7 +10,8 @@
 * **[Einloggen](#einloggen)**   
 * **[Registrieren](#registrieren)**  
 
-### [Sonstiges](#sonstiges)    
+### [Sonstiges](#sonstiges)  
+* **[prototyp](#prototyp)**
 * **[Aufruf der Daten](#aufruf-der-daten)**    
 * **[Datenschutz](#datenschutz)**    
  
@@ -95,6 +96,8 @@ Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnu
 <a name="sonstiges"/>   
 
 # Sonstiges   
+
+<a name="prototyp"/>   
 
 ## Prototyp
 Den Prototyp können Sie über folgenden Link aufrufen. Nutzen Sie am besten den Chrome Browser  

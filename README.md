@@ -96,6 +96,9 @@ Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnu
 
 # Sonstiges   
 
+## Prototyp
+Den Prototyp können Sie über folgenden Link aufrufen. Nutzen Sie am besten den Chrome Browser  
+(https://xd.adobe.com/view/bc708687-9e33-4f07-a46f-df13c3a1f5ef-e923/?fullscreen)
 
 <a name="aufruf-der-daten"/> 
 
@@ -117,8 +120,6 @@ Wir legen höchsten Wert auf die Sicherheit Ihrer Daten. Deswegen halten wir uns
 <a name="probleme"/> 
 
  ## Probleme
-
-Momentan sind keine Probleme bekannt.
 
 <a name="lösungen"/> 
 

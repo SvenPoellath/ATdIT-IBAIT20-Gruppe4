@@ -118,10 +118,10 @@ public class StartLayer implements SwingPresentation {
     **/
     void spracheWurdeGeaendert(ItemEvent e){
         JComboBox<String> cb = (JComboBox<String>) e.getSource();
-        if(cb.getSelectedItem().equals(App.resourceBundle.getString("german"))){
+        if(cb.getSelectedIndex() == 1){
            setSpracheToGerman();
         }
-        else if(cb.getSelectedItem().equals(App.resourceBundle.getString("english"))){
+        else if(cb.getSelectedIndex() == 2){
             setSpracheToEnglish();
         }
         resetAllStrings();

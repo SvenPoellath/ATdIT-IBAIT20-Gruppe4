@@ -217,6 +217,7 @@ public class RegistrierLayer implements SwingPresentation {
                 BasicPerson person = new BasicPerson(tfVersicherungsNummer.getText(), tfName.getText(), tfNachName.getText(), neuesGeburtsDatum, new String(tfRegistrierPasswort.getPassword()), cbAnrede.getSelectedItem().toString(), Integer.parseInt(tfPlz.getText()), tfOrt.getText(), tfHausnummer.getText(), cbFamilienstand.getSelectedItem().toString(), tfEmailadresse.getText(), Long.parseLong(tfTelefonnummer.getText()), tfStaatsangehoerigkeit.getText(), tfStrasse.getText());
                 DATABASE.create_person_entry(person);
                 removePanelsFromFrame();
+                clearAllTextFields();
                 new Vertragsuebersicht(person);
             } catch (Exception exp) {
                 falscheAngabe.setText(App.resourceBundle.getString("check.your.inputs"));
@@ -225,6 +226,19 @@ public class RegistrierLayer implements SwingPresentation {
                 StartLayer.fenster.validate();
             }
         }
+    }
+    public void clearAllTextFields(){
+        tfVersicherungsNummer.setText(null);
+        tfEmailadresse.setText(null);
+        tfHausnummer.setText(null);
+        tfName.setText(null);
+        tfRegistrierPasswort.setText(null);
+        tfNachName.setText(null);
+        tfOrt.setText(null);
+        tfPlz.setText(null);
+        tfStaatsangehoerigkeit.setText(null);
+        tfStrasse.setText(null);
+        tfTelefonnummer.setText(null);
     }
     public void removePanelsFromFrame(){
         StartLayer.fenster.remove(registrierButtonPanel);

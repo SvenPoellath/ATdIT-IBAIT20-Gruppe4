@@ -259,7 +259,9 @@ public class VertragHinzufuegen implements SwingPresentation {
         if(tfIBAN.getText().length()==22) {
             angemeldetePerson.setIBAN(tfIBAN.getText());
             DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "IBAN", angemeldetePerson.getIBAN());
-            neueIBAN.removeAll();
+            neueIBAN.remove(falscheIBAN);
+            StartLayer.fenster.remove(neueIBAN);
+            StartLayer.fenster.validate();
         } else{
             neueIBAN.add(falscheIBAN);
         }

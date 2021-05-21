@@ -71,6 +71,8 @@ public class Einstellungen implements SwingPresentation {
             addComponentsToPanels();
             addPanelsToFrame();
             setFrame();
+        StartLayer.fenster.validate();
+        StartLayer.fenster.repaint();
     }
 /**
 * @setString ermöglicht es dem Nutzer seine Daten zu ändern.
@@ -142,6 +144,7 @@ public class Einstellungen implements SwingPresentation {
 
     @Override
     public void addListeners() {
+        removeListeners();
         vornameAendern.addActionListener(e->vornameAendernWurdeAusgewaelt());
         nachnameAendern.addActionListener(e->nachnameAendernWurdeAusgewaelt());
         geburtsdatumAendern.addActionListener(e->geburtsdatumAendernWurdeAusgewaelt());
@@ -156,6 +159,36 @@ public class Einstellungen implements SwingPresentation {
         staatsangehoerigkeitAendern.addActionListener(e->staatsangehoerigkeitAendernWurdeAusgewaelt());
         telefonnummerAendern.addActionListener(e->telefonnummerAendernWurdeAusgewaelt());
     }
+
+    public void removeListeners() {
+        for (ActionListener listener : vornameAendern.getActionListeners())
+            vornameAendern.removeActionListener(listener);
+        for (ActionListener listener : nachnameAendern.getActionListeners())
+            nachnameAendern.removeActionListener(listener);
+        for (ActionListener listener : geburtsdatumAendern.getActionListeners())
+            geburtsdatumAendern.removeActionListener(listener);
+        for (ActionListener listener : passwortAendern.getActionListeners())
+            passwortAendern.removeActionListener(listener);
+        for (ActionListener listener : anredeAendern.getActionListeners())
+            anredeAendern.removeActionListener(listener);
+        for (ActionListener listener : plzAendern.getActionListeners())
+            plzAendern.removeActionListener(listener);
+        for (ActionListener listener : ortAendern.getActionListeners())
+            ortAendern.removeActionListener(listener);
+        for (ActionListener listener : strasseAendern.getActionListeners())
+            strasseAendern.removeActionListener(listener);
+        for (ActionListener listener : hausnummerAendern.getActionListeners())
+            hausnummerAendern.removeActionListener(listener);
+        for (ActionListener listener : familienstandAendern.getActionListeners())
+            familienstandAendern.removeActionListener(listener);
+        for (ActionListener listener : mailAendern.getActionListeners())
+            mailAendern.removeActionListener(listener);
+        for (ActionListener listener : staatsangehoerigkeitAendern.getActionListeners())
+            staatsangehoerigkeitAendern.removeActionListener(listener);
+        for (ActionListener listener : telefonnummerAendern.getActionListeners())
+            telefonnummerAendern.removeActionListener(listener);
+    }
+
 
     @Override
     public void addComponentsToPanels() {

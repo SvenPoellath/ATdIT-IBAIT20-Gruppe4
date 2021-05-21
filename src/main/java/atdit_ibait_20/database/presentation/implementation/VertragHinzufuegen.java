@@ -68,6 +68,8 @@ public class VertragHinzufuegen implements SwingPresentation {
         addComponentsToPanels();
         addPanelsToFrame();
         setFrame();
+        StartLayer.fenster.validate();
+        StartLayer.fenster.repaint();
     }
 
     /**
@@ -119,11 +121,29 @@ public class VertragHinzufuegen implements SwingPresentation {
     **/
     @Override
     public void addListeners() {
+        removeListeners();
         buchungsArt.addItemListener(e->this.buchungsArtWurdeGeaendert(e));
         versicherungsArt.addItemListener(e->this.versicherungsArtWurdeGeaendert());
         hinzufuegenButton.addActionListener(e->this.hinzufuegeButtonWurdeGedrueckt());
         preis.addActionListener(e->this.preisButtonWurdeGedrueckt());
         addIBAN.addActionListener(e->this.IBANButtonWurdeGedrueckt());
+    }
+
+    public void removeListeners() {
+        for (ItemListener listener : buchungsArt.getItemListeners())
+            buchungsArt.removeItemListener(listener);
+
+        for (ItemListener listener : versicherungsArt.getItemListeners())
+            versicherungsArt.removeItemListener(listener);
+
+        for (ActionListener listener : hinzufuegenButton.getActionListeners())
+            hinzufuegenButton.removeActionListener(listener);
+
+        for (ActionListener listener : preis.getActionListeners())
+            preis.removeActionListener(listener);
+
+        for (ActionListener listener : addIBAN.getActionListeners())
+            addIBAN.removeActionListener(listener);
     }
 
     @Override

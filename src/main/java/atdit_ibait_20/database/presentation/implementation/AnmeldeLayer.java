@@ -41,6 +41,8 @@ public class AnmeldeLayer implements SwingPresentation {
         addComponentsToPanels();
         addPanelsToFrame();
         setFrame();
+        StartLayer.fenster.validate();
+        StartLayer.fenster.repaint();
     }
     static void setStrings(){
         anmeldename.setText(App.resourceBundle.getString("nick.name"));
@@ -66,9 +68,21 @@ public class AnmeldeLayer implements SwingPresentation {
 
 
     public void addListeners() {
+        removeListeners();
         anmeldenButton.addActionListener(e->this.anmelden());
         zurueckButton.addActionListener(e->this.zurueck());
     }
+
+    public void removeListeners() {
+        for (ActionListener listener : anmeldenButton.getActionListeners())
+            anmeldenButton.removeActionListener(listener);
+
+        for (ActionListener listener : zurueckButton.getActionListeners())
+            zurueckButton.removeActionListener(listener);
+
+    }
+
+
 
 
     public void addComponentsToPanels() {

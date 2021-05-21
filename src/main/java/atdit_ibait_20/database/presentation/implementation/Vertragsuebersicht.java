@@ -32,6 +32,9 @@ public class Vertragsuebersicht implements SwingPresentation {
         addComponentsToPanels();
         addPanelsToFrame();
         setFrame();
+        StartLayer.fenster.validate();
+        StartLayer.fenster.repaint();
+
     }
 
     /**
@@ -97,10 +100,22 @@ public class Vertragsuebersicht implements SwingPresentation {
     
     @Override
     public void addListeners() {
+        removeListeners();
         einstellungen.addActionListener(e->einstellungenWurdenAusgewaelt());
         logout.addActionListener(e->logoutWurdeAusgewaelt());
         home.addActionListener(e->vertragsuebersichtWurdeAusgewaelt());
         plusButton.addActionListener(e->vertraghinzufuegenWurdeGedrueckt());
+    }
+
+    public void removeListeners() {
+        for (ActionListener listener : einstellungen.getActionListeners())
+            einstellungen.removeActionListener(listener);
+        for (ActionListener listener : logout.getActionListeners())
+            logout.removeActionListener(listener);
+        for (ActionListener listener : home.getActionListeners())
+            home.removeActionListener(listener);
+        for (ActionListener listener : plusButton.getActionListeners())
+            plusButton.removeActionListener(listener);
     }
 
     @Override

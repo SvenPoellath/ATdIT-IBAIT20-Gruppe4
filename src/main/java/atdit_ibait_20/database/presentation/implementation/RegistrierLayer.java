@@ -78,6 +78,8 @@ public class RegistrierLayer implements SwingPresentation {
             addComponentsToPanels();
             addPanelsToFrame();
             setFrame();
+        StartLayer.fenster.validate();
+        StartLayer.fenster.repaint();
     }
     /**
 * @setString legt die dem Nutzer angezeigten Namen der einzelnen Felder fest sowie die Auswahloptionen des Geburtsdatums
@@ -125,9 +127,19 @@ public class RegistrierLayer implements SwingPresentation {
 
     @Override
     public void addListeners() {
+        removeListeners();
         zurueckButton.addActionListener(e->zurueckButtonWurdeGedrueckt());
         registrierenButton.addActionListener(e->registerierButtonWurdeGedrueckt());
     }
+
+    public void removeListeners() {
+        for (ActionListener listener : zurueckButton.getActionListeners())
+            zurueckButton.removeActionListener(listener);
+
+        for (ActionListener listener : registrierenButton.getActionListeners())
+            registrierenButton.removeActionListener(listener);
+    }
+
 
     @Override
     public void addComponentsToPanels() {

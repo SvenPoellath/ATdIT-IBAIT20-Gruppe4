@@ -5,7 +5,9 @@ import atdit_ibait_20.database.presentation.SwingPresentation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 /**
@@ -33,7 +35,8 @@ public class StartLayer implements SwingPresentation {
         addListeners();
         addComponentsToPanels();
         addPanelsToFrame();
-        fenster.validate();
+        StartLayer.fenster.validate();
+        StartLayer.fenster.repaint();
     }
     /**
     * @setFrame Legt den Rahmen für das Fester fest
@@ -60,10 +63,23 @@ public class StartLayer implements SwingPresentation {
      *
      * */
     public void addListeners(){
+        removeListeners();
         registrierButton.addActionListener(e-> registrierenFensterButtonWurdeGedrueckt());
         anmeldeButton.addActionListener(e-> anmeldenFensterButtonWurdeGedrueckt());
         spracheWaelen.addItemListener(e->spracheWurdeGeaendert(e));
     }
+
+    public void removeListeners() {
+        for (ActionListener listener : registrierButton.getActionListeners())
+            registrierButton.removeActionListener(listener);
+
+        for (ActionListener listener : anmeldeButton.getActionListeners())
+            anmeldeButton.removeActionListener(listener);
+
+        for (ItemListener listener : spracheWaelen.getItemListeners())
+            spracheWaelen.removeItemListener(listener);
+    }
+
 
     /**
     * @addComponentsToPanels verknüpft die Buttons mit den Funktionen die passieren sollen, wenn sie gedrückt werden

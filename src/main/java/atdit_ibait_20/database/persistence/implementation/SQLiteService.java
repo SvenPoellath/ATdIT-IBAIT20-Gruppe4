@@ -224,10 +224,40 @@ public class SQLiteService implements Database {
         update_person_by_id(id,"salt",salt);
 
     }
-/**
+
+    @Override
+    public boolean check_id(String id) {
+        String sql = "SELECT (count(*) > 0) as found FROM person WHERE id=?";
+        Connection conn = connect();
+        boolean returnValue = false;
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    boolean found = rs.getBoolean(1);
+                    if (found) {
+                        System.out.println("ID vergeben");
+                        returnValue = false;
+                    } else {
+                        System.out.println("ID frei");
+                        returnValue = true;
+                    }
+
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return returnValue;
+    }
+
+    /**
 * @check_Login überprüft ob die vom Nutzer eingegebenen Anmeldeinformationen mit den in der Datenbank übereinstimmen.
 * Wenn das Passwort stimmt, wird der Nutzer erfolgreich verifiziert.
 **/
+
     public boolean check_Login(String id, String providedPassword) {
 
         String salt = null;

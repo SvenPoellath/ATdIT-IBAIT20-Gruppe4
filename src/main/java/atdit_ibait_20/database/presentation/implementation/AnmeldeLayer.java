@@ -51,6 +51,11 @@ public class AnmeldeLayer implements SwingPresentation {
         anmeldenButton.setText(App.resourceBundle.getString("sign.in"));
     }
 
+    static void resetLogin() {
+        tfAnmeldeName.setText("");
+        tfAnmeldePasswort.setText("");
+    }
+
 
     public void setFrame() {
         StartLayer.fenster.setSize(250, 325);

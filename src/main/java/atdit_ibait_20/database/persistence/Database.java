@@ -26,6 +26,8 @@ public interface Database {
 
     void update_password_by_id(String id, String password);
 
+    boolean check_id(String id);
+
     boolean check_Login(String id, String providedPassword);
 
     boolean check_order_number(String orderNumber);

@@ -190,6 +190,11 @@ public class RegistrierLayer implements SwingPresentation {
 **/
     boolean checkInputs(){
         falscheAngabe.setText(null);
+
+        if(!DATABASE.check_id(tfVersicherungsNummer.getText())) {
+            falscheAngabe.setText(App.resourceBundle.getString("invalid") + " " + App.resourceBundle.getString("social.security.number"));
+        }
+
         if(tfVersicherungsNummer.getText().length()!=12){
             falscheAngabe.setText(App.resourceBundle.getString("invalid")+" "+App.resourceBundle.getString("social.security.number"));
         }
@@ -205,6 +210,8 @@ public class RegistrierLayer implements SwingPresentation {
         }
         if (falscheAngabe.getText()!=null){
             StartLayer.fenster.add(falscheAngabePanel);
+            StartLayer.fenster.repaint();
+            StartLayer.fenster.validate();
             return false;
         }
         else{

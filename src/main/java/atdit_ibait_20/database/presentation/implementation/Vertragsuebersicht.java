@@ -169,5 +169,6 @@ public class Vertragsuebersicht implements SwingPresentation {
         angemeldetePerson = null;
         new StartLayer();
         StartLayer.fenster.validate();
+        AnmeldeLayer.resetLogin();
     }
 }

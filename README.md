@@ -59,7 +59,8 @@ Die App ist mit jedem Rechner (Windows 8/MacOS), Tablet oder Smartphone (Android
 
 # Benötigte Software  
 
-Internetbrowser zum Aufrufen der App.
+Zum jetzigen Stand ist eine IDE zum Aufrufen und Ausführen des Codes empfohlen.
+Für die Endanwendung wird ein Internetbrowser zum Aufrufen der App benötigt.
 
 
 <a name="anwendung"/> 

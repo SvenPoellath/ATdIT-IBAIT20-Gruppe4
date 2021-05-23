@@ -124,6 +124,8 @@ Wir legen höchsten Wert auf die Sicherheit Ihrer Daten. Deswegen halten wir uns
 
  ## Probleme
 
+Bisher sind keine Probleme bekannt.
+
 <a name="lösungen"/> 
 
  ## Lösungen

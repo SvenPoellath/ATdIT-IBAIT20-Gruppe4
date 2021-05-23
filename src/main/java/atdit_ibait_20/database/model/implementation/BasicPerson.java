@@ -91,7 +91,10 @@ public class BasicPerson implements Person {
     * Es wird ein Konstruktur für BasicPerson angelegt. Darin werden alle Attribute übergeben.
     **/
 
-    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, long telefonnummer, String staatsangehoerigkeit, String strasse, ArrayList<Vertrag> vertraege, String iban) {
+    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum,
+                       String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand,
+                       String mailadresse, long telefonnummer, String staatsangehoerigkeit, String strasse,
+                       ArrayList<Vertrag> vertraege, String iban) {
         this.Sozialversicherungsnummer = sozialversicherungsnummer;
         this.Vorname = vorname;
         this.Nachname = nachname;
@@ -115,12 +118,19 @@ public class BasicPerson implements Person {
 
     }
 
-    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, long telefonnummer, String staatsangehoerigkeit, String strasse, ArrayList<Vertrag> vertraege) {
-        this(sozialversicherungsnummer, vorname, nachname, geburtsdatum, passwort, anrede, plz, ort, hausnummer, familienstand, mailadresse, telefonnummer, staatsangehoerigkeit, strasse, vertraege, null);
+    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum,
+                       String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand,
+                       String mailadresse, long telefonnummer, String staatsangehoerigkeit, String strasse,
+                       ArrayList<Vertrag> vertraege) {
+        this(sozialversicherungsnummer, vorname, nachname, geburtsdatum, passwort, anrede, plz, ort, hausnummer, familienstand,
+                mailadresse, telefonnummer, staatsangehoerigkeit, strasse, vertraege, null);
     }
 
-    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailadresse, long telefonnummer, String staatsangehoerigkeit, String strasse) {
-        this(sozialversicherungsnummer, vorname, nachname, geburtsdatum, passwort, anrede, plz, ort, hausnummer, familienstand, mailadresse, telefonnummer, staatsangehoerigkeit, strasse, null);
+    public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum,
+                       String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand,
+                       String mailadresse, long telefonnummer, String staatsangehoerigkeit, String strasse) {
+        this(sozialversicherungsnummer, vorname, nachname, geburtsdatum, passwort, anrede, plz, ort, hausnummer, familienstand,
+                mailadresse, telefonnummer, staatsangehoerigkeit, strasse, null);
     }
 
 
@@ -147,7 +157,6 @@ public class BasicPerson implements Person {
     public String getGeburtsdatum() {
         return Geburtsdatum.getGeburtsdatumJahr() + "-" + Geburtsdatum.getGeburtsdatumMonat() + "-" + Geburtsdatum.getGeburtsdatumTag();
     }
-
 
     @Override
     public ArrayList<Vertrag> getVertraege() {

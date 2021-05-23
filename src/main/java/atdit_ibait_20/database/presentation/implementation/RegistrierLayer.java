@@ -226,18 +226,32 @@ public class RegistrierLayer implements SwingPresentation {
         new StartLayer();
     }
     /**
-* Die Klasse wird vom Nutzer gedrückt wenn er alle seine Daten eingegeben hat. Das bisherige Layout verschwindet. 
+* Die Klasse wird vom Nutzer gedrückt wenn er alle seine Daten eingegeben hat. Das bisherige Layout verschwindet.
 * Wenn der Nutzer ungültige Eingaben getätigt hat, weisst das Programm ihn an dieser Stelle darauf hin.
 **/
     void registerierButtonWurdeGedrueckt(){
         if(checkInputs()) {
+
             try {
-                BasicGeburtsdatum neuesGeburtsDatum = new BasicGeburtsdatum((Integer) GeburtsdatumTag.getSelectedItem(), (Integer) GeburtsdatumMonat.getSelectedItem(), (Integer) GeburtsdatumJahr.getSelectedItem());
-                BasicPerson person = new BasicPerson(tfVersicherungsNummer.getText(), tfName.getText(), tfNachName.getText(), neuesGeburtsDatum, new String(tfRegistrierPasswort.getPassword()), cbAnrede.getSelectedItem().toString(), Integer.parseInt(tfPlz.getText()), tfOrt.getText(), tfHausnummer.getText(), cbFamilienstand.getSelectedItem().toString(), tfEmailadresse.getText(), Long.parseLong(tfTelefonnummer.getText()), tfStaatsangehoerigkeit.getText(), tfStrasse.getText());
-                DATABASE.create_person_entry(person);
-                removePanelsFromFrame();
-                clearAllTextFields();
-                new Vertragsuebersicht(person);
+                BasicGeburtsdatum neuesGeburtsDatum = new BasicGeburtsdatum((Integer) GeburtsdatumTag.getSelectedItem(),
+                        (Integer) GeburtsdatumMonat.getSelectedItem(), (Integer) GeburtsdatumJahr.getSelectedItem());
+                String versicherungsNummer = tfVersicherungsNummer.getText();
+                String vorname = tfName.getText();
+                String nachname = tfNachName.getText();
+                String passwort = new String(tfRegistrierPasswort.getPassword());
+                String anrede = cbAnrede.getSelectedItem().toString();
+                int plz = Integer.parseInt(tfPlz.getText());
+                String ort = tfOrt.getText();
+                String hausnummer = tfHausnummer.getText();
+                String familienstand = cbFamilienstand.getSelectedItem().toString();
+                String mailAdresse = tfEmailadresse.getText();
+                Long telefonNummer = Long.parseLong(tfTelefonnummer.getText());
+                String staatsangehoerigkeit = tfStaatsangehoerigkeit.getText();
+                String strasse = tfStrasse.getText();
+
+                registrieren(versicherungsNummer, vorname, nachname, neuesGeburtsDatum, passwort, anrede, plz, ort, hausnummer,
+                        familienstand, mailAdresse, telefonNummer, staatsangehoerigkeit, strasse);
+
             } catch (Exception exp) {
                 falscheAngabe.setText(App.resourceBundle.getString("check.your.inputs"));
                 StartLayer.fenster.add(falscheAngabePanel);
@@ -245,6 +259,30 @@ public class RegistrierLayer implements SwingPresentation {
                 StartLayer.fenster.validate();
             }
         }
+    }
+
+    public void registrieren(String versicherungsNummer, String vorname, String nachname, BasicGeburtsdatum neuesGeburtsDatum, String passwort,
+                             String anrede, int plz, String ort, String hausnummer, String familienstand, String mailAdresse,
+                             long telefonNummer, String staatsangehoerigkeit, String strasse) {
+        BasicPerson person = new BasicPerson(
+                versicherungsNummer,
+                vorname,
+                nachname,
+                neuesGeburtsDatum,
+                passwort,
+                anrede,
+                plz,
+                ort,
+                hausnummer,
+                familienstand,
+                mailAdresse,
+                telefonNummer,
+                staatsangehoerigkeit,
+                strasse);
+        DATABASE.create_person_entry(person);
+        removePanelsFromFrame();
+        clearAllTextFields();
+        new Vertragsuebersicht(person);
     }
     public void clearAllTextFields(){
         tfVersicherungsNummer.setText(null);

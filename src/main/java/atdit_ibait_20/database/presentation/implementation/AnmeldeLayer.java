@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static atdit_ibait_20.database.App.DATABASE;
+import static atdit_ibait_20.database.App.resourceBundle;
 
 /**
  * Die Klasse legt fest welche Komponenten die Anmeldeseite für den Nutzer hat und wie diese am Ende aussieht.
@@ -123,16 +124,22 @@ public class AnmeldeLayer implements SwingPresentation {
      **/
 
     public void anmelden() {
-        Person person;
         removePanelsFromFrame();
-        if (DATABASE.check_Login(tfAnmeldeName.getText(), new String(tfAnmeldePasswort.getPassword()))) {
-            person = DATABASE.get_person_by_id(tfAnmeldeName.getText());
-            System.out.println("Anmeldung erfolgreich.");
+        String anmeldeName = tfAnmeldeName.getText();
+        String anmeldePasswort = new String(tfAnmeldePasswort.getPassword());
+        anmeldenCheck(anmeldeName, anmeldePasswort);
+    }
+
+    public void anmeldenCheck(String anmeldeName, String anmeldePasswort) {
+        Person person;
+        if (DATABASE.check_Login(anmeldeName, anmeldePasswort)) {
+            person = DATABASE.get_person_by_id(anmeldeName);
+            System.out.println(App.resourceBundle.getString("loginSuccess"));
             new Vertragsuebersicht(person);
         } else {
             addPanelsToFrame();
             StartLayer.fenster.add(fehlerPanel);
-            System.out.println("Wrong id/password entered.");
+            System.out.println(resourceBundle.getString("wrongLogin"));
             StartLayer.fenster.validate();
         }
     }

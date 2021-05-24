@@ -1,7 +1,8 @@
 package atdit_ibait_20.database.persistence;
 /**
-* @interface legt Methoden zur individuellen Verschlüsselung der Passwörter an, die später benutzt werden können
-**/
+* Legt Methoden zur individuellen Verschlüsselung der Passwörter an, die später benutzt werden können
+* Durch das Interface kann man leichter Methoden hinzufügen und bearbeiten
+*/
 public interface Password {
     static String getSalt() {
         return null;

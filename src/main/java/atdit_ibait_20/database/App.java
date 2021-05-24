@@ -14,7 +14,7 @@ public class App {
     public static final Database DATABASE = new SQLiteService();
 
     /**
-    * @main Methode, die die Applikation startet und die Verbindung zur Datenbank aufbaut
+    * @Methode Main startet die Applikation und baut die Verbindung zur Datenbank auf
     **/
     public static void main (String[] args) {
         new StartLayer();

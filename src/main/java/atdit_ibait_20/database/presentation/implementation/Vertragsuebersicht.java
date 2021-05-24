@@ -18,9 +18,7 @@ public class Vertragsuebersicht implements SwingPresentation {
     private static final JMenuItem einstellungen = new JMenuItem();
     private static final JMenuItem home = new JMenuItem();
     private static final JMenuItem logout = new JMenuItem();
-    private static final JLabel vertragsUebersicht = new JLabel();
 
-    private static final JButton plusButton = new JButton("+");
 
     private static Person angemeldetePerson;
     public Vertragsuebersicht(Person person){
@@ -30,9 +28,8 @@ public class Vertragsuebersicht implements SwingPresentation {
         addListeners();
         addComponentsToPanels();
         addPanelsToFrame();
-        setFrame();
-        StartLayer.fenster.validate();
-        StartLayer.fenster.repaint();
+        MasterController.fenster.validate();
+        MasterController.fenster.repaint();
 
     }
 
@@ -73,21 +70,15 @@ public class Vertragsuebersicht implements SwingPresentation {
         einstellungen.setText(App.resourceBundle.getString("settings"));
         home.setText(App.resourceBundle.getString("home"));
         logout.setText(App.resourceBundle.getString("logout"));
-        vertragsUebersicht.setText(App.resourceBundle.getString("welcome.to.your.contract.overview"));
+        label5.setText(App.resourceBundle.getString("welcome.to.your.contract.overview"));
+        button6.setText("+");
         add.removeAll();
         if (angemeldetePerson != null)
             addVorhandeneVertraegetoGUI(angemeldetePerson);
-        add.add(vertragsUebersicht);
-        add.add(plusButton);
+        add.add(label5);
+        add.add(button6);
     }
 
-    /**
-    * @setFrame legt die Größe des Fensters, welches die Applikation anzeigt fest
-    **/
-    @Override
-    public void setFrame() {
-        StartLayer.fenster.setSize(400,400);
-    }
 
     /**
     * @setLayout Legt die Art des Layoutes fest, welches verwendet wird
@@ -103,7 +94,7 @@ public class Vertragsuebersicht implements SwingPresentation {
         einstellungen.addActionListener(e->einstellungenWurdenAusgewaelt());
         logout.addActionListener(e->logoutWurdeAusgewaelt());
         home.addActionListener(e->vertragsuebersichtWurdeAusgewaelt());
-        plusButton.addActionListener(e->vertraghinzufuegenWurdeGedrueckt());
+        button6.addActionListener(e->vertraghinzufuegenWurdeGedrueckt());
     }
 
     public void removeListeners() {
@@ -113,8 +104,8 @@ public class Vertragsuebersicht implements SwingPresentation {
             logout.removeActionListener(listener);
         for (ActionListener listener : home.getActionListeners())
             home.removeActionListener(listener);
-        for (ActionListener listener : plusButton.getActionListeners())
-            plusButton.removeActionListener(listener);
+        for (ActionListener listener : button6.getActionListeners())
+            button6.removeActionListener(listener);
     }
 
     @Override
@@ -127,47 +118,47 @@ public class Vertragsuebersicht implements SwingPresentation {
 
     @Override
     public void addPanelsToFrame() {
-        StartLayer.fenster.setJMenuBar(menuBar);
-        StartLayer.fenster.add(add);
+        MasterController.fenster.setJMenuBar(menuBar);
+        MasterController.fenster.add(add);
     }
 
         @Override
         public void removePanelsFromFrame() {
-            StartLayer.fenster.remove(add);
+            MasterController.fenster.remove(add);
         }
 
         public void vertraghinzufuegenWurdeGedrueckt(){
-        StartLayer.fenster.remove(add);
+            MasterController.fenster.remove(add);
         new VertragHinzufuegenLayer(angemeldetePerson);
-        StartLayer.fenster.validate();
+            MasterController.fenster.validate();
     }
     public void removeAllPanelsFromFrame(){
         removePanelsFromFrame();
-        StartLayer.fenster.remove(VertragHinzufuegenLayer.neueIBAN);
-        StartLayer.fenster.remove(VertragHinzufuegenLayer.hinzugefuegt);
-        StartLayer.fenster.remove(EinstellungsLayer.einstellungen);
-        StartLayer.fenster.remove(EinstellungsLayer.datenAendern);
-        StartLayer.fenster.remove(EinstellungsLayer.geburtsdatum);
-        StartLayer.fenster.remove(VertragHinzufuegenLayer.vertragsDaten);
-        StartLayer.fenster.remove(VertragHinzufuegenLayer.hinzufuegen);
-        StartLayer.fenster.remove(VertragHinzufuegenLayer.preise);
+        MasterController.fenster.remove(VertragHinzufuegenLayer.neueIBAN);
+        MasterController.fenster.remove(VertragHinzufuegenLayer.hinzugefuegt);
+        MasterController.fenster.remove(EinstellungsLayer.einstellungen);
+        MasterController.fenster.remove(EinstellungsLayer.datenAendern);
+        MasterController.fenster.remove(EinstellungsLayer.geburtsdatum);
+        MasterController.fenster.remove(VertragHinzufuegenLayer.vertragsDaten);
+        MasterController.fenster.remove(VertragHinzufuegenLayer.hinzufuegen);
+        MasterController.fenster.remove(VertragHinzufuegenLayer.preise);
     }
     public void einstellungenWurdenAusgewaelt(){
         removeAllPanelsFromFrame();
-        new EinstellungsLayer(angemeldetePerson);
-        StartLayer.fenster.validate();
+        App.masterController.loadEinstellungsLayer(angemeldetePerson);
+        MasterController.fenster.validate();
     }
     public void vertragsuebersichtWurdeAusgewaelt(){
         removeAllPanelsFromFrame();
-        new Vertragsuebersicht(angemeldetePerson);
-        StartLayer.fenster.validate();
+        App.masterController.loadVertragsuebersicht(angemeldetePerson);
+        MasterController.fenster.validate();
     }
     public void logoutWurdeAusgewaelt(){
         removeAllPanelsFromFrame();
-        StartLayer.fenster.setJMenuBar(null);
+        MasterController.fenster.setJMenuBar(null);
         angemeldetePerson = null;
-        new StartLayer();
-        StartLayer.fenster.validate();
+        App.masterController.loadStartLayer();
+        MasterController.fenster.validate();
         AnmeldeLayer.resetLogin();
     }
 }

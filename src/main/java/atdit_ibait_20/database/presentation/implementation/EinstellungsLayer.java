@@ -3,12 +3,10 @@ package atdit_ibait_20.database.presentation.implementation;
 import atdit_ibait_20.database.App;
 import atdit_ibait_20.database.model.Person;
 import atdit_ibait_20.database.model.implementation.BasicGeburtsdatum;
-import atdit_ibait_20.database.persistence.Database;
 import atdit_ibait_20.database.presentation.SwingPresentation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static atdit_ibait_20.database.App.DATABASE;
@@ -22,46 +20,7 @@ public class EinstellungsLayer implements SwingPresentation {
     static final JPanel datenAendern = new JPanel();
     static final JPanel geburtsdatum = new JPanel();
 
-    private static final JLabel einstellungenText = new JLabel();
-    private static final JLabel veraenderungen = new JLabel();
-    private static final JLabel vornameAendernText = new JLabel();
-    private static final JLabel nachnameAendernText = new JLabel();
-    private static final JLabel geburtsdatumAendernText = new JLabel();
-    private static final JLabel passwortAendernText = new JLabel();
-    private static final JLabel anredeAendernText = new JLabel();
-    private static final JLabel plzAendernText = new JLabel();
-    private static final JLabel ortAendernText = new JLabel();
-    private static final JLabel strasseAendernText = new JLabel();
-    private static final JLabel hausnummerAendernText = new JLabel();
-    private static final JLabel familienstandAendernText = new JLabel();
-    private static final JLabel mailAendernText = new JLabel();
-    private static final JLabel telefonnummerAendernText = new JLabel();
-    private static final JLabel staatsangehoerigkeitAendernText = new JLabel();
 
-    private static final  JTextField vornameNeu = new JTextField();
-    private static final  JTextField nachnameNeu = new JTextField();
-    private static final  JTextField passwortNeu = new JPasswordField();
-    private static final  JTextField plzNeu = new JTextField();
-    private static final  JTextField ortNeu = new JTextField();
-    private static final  JTextField strasseNeu = new JTextField();
-    private static final  JTextField hausnummerNeu = new JTextField();
-    private static final  JTextField telefonnummerNeu = new JTextField();
-    private static final  JTextField mailNeu = new JTextField();
-    private static final  JTextField staatsangehoerigkeitNeu = new JTextField();
-
-    private static final JButton vornameAendern = new JButton();
-    private static final JButton nachnameAendern = new JButton();
-    private static final JButton geburtsdatumAendern = new JButton();
-    private static final JButton passwortAendern = new JButton();
-    private static final JButton anredeAendern = new JButton();
-    private static final JButton plzAendern = new JButton();
-    private static final JButton ortAendern = new JButton();
-    private static final JButton strasseAendern = new JButton();
-    private static final JButton hausnummerAendern = new JButton();
-    private static final JButton familienstandAendern = new JButton();
-    private static final JButton mailAendern = new JButton();
-    private static final JButton telefonnummerAendern = new JButton();
-    private static final JButton staatsangehoerigkeitAendern = new JButton();
     static Person angemeldetePerson;
     public EinstellungsLayer(Person person){
         angemeldetePerson = person;
@@ -70,69 +29,61 @@ public class EinstellungsLayer implements SwingPresentation {
             addListeners();
             addComponentsToPanels();
             addPanelsToFrame();
-            setFrame();
-        StartLayer.fenster.validate();
-        StartLayer.fenster.repaint();
+        MasterController.fenster.validate();
+        MasterController.fenster.repaint();
     }
 /**
 * @setString ermöglicht es dem Nutzer seine Daten zu ändern.
 **/
     static void setStrings(){
-        einstellungenText.setText(App.resourceBundle.getString("welcome.to.your.settings"));
-        veraenderungen.setText(App.resourceBundle.getString("make.changes.here"));
-        vornameAendernText.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("first.name"));
-        nachnameAendernText.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("last.name"));
-        geburtsdatumAendernText.setText(App.resourceBundle.getString("new.2")+" "+App.resourceBundle.getString("date.of.birth"));
-        passwortAendernText.setText(App.resourceBundle.getString("new.2")+" "+App.resourceBundle.getString("password"));
-        anredeAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("title"));
-        plzAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("postcode"));
-        ortAendernText.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("city"));
-        strasseAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("street"));
-        hausnummerAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("house.number"));
-        familienstandAendernText.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("marital.status"));
-        mailAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("e.mail.address"));
-        telefonnummerAendernText.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("phone.number"));
-        staatsangehoerigkeitAendern.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("nationality"));
+        label1.setText(App.resourceBundle.getString("welcome.to.your.settings"));
+        label2.setText(App.resourceBundle.getString("make.changes.here"));
+        label3.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("first.name"));
+        label4.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("last.name"));
+        label5.setText(App.resourceBundle.getString("new.2")+" "+App.resourceBundle.getString("date.of.birth"));
+        label6.setText(App.resourceBundle.getString("new.2")+" "+App.resourceBundle.getString("password"));
+        label7.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("title"));
+        label8.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("postcode"));
+        label9.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("city"));
+        label10.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("street"));
+        label11.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("house.number"));
+        label12.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("marital.status"));
+        label13.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("e.mail.address"));
+        label14.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("phone.number"));
+        button13.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("nationality"));
 
-        vornameAendern.setText(App.resourceBundle.getString("first.name")+" "+App.resourceBundle.getString("change"));
-        nachnameAendern.setText(App.resourceBundle.getString("last.name")+" "+App.resourceBundle.getString("change"));
-        geburtsdatumAendern.setText(App.resourceBundle.getString("date.of.birth")+" "+App.resourceBundle.getString("change"));
-        passwortAendern.setText(App.resourceBundle.getString("password")+" "+App.resourceBundle.getString("change"));
-        anredeAendern.setText(App.resourceBundle.getString("title")+" "+App.resourceBundle.getString("change"));
-        plzAendern.setText(App.resourceBundle.getString("postcode")+" "+App.resourceBundle.getString("change"));
-        ortAendern.setText(App.resourceBundle.getString("city")+" "+App.resourceBundle.getString("change"));
-        strasseAendern.setText(App.resourceBundle.getString("street")+" "+App.resourceBundle.getString("change"));
-        hausnummerAendern.setText(App.resourceBundle.getString("house.number")+" "+App.resourceBundle.getString("change"));
-        familienstandAendern.setText(App.resourceBundle.getString("marital.status")+" "+App.resourceBundle.getString("change"));
-        mailAendern.setText(App.resourceBundle.getString("change")+" "+App.resourceBundle.getString("e.mail.address"));
-        telefonnummerAendern.setText(App.resourceBundle.getString("phone.number")+" "+App.resourceBundle.getString("change"));
-        staatsangehoerigkeitAendern.setText(App.resourceBundle.getString("nationality")+" "+App.resourceBundle.getString("change"));
+        button1.setText(App.resourceBundle.getString("first.name")+" "+App.resourceBundle.getString("change"));
+        button2.setText(App.resourceBundle.getString("last.name")+" "+App.resourceBundle.getString("change"));
+        button3.setText(App.resourceBundle.getString("date.of.birth")+" "+App.resourceBundle.getString("change"));
+        button4.setText(App.resourceBundle.getString("password")+" "+App.resourceBundle.getString("change"));
+        button5.setText(App.resourceBundle.getString("title")+" "+App.resourceBundle.getString("change"));
+        button6.setText(App.resourceBundle.getString("postcode")+" "+App.resourceBundle.getString("change"));
+        button7.setText(App.resourceBundle.getString("city")+" "+App.resourceBundle.getString("change"));
+        button8.setText(App.resourceBundle.getString("street")+" "+App.resourceBundle.getString("change"));
+        button9.setText(App.resourceBundle.getString("house.number")+" "+App.resourceBundle.getString("change"));
+        button10.setText(App.resourceBundle.getString("marital.status")+" "+App.resourceBundle.getString("change"));
+        button11.setText(App.resourceBundle.getString("change")+" "+App.resourceBundle.getString("e.mail.address"));
+        button12.setText(App.resourceBundle.getString("phone.number")+" "+App.resourceBundle.getString("change"));
+        button13.setText(App.resourceBundle.getString("nationality")+" "+App.resourceBundle.getString("change"));
 
         if (angemeldetePerson != null) {
             RegistrierLayer.cbAnrede.setSelectedItem(angemeldetePerson.getAnrede());
-            vornameNeu.setText(angemeldetePerson.getVorname());
-            nachnameNeu.setText(angemeldetePerson.getNachname());
-            plzNeu.setText(String.valueOf(angemeldetePerson.getPLZ()));
-            ortNeu.setText(angemeldetePerson.getOrt());
-            strasseNeu.setText(angemeldetePerson.getStrasse());
-            hausnummerNeu.setText(angemeldetePerson.getHausnummer());
-            mailNeu.setText(angemeldetePerson.getMailAdresse());
-            telefonnummerNeu.setText("0" + angemeldetePerson.getTelefonnummer());
+            textField1.setText(angemeldetePerson.getVorname());
+            textField2.setText(angemeldetePerson.getNachname());
+            textField4.setText(String.valueOf(angemeldetePerson.getPLZ()));
+            textField5.setText(angemeldetePerson.getOrt());
+            textField6.setText(angemeldetePerson.getStrasse());
+            textField7.setText(angemeldetePerson.getHausnummer());
+            textField9.setText(angemeldetePerson.getMailAdresse());
+            textField8.setText("0" + angemeldetePerson.getTelefonnummer());
             RegistrierLayer.cbFamilienstand.setSelectedItem(angemeldetePerson.getFamilienstand());
-            staatsangehoerigkeitNeu.setText(angemeldetePerson.getStaatsangehoerigkeit());
+            textField10.setText(angemeldetePerson.getStaatsangehoerigkeit());
 
             BasicGeburtsdatum transfer = new BasicGeburtsdatum(angemeldetePerson.getGeburtsdatum());
             RegistrierLayer.GeburtsdatumTag.setSelectedItem(transfer.getGeburtsdatumTag());
             RegistrierLayer.GeburtsdatumMonat.setSelectedItem(transfer.getGeburtsdatumMonat());
             RegistrierLayer.GeburtsdatumJahr.setSelectedItem(transfer.getGeburtsdatumJahr());
         }
-    }
-/**
-* Die folgenden @Override Methoden legen fest wie sich das Layout ändert, wenn der Nutzer seine Informationen ändert.
-**/
-    @Override
-    public void setFrame() {
-        StartLayer.fenster.setSize(1300,500);
     }
 
     @Override
@@ -145,126 +96,126 @@ public class EinstellungsLayer implements SwingPresentation {
     @Override
     public void addListeners() {
         removeListeners();
-        vornameAendern.addActionListener(e->vornameAendernWurdeAusgewaelt());
-        nachnameAendern.addActionListener(e->nachnameAendernWurdeAusgewaelt());
-        geburtsdatumAendern.addActionListener(e->geburtsdatumAendernWurdeAusgewaelt());
-        passwortAendern.addActionListener(e->passwortAendernWurdeAusgewaelt());
-        anredeAendern.addActionListener(e->anredeAendernWurdeAusgewaelt());
-        plzAendern.addActionListener(e->plzAendernWurdeAusgewaelt());
-        ortAendern.addActionListener(e->ortAendernWurdeAusgewaelt());
-        strasseAendern.addActionListener(e->strasseAendernWurdeAusgewaelt());
-        hausnummerAendern.addActionListener(e->hausnummerAendernWurdeAusgewaelt());
-        familienstandAendern.addActionListener(e->familienstandAendernWurdeAusgewaelt());
-        mailAendern.addActionListener(e->mailAendernWurdeAusgewaelt());
-        staatsangehoerigkeitAendern.addActionListener(e->staatsangehoerigkeitAendernWurdeAusgewaelt());
-        telefonnummerAendern.addActionListener(e->telefonnummerAendernWurdeAusgewaelt());
+        button1.addActionListener(e->vornameAendernWurdeAusgewaelt());
+        button2.addActionListener(e->nachnameAendernWurdeAusgewaelt());
+        button3.addActionListener(e->geburtsdatumAendernWurdeAusgewaelt());
+        button4.addActionListener(e->passwortAendernWurdeAusgewaelt());
+        button5.addActionListener(e->anredeAendernWurdeAusgewaelt());
+        button6.addActionListener(e->plzAendernWurdeAusgewaelt());
+        button7.addActionListener(e->ortAendernWurdeAusgewaelt());
+        button8.addActionListener(e->strasseAendernWurdeAusgewaelt());
+        button9.addActionListener(e->hausnummerAendernWurdeAusgewaelt());
+        button10.addActionListener(e->familienstandAendernWurdeAusgewaelt());
+        button11.addActionListener(e->mailAendernWurdeAusgewaelt());
+        button13.addActionListener(e->staatsangehoerigkeitAendernWurdeAusgewaelt());
+        button12.addActionListener(e->telefonnummerAendernWurdeAusgewaelt());
     }
 
     public void removeListeners() {
-        for (ActionListener listener : vornameAendern.getActionListeners())
-            vornameAendern.removeActionListener(listener);
-        for (ActionListener listener : nachnameAendern.getActionListeners())
-            nachnameAendern.removeActionListener(listener);
-        for (ActionListener listener : geburtsdatumAendern.getActionListeners())
-            geburtsdatumAendern.removeActionListener(listener);
-        for (ActionListener listener : passwortAendern.getActionListeners())
-            passwortAendern.removeActionListener(listener);
-        for (ActionListener listener : anredeAendern.getActionListeners())
-            anredeAendern.removeActionListener(listener);
-        for (ActionListener listener : plzAendern.getActionListeners())
-            plzAendern.removeActionListener(listener);
-        for (ActionListener listener : ortAendern.getActionListeners())
-            ortAendern.removeActionListener(listener);
-        for (ActionListener listener : strasseAendern.getActionListeners())
-            strasseAendern.removeActionListener(listener);
-        for (ActionListener listener : hausnummerAendern.getActionListeners())
-            hausnummerAendern.removeActionListener(listener);
-        for (ActionListener listener : familienstandAendern.getActionListeners())
-            familienstandAendern.removeActionListener(listener);
-        for (ActionListener listener : mailAendern.getActionListeners())
-            mailAendern.removeActionListener(listener);
-        for (ActionListener listener : staatsangehoerigkeitAendern.getActionListeners())
-            staatsangehoerigkeitAendern.removeActionListener(listener);
-        for (ActionListener listener : telefonnummerAendern.getActionListeners())
-            telefonnummerAendern.removeActionListener(listener);
+        for (ActionListener listener : button1.getActionListeners())
+            button1.removeActionListener(listener);
+        for (ActionListener listener : button2.getActionListeners())
+            button2.removeActionListener(listener);
+        for (ActionListener listener : button3.getActionListeners())
+            button3.removeActionListener(listener);
+        for (ActionListener listener : button4.getActionListeners())
+            button4.removeActionListener(listener);
+        for (ActionListener listener : button5.getActionListeners())
+            button5.removeActionListener(listener);
+        for (ActionListener listener : button6.getActionListeners())
+            button6.removeActionListener(listener);
+        for (ActionListener listener : button7.getActionListeners())
+            button7.removeActionListener(listener);
+        for (ActionListener listener : button8.getActionListeners())
+            button8.removeActionListener(listener);
+        for (ActionListener listener : button9.getActionListeners())
+            button9.removeActionListener(listener);
+        for (ActionListener listener : button10.getActionListeners())
+            button10.removeActionListener(listener);
+        for (ActionListener listener : button11.getActionListeners())
+            button11.removeActionListener(listener);
+        for (ActionListener listener : button13.getActionListeners())
+            button13.removeActionListener(listener);
+        for (ActionListener listener : button12.getActionListeners())
+            button12.removeActionListener(listener);
     }
 
 
     @Override
     public void addComponentsToPanels() {
-        einstellungen.add(einstellungenText);
-        einstellungen.add(veraenderungen);
-        datenAendern.add(anredeAendernText);
+        einstellungen.add(label1);
+        einstellungen.add(label2);
+        datenAendern.add(label7);
         datenAendern.add(RegistrierLayer.cbAnrede);
-        datenAendern.add(anredeAendern);
-        datenAendern.add(vornameAendernText);
-        datenAendern.add(vornameNeu);
-        datenAendern.add(vornameAendern);
-        datenAendern.add(nachnameAendernText);
-        datenAendern.add(nachnameNeu);
-        datenAendern.add(nachnameAendern);
-        datenAendern.add(passwortAendernText);
-        datenAendern.add(passwortNeu);
-        datenAendern.add(passwortAendern);
-        datenAendern.add(plzAendernText);
-        datenAendern.add(plzNeu);
-        datenAendern.add(plzAendern);
-        datenAendern.add(ortAendernText);
-        datenAendern.add(ortNeu);
-        datenAendern.add(ortAendern);
-        datenAendern.add(strasseAendernText);
-        datenAendern.add(strasseNeu);
-        datenAendern.add(strasseAendern);
-        datenAendern.add(hausnummerAendernText);
-        datenAendern.add(hausnummerNeu);
-        datenAendern.add(hausnummerAendern);
-        datenAendern.add(mailAendernText);
-        datenAendern.add(mailNeu);
-        datenAendern.add(mailAendern);
-        datenAendern.add(telefonnummerAendernText);
-        datenAendern.add(telefonnummerNeu);
-        datenAendern.add(telefonnummerAendern);
-        datenAendern.add(familienstandAendernText);
+        datenAendern.add(button5);
+        datenAendern.add(label3);
+        datenAendern.add(textField1);
+        datenAendern.add(button1);
+        datenAendern.add(label4);
+        datenAendern.add(textField2);
+        datenAendern.add(button2);
+        datenAendern.add(label6);
+        datenAendern.add(textField3);
+        datenAendern.add(button4);
+        datenAendern.add(label8);
+        datenAendern.add(textField4);
+        datenAendern.add(button6);
+        datenAendern.add(label9);
+        datenAendern.add(textField5);
+        datenAendern.add(button7);
+        datenAendern.add(label10);
+        datenAendern.add(textField6);
+        datenAendern.add(button8);
+        datenAendern.add(label11);
+        datenAendern.add(textField7);
+        datenAendern.add(button9);
+        datenAendern.add(label13);
+        datenAendern.add(textField9);
+        datenAendern.add(button11);
+        datenAendern.add(label14);
+        datenAendern.add(textField8);
+        datenAendern.add(button12);
+        datenAendern.add(label12);
         datenAendern.add(RegistrierLayer.cbFamilienstand);
-        datenAendern.add(familienstandAendern);
-        datenAendern.add(staatsangehoerigkeitAendernText);
-        datenAendern.add(staatsangehoerigkeitNeu);
-        datenAendern.add(staatsangehoerigkeitAendern);
-        geburtsdatum.add(geburtsdatumAendernText);
+        datenAendern.add(button10);
+        datenAendern.add(label15);
+        datenAendern.add(textField10);
+        datenAendern.add(button13);
+        geburtsdatum.add(label5);
         geburtsdatum.add(RegistrierLayer.GeburtsdatumTag);
         geburtsdatum.add(RegistrierLayer.GeburtsdatumMonat);
         geburtsdatum.add(RegistrierLayer.GeburtsdatumJahr);
-        geburtsdatum.add(geburtsdatumAendern);
+        geburtsdatum.add(button3);
     }
 
     @Override
     public void addPanelsToFrame() {
-        StartLayer.fenster.add(einstellungen);
-        StartLayer.fenster.add(datenAendern);
-        StartLayer.fenster.add(geburtsdatum);
+        MasterController.fenster.add(einstellungen);
+        MasterController.fenster.add(datenAendern);
+        MasterController.fenster.add(geburtsdatum);
     }
 
     @Override
     public void removePanelsFromFrame() {
-        StartLayer.fenster.remove(einstellungen);
-        StartLayer.fenster.remove(datenAendern);
-        StartLayer.fenster.remove(geburtsdatum);
+        MasterController.fenster.remove(einstellungen);
+        MasterController.fenster.remove(datenAendern);
+        MasterController.fenster.remove(geburtsdatum);
     }
 
     void vornameAendernWurdeAusgewaelt(){
-        angemeldetePerson.setVorname(vornameNeu.getText());
+        angemeldetePerson.setVorname(textField1.getText());
         DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
                 "first_name",
                 angemeldetePerson.getVorname());
     }
     void ortAendernWurdeAusgewaelt(){
-        angemeldetePerson.setOrt(ortNeu.getText());
+        angemeldetePerson.setOrt(textField5.getText());
         DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
                 "city",
                 angemeldetePerson.getOrt());
     }
     void nachnameAendernWurdeAusgewaelt(){
-        angemeldetePerson.setNachname(nachnameNeu.getText());
+        angemeldetePerson.setNachname(textField2.getText());
         DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
                 "last_name",
                 angemeldetePerson.getNachname());
@@ -278,7 +229,7 @@ public class EinstellungsLayer implements SwingPresentation {
                 angemeldetePerson.getGeburtsdatum());
     }
     void passwortAendernWurdeAusgewaelt(){
-        angemeldetePerson.setPasswort(passwortNeu.getText());
+        angemeldetePerson.setPasswort(textField3.getText());
         DATABASE.update_password_by_id(angemeldetePerson.getSozialversicherungsnummer(),
                 angemeldetePerson.getPasswort());
     }
@@ -289,19 +240,19 @@ public class EinstellungsLayer implements SwingPresentation {
                 angemeldetePerson.getAnrede());
     }
     void plzAendernWurdeAusgewaelt(){
-        angemeldetePerson.setPLZ(Integer.parseInt(plzNeu.getText()));
+        angemeldetePerson.setPLZ(Integer.parseInt(textField4.getText()));
         DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
                 "zip_code",
                 angemeldetePerson.getPLZ());
     }
     void strasseAendernWurdeAusgewaelt(){
-        angemeldetePerson.setStrasse(strasseNeu.getText());
+        angemeldetePerson.setStrasse(textField6.getText());
         DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
                 "street",
                 angemeldetePerson.getStrasse());
     }
     void hausnummerAendernWurdeAusgewaelt(){
-        angemeldetePerson.setHausnummer(hausnummerNeu.getText());
+        angemeldetePerson.setHausnummer(textField7.getText());
         DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
                 "house_number",
                 angemeldetePerson.getHausnummer());
@@ -313,19 +264,19 @@ public class EinstellungsLayer implements SwingPresentation {
                 angemeldetePerson.getFamilienstand());
     }
     void mailAendernWurdeAusgewaelt(){
-        angemeldetePerson.setMailAdresse(mailNeu.getText());
+        angemeldetePerson.setMailAdresse(textField9.getText());
         DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
                 "email_address",
                 angemeldetePerson.getMailAdresse());
     }
     void telefonnummerAendernWurdeAusgewaelt(){
-        angemeldetePerson.setTelefonnummer(Long.parseLong(telefonnummerNeu.getText()));
+        angemeldetePerson.setTelefonnummer(Long.parseLong(textField8.getText()));
         DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
                 "phone_number",
                 angemeldetePerson.getTelefonnummer());
     }
     void staatsangehoerigkeitAendernWurdeAusgewaelt(){
-        angemeldetePerson.setStaatsangehoerigkeit(staatsangehoerigkeitNeu.getText());
+        angemeldetePerson.setStaatsangehoerigkeit(textField10.getText());
         DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
                 "nationality",
                 angemeldetePerson.getStaatsangehoerigkeit());

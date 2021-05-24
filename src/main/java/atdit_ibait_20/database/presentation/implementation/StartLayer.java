@@ -16,39 +16,25 @@ import java.util.ResourceBundle;
 public class StartLayer implements SwingPresentation {
 
 
-    static final JFrame fenster = new JFrame();
+
 
     private static final JPanel willkommenPanel = new JPanel();
     private static final JPanel eingangsButtonsPanel = new JPanel();
-    private static final JLabel willkommenLabel = new JLabel();
     static final JPanel sprache = new JPanel();
-    private static final JButton anmeldeButton = new JButton();
-    private static final JButton registrierButton = new JButton();
     private static String[] sprachen;
     private static JComboBox<String> spracheWaelen;
 
 
     public StartLayer(){
         setStrings();
-        setFrame();
         setLayout();
         addListeners();
         addComponentsToPanels();
         addPanelsToFrame();
-        StartLayer.fenster.validate();
-        StartLayer.fenster.repaint();
+        MasterController.fenster.validate();
+        MasterController.fenster.repaint();
     }
-    /**
-    * @setFrame Legt den Rahmen für das Fester fest
-    **/
-    public void setFrame(){
-        fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
-        fenster.pack();
-        fenster.setVisible(true);
-        fenster.setSize(200, 300);
-        fenster.setLayout(new FlowLayout());
-    }
+
     /**
     * @setLayout Legt fest welche Art von Layout die Nutzeroberfläche hat
     **/
@@ -64,17 +50,17 @@ public class StartLayer implements SwingPresentation {
      * */
     public void addListeners(){
         removeListeners();
-        registrierButton.addActionListener(e-> registrierenFensterButtonWurdeGedrueckt());
-        anmeldeButton.addActionListener(e-> anmeldenFensterButtonWurdeGedrueckt());
+        button2.addActionListener(e-> registrierenFensterButtonWurdeGedrueckt());
         spracheWaelen.addItemListener(e->spracheWurdeGeaendert(e));
+        button1.addActionListener(e->anmeldenFensterButtonWurdeGedrueckt());
     }
 
     public void removeListeners() {
-        for (ActionListener listener : registrierButton.getActionListeners())
-            registrierButton.removeActionListener(listener);
+        for (ActionListener listener : button1.getActionListeners())
+            button1.removeActionListener(listener);
 
-        for (ActionListener listener : anmeldeButton.getActionListeners())
-            anmeldeButton.removeActionListener(listener);
+        for (ActionListener listener : button2.getActionListeners())
+            button2.removeActionListener(listener);
 
         for (ItemListener listener : spracheWaelen.getItemListeners())
             spracheWaelen.removeItemListener(listener);
@@ -87,34 +73,34 @@ public class StartLayer implements SwingPresentation {
     public void addComponentsToPanels(){
         sprache.removeAll();
         sprache.add(spracheWaelen);
-        willkommenPanel.add(willkommenLabel);
-        eingangsButtonsPanel.add(registrierButton);
-        eingangsButtonsPanel.add(anmeldeButton);
+        willkommenPanel.add(label1);
+        eingangsButtonsPanel.add(button2);
+        eingangsButtonsPanel.add(button1);
     }
     
     /**
     * @addPanelsToFrame fügt die Buttons dem Rahmen hinzu
     **/
     public void addPanelsToFrame(){
-        fenster.add(sprache);
-        fenster.add(willkommenPanel);
-        fenster.add(eingangsButtonsPanel);
+        MasterController.fenster.add(sprache);
+        MasterController.fenster.add(willkommenPanel);
+        MasterController.fenster.add(eingangsButtonsPanel);
     }
 
 
     public void removePanelsFromFrame() {
-        fenster.remove(willkommenPanel);
-        fenster.remove(eingangsButtonsPanel);
+        MasterController.fenster.remove(willkommenPanel);
+        MasterController.fenster.remove(eingangsButtonsPanel);
     }
 
     /**
     * @setString Legt die Schriftzüge der einzelnen Elemente des Layouts fest
     **/
     private static void setStrings(){
-        willkommenLabel.setText(App.resourceBundle.getString("welcome.to.our.app"));
-        fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
-        anmeldeButton.setText(App.resourceBundle.getString("sign.in"));
-        registrierButton.setText(App.resourceBundle.getString("register"));
+        button1.setText(App.resourceBundle.getString("sign.in"));
+        label1.setText(App.resourceBundle.getString("welcome.to.our.app"));
+        MasterController.fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
+        button2.setText(App.resourceBundle.getString("register"));
         sprachen = new String[]{App.resourceBundle.getString("choose.your.language"), App.resourceBundle.getString("german"), App.resourceBundle.getString("english")};
         spracheWaelen = new JComboBox<>(sprachen);
     }
@@ -123,10 +109,10 @@ public class StartLayer implements SwingPresentation {
     **/
     void registrierenFensterButtonWurdeGedrueckt(){
         removePanelsFromFrame();
-        new RegistrierLayer();
+        App.masterController.loadRegistrierLayer();
     }
     void anmeldenFensterButtonWurdeGedrueckt(){
-        new AnmeldeLayer();
+        App.masterController.loadAnmeldeLayer();
         removePanelsFromFrame();
     }
     /**

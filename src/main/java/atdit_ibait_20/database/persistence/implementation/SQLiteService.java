@@ -74,7 +74,7 @@ public class SQLiteService implements Database {
                  phone_number    long     NOT NULL,    \s
                  password        text     NOT NULL,    \s
                  salt            text     NOT NULL,    \s
-                 IBAN            text(22)              \s
+                 label16            text(22)              \s
                 );""";
         execute(sql, conn);
 
@@ -151,7 +151,7 @@ public class SQLiteService implements Database {
 * @get_person_by_id erlaubt es auf die Datenbank zuzugreifen und mit Hilfe der ID die Daten einer Person abzufragen
 **/
     public BasicPerson get_person_by_id(String id) {
-        String sql = "SELECT id, form_of_address, first_name, last_name, birth_date, nationality, marital_status, zip_code, city, street, house_number, email_address, phone_number, IBAN FROM person WHERE id = ?";
+        String sql = "SELECT id, form_of_address, first_name, last_name, birth_date, nationality, marital_status, zip_code, city, street, house_number, email_address, phone_number, label16 FROM person WHERE id = ?";
         Connection conn = connect();
         BasicPerson returnPerson = new BasicPerson();
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -171,7 +171,7 @@ public class SQLiteService implements Database {
                 returnPerson.setHausnummer(rs.getString("house_number"));
                 returnPerson.setMailAdresse(rs.getString("email_address"));
                 returnPerson.setTelefonnummer(rs.getInt("phone_number"));
-                returnPerson.setIBAN(rs.getString("IBAN"));
+                returnPerson.setIBAN(rs.getString("label16"));
             }
             System.out.println("Data for id: " + id + " successfully received.");
         } catch (SQLException exp) {

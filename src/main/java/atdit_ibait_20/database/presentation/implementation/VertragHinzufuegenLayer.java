@@ -28,21 +28,6 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     static final JPanel hinzugefuegt = new JPanel();
     static final JPanel fehlerPanel  = new JPanel();
 
-
-    private static final JLabel buchungsArtText = new JLabel();
-    private static final JLabel tageText = new JLabel();
-    private static final JLabel landText = new JLabel();
-    private static final JLabel preisMonatlich = new JLabel();
-    private static final JLabel preisJahr = new JLabel();
-    private static final JLabel keinPreis = new JLabel();
-    private static final JLabel keineVersicherung = new JLabel();
-    private static final JLabel falscheIBAN = new JLabel();
-    private static final JLabel versicherungArtText = new JLabel();
-    private static final JLabel IBAN = new JLabel("IBAN");
-    private static final JLabel fertig = new JLabel();
-
-    private final JTextField tfIBAN = new JTextField();
-
     private static String[] versicherungsArten;
     private static String[] buchungsArten;
     private static Integer[] tage;
@@ -52,10 +37,6 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     private static JComboBox <String> buchungsArt;
     private static JComboBox <Integer> anzahlDerTage;
     private static JComboBox <String> land;
-
-    private static final JButton hinzufuegenButton = new JButton();
-    private static final JButton preis = new JButton();
-    private static final JButton addIBAN = new JButton();
 
     private static Integer tagesPreis;
     static int betrag;
@@ -69,29 +50,29 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         addListeners();
         addComponentsToPanels();
         addPanelsToFrame();
-        setFrame();
-        StartLayer.fenster.validate();
-        StartLayer.fenster.repaint();
+        MasterController.fenster.validate();
+        MasterController.fenster.repaint();
     }
 
     /**
     * @setStringt legt fest welche Schriftzüge die einzelnen Elemente tragen
     **/
     static void setStrings(){
-        buchungsArtText.setText(App.resourceBundle.getString("payment.type"));
-        tageText.setText(App.resourceBundle.getString("days.of.visiting"));
-        landText.setText(App.resourceBundle.getString("country"));
-        preisMonatlich.setText(monatlicherPreis+App.resourceBundle.getString("currency"));
-        preisJahr.setText(jahresPreis+App.resourceBundle.getString("currency"));
-        keinPreis.setText(App.resourceBundle.getString("noPrice"));
-        keineVersicherung.setText((App.resourceBundle.getString("noInsuranceSelected")));
-        falscheIBAN.setText(App.resourceBundle.getString("failed.to.add.IBAN"));
-        hinzufuegenButton.setText(App.resourceBundle.getString("add.contract"));
-        preis.setText(App.resourceBundle.getString("get.price"));
-        addIBAN.setText(App.resourceBundle.getString("add.iban"));
+        label6.setText(App.resourceBundle.getString("payment.type"));
+        label7.setText(App.resourceBundle.getString("days.of.visiting"));
+        label8.setText(App.resourceBundle.getString("country"));
+        label9.setText(monatlicherPreis+App.resourceBundle.getString("currency"));
+        label10.setText(jahresPreis+App.resourceBundle.getString("currency"));
+        label11.setText(App.resourceBundle.getString("noPrice"));
+        label12.setText((App.resourceBundle.getString("noInsuranceSelected")));
+        label13.setText(App.resourceBundle.getString("failed.to.add.IBAN"));
+        button7.setText(App.resourceBundle.getString("add.contract"));
+        button8.setText(App.resourceBundle.getString("get.price"));
+        button9.setText(App.resourceBundle.getString("add.iban"));
         versicherungsArten = new String[]{"*",App.resourceBundle.getString("luggage.insurance")};
-        versicherungArtText.setText(App.resourceBundle.getString("insurance.type"));
-        fertig.setText(App.resourceBundle.getString("successfully.added.new.contract"));
+        label14.setText(App.resourceBundle.getString("insurance.type"));
+        label15.setText(App.resourceBundle.getString("successfully.added.new.contract"));
+        label16.setText("IBAN");
         buchungsArten = new String[]{"*",App.resourceBundle.getString("monthly"),App.resourceBundle.getString("yearly"),App.resourceBundle.getString("per.trip")};
         tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
         laender = new String[]{App.resourceBundle.getString("germany"),App.resourceBundle.getString("usa"),App.resourceBundle.getString("portugal")};
@@ -101,13 +82,6 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         buchungsArt = new JComboBox<>(buchungsArten);
     }
 
-    /**
-    * @setFrame Legt die Größe des Fensters, welches dem Nutzer angezeigt wird fest
-    **/
-    @Override
-    public void setFrame() {
-        StartLayer.fenster.setSize(400,400);
-    }
 
     /**
     * @setLayout Legt fest welche Art das Layout haben soll
@@ -117,10 +91,10 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         vertragsDaten.setLayout(new GridLayout(0,2));
         neueIBAN.setLayout(new GridLayout(0,2));
         preise.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
-        falscheIBAN.setForeground(Color.red);
-        keineVersicherung.setForeground(Color.red);
-        keinPreis.setForeground(Color.red);
-        keineVersicherung.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
+        label13.setForeground(Color.red);
+        label12.setForeground(Color.red);
+        label11.setForeground(Color.red);
+        label12.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
     }
 
     /**
@@ -131,9 +105,9 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         removeListeners();
         buchungsArt.addItemListener(e->this.buchungsArtWurdeGeaendert(e));
         versicherungsArt.addItemListener(e->this.versicherungsArtWurdeGeaendert());
-        hinzufuegenButton.addActionListener(e->this.hinzufuegeButtonWurdeGedrueckt());
-        preis.addActionListener(e->this.preisButtonWurdeGedrueckt());
-        addIBAN.addActionListener(e->this.IBANButtonWurdeGedrueckt());
+        button7.addActionListener(e->this.hinzufuegeButtonWurdeGedrueckt());
+        button8.addActionListener(e->this.preisButtonWurdeGedrueckt());
+        button9.addActionListener(e->this.IBANButtonWurdeGedrueckt());
     }
 
     public void removeListeners() {
@@ -143,14 +117,14 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         for (ItemListener listener : versicherungsArt.getItemListeners())
             versicherungsArt.removeItemListener(listener);
 
-        for (ActionListener listener : hinzufuegenButton.getActionListeners())
-            hinzufuegenButton.removeActionListener(listener);
+        for (ActionListener listener : button7.getActionListeners())
+            button7.removeActionListener(listener);
 
-        for (ActionListener listener : preis.getActionListeners())
-            preis.removeActionListener(listener);
+        for (ActionListener listener : button8.getActionListeners())
+            button8.removeActionListener(listener);
 
-        for (ActionListener listener : addIBAN.getActionListeners())
-            addIBAN.removeActionListener(listener);
+        for (ActionListener listener : button9.getActionListeners())
+            button9.removeActionListener(listener);
     }
 
     @Override
@@ -160,29 +134,29 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         preise.removeAll();
         neueIBAN.removeAll();
         hinzugefuegt.removeAll();
-        vertragsDaten.add(versicherungArtText);
+        vertragsDaten.add(label14);
         vertragsDaten.add(versicherungsArt);
-        hinzufuegen.add(preis);
-        neueIBAN.add(IBAN);
-        neueIBAN.add(tfIBAN);
-        neueIBAN.add(addIBAN);
-        hinzugefuegt.add(fertig);
+        hinzufuegen.add(button8);
+        neueIBAN.add(label16);
+        neueIBAN.add(textField2);
+        neueIBAN.add(button9);
+        hinzugefuegt.add(label15);
     }
 
     @Override
     public void addPanelsToFrame() {
-        StartLayer.fenster.add(vertragsDaten);
-        StartLayer.fenster.add(preise);
-        StartLayer.fenster.add(hinzufuegen);
-        StartLayer.fenster.add(fehlerPanel);
+        MasterController.fenster.add(vertragsDaten);
+        MasterController.fenster.add(preise);
+        MasterController.fenster.add(hinzufuegen);
+        MasterController.fenster.add(fehlerPanel);
     }
 
 
         public void removePanelsFromFrame() {
-            StartLayer.fenster.remove(vertragsDaten);
-            StartLayer.fenster.remove(preise);
-            StartLayer.fenster.remove(hinzufuegen);
-            StartLayer.fenster.remove(fehlerPanel);
+            MasterController.fenster.remove(vertragsDaten);
+            MasterController.fenster.remove(preise);
+            MasterController.fenster.remove(hinzufuegen);
+            MasterController.fenster.remove(fehlerPanel);
         }
 
         /**
@@ -194,8 +168,8 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         preise.removeAll();
         eingabenStimmen();
         setPreis();
-        hinzufuegen.add(hinzufuegenButton);
-        StartLayer.fenster.validate();
+        hinzufuegen.add(button7);
+        MasterController.fenster.validate();
     }
     public void hinzufuegeButtonWurdeGedrueckt(){
         if(eingabenStimmen()){
@@ -204,37 +178,37 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     }
 
     public void IBANButtonWurdeGedrueckt(){
-        String IBAN = tfIBAN.getText();
+        String IBAN = textField2.getText();
         eingegebeneIBANPruefen(IBAN);
-        StartLayer.fenster.validate();
+        MasterController.fenster.validate();
     }
     public void versicherungsArtWurdeGeaendert(){
         displayBuchungsartOptionen();
-        StartLayer.fenster.validate();
+        MasterController.fenster.validate();
     }
     public void buchungsArtWurdeGeaendert(ItemEvent e){
         hideAngabenZurReise();
-        StartLayer.fenster.validate();
+        MasterController.fenster.validate();
         if(e.getItem().equals(App.resourceBundle.getString("per.trip"))) {
             displayAngabenZurReise();
-            StartLayer.fenster.setSize(600,400);
-            StartLayer.fenster.validate();
+            MasterController.fenster.setSize(600,400);
+            MasterController.fenster.validate();
         }
     }
     public void displayBuchungsartOptionen(){
-        vertragsDaten.add(buchungsArtText);
+        vertragsDaten.add(label6);
         vertragsDaten.add(buchungsArt);
     }
     public void displayAngabenZurReise(){
-        vertragsDaten.add(tageText);
+        vertragsDaten.add(label7);
         vertragsDaten.add(anzahlDerTage);
-        vertragsDaten.add(landText);
+        vertragsDaten.add(label8);
         vertragsDaten.add(land);
     }
     public void hideAngabenZurReise(){
-        vertragsDaten.remove(tageText);
+        vertragsDaten.remove(label7);
         vertragsDaten.remove(anzahlDerTage);
-        vertragsDaten.remove(landText);
+        vertragsDaten.remove(label8);
         vertragsDaten.remove(land);
     }
     public void setPreis(){
@@ -249,11 +223,11 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     **/
     public int setPreisForLuggageInsurance(Object buchungsArtObjekt){
         if(buchungsArtObjekt.equals(App.resourceBundle.getString("monthly"))) {
-            preise.add(preisMonatlich);
+            preise.add(label9);
             return monatlicherPreis;
         }
         else if(buchungsArtObjekt.equals(App.resourceBundle.getString("yearly"))) {
-            preise.add(preisJahr);
+            preise.add(label10);
             return jahresPreis;
         }
         else if(buchungsArtObjekt.equals(App.resourceBundle.getString("per.trip"))){
@@ -274,18 +248,18 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     }
 
     /**
-    * @PersonenIf fügt bei der Person die IBAN zu bzw. ändert sie
+    * @PersonenIf fügt bei der Person die label16 zu bzw. ändert sie
     **/
     public boolean eingabenStimmen(){
         boolean angabenStimmen;
         fehlerPanel.removeAll();
 
         if (versicherungsArt.getSelectedItem() == "*") {
-            fehlerPanel.add(keineVersicherung);
+            fehlerPanel.add(label12);
             angabenStimmen = false;
         }
         else if (betrag == 0) {
-            fehlerPanel.add(keinPreis);
+            fehlerPanel.add(label11);
             angabenStimmen = false;
         }else if(angemeldetePerson.getIBAN()==null){
             displayIBANHinzufuegePanel();
@@ -295,14 +269,14 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
             angabenStimmen = true;
         }
 
-        StartLayer.fenster.validate();
+        MasterController.fenster.validate();
         return angabenStimmen;
     }
     public void displayIBANHinzufuegePanel(){
-        StartLayer.fenster.remove(hinzufuegen);
-        StartLayer.fenster.add(neueIBAN);
-        StartLayer.fenster.add(hinzufuegen);
-        StartLayer.fenster.validate();
+        MasterController.fenster.remove(hinzufuegen);
+        MasterController.fenster.add(neueIBAN);
+        MasterController.fenster.add(hinzufuegen);
+        MasterController.fenster.validate();
     }
     public void neuerVertragHinzufuegen(){
         System.out.println("Contract added.");
@@ -310,24 +284,24 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
                 buchungsArt.getSelectedItem().toString(),betrag);
         DATABASE.create_contract_entry(vertrag,angemeldetePerson.getSozialversicherungsnummer());
         angemeldetePerson.addVertrag(vertrag);
-        StartLayer.fenster.add(hinzugefuegt);
-        StartLayer.fenster.validate();
+        MasterController.fenster.add(hinzugefuegt);
+        MasterController.fenster.validate();
     }
 
     /**
-    * @IBANIf überträgt die Änderung der IBAN an die Datenbank
+    * @IBANIf überträgt die Änderung der label16 an die Datenbank
     **/
     public void eingegebeneIBANPruefen(String IBAN){
         if(IBAN.length()==22) {
             angemeldetePerson.setIBAN(IBAN);
             DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
-                    "IBAN", angemeldetePerson.getIBAN());
-            neueIBAN.remove(falscheIBAN);
-            StartLayer.fenster.remove(neueIBAN);
-            StartLayer.fenster.validate();
+                    "label16", angemeldetePerson.getIBAN());
+            neueIBAN.remove(label13);
+            MasterController.fenster.remove(neueIBAN);
+            MasterController.fenster.validate();
         } else{
-            neueIBAN.add(falscheIBAN);
-            StartLayer.fenster.validate();
+            neueIBAN.add(label13);
+            MasterController.fenster.validate();
         }
     }
 }

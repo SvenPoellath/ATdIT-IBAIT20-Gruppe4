@@ -61,7 +61,7 @@ class RegistrierLayerTest {
         Assertions.assertEquals(vorname, person.getVorname());
         Assertions.assertEquals(nachname, person.getNachname());
         Assertions.assertEquals(geburtsdatumReturnForm, person.getGeburtsdatum());
-        //Assertions.assertEquals(passwort, person.getPasswort());
+        //Assertions.assertEquals(label3, person.getPasswort());
         Assertions.assertEquals(anrede, person.getAnrede());
         Assertions.assertEquals(plz, person.getPLZ());
         Assertions.assertEquals(ort, person.getOrt());

@@ -23,49 +23,20 @@ public class RegistrierLayer implements SwingPresentation {
     private static final JPanel registrierButtonPanel = new JPanel();
     private static final JPanel falscheAngabePanel = new JPanel();
 
-    private static final JTextField tfName = new JTextField();
-    private static final JTextField tfNachName = new JTextField();
-    private static final JTextField tfVersicherungsNummer = new JTextField();
-    private static final JTextField tfPlz = new JTextField();
-    private static final JTextField tfOrt = new JTextField();
-    private static final JTextField tfStrasse = new JTextField();
-    private static final JTextField tfHausnummer = new JTextField();
-    private static final JTextField tfEmailadresse = new JTextField();
-    private static final JTextField tfTelefonnummer = new JTextField();
-    private static final JTextField tfStaatsangehoerigkeit = new JTextField();
-
     private static final JPasswordField tfRegistrierPasswort = new JPasswordField();
 
-    private static final JLabel falscheAngabe = new JLabel();
-    private static final JLabel anrede = new JLabel();
-    private static final JLabel name = new JLabel();
-    private static final JLabel nachName = new JLabel();
-    private static final JLabel staatsangehoerigkeit = new JLabel();
-    private static final JLabel familienstand = new JLabel();
-    private static final JLabel plz = new JLabel();
-    private static final JLabel ort = new JLabel();
-    private static final JLabel strasse = new JLabel();
-    private static final JLabel hausnummer = new JLabel();
-    private static final JLabel mailadresse = new JLabel();
-    private static final JLabel telefonnummer = new JLabel();
-    private static final JLabel versicherungsNummer = new JLabel();
-    private static final JLabel registrierPasswort = new JLabel();
-    private static final JLabel geburtsDatum = new JLabel();
+    private static String[] anredeAuswahl = new String[]{ "*",App.resourceBundle.getString("mister"), App.resourceBundle.getString("mrs")};
+    private static Integer[] tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
+    private static Integer[] monate = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12};
+    private static Integer[] jahre = new Integer[(Year.now().getValue()-1899)];
+    private static String [] familienstandArten = new String[]{App.resourceBundle.getString("single"),App.resourceBundle.getString("married"),App.resourceBundle.getString("divorced"),App.resourceBundle.getString("widowed")};
 
-    private static final JButton registrierenButton = new JButton();
-    private static final JButton zurueckButton = new JButton("<--");
+    static JComboBox<String> cbAnrede = new JComboBox<>(anredeAuswahl);
+    static JComboBox<Integer> GeburtsdatumTag = new JComboBox<>(tage);
+    static JComboBox<Integer> GeburtsdatumMonat = new JComboBox<>(monate);
+    static JComboBox<Integer> GeburtsdatumJahr = new JComboBox<>(jahre);
+    static JComboBox<String> cbFamilienstand = new JComboBox<>(familienstandArten);
 
-    private static String[] anredeAuswahl;
-    private static Integer[] tage;
-    private static Integer[] monate;
-    private static Integer[] jahre;
-    private static String [] familienstandArten;
-
-    static JComboBox<String> cbAnrede;
-    static JComboBox<Integer> GeburtsdatumTag;
-    static JComboBox<Integer> GeburtsdatumMonat;
-    static JComboBox<Integer> GeburtsdatumJahr;
-    static JComboBox<String> cbFamilienstand;
     static boolean istErsterAufruf = true;
 
     public RegistrierLayer(){
@@ -77,36 +48,33 @@ public class RegistrierLayer implements SwingPresentation {
             addListeners();
             addComponentsToPanels();
             addPanelsToFrame();
-            setFrame();
-        StartLayer.fenster.validate();
-        StartLayer.fenster.repaint();
+        MasterController.fenster.validate();
+        MasterController.fenster.repaint();
     }
     /**
 * @setString legt die dem Nutzer angezeigten Namen der einzelnen Felder fest sowie die Auswahloptionen des Geburtsdatums
 **/
     static void setStrings(){
-        anrede.setText(App.resourceBundle.getString("title"));
-        name.setText(App.resourceBundle.getString("first.name"));
-        nachName.setText(App.resourceBundle.getString("last.name"));
-        staatsangehoerigkeit.setText(App.resourceBundle.getString("nationality"));
-        familienstand.setText(App.resourceBundle.getString("marital.status"));
-        plz.setText(App.resourceBundle.getString("postcode"));
-        ort.setText(App.resourceBundle.getString("city"));
-        strasse.setText(App.resourceBundle.getString("street"));
-        hausnummer.setText(App.resourceBundle.getString("house.number"));
-        mailadresse.setText(App.resourceBundle.getString("e.mail.address"));
-        telefonnummer.setText(App.resourceBundle.getString("phone.number"));
-        versicherungsNummer.setText(App.resourceBundle.getString("social.security.number"));
-        registrierPasswort.setText(App.resourceBundle.getString("password"));
-        geburtsDatum.setText(App.resourceBundle.getString("date.of.birth"));
-        registrierenButton.setText(App.resourceBundle.getString("register"));
-        anredeAuswahl = new String[]{ "*",App.resourceBundle.getString("mister"), App.resourceBundle.getString("mrs")};
-        tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
-        monate = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12};
-        jahre = new Integer[(Year.now().getValue()-1899)];
+        label2.setText(App.resourceBundle.getString("title"));
+        label3.setText(App.resourceBundle.getString("first.name"));
+        label4.setText(App.resourceBundle.getString("last.name"));
+        label5.setText(App.resourceBundle.getString("nationality"));
+        label6.setText(App.resourceBundle.getString("marital.status"));
+        label7.setText(App.resourceBundle.getString("postcode"));
+        label8.setText(App.resourceBundle.getString("city"));
+        label9.setText(App.resourceBundle.getString("street"));
+        label10.setText(App.resourceBundle.getString("house.number"));
+        label11.setText(App.resourceBundle.getString("e.mail.address"));
+        label12.setText(App.resourceBundle.getString("phone.number"));
+        label13.setText(App.resourceBundle.getString("social.security.number"));
+        label14.setText(App.resourceBundle.getString("password"));
+        label15.setText(App.resourceBundle.getString("date.of.birth"));
+        button5.setText(App.resourceBundle.getString("register"));
+        button4.setText("<--");
         for(int JahreCounter = 1900; JahreCounter <= Year.now().getValue(); JahreCounter++){
-                jahre[JahreCounter-1900] = JahreCounter;
+            jahre[JahreCounter-1900] = JahreCounter;
         }
+        anredeAuswahl = new String[]{ "*",App.resourceBundle.getString("mister"), App.resourceBundle.getString("mrs")};
         familienstandArten = new String[]{App.resourceBundle.getString("single"),App.resourceBundle.getString("married"),App.resourceBundle.getString("divorced"),App.resourceBundle.getString("widowed")};
         cbAnrede  = new JComboBox<>(anredeAuswahl);
         GeburtsdatumTag  = new JComboBox<>(tage);
@@ -115,10 +83,6 @@ public class RegistrierLayer implements SwingPresentation {
         cbFamilienstand = new JComboBox<>(familienstandArten);
     }
 
-    @Override
-    public void setFrame() {
-        StartLayer.fenster.setSize(400,600);
-    }
 
     @Override
     public void setLayout() {
@@ -126,96 +90,96 @@ public class RegistrierLayer implements SwingPresentation {
         datenPanel.setLayout(new GridLayout(0,2));
         geburtsDatumsPanel.setLayout(new GridLayout(0,3));
         registrierButtonPanel.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
-        falscheAngabe.setForeground(Color.red);
+        label1.setForeground(Color.red);
     }
 
     @Override
     public void addListeners() {
         removeListeners();
-        zurueckButton.addActionListener(e->zurueckButtonWurdeGedrueckt());
-        registrierenButton.addActionListener(e->registerierButtonWurdeGedrueckt());
+        button4.addActionListener(e->zurueckButtonWurdeGedrueckt());
+        button5.addActionListener(e->registerierButtonWurdeGedrueckt());
     }
 
     public void removeListeners() {
-        for (ActionListener listener : zurueckButton.getActionListeners())
-            zurueckButton.removeActionListener(listener);
+        for (ActionListener listener : button4.getActionListeners())
+            button4.removeActionListener(listener);
 
-        for (ActionListener listener : registrierenButton.getActionListeners())
-            registrierenButton.removeActionListener(listener);
+        for (ActionListener listener : button5.getActionListeners())
+            button5.removeActionListener(listener);
     }
 
 
     @Override
     public void addComponentsToPanels() {
-        registrierButtonPanel.add(registrierenButton);
-        datenPanel.add(anrede);
+        registrierButtonPanel.add(button5);
+        datenPanel.add(label2);
         datenPanel.add(cbAnrede);
-        datenPanel.add(name);
-        datenPanel.add(tfName);
-        datenPanel.add(nachName);
-        datenPanel.add(tfNachName);
-        datenPanel.add(staatsangehoerigkeit);
-        datenPanel.add(tfStaatsangehoerigkeit);
-        datenPanel.add(familienstand);
+        datenPanel.add(label3);
+        datenPanel.add(textField1);
+        datenPanel.add(label4);
+        datenPanel.add(textField2);
+        datenPanel.add(label5);
+        datenPanel.add(textField10);
+        datenPanel.add(label6);
         datenPanel.add(cbFamilienstand);
-        datenPanel.add(plz);
-        datenPanel.add(tfPlz);
-        datenPanel.add(ort);
-        datenPanel.add(tfOrt);
-        datenPanel.add(strasse);
-        datenPanel.add(tfStrasse);
-        datenPanel.add(hausnummer);
-        datenPanel.add(tfHausnummer);
-        datenPanel.add(mailadresse);
-        datenPanel.add(tfEmailadresse);
-        datenPanel.add(telefonnummer);
-        datenPanel.add(tfTelefonnummer);
-        datenPanel.add(versicherungsNummer);
-        datenPanel.add(tfVersicherungsNummer);
-        datenPanel.add(registrierPasswort);
+        datenPanel.add(label7);
+        datenPanel.add(textField4);
+        datenPanel.add(label8);
+        datenPanel.add(textField5);
+        datenPanel.add(label9);
+        datenPanel.add(textField6);
+        datenPanel.add(label10);
+        datenPanel.add(textField7);
+        datenPanel.add(label11);
+        datenPanel.add(textField8);
+        datenPanel.add(label12);
+        datenPanel.add(textField9);
+        datenPanel.add(label13);
+        datenPanel.add(textField3);
+        datenPanel.add(label14);
         datenPanel.add(tfRegistrierPasswort);
-        datenPanel.add(geburtsDatum);
+        datenPanel.add(label15);
         geburtsDatumsPanel.add(GeburtsdatumTag);
         geburtsDatumsPanel.add(GeburtsdatumMonat);
         geburtsDatumsPanel.add(GeburtsdatumJahr);
-        zurueckPanel.add(zurueckButton);
-        falscheAngabePanel.add(falscheAngabe);
+        zurueckPanel.add(button4);
+        falscheAngabePanel.add(label1);
     }
 
     @Override
     public void addPanelsToFrame() {
-        StartLayer.fenster.add(zurueckPanel);
-        StartLayer.fenster.add(datenPanel);
-        StartLayer.fenster.add(geburtsDatumsPanel);
-        StartLayer.fenster.add(registrierButtonPanel);
+        MasterController.fenster.add(zurueckPanel);
+        MasterController.fenster.add(datenPanel);
+        MasterController.fenster.add(geburtsDatumsPanel);
+        MasterController.fenster.add(registrierButtonPanel);
     }
 /**
 * @checkInputs überprüft ob gültige Daten eingegeben wurden und gibt dem Nutzer bei Problemen eine Fehlermeldung zurück
 **/
     boolean checkInputs(){
-        falscheAngabe.setText(null);
+        label1.setText(null);
 
-        if(!DATABASE.check_id(tfVersicherungsNummer.getText())) {
-            falscheAngabe.setText(App.resourceBundle.getString("social.security.number") + " " + App.resourceBundle.getString("is.taken"));
+        if(!DATABASE.check_id(textField3.getText())) {
+            label1.setText(App.resourceBundle.getString("social.security.number") + " " + App.resourceBundle.getString("is.taken"));
         }
 
-        if(tfVersicherungsNummer.getText().length()!=12){
-            falscheAngabe.setText(App.resourceBundle.getString("invalid")+" "+App.resourceBundle.getString("social.security.number"));
+        if(textField3.getText().length()!=12){
+            label1.setText(App.resourceBundle.getString("invalid")+" "+App.resourceBundle.getString("social.security.number"));
         }
         try{
-            Integer.parseInt(tfPlz.getText());
+            Integer.parseInt(textField4.getText());
         }catch (NumberFormatException nfe){
-            falscheAngabe.setText(App.resourceBundle.getString("invalid")+" "+App.resourceBundle.getString("postcode"));
+            label1.setText(App.resourceBundle.getString("invalid")+" "+App.resourceBundle.getString("postcode"));
         }
         try{
-            Long.parseLong(tfTelefonnummer.getText());
+            Long.parseLong(textField9.getText());
         }catch (NumberFormatException nfe){
-            falscheAngabe.setText(App.resourceBundle.getString("invalid")+" "+App.resourceBundle.getString("phone.number"));
+            label1.setText(App.resourceBundle.getString("invalid")+" "+App.resourceBundle.getString("phone.number"));
         }
-        if (falscheAngabe.getText()!=null){
-            StartLayer.fenster.add(falscheAngabePanel);
-            StartLayer.fenster.repaint();
-            StartLayer.fenster.validate();
+        if (label1.getText()!=null){
+            MasterController.fenster.add(falscheAngabePanel);
+            MasterController.fenster.repaint();
+            MasterController.fenster.validate();
             return false;
         }
         else{
@@ -239,28 +203,28 @@ public class RegistrierLayer implements SwingPresentation {
             try {
                 BasicGeburtsdatum neuesGeburtsDatum = new BasicGeburtsdatum((Integer) GeburtsdatumTag.getSelectedItem(),
                         (Integer) GeburtsdatumMonat.getSelectedItem(), (Integer) GeburtsdatumJahr.getSelectedItem());
-                String versicherungsNummer = tfVersicherungsNummer.getText();
-                String vorname = tfName.getText();
-                String nachname = tfNachName.getText();
+                String versicherungsNummer = textField3.getText();
+                String vorname = textField1.getText();
+                String nachname = textField2.getText();
                 String passwort = new String(tfRegistrierPasswort.getPassword());
                 String anrede = cbAnrede.getSelectedItem().toString();
-                int plz = Integer.parseInt(tfPlz.getText());
-                String ort = tfOrt.getText();
-                String hausnummer = tfHausnummer.getText();
+                int plz = Integer.parseInt(textField4.getText());
+                String ort = textField5.getText();
+                String hausnummer = textField7.getText();
                 String familienstand = cbFamilienstand.getSelectedItem().toString();
-                String mailAdresse = tfEmailadresse.getText();
-                Long telefonNummer = Long.parseLong(tfTelefonnummer.getText());
-                String staatsangehoerigkeit = tfStaatsangehoerigkeit.getText();
-                String strasse = tfStrasse.getText();
+                String mailAdresse = textField8.getText();
+                Long telefonNummer = Long.parseLong(textField9.getText());
+                String staatsangehoerigkeit = textField10.getText();
+                String strasse = textField6.getText();
 
                 registrieren(versicherungsNummer, vorname, nachname, neuesGeburtsDatum, passwort, anrede, plz, ort, hausnummer,
                         familienstand, mailAdresse, telefonNummer, staatsangehoerigkeit, strasse);
 
             } catch (Exception exp) {
-                falscheAngabe.setText(App.resourceBundle.getString("check.your.inputs"));
-                StartLayer.fenster.add(falscheAngabePanel);
+                label1.setText(App.resourceBundle.getString("check.your.inputs"));
+                MasterController.fenster.add(falscheAngabePanel);
                 System.out.println(exp.getMessage());
-                StartLayer.fenster.validate();
+                MasterController.fenster.validate();
             }
         }
     }
@@ -283,21 +247,11 @@ public class RegistrierLayer implements SwingPresentation {
                 strasse);
         DATABASE.create_person_entry(person);
         removePanelsFromFrame();
-        clearAllTextFields();
-        new Vertragsuebersicht(person);
+        SwingPresentation.clearAllTextFields();
+        clearAllComboBoxes();
+        App.masterController.loadVertragsuebersicht(person);
     }
-    public void clearAllTextFields(){
-        tfVersicherungsNummer.setText(null);
-        tfEmailadresse.setText(null);
-        tfHausnummer.setText(null);
-        tfName.setText(null);
-        tfRegistrierPasswort.setText(null);
-        tfNachName.setText(null);
-        tfOrt.setText(null);
-        tfPlz.setText(null);
-        tfStaatsangehoerigkeit.setText(null);
-        tfStrasse.setText(null);
-        tfTelefonnummer.setText(null);
+    public void clearAllComboBoxes(){
         cbFamilienstand.setSelectedIndex(0);
         cbAnrede.setSelectedIndex(0);
         GeburtsdatumTag.setSelectedIndex(0);
@@ -305,11 +259,11 @@ public class RegistrierLayer implements SwingPresentation {
         GeburtsdatumJahr.setSelectedIndex(0);
     }
     public void removePanelsFromFrame(){
-        StartLayer.fenster.remove(registrierButtonPanel);
-        StartLayer.fenster.remove(datenPanel);
-        StartLayer.fenster.remove(geburtsDatumsPanel);
-        StartLayer.fenster.remove(zurueckPanel);
-        StartLayer.fenster.remove(falscheAngabePanel);
+        MasterController.fenster.remove(registrierButtonPanel);
+        MasterController.fenster.remove(datenPanel);
+        MasterController.fenster.remove(geburtsDatumsPanel);
+        MasterController.fenster.remove(zurueckPanel);
+        MasterController.fenster.remove(falscheAngabePanel);
     }
 }
 

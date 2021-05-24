@@ -10,7 +10,7 @@ import static atdit_ibait_20.database.App.DATABASE;
 
 /**
 * Es wird eine Klasse BasicVertrag angelegt, die alle Attribute aus der Datenbank von Vertrag implementiert
-**/
+*/
 public class BasicVertrag implements Vertrag {
     private final String Versicherungsart;
     private final String Auftragsnummer;
@@ -18,7 +18,7 @@ public class BasicVertrag implements Vertrag {
     private final int EURBetrag;
 /**
 * generateAuftragsnummer ist eine Methode, die eine zufällige Nummer für die Buchung der Versicherung generiert
-**/
+*/
     public String generateAuftragsnummer() {
         int LENGTH = 12;
         int ITERATIONS = 1;
@@ -36,8 +36,8 @@ public class BasicVertrag implements Vertrag {
     }
 
 /**
-* Ein Konstruktor für den Vertrag wird angelegt in den dem Vertrag die zufällig generierte Auftragsnummer übergeben wird. 
-**/
+* Ein Konstruktor für den Vertrag wird angelegt in den dem Vertrag die zufällig generierte Auftragsnummer sowie Buchungsart, Auftragsnummer und EURBetrag übergeben werden
+*/
     public BasicVertrag(String versicherungsart,String buchungsart, int eurBetrag) {
         Versicherungsart = versicherungsart;
         String auftragsNummer;
@@ -55,7 +55,12 @@ public class BasicVertrag implements Vertrag {
         Buchungsart = buchungsart;
         EURBetrag = eurBetrag;
     }
-
+/**
+* @Method getter ermöglicht das Zugreifen auf die Parameter von außerhalb der Klasse
+* @Param Versicherungsart
+* @Param Buchungsart
+* @Param EURBetrag
+*/
     @Override
     public String getVersicherungsart() {
         return this.Versicherungsart;

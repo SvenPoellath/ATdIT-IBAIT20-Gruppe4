@@ -13,7 +13,7 @@ import static atdit_ibait_20.database.persistence.implementation.PasswordService
 /**
 * Die Klasse DatabaseService wird erstellt um eine Verbindung mit der Datenbank herzustellen.
 * Es wird versucht eine Verbindung über den String URL herzustellen und darüber auf die Datenbank zuzugreifen.
-**/
+*/
 public class SQLiteService implements Database {
 
     public static final String URL = "jdbc:sqlite:src/main/java/atdit_ibait_20/database/persistence/database.sqlite";
@@ -30,7 +30,9 @@ public class SQLiteService implements Database {
         }
         return conn;
     }
-
+/**
+* @Method führt die Verbindung zur Datenbank aus
+*/
     public void execute(String sql, Connection conn) {
         try {
             if (conn != null) {
@@ -42,7 +44,9 @@ public class SQLiteService implements Database {
                 System.out.println(e.getMessage());
             }
         }
-
+/**
+* @Method schliesst die Verbindung zur Datenbank
+*/
     public void close(Connection conn) {
         try {
             if (conn != null)
@@ -53,8 +57,8 @@ public class SQLiteService implements Database {
         }
     }
 /**
-* Die Methode @create_tables erlaubt es verschiedene Tabellen in der Datenbank anzulegen und mit Attributen zu befüllen.
-**/
+* @Method Die Methode erlaubt es verschiedene Tabellen in der Datenbank anzulegen und mit Attributen zu befüllen.
+*/
     public void create_tables() {
         Connection conn = connect();
         String sql = """
@@ -93,8 +97,10 @@ public class SQLiteService implements Database {
     }
 
 /**
-* Die Methode @create_person erlaubt es Personen mit verschiedenen Attributen anzulegen und direkt in der Datenbank zu speichern
-**/
+* @Method erlaubt es Personen mit verschiedenen Attributen anzulegen, in der Datenbank zu speichern und das Passwort zu verschlüsseln
+* @Param salt
+* @Param securePassword
+*/
     public void create_person_entry(Person person) {
         Connection conn = connect();
 
@@ -128,8 +134,8 @@ public class SQLiteService implements Database {
         close(conn);
     }
 /**
-* @create_contract_entry erlaubt es neue Verträge anzulegen und in der Datenbank zu speichern
-**/
+* @Method erlaubt es neue Verträge anzulegen und in der Datenbank zu speichern
+*/
     public void create_contract_entry(Vertrag contract, String person_id) {
         Connection conn = connect();
         String sql = "INSERT INTO contract(order_number,person_id,insurance_type,booking_type,price) VALUES(?,?,?,?,?)";
@@ -148,8 +154,8 @@ public class SQLiteService implements Database {
         close(conn);
     }
 /**
-* @get_person_by_id erlaubt es auf die Datenbank zuzugreifen und mit Hilfe der ID die Daten einer Person abzufragen
-**/
+* @Method erlaubt es auf die Datenbank zuzugreifen und mit Hilfe der ID die Daten einer Person abzufragen
+*/
     public BasicPerson get_person_by_id(String id) {
         String sql = "SELECT id, form_of_address, first_name, last_name, birth_date, nationality, marital_status, zip_code, city, street, house_number, email_address, phone_number, label16 FROM person WHERE id = ?";
         Connection conn = connect();
@@ -181,8 +187,9 @@ public class SQLiteService implements Database {
     return returnPerson;
     }
 /**
-* @get_contract_by_id erlaubt es mithilfe der ID des Vertrages alle weiteren Informationen des Vertrages von der Datenbank einzusehen, die Daten zu ändern und neue Verträge anzulegen
-**/
+* @Method erlaubt es mithilfe der ID des Vertrages alle weiteren Informationen des Vertrages von der Datenbank einzusehen,
+* die Daten zu ändern und neue Verträge anzulegen
+*/
     public void get_contract_by_id(Person person) {
         String sql = "SELECT order_number,person_id,insurance_type,booking_type,price FROM contract WHERE person_id = ?";
         try (PreparedStatement pstmt = connect().prepareStatement(sql)) {
@@ -233,7 +240,10 @@ public class SQLiteService implements Database {
         update_person_by_id(id,"salt",salt);
 
     }
-
+/**
+* @Method Überprüft ob die ID Korrekt ist
+* @param id
+*/
     @Override
     public boolean check_id(String id) {
         String sql = "SELECT (count(*) > 0) as found FROM person WHERE id=?";
@@ -263,9 +273,11 @@ public class SQLiteService implements Database {
     }
 
     /**
-* @check_Login überprüft ob die vom Nutzer eingegebenen Anmeldeinformationen mit den in der Datenbank übereinstimmen.
+* @Method überprüft ob die vom Nutzer eingegebenen Anmeldeinformationen mit den in der Datenbank übereinstimmen.
 * Wenn das Passwort stimmt, wird der Nutzer erfolgreich verifiziert.
-**/
+* @param salt
+* @param securePassword
+*/
 
     public boolean check_Login(String id, String providedPassword) {
 
@@ -289,8 +301,8 @@ public class SQLiteService implements Database {
     return verifyUserPassword(providedPassword,securePassword,salt);
     }
 /**
-* @check_order_number überprüft ob die Bestellnummer des Kunden noch frei ist.
-**/
+* @Method überprüft ob die Bestellnummer des Kunden noch frei ist.
+*/
     public boolean check_order_number(String orderNumber) {
         boolean returnValue = true;
         Connection conn = connect();

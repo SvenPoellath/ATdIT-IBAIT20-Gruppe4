@@ -5,8 +5,8 @@ import atdit_ibait_20.database.model.Person;
 
 import java.util.ArrayList;
 /**
-* Es wird eine Klasse Person erstellt, die das Interface Person implementiert. Weiterhin werden verschiedene Attribute angelegt
-**/
+* Es wird eine Klasse Person erstellt, die das Interface Person implementiert. Weiterhin werden verschiedene primitive Datentypen sowie ein Array angelegt
+*/
 public class BasicPerson implements Person {
     private String Sozialversicherungsnummer;
     private String Vorname;
@@ -24,8 +24,8 @@ public class BasicPerson implements Person {
     private String Staatsangehoerigkeit;
     private String Strasse;
 /**
-* Im folgenden werden jeder Methode die richtigen Variablen zugeordnet
-**/
+* Im folgenden werden jeder Methode die richtigen Variablen zugeordnet. Durch den set Aufruf, wird es möglich die Daten außerhalb der Klasse zu bearbeiten
+*/
     public void setSozialversicherungsnummer(String sozialversicherungsnummer) {
         Sozialversicherungsnummer = sozialversicherungsnummer;
     }
@@ -89,7 +89,7 @@ public class BasicPerson implements Person {
     private String IBAN;
     /**
     * Es wird ein Konstruktur für BasicPerson angelegt. Darin werden alle Attribute übergeben.
-    **/
+    */
 
     public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum,
                        String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand,
@@ -132,12 +132,16 @@ public class BasicPerson implements Person {
         this(sozialversicherungsnummer, vorname, nachname, geburtsdatum, passwort, anrede, plz, ort, hausnummer, familienstand,
                 mailadresse, telefonnummer, staatsangehoerigkeit, strasse, null);
     }
-
+/**
+* @Methode ermöglicht es Verträge hinzuzufügen
+*/
 
     public void addVertrag(Vertrag vertrag) {
         Vertraege.add(vertrag);
     }
-
+/**
+* Es wird für jedes Attribut der Parameter angelegt, damit man von außerhalb der Klasse darauf zugreifen kann
+*/
     @Override
     public String getSozialversicherungsnummer() {
         return this.Sozialversicherungsnummer;

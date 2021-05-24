@@ -45,7 +45,7 @@ Die MODVER App der Ergo Versicherungen ist eine kostenlose App zur erleichterten
 
 
 
-Für weitere Infos besuchen Sie bitte unsere [Dokumentationsseite](https://github.com/SvenPoellath/ATdIT-IBAIT20-Gruppe4/tree/main/Documentation)
+Für weitere Infos besuchen Sie bitte unsere [Dokumentationsseite](https://github.com/SvenPoellath/ATdIT-IBAIT20-Gruppe4/tree/main/Dokumentation)
 
 
 <a name="benötigte-hardware"/> 
@@ -75,7 +75,7 @@ Verwendete Java Version: OpenJDK 16.0.1
 
 Dieser Abschnitt beschreibt die Installation der aktuellen Entwicklungsversion unserer App in der IDE IntelliJ.
 Die Installationsanleitung weist sie durch alle richtigen Schritte. Sollten Sie IntelliJ oder einzelne Teile der Software
-bereits installiert haben, so kann diese Anleitung für sie abweichen. Kontaktieren Sie bei Schwierigkeiten den [Support](#probleme-was-nun).
+bereits installiert haben, so kann diese Anleitung für Sie abweichen. Kontaktieren Sie bei Schwierigkeiten den [Support](#support).
 
 [Tutorial für Windows auf YouTube](https://youtu.be/zojASmVTc6M)
 
@@ -84,7 +84,9 @@ bereits installiert haben, so kann diese Anleitung für sie abweichen. Kontaktie
 3. Import des Projektes über den Github Link (Grüner Button: Code, HTTPS Link kopieren)
 3. Installation von Java (OpenJDK) über die IntelliJ IDE.
 5. Installieren der notwendigen Maven Ressourcen (Plugins, etc.)
-6. Starten der App
+6. Starten der App  
+
+Für weitere Infos zum Programm schauen Sie bitte [hier](https://github.com/SvenPoellath/ATdIT-IBAIT20-Gruppe4/tree/main/Programm)
 
 <a name="anwendung"/> 
 
@@ -125,7 +127,7 @@ Um ein Benutzerkonto zu erstellen, müssen Sie Ihre individuelle Versicherungsnu
 
 ## Prototyp
 Den Prototyp können Sie über folgenden Link aufrufen. Nutzen Sie am besten den Chrome Browser  
-(https://xd.adobe.com/view/bc708687-9e33-4f07-a46f-df13c3a1f5ef-e923/?fullscreen)
+[Teste Mich](https://xd.adobe.com/view/22eeb0e2-9ffc-427e-8570-6fe4cd848fc9-77bd/?fullscreen&hints=off)
 
 <a name="aufruf-der-daten"/> 
 

@@ -83,7 +83,9 @@ public class RegistrierLayer implements SwingPresentation {
         cbFamilienstand = new JComboBox<>(familienstandArten);
     }
 
-
+/**
+* @method legt fest wie das Layout beim Registrieren aussieht
+*/
     @Override
     public void setLayout() {
         zurueckPanel.setLayout(new FlowLayout());
@@ -92,6 +94,9 @@ public class RegistrierLayer implements SwingPresentation {
         registrierButtonPanel.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
     }
 
+/**
+* @method legt fest welche Funktionen der zurück und der registrieren Button haben
+*/
     @Override
     public void addListeners() {
         removeListeners();
@@ -108,6 +113,9 @@ public class RegistrierLayer implements SwingPresentation {
     }
 
 
+/**
+* @method fügt die Komponenten ins Panel ein
+*/
     @Override
     public void addComponentsToPanels() {
         registrierButtonPanel.add(button5);
@@ -145,6 +153,9 @@ public class RegistrierLayer implements SwingPresentation {
         falscheAngabePanel.add(label1);
     }
 
+/**
+* @method fügt die Panels dem Frame hinzu
+*/
     @Override
     public void addPanelsToFrame() {
         MasterController.fenster.add(zurueckPanel);
@@ -187,15 +198,29 @@ public class RegistrierLayer implements SwingPresentation {
     }
     /**
 * Die Klasse ermöglicht es dem Nutzer eine Seite zurück zu gehen in der Registrierung
-**/
+*/
     void zurueckButtonWurdeGedrueckt(){
         removePanelsFromFrame();
         new StartLayer();
     }
     /**
-* Die Klasse wird vom Nutzer gedrückt wenn er alle seine Daten eingegeben hat. Das bisherige Layout verschwindet.
+* @method wird vom Nutzer aktiviert wenn er alle seine Daten eingegeben hat. Das bisherige Layout verschwindet.
 * Wenn der Nutzer ungültige Eingaben getätigt hat, weisst das Programm ihn an dieser Stelle darauf hin.
-**/
+* @Param Vorname
+* @Param Nachname
+* @Param Geburtsdatum
+* @Param Passwort
+* @Param Anrede
+* @Param PLZ
+* @Param Ort
+* @Param Hausnummer
+* @Param Familienstand
+* @Param Mailadresse
+* @Param Telefonnummer
+* @Param Staatsangehörigkeit
+* @Param Strasse
+* @Param IBAN
+*/
     void registerierButtonWurdeGedrueckt(){
         if(checkInputs()) {
 
@@ -227,7 +252,23 @@ public class RegistrierLayer implements SwingPresentation {
             }
         }
     }
-
+/**
+* @method fügt alle Daten aus dem Registrieren der Datenbank hinzu und erzeugt damit eine neue Person
+* @Param Vorname
+* @Param Nachname
+* @Param Geburtsdatum
+* @Param Passwort
+* @Param Anrede
+* @Param PLZ
+* @Param Ort
+* @Param Hausnummer
+* @Param Familienstand
+* @Param Mailadresse
+* @Param Telefonnummer
+* @Param Staatsangehörigkeit
+* @Param Strasse
+* @Param IBAN
+*/
     public void registrieren(String versicherungsNummer, String vorname, String nachname, BasicGeburtsdatum neuesGeburtsDatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailAdresse, long telefonNummer, String staatsangehoerigkeit, String strasse) {
         BasicPerson person = new BasicPerson(
                 versicherungsNummer,
@@ -250,6 +291,9 @@ public class RegistrierLayer implements SwingPresentation {
         clearAllComboBoxes();
         App.masterController.loadVertragsuebersicht(person);
     }
+    /**
+    * @method leert alle Boxen nach der Registrierung wieder
+    */
     public void clearAllComboBoxes(){
         cbFamilienstand.setSelectedIndex(0);
         cbAnrede.setSelectedIndex(0);
@@ -257,6 +301,9 @@ public class RegistrierLayer implements SwingPresentation {
         GeburtsdatumMonat.setSelectedIndex(0);
         GeburtsdatumJahr.setSelectedIndex(0);
     }
+    /**
+    * @method sorgt dafür dass die Panels vom Frame wieder verschwinden
+    */
     public void removePanelsFromFrame(){
         MasterController.fenster.remove(registrierButtonPanel);
         MasterController.fenster.remove(datenPanel);

@@ -76,7 +76,7 @@ Dieser Abschnitt beschreibt die Installation der aktuellen Entwicklungsversion u
 Die Installationsanleitung weist sie durch alle richtigen Schritte. Sollten Sie IntelliJ oder einzelne Teile der Software
 bereits installiert haben, so kann diese Anleitung für sie abweichen. Kontaktieren Sie bei Schwierigkeiten den [Support](#probleme-was-nun).
 
-[Tutorial für Windows auf YouTube](www.youtube.de)
+[Tutorial für Windows auf YouTube](https://youtu.be/zojASmVTc6M)
 
 1. Herunterladen und Installieren der aktuellen [IntelliJ IDE](https://www.jetbrains.com/de-de/idea/)
 2. Installation von Git über die IntelliJ IDE

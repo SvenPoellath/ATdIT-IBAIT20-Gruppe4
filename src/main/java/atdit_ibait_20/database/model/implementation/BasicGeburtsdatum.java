@@ -2,15 +2,15 @@ package atdit_ibait_20.database.model.implementation;
 
 import atdit_ibait_20.database.model.Geburtsdatum;
 /**
-* BasicGeburtsdatum soll alle Attribute der Datenbank enthalten
-**/
+* BasicGeburtsdatum soll alle Attribute des Geburtsdatum der Datenbank enthalten
+*/
 public class BasicGeburtsdatum implements Geburtsdatum {
     private final int GeburtsdatumTag;
     private final int GeburtsdatumMonat;
     private final int GeburtsdatumJahr;
 /**
-* Der Konstruktor weiß die Werte aus der Datenbank den Werten im Quellcode zu 
-**/
+* Der Konstruktor weisst die Werte aus der Datenbank den Werten im Quellcode zu 
+*/
     public BasicGeburtsdatum(int geburtsdatumTag, int geburtsdatumMonat, int geburtsdatumJahr) {
         GeburtsdatumTag = geburtsdatumTag;
         GeburtsdatumMonat = geburtsdatumMonat;
@@ -19,7 +19,7 @@ public class BasicGeburtsdatum implements Geburtsdatum {
 
 /**
 * Die Werte werden in Integer gecastet
-**/
+*/
     public BasicGeburtsdatum(String database_entry) {
         String[] geburtstag = database_entry.split("-");
         GeburtsdatumJahr = Integer.parseInt(geburtstag[0]);

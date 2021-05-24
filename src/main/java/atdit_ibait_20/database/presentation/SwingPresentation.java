@@ -3,19 +3,19 @@ package atdit_ibait_20.database.presentation;
 import javax.swing.*;
 
 public interface SwingPresentation {
-    static JButton button1 = new JButton();
-    static JButton button2 = new JButton();
-    static JButton button3 = new JButton();
-    static JButton button4 = new JButton();
-    static JButton button5 = new JButton();
-    static JButton button6 = new JButton();
-    static JButton button7 = new JButton();
-    static JButton button8 = new JButton();
-    static JButton button9 = new JButton();
-    static JButton button10 = new JButton();
-    static JButton button11 = new JButton();
-    static JButton button12 = new JButton();
-    static JButton button13 = new JButton();
+    JButton button1 = new JButton();
+    JButton button2 = new JButton();
+    JButton button3 = new JButton();
+    JButton button4 = new JButton();
+    JButton button5 = new JButton();
+    JButton button6 = new JButton();
+    JButton button7 = new JButton();
+    JButton button8 = new JButton();
+    JButton button9 = new JButton();
+    JButton button10 = new JButton();
+    JButton button11 = new JButton();
+    JButton button12 = new JButton();
+    JButton button13 = new JButton();
 
     JLabel label1 = new JLabel();
     JLabel label2 = new JLabel();

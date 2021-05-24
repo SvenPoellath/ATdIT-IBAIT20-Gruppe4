@@ -91,9 +91,6 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         vertragsDaten.setLayout(new GridLayout(0,2));
         neueIBAN.setLayout(new GridLayout(0,2));
         preise.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
-        label13.setForeground(Color.red);
-        label12.setForeground(Color.red);
-        label11.setForeground(Color.red);
         label12.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
     }
 

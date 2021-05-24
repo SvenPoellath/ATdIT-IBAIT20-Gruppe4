@@ -51,7 +51,6 @@ public class AnmeldeLayer implements SwingPresentation {
         anmeldungsPanel.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
         anmeldungsPanel.setLayout(new GridLayout(0, 2));
         anmeldungsButtonPanel.setBorder(BorderFactory.createEmptyBorder(0, 30, 10, 30));
-        label4.setForeground(Color.red);
     }
 
 

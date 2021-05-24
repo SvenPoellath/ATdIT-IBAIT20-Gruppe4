@@ -18,6 +18,7 @@
  
 ### [Probleme-Was nun?](#probleme-was-nun?)  
 * **[Probleme](#probleme)**    
+* **[Support](#support)**
 * **[Lösungen](#lösungen)**  
  
 ### [Fragen & Antworten](#f&a)  
@@ -149,7 +150,10 @@ Wir legen höchsten Wert auf die Sicherheit Ihrer Daten. Deswegen halten wir uns
 
 Bisher sind keine Probleme bekannt.
 
-Bei Probleme wenden Sie sich an unseren Support:  
+<a name="support"/> 
+
+## Support
+Bei Problemen wenden Sie sich an unseren Support:  
 e-mail: support@modver.com  
 Telefon: 12345678
 

@@ -129,7 +129,7 @@ public class Vertragsuebersicht implements SwingPresentation {
 
         public void vertraghinzufuegenWurdeGedrueckt(){
             MasterController.fenster.remove(add);
-        new VertragHinzufuegenLayer(angemeldetePerson);
+            App.masterController.loadVertragHinzufuegenLayer(angemeldetePerson);
             MasterController.fenster.validate();
     }
     public void removeAllPanelsFromFrame(){

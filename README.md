@@ -149,6 +149,10 @@ Wir legen höchsten Wert auf die Sicherheit Ihrer Daten. Deswegen halten wir uns
 
 Bisher sind keine Probleme bekannt.
 
+Bei Probleme wenden Sie sich an unseren Support:  
+e-mail: support@modver.com  
+Telefon: 12345678
+
 <a name="lösungen"/> 
 
  ## Lösungen

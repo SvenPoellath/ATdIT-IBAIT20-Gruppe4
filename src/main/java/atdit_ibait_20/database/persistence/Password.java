@@ -6,7 +6,6 @@ public interface Password {
     static String getSalt() {
         return null;
     }
-
     static byte[] hash(char[] password, byte[] salt) {
         return new byte[0];
     }

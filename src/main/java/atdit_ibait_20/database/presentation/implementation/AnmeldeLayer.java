@@ -27,11 +27,14 @@ public class AnmeldeLayer implements SwingPresentation {
     private static final JLabel anmeldename = new JLabel();
     private static final JLabel passwort = new JLabel();
     private static final JLabel falschesPasswort = new JLabel();
+
     private static final JButton anmeldenButton = new JButton();
+    private static final JButton zurueckButton = new JButton("<--");
+
     private static final JTextField tfAnmeldeName = new JTextField();
     private static final JPasswordField tfAnmeldePasswort = new JPasswordField();
 
-    private static final JButton zurueckButton = new JButton("<--");
+
     /**
      * Das Verhalten der einzelnen Komponenten des Layouts für verschiedene Eingaben des Nutzers wird festgelegt
      **/
@@ -51,12 +54,6 @@ public class AnmeldeLayer implements SwingPresentation {
         falschesPasswort.setText(App.resourceBundle.getString("wrong.password"));
         anmeldenButton.setText(App.resourceBundle.getString("sign.in"));
     }
-
-    static void resetLogin() {
-        tfAnmeldeName.setText("");
-        tfAnmeldePasswort.setText("");
-    }
-
 
     public void setFrame() {
         StartLayer.fenster.setSize(250, 325);
@@ -116,6 +113,10 @@ public class AnmeldeLayer implements SwingPresentation {
         StartLayer.fenster.remove(fehlerPanel);
     }
 
+    static void resetLogin() {
+        tfAnmeldeName.setText("");
+        tfAnmeldePasswort.setText("");
+    }
 
     /**
      * Die Eingaben des Nutzers werden eingelesen und mit den in der Datenbank hinterlegten Daten abgeglichen. Wenn die Daten übereinstimmen bekommen der Nutzer die Ausgabe

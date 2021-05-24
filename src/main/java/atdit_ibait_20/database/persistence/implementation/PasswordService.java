@@ -1,6 +1,7 @@
 package atdit_ibait_20.database.persistence.implementation;
 
 import atdit_ibait_20.database.persistence.Database;
+import atdit_ibait_20.database.persistence.Password;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -13,7 +14,7 @@ import java.util.Random;
 /**
 * Die Klasse setzt fest welche und wie viele Zeichen das Passwort eines Nutzers enthalten darf.
 **/
-public class PasswordService {
+public class PasswordService implements Password {
 
     private static final int LENGTH = 32;
     private static final int ITERATIONS = 10000;

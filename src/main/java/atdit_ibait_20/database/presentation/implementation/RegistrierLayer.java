@@ -1,15 +1,14 @@
 package atdit_ibait_20.database.presentation.implementation;
 
 import atdit_ibait_20.database.App;
-import atdit_ibait_20.database.persistence.Database;
 import atdit_ibait_20.database.model.implementation.BasicGeburtsdatum;
 import atdit_ibait_20.database.model.implementation.BasicPerson;
 import atdit_ibait_20.database.presentation.SwingPresentation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.Year;
 
 import static atdit_ibait_20.database.App.DATABASE;
 
@@ -56,7 +55,7 @@ public class RegistrierLayer implements SwingPresentation {
     private static final JButton registrierenButton = new JButton();
     private static final JButton zurueckButton = new JButton("<--");
 
-    private static String[] namen;
+    private static String[] anredeAuswahl;
     private static Integer[] tage;
     private static Integer[] monate;
     private static Integer[] jahre;
@@ -68,6 +67,7 @@ public class RegistrierLayer implements SwingPresentation {
     static JComboBox<Integer> GeburtsdatumJahr;
     static JComboBox<String> cbFamilienstand;
     static boolean istErsterAufruf = true;
+
     public RegistrierLayer(){
         if(istErsterAufruf){
             setStrings();
@@ -100,12 +100,15 @@ public class RegistrierLayer implements SwingPresentation {
         registrierPasswort.setText(App.resourceBundle.getString("password"));
         geburtsDatum.setText(App.resourceBundle.getString("date.of.birth"));
         registrierenButton.setText(App.resourceBundle.getString("register"));
-        namen = new String[]{ "*",App.resourceBundle.getString("mister"), App.resourceBundle.getString("mrs")};
+        anredeAuswahl = new String[]{ "*",App.resourceBundle.getString("mister"), App.resourceBundle.getString("mrs")};
         tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
         monate = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12};
-        jahre = new Integer[] {1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004};
+        jahre = new Integer[(Year.now().getValue()-1899)];
+        for(int JahreCounter = 1900; JahreCounter <= Year.now().getValue(); JahreCounter++){
+                jahre[JahreCounter-1900] = JahreCounter;
+        }
         familienstandArten = new String[]{App.resourceBundle.getString("single"),App.resourceBundle.getString("married"),App.resourceBundle.getString("divorced"),App.resourceBundle.getString("widowed")};
-        cbAnrede  = new JComboBox<>(namen);
+        cbAnrede  = new JComboBox<>(anredeAuswahl);
         GeburtsdatumTag  = new JComboBox<>(tage);
         GeburtsdatumMonat = new JComboBox<>(monate);
         GeburtsdatumJahr = new JComboBox<>(jahre);
@@ -262,9 +265,7 @@ public class RegistrierLayer implements SwingPresentation {
         }
     }
 
-    public void registrieren(String versicherungsNummer, String vorname, String nachname, BasicGeburtsdatum neuesGeburtsDatum, String passwort,
-                             String anrede, int plz, String ort, String hausnummer, String familienstand, String mailAdresse,
-                             long telefonNummer, String staatsangehoerigkeit, String strasse) {
+    public void registrieren(String versicherungsNummer, String vorname, String nachname, BasicGeburtsdatum neuesGeburtsDatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailAdresse, long telefonNummer, String staatsangehoerigkeit, String strasse) {
         BasicPerson person = new BasicPerson(
                 versicherungsNummer,
                 vorname,

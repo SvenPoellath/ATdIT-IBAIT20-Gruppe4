@@ -14,10 +14,10 @@ import java.awt.event.ActionListener;
 import static atdit_ibait_20.database.App.DATABASE;
 
 /**
-* In der Klasse wird das Layout für die Einstellungen festgelegt. Es werden Textfelder angelegt und Buttons,
+* In der Klasse wird das Layout für die EinstellungsLayer festgelegt. Es werden Textfelder angelegt und Buttons,
 * die dem Nutzer später die Möglichkeit bieten sollen seine Nutzerdaten zu ändern.
 **/
-public class Einstellungen implements SwingPresentation {
+public class EinstellungsLayer implements SwingPresentation {
     static final JPanel einstellungen = new JPanel();
     static final JPanel datenAendern = new JPanel();
     static final JPanel geburtsdatum = new JPanel();
@@ -63,7 +63,7 @@ public class Einstellungen implements SwingPresentation {
     private static final JButton telefonnummerAendern = new JButton();
     private static final JButton staatsangehoerigkeitAendern = new JButton();
     static Person angemeldetePerson;
-    public Einstellungen(Person person){
+    public EinstellungsLayer(Person person){
         angemeldetePerson = person;
             setStrings();
             setLayout();
@@ -253,55 +253,82 @@ public class Einstellungen implements SwingPresentation {
 
     void vornameAendernWurdeAusgewaelt(){
         angemeldetePerson.setVorname(vornameNeu.getText());
-        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "first_name", angemeldetePerson.getVorname());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
+                "first_name",
+                angemeldetePerson.getVorname());
     }
     void ortAendernWurdeAusgewaelt(){
         angemeldetePerson.setOrt(ortNeu.getText());
-        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "city", angemeldetePerson.getOrt());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
+                "city",
+                angemeldetePerson.getOrt());
     }
     void nachnameAendernWurdeAusgewaelt(){
         angemeldetePerson.setNachname(nachnameNeu.getText());
-        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "last_name", angemeldetePerson.getNachname());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
+                "last_name",
+                angemeldetePerson.getNachname());
     }
     void geburtsdatumAendernWurdeAusgewaelt(){
-        angemeldetePerson.setGeburtsdatum(new BasicGeburtsdatum((int) RegistrierLayer.GeburtsdatumTag.getSelectedItem(), (int) RegistrierLayer.GeburtsdatumMonat.getSelectedItem(), (int) RegistrierLayer.GeburtsdatumJahr.getSelectedItem()));
-        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "birth_date", angemeldetePerson.getGeburtsdatum());
+        angemeldetePerson.setGeburtsdatum(new BasicGeburtsdatum((int) RegistrierLayer.GeburtsdatumTag.getSelectedItem(),
+                (int) RegistrierLayer.GeburtsdatumMonat.getSelectedItem(),
+                (int) RegistrierLayer.GeburtsdatumJahr.getSelectedItem()));
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
+                "birth_date",
+                angemeldetePerson.getGeburtsdatum());
     }
     void passwortAendernWurdeAusgewaelt(){
         angemeldetePerson.setPasswort(passwortNeu.getText());
-        DATABASE.update_password_by_id(angemeldetePerson.getSozialversicherungsnummer(), angemeldetePerson.getPasswort());
+        DATABASE.update_password_by_id(angemeldetePerson.getSozialversicherungsnummer(),
+                angemeldetePerson.getPasswort());
     }
     void anredeAendernWurdeAusgewaelt(){
         angemeldetePerson.setAnrede(RegistrierLayer.cbAnrede.getSelectedItem().toString());
-        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "form_of_address", angemeldetePerson.getAnrede());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
+                "form_of_address",
+                angemeldetePerson.getAnrede());
     }
     void plzAendernWurdeAusgewaelt(){
         angemeldetePerson.setPLZ(Integer.parseInt(plzNeu.getText()));
-        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "zip_code", angemeldetePerson.getPLZ());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
+                "zip_code",
+                angemeldetePerson.getPLZ());
     }
     void strasseAendernWurdeAusgewaelt(){
         angemeldetePerson.setStrasse(strasseNeu.getText());
-        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "street", angemeldetePerson.getStrasse());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
+                "street",
+                angemeldetePerson.getStrasse());
     }
     void hausnummerAendernWurdeAusgewaelt(){
         angemeldetePerson.setHausnummer(hausnummerNeu.getText());
-        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "house_number", angemeldetePerson.getHausnummer());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
+                "house_number",
+                angemeldetePerson.getHausnummer());
     }
     void familienstandAendernWurdeAusgewaelt(){
         angemeldetePerson.setFamilienstand(RegistrierLayer.cbFamilienstand.getSelectedItem().toString());
-        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "marital_status", angemeldetePerson.getFamilienstand());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
+                "marital_status",
+                angemeldetePerson.getFamilienstand());
     }
     void mailAendernWurdeAusgewaelt(){
         angemeldetePerson.setMailAdresse(mailNeu.getText());
-        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "email_address", angemeldetePerson.getMailAdresse());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
+                "email_address",
+                angemeldetePerson.getMailAdresse());
     }
     void telefonnummerAendernWurdeAusgewaelt(){
         angemeldetePerson.setTelefonnummer(Long.parseLong(telefonnummerNeu.getText()));
-        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "phone_number", angemeldetePerson.getTelefonnummer());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
+                "phone_number",
+                angemeldetePerson.getTelefonnummer());
     }
     void staatsangehoerigkeitAendernWurdeAusgewaelt(){
         angemeldetePerson.setStaatsangehoerigkeit(staatsangehoerigkeitNeu.getText());
-        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(), "nationality", angemeldetePerson.getStaatsangehoerigkeit());
+        DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
+                "nationality",
+                angemeldetePerson.getStaatsangehoerigkeit());
     }
 /**
 * Wenn der Nutzer die Daten seiner Person ändert, ermöglicht diese Klasse es die Änderungen in der Datenbank zu speichern

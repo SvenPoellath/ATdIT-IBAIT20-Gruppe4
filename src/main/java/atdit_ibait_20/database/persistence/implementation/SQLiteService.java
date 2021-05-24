@@ -189,7 +189,10 @@ public class SQLiteService implements Database {
             pstmt.setString(1,person.getSozialversicherungsnummer());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                person.addVertrag(new BasicVertrag(rs.getString("order_number"),rs.getString("insurance_type"),rs.getString("booking_type"),rs.getInt("price")));
+                person.addVertrag(new BasicVertrag(rs.getString("order_number"),
+                        rs.getString("insurance_type"),
+                        rs.getString("booking_type"),
+                        rs.getInt("price")));
                 System.out.println("Contract " + rs.getString("order_number") + " added.");
             }
         } catch (SQLException e) {
@@ -212,6 +215,12 @@ public class SQLiteService implements Database {
 
     public void update_person_by_id(String id, String entry, Long value) {
         String sql = "UPDATE person SET " + entry + "=" + value + " WHERE id='" + id + "'";
+        Connection conn = connect();
+        execute(sql,conn);
+    }
+
+    public void delete_person_by_id(String id) {
+        String sql = "DELETE FROM person WHERE id='" + id + "'";
         Connection conn = connect();
         execute(sql,conn);
     }

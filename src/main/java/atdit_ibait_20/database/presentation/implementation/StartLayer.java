@@ -154,8 +154,8 @@ public class StartLayer implements SwingPresentation {
         setStrings();
         RegistrierLayer.setStrings();
         AnmeldeLayer.setStrings();
-        Einstellungen.setStrings();
-        VertragHinzufuegen.setStrings();
+        EinstellungsLayer.setStrings();
+        VertragHinzufuegenLayer.setStrings();
         Vertragsuebersicht.setStrings();
     }
 }

@@ -17,7 +17,7 @@ import static atdit_ibait_20.database.App.DATABASE;
     /**
     * Legt fest welche Elemente das Layout enthalten soll, wenn man einen Vertrag hinzufügen will.
     **/
-public class VertragHinzufuegen implements SwingPresentation {
+public class VertragHinzufuegenLayer implements SwingPresentation {
     static final int monatlicherPreis = 300;
     static final int jahresPreis =3000;
 
@@ -59,7 +59,7 @@ public class VertragHinzufuegen implements SwingPresentation {
     static int betrag;
     private final Person angemeldetePerson;
 
-    public VertragHinzufuegen(Person person){
+    public VertragHinzufuegenLayer(Person person){
         angemeldetePerson = person;
         tagesPreis=50;
         setStrings();

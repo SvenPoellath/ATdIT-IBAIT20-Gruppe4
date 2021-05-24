@@ -6,7 +6,6 @@ import atdit_ibait_20.database.presentation.SwingPresentation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
     /**
@@ -139,23 +138,23 @@ public class Vertragsuebersicht implements SwingPresentation {
 
         public void vertraghinzufuegenWurdeGedrueckt(){
         StartLayer.fenster.remove(add);
-        new VertragHinzufuegen(angemeldetePerson);
+        new VertragHinzufuegenLayer(angemeldetePerson);
         StartLayer.fenster.validate();
     }
     public void removeAllPanelsFromFrame(){
         removePanelsFromFrame();
-        StartLayer.fenster.remove(VertragHinzufuegen.neueIBAN);
-        StartLayer.fenster.remove(VertragHinzufuegen.hinzugefuegt);
-        StartLayer.fenster.remove(Einstellungen.einstellungen);
-        StartLayer.fenster.remove(Einstellungen.datenAendern);
-        StartLayer.fenster.remove(Einstellungen.geburtsdatum);
-        StartLayer.fenster.remove(VertragHinzufuegen.vertragsDaten);
-        StartLayer.fenster.remove(VertragHinzufuegen.hinzufuegen);
-        StartLayer.fenster.remove(VertragHinzufuegen.preise);
+        StartLayer.fenster.remove(VertragHinzufuegenLayer.neueIBAN);
+        StartLayer.fenster.remove(VertragHinzufuegenLayer.hinzugefuegt);
+        StartLayer.fenster.remove(EinstellungsLayer.einstellungen);
+        StartLayer.fenster.remove(EinstellungsLayer.datenAendern);
+        StartLayer.fenster.remove(EinstellungsLayer.geburtsdatum);
+        StartLayer.fenster.remove(VertragHinzufuegenLayer.vertragsDaten);
+        StartLayer.fenster.remove(VertragHinzufuegenLayer.hinzufuegen);
+        StartLayer.fenster.remove(VertragHinzufuegenLayer.preise);
     }
     public void einstellungenWurdenAusgewaelt(){
         removeAllPanelsFromFrame();
-        new Einstellungen(angemeldetePerson);
+        new EinstellungsLayer(angemeldetePerson);
         StartLayer.fenster.validate();
     }
     public void vertragsuebersichtWurdeAusgewaelt(){

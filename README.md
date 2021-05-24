@@ -45,7 +45,7 @@ Die MODVER App der Ergo Versicherungen ist eine kostenlose App zur erleichterten
 
 
 
-Für weitere Infos besuchen Sie bitte unsere [Dokumentationsseite](https://github.com/SvenPoellath/ATdIT-IBAIT20-Gruppe4/tree/main/Documentation)
+Für weitere Infos besuchen Sie bitte unsere [Dokumentationsseite](https://github.com/SvenPoellath/ATdIT-IBAIT20-Gruppe4/tree/main/Dokumentation)
 
 
 <a name="benötigte-hardware"/> 

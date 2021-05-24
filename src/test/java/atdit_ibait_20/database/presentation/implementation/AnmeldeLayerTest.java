@@ -46,6 +46,7 @@ class AnmeldeLayerTest{
 
     @BeforeEach
     public void create () {
+        App.DATABASE.create_tables();
         App.DATABASE.create_person_entry(person);
         anmeldePasswort = person.getPasswort();
         anmeldeName = person.getSozialversicherungsnummer();

@@ -86,7 +86,7 @@ bereits installiert haben, so kann diese Anleitung für sie abweichen. Kontaktie
 5. Installieren der notwendigen Maven Ressourcen (Plugins, etc.)
 6. Starten der App  
 
-Für weitere Infos zum Programm schauen sie hier(https://github.com/SvenPoellath/ATdIT-IBAIT20-Gruppe4/tree/main/Programm)
+Für weitere Infos zum Programm schauen sie [hier](https://github.com/SvenPoellath/ATdIT-IBAIT20-Gruppe4/tree/main/Programm)
 
 <a name="anwendung"/> 
 

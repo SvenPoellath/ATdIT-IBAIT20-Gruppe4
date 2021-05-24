@@ -75,7 +75,7 @@ Verwendete Java Version: OpenJDK 16.0.1
 
 Dieser Abschnitt beschreibt die Installation der aktuellen Entwicklungsversion unserer App in der IDE IntelliJ.
 Die Installationsanleitung weist sie durch alle richtigen Schritte. Sollten Sie IntelliJ oder einzelne Teile der Software
-bereits installiert haben, so kann diese Anleitung für sie abweichen. Kontaktieren Sie bei Schwierigkeiten den [Support](#probleme-was-nun).
+bereits installiert haben, so kann diese Anleitung für sie abweichen. Kontaktieren Sie bei Schwierigkeiten den [Support](#support).
 
 [Tutorial für Windows auf YouTube](https://youtu.be/zojASmVTc6M)
 

@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
 import static atdit_ibait_20.database.App.DATABASE;
 
 /**
-* In der Klasse wird das Layout für die EinstellungsLayer festgelegt. Es werden Textfelder angelegt und Buttons,
-* die dem Nutzer später die Möglichkeit bieten sollen seine Nutzerdaten zu ändern.
-**/
+* In der Klasse wird das Layout für das Einstellungsfenster festgelegt. Es werden Textfelder angelegt und Buttons,
+* die dem Nutzer später die Möglichkeit bieten sollen seine Nutzerdaten zu ändern
+*/
 public class EinstellungsLayer implements SwingPresentation {
     static final JPanel einstellungen = new JPanel();
     static final JPanel datenAendern = new JPanel();
@@ -33,8 +33,8 @@ public class EinstellungsLayer implements SwingPresentation {
         MasterController.fenster.repaint();
     }
 /**
-* @setString ermöglicht es dem Nutzer seine Daten zu ändern.
-**/
+* @method Setter ermöglicht es dem Nutzer Daten zuzuschreiben und in die Datenbank zu bringen
+*/
     static void setStrings(){
         label1.setText(App.resourceBundle.getString("welcome.to.your.settings"));
         label2.setText(App.resourceBundle.getString("make.changes.here"));
@@ -85,14 +85,18 @@ public class EinstellungsLayer implements SwingPresentation {
             RegistrierLayer.GeburtsdatumJahr.setSelectedItem(transfer.getGeburtsdatumJahr());
         }
     }
-
+/**
+* @method legt die Größe des Layoutes fest
+*/
     @Override
     public void setLayout() {
         einstellungen.setLayout(new GridLayout(0,1));
         datenAendern.setLayout(new GridLayout(0,3));
         geburtsdatum.setLayout(new GridLayout(0,5));
     }
-
+/**
+* @method legt fest welche Funktionalitäten dem Layout hinzugefügt werden sollen
+*/
     @Override
     public void addListeners() {
         removeListeners();
@@ -140,7 +144,9 @@ public class EinstellungsLayer implements SwingPresentation {
             button12.removeActionListener(listener);
     }
 
-
+/**
+* @method legt fest welche Komponenten dem Layout hinzugefügt werden sollen
+*/
     @Override
     public void addComponentsToPanels() {
         einstellungen.add(label1);
@@ -201,7 +207,23 @@ public class EinstellungsLayer implements SwingPresentation {
         MasterController.fenster.remove(datenAendern);
         MasterController.fenster.remove(geburtsdatum);
     }
-
+/**
+* @method Alle folgenden void Methoden ermöglichen es dem Nutzer seine Daten in der Datenbank zu ändern
+* @Param Vorname
+* @Param Nachname
+* @Param Geburtsdatum
+* @Param Passwort
+* @Param Anrede
+* @Param PLZ
+* @Param Ort
+* @Param Hausnummer
+* @Param Familienstand
+* @Param Mailadresse
+* @Param Telefonnummer
+* @Param Staatsangehörigkeit
+* @Param Strasse
+* @Param IBAN
+*/
     void vornameAendernWurdeAusgewaelt(){
         angemeldetePerson.setVorname(textField1.getText());
         DATABASE.update_person_by_id(angemeldetePerson.getSozialversicherungsnummer(),
@@ -281,8 +303,5 @@ public class EinstellungsLayer implements SwingPresentation {
                 "nationality",
                 angemeldetePerson.getStaatsangehoerigkeit());
     }
-/**
-* Wenn der Nutzer die Daten seiner Person ändert, ermöglicht diese Klasse es die Änderungen in der Datenbank zu speichern
-**/
 
 }

@@ -13,7 +13,7 @@ import java.util.Base64;
 import java.util.Random;
 /**
 * Die Klasse setzt fest welche und wie viele Zeichen das Passwort eines Nutzers enthalten darf.
-**/
+*/
 public class PasswordService implements Password {
 
     private static final int LENGTH = 32;
@@ -24,7 +24,7 @@ public class PasswordService implements Password {
 
 /**
 * @getSalt sorgt dafür die Passwörter in der Datenbank verschlüsseln
-**/
+*/
     public static String getSalt() {
         StringBuilder returnValue = new StringBuilder(32);
 
@@ -33,8 +33,11 @@ public class PasswordService implements Password {
     return new String (returnValue);
     }
 /**
-* @Method sorgt dafür, dass jedes Passwort eine unterschiedliche Verschlüsselung erhält. Die Verschlüsselung ist dadurch für jeden Nutzer individuell
-**/
+* @Method sorgt dafür, dass jedes Passwort eine unterschiedliche Verschlüsselung erhält. 
+* Die Verschlüsselung ist dadurch für jeden Nutzer individuell, auch wenn die Nutzer das gleiche Passwort haben
+* @param spec
+* @param skf
+*/
     public static byte[] hash(char[] password, byte[] salt) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
         Arrays.fill(password, Character.MIN_VALUE);
@@ -48,8 +51,10 @@ public class PasswordService implements Password {
         }
     }
 /**
-* Generiert das verschlüsselte Passwort
-**/
+* @Method Generiert das verschlüsselte Passwort
+* @param returnValue
+* @param securePassword
+*/
     public static String generateSecurePassword(String password, String salt) {
         String returnValue;
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
@@ -57,8 +62,10 @@ public class PasswordService implements Password {
         return returnValue;
     }
 /**
-* Bestätigt das verschlüsselte Passwort des Nutzers
-**/
+* @Method Bestätigt das verschlüsselte Passwort des Nutzers
+* @param salt
+* @param passwordToTest
+*/
     public static boolean verifyUserPassword(String providedPassword, String securePassword, String salt) {
         boolean returnValue;
         if (salt == null)

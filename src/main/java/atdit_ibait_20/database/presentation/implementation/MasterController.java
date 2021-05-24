@@ -7,7 +7,10 @@ import atdit_ibait_20.database.presentation.SwingPresentation;
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+* Die Klasse legt das Startfenster der Versicherungs App  fest
+* @method die einzelnen Methoden legen fest wie groß jedes einzelne Element ist
+*/
 public class MasterController {
     static final JFrame fenster = new JFrame();
     public void loadStartLayer(){

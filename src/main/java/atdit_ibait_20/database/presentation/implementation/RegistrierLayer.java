@@ -56,17 +56,17 @@ public class RegistrierLayer implements SwingPresentation {
     private static final JButton registrierenButton = new JButton();
     private static final JButton zurueckButton = new JButton("<--");
 
-    private static String[] namen = new String[]{ "*",App.resourceBundle.getString("mister"), App.resourceBundle.getString("mrs")};
-    private static Integer[] tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
-    private static Integer[] monate = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12};
-    private static Integer[] jahre = new Integer[] {1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004};
-    private static String [] familienstandArten = new String[]{App.resourceBundle.getString("single"),App.resourceBundle.getString("married"),App.resourceBundle.getString("divorced"),App.resourceBundle.getString("widowed")};
+    private static String[] namen;
+    private static Integer[] tage;
+    private static Integer[] monate;
+    private static Integer[] jahre;
+    private static String [] familienstandArten;
 
-    static JComboBox<String> cbAnrede = new JComboBox<>(namen);
-    static JComboBox<Integer> GeburtsdatumTag = new JComboBox<>(tage);
-    static JComboBox<Integer> GeburtsdatumMonat = new JComboBox<>(monate);
-    static JComboBox<Integer> GeburtsdatumJahr = new JComboBox<>(jahre);
-    static JComboBox<String> cbFamilienstand = new JComboBox<>(familienstandArten);
+    static JComboBox<String> cbAnrede;
+    static JComboBox<Integer> GeburtsdatumTag;
+    static JComboBox<Integer> GeburtsdatumMonat;
+    static JComboBox<Integer> GeburtsdatumJahr;
+    static JComboBox<String> cbFamilienstand;
     static boolean istErsterAufruf = true;
     public RegistrierLayer(){
         if(istErsterAufruf){
@@ -114,7 +114,7 @@ public class RegistrierLayer implements SwingPresentation {
 
     @Override
     public void setFrame() {
-        StartLayer.fenster.setSize(400,550);
+        StartLayer.fenster.setSize(400,600);
     }
 
     @Override
@@ -122,6 +122,7 @@ public class RegistrierLayer implements SwingPresentation {
         zurueckPanel.setLayout(new FlowLayout());
         datenPanel.setLayout(new GridLayout(0,2));
         geburtsDatumsPanel.setLayout(new GridLayout(0,3));
+        registrierButtonPanel.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
         falscheAngabe.setForeground(Color.red);
     }
 
@@ -192,7 +193,7 @@ public class RegistrierLayer implements SwingPresentation {
         falscheAngabe.setText(null);
 
         if(!DATABASE.check_id(tfVersicherungsNummer.getText())) {
-            falscheAngabe.setText(App.resourceBundle.getString("invalid") + " " + App.resourceBundle.getString("social.security.number"));
+            falscheAngabe.setText(App.resourceBundle.getString("social.security.number") + " " + App.resourceBundle.getString("is.taken"));
         }
 
         if(tfVersicherungsNummer.getText().length()!=12){
@@ -296,6 +297,11 @@ public class RegistrierLayer implements SwingPresentation {
         tfStaatsangehoerigkeit.setText(null);
         tfStrasse.setText(null);
         tfTelefonnummer.setText(null);
+        cbFamilienstand.setSelectedIndex(0);
+        cbAnrede.setSelectedIndex(0);
+        GeburtsdatumTag.setSelectedIndex(0);
+        GeburtsdatumMonat.setSelectedIndex(0);
+        GeburtsdatumJahr.setSelectedIndex(0);
     }
     public void removePanelsFromFrame(){
         StartLayer.fenster.remove(registrierButtonPanel);

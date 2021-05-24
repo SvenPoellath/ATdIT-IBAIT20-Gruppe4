@@ -52,8 +52,8 @@ public class Vertragsuebersicht implements SwingPresentation {
                 JLabel versicherungsArt = new JLabel(String.valueOf(person.getVertraege().get(i).getVersicherungsart()));
                 JLabel buchungsArtText = new JLabel(App.resourceBundle.getString("payment.type"));
                 JLabel buchungsArt = new JLabel(String.valueOf(person.getVertraege().get(i).getBuchungsart()));
-                JLabel betragText = new JLabel(App.resourceBundle.getString("payment.amount")+App.resourceBundle.getString("currency"));
-                JLabel betrag = new JLabel(String.valueOf(person.getVertraege().get(i).getEURBetrag()));
+                JLabel betragText = new JLabel(App.resourceBundle.getString("payment.amount"));
+                JLabel betrag = new JLabel(person.getVertraege().get(i).getEURBetrag()+App.resourceBundle.getString("currency"));
                 jp.add(auftragsnummerText);
                 jp.add(auftragsNummer);
                 jp.add(versicherungArtText);

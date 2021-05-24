@@ -26,6 +26,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     static final JPanel preise = new JPanel();
     static final JPanel neueIBAN = new JPanel();
     static final JPanel hinzugefuegt = new JPanel();
+    static final JPanel fehlerPanel  = new JPanel();
 
 
     private static final JLabel buchungsArtText = new JLabel();
@@ -173,6 +174,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         StartLayer.fenster.add(vertragsDaten);
         StartLayer.fenster.add(preise);
         StartLayer.fenster.add(hinzufuegen);
+        StartLayer.fenster.add(fehlerPanel);
     }
 
 
@@ -180,6 +182,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
             StartLayer.fenster.remove(vertragsDaten);
             StartLayer.fenster.remove(preise);
             StartLayer.fenster.remove(hinzufuegen);
+            StartLayer.fenster.remove(fehlerPanel);
         }
 
         /**
@@ -189,18 +192,14 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
 
     public void preisButtonWurdeGedrueckt(){
         preise.removeAll();
+        eingabenStimmen();
         setPreis();
         hinzufuegen.add(hinzufuegenButton);
         StartLayer.fenster.validate();
     }
     public void hinzufuegeButtonWurdeGedrueckt(){
-        if (versicherungsArt.getSelectedItem() == "*")
-        {
-            hinzufuegen.add(keineVersicherung);
-            StartLayer.fenster.validate();
-        }
-        else {
-            pruefenObIBANVorhanden();
+        if(eingabenStimmen()){
+            neuerVertragHinzufuegen();
         }
     }
 
@@ -242,9 +241,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         if(versicherungsArt.getSelectedItem().equals(App.resourceBundle.getString("luggage.insurance"))){
             Object buchungsArtObjekt = buchungsArt.getSelectedItem();
                 betrag = setPreisForLuggageInsurance(buchungsArtObjekt);
-                if (betrag == 0) {
-                    preise.add(keinPreis);
-                }
+                eingabenStimmen();
         }
     }
     /**
@@ -279,13 +276,27 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     /**
     * @PersonenIf fügt bei der Person die IBAN zu bzw. ändert sie
     **/
-    public void pruefenObIBANVorhanden(){
-        if(angemeldetePerson.getIBAN()==null){
+    public boolean eingabenStimmen(){
+        boolean angabenStimmen;
+        fehlerPanel.removeAll();
+
+        if (versicherungsArt.getSelectedItem() == "*") {
+            fehlerPanel.add(keineVersicherung);
+            angabenStimmen = false;
+        }
+        else if (betrag == 0) {
+            fehlerPanel.add(keinPreis);
+            angabenStimmen = false;
+        }else if(angemeldetePerson.getIBAN()==null){
             displayIBANHinzufuegePanel();
+            angabenStimmen = false;
         }
-        else if (angemeldetePerson.getIBAN()!=null){
-            neueIBANHinzufuegen();
+        else{
+            angabenStimmen = true;
         }
+
+        StartLayer.fenster.validate();
+        return angabenStimmen;
     }
     public void displayIBANHinzufuegePanel(){
         StartLayer.fenster.remove(hinzufuegen);
@@ -293,7 +304,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         StartLayer.fenster.add(hinzufuegen);
         StartLayer.fenster.validate();
     }
-    public void neueIBANHinzufuegen(){
+    public void neuerVertragHinzufuegen(){
         System.out.println("Contract added.");
         BasicVertrag vertrag = new BasicVertrag(versicherungsArt.getSelectedItem().toString(),
                 buchungsArt.getSelectedItem().toString(),betrag);

@@ -2,7 +2,10 @@ package atdit_ibait_20.database.model.implementation;
 
 import atdit_ibait_20.database.model.Geburtsdatum;
 /**
-* BasicGeburtsdatum soll alle Attribute des Geburtsdatum der Datenbank enthalten
+* BasicGeburtsdatum soll alle Parameter des Geburtsdatum der Datenbank enthalten
+* @Param GeburstdatumTag
+* @Param GeburtsdatumMonat
+* @Param GeburstdatumJahr
 */
 public class BasicGeburtsdatum implements Geburtsdatum {
     private final int GeburtsdatumTag;

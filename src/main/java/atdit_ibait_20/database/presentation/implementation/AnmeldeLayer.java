@@ -12,8 +12,8 @@ import static atdit_ibait_20.database.App.DATABASE;
 import static atdit_ibait_20.database.App.resourceBundle;
 
 /**
- * Die Klasse legt fest welche Komponenten die Anmeldeseite für den Nutzer hat und wie diese am Ende aussieht.
- **/
+ * Die Klasse legt fest welche grafischen Komponenten das FrontEnd
+ */
 public class AnmeldeLayer implements SwingPresentation {
 
     private static final JPanel zurueckPanel = new JPanel();
@@ -24,8 +24,8 @@ public class AnmeldeLayer implements SwingPresentation {
     private static final JPasswordField tfAnmeldePasswort = new JPasswordField();
 
     /**
-     * Das Verhalten der einzelnen Komponenten des Layouts für verschiedene Eingaben des Nutzers wird festgelegt
-     **/
+     * Das genaue Aussehen des Layoutes wird in den @Method der Setter festgelegt
+     */
     public AnmeldeLayer(){
         setStrings();
         setLayout();
@@ -107,6 +107,11 @@ public class AnmeldeLayer implements SwingPresentation {
      * Die Eingaben des Nutzers werden eingelesen und mit den in der Datenbank hinterlegten Daten abgeglichen. Wenn die Daten übereinstimmen bekommen der Nutzer die Ausgabe
      * "Anmeldung erfolgreich". Wenn die Daten nicht übereinstimmen bekommt der Nutzer die Ausgabe "Wrong id/password entered" und hat die Möglichkeit wieder auf die
      * Anmeldungsseite zurück zu gehen.
+     * @param anmeldeName
+     * @param anmeldePasswort
+     * @method anmelden
+     * @method anmeldenCheck
+     * @method zurueck
      **/
 
     public void anmelden() {

@@ -6,6 +6,7 @@
 ### [Allgemeine Info](#allgemeine-info)  
 ### [benötige Hardware](#benötigte-hardware)  
 ### [benötigte Software](#benötigte-software)  
+### [Installation der Entwicklerversion](#installation-entwicklerversion)
 ### [Anwendung](#anwendung)  
 * **[Einloggen](#einloggen)**   
 * **[Registrieren](#registrieren)**  
@@ -60,8 +61,29 @@ Die App ist mit jedem Rechner (Windows 8/MacOS), Tablet oder Smartphone (Android
 # Benötigte Software  
 
 Zum jetzigen Stand ist eine IDE zum Aufrufen und Ausführen des Codes empfohlen.   
-Für die Endanwendung wird ein Internetbrowser zum Aufrufen der App benötigt.
+Für die Endanwendung wird ein Internetbrowser zum Aufrufen der App benötigt. 
 
+Verwendete IDE: IntelliJ Community, 2021.1.1 
+
+Verwendete Java Version: OpenJDK 16.0.1
+
+<a name="installation-entwicklerversion"/>  
+
+
+# Installation der Entwicklerversion
+
+Dieser Abschnitt beschreibt die Installation der aktuellen Entwicklungsversion unserer App in der IDE IntelliJ.
+Die Installationsanleitung weist sie durch alle richtigen Schritte. Sollten Sie IntelliJ oder einzelne Teile der Software
+bereits installiert haben, so kann diese Anleitung für sie abweichen. Kontaktieren Sie bei Schwierigkeiten den [Support](#probleme-was-nun).
+
+[Tutorial für Windows auf YouTube](www.youtube.de)
+
+1. Herunterladen und Installieren der aktuellen [IntelliJ IDE](https://www.jetbrains.com/de-de/idea/)
+2. Installation von Git über die IntelliJ IDE
+3. Import des Projektes über den Github Link (Grüner Button: Code, HTTPS Link kopieren)
+3. Installation von Java (OpenJDK) über die IntelliJ IDE.
+5. Installieren der notwendigen Maven Ressourcen (Plugins, etc.)
+6. Starten der App
 
 <a name="anwendung"/> 
 

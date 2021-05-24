@@ -24,7 +24,21 @@ public class BasicPerson implements Person {
     private String Staatsangehoerigkeit;
     private String Strasse;
 /**
-* Im folgenden werden jeder Methode die richtigen Variablen zugeordnet. Durch den set Aufruf, wird es möglich die Daten außerhalb der Klasse zu bearbeiten
+* @Method Im folgenden werden jeder Methode die richtigen Variablen zugeordnet. Durch den set Aufruf, wird es möglich die Daten außerhalb der Klasse zu bearbeiten
+* @Param Vorname
+* @Param Nachname
+* @Param Geburtsdatum
+* @Param Passwort
+* @Param Anrede
+* @Param PLZ
+* @Param Ort
+* @Param Hausnummer
+* @Param Familienstand
+* @Param Mailadresse
+* @Param Telefonnummer
+* @Param Staatsangehörigkeit
+* @Param Strasse
+* @Param IBAN
 */
     public void setSozialversicherungsnummer(String sozialversicherungsnummer) {
         Sozialversicherungsnummer = sozialversicherungsnummer;
@@ -89,6 +103,20 @@ public class BasicPerson implements Person {
     private String IBAN;
     /**
     * Es wird ein Konstruktur für BasicPerson angelegt. Darin werden alle Attribute übergeben.
+    * @Param Vorname
+    * @Param Nachname
+    * @Param Geburtsdatum
+    * @Param Passwort
+    * @Param Anrede
+    * @Param PLZ
+    * @Param Ort
+    * @Param Hausnummer
+    * @Param Familienstand
+    * @Param Mailadresse
+    * @Param Telefonnummer
+    * @Param Staatsangehörigkeit
+    * @Param Strasse
+    * @Param IBAN
     */
 
     public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum,
@@ -141,6 +169,20 @@ public class BasicPerson implements Person {
     }
 /**
 * Es wird für jedes Attribut der Parameter angelegt, damit man von außerhalb der Klasse darauf zugreifen kann
+* @Param Vorname
+* @Param Nachname
+* @Param Geburtsdatum
+* @Param Passwort
+* @Param Anrede
+* @Param PLZ
+* @Param Ort
+* @Param Hausnummer
+* @Param Familienstand
+* @Param Mailadresse
+* @Param Telefonnummer
+* @Param Staatsangehörigkeit
+* @Param Strasse
+* @Param IBAN
 */
     @Override
     public String getSozialversicherungsnummer() {

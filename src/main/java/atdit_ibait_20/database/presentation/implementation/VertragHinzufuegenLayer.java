@@ -34,6 +34,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     private static final JLabel preisMonatlich = new JLabel();
     private static final JLabel preisJahr = new JLabel();
     private static final JLabel keinPreis = new JLabel();
+    private static final JLabel keineVersicherung = new JLabel();
     private static final JLabel falscheIBAN = new JLabel();
     private static final JLabel versicherungArtText = new JLabel();
     private static final JLabel IBAN = new JLabel("IBAN");
@@ -82,6 +83,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         preisMonatlich.setText(monatlicherPreis+App.resourceBundle.getString("currency"));
         preisJahr.setText(jahresPreis+App.resourceBundle.getString("currency"));
         keinPreis.setText(App.resourceBundle.getString("noPrice"));
+        keineVersicherung.setText((App.resourceBundle.getString("noInsuranceSelected")));
         falscheIBAN.setText(App.resourceBundle.getString("failed.to.add.IBAN"));
         hinzufuegenButton.setText(App.resourceBundle.getString("add.contract"));
         preis.setText(App.resourceBundle.getString("get.price"));
@@ -115,6 +117,9 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         neueIBAN.setLayout(new GridLayout(0,2));
         preise.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
         falscheIBAN.setForeground(Color.red);
+        keineVersicherung.setForeground(Color.red);
+        keinPreis.setForeground(Color.red);
+        keineVersicherung.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
     }
 
     /**
@@ -189,7 +194,14 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         StartLayer.fenster.validate();
     }
     public void hinzufuegeButtonWurdeGedrueckt(){
-        pruefenObIBANVorhanden();
+        if (versicherungsArt.getSelectedItem() == "*")
+        {
+            hinzufuegen.add(keineVersicherung);
+            StartLayer.fenster.validate();
+        }
+        else {
+            pruefenObIBANVorhanden();
+        }
     }
 
     public void IBANButtonWurdeGedrueckt(){

@@ -92,6 +92,7 @@ public class RegistrierLayer implements SwingPresentation {
         datenPanel.setLayout(new GridLayout(0,2));
         geburtsDatumsPanel.setLayout(new GridLayout(0,3));
         registrierButtonPanel.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
+
     }
 
 /**

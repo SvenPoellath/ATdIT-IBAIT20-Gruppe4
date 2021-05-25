@@ -50,7 +50,7 @@ public class EinstellungsLayer implements SwingPresentation {
         label12.setText(App.resourceBundle.getString("new.1")+" "+App.resourceBundle.getString("marital.status"));
         label13.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("e.mail.address"));
         label14.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("phone.number"));
-        button13.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("nationality"));
+        label15.setText(App.resourceBundle.getString("new.3")+" "+App.resourceBundle.getString("nationality"));
 
         button1.setText(App.resourceBundle.getString("first.name")+" "+App.resourceBundle.getString("change"));
         button2.setText(App.resourceBundle.getString("last.name")+" "+App.resourceBundle.getString("change"));

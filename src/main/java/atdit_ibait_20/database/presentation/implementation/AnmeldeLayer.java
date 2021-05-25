@@ -103,7 +103,7 @@ public class AnmeldeLayer implements SwingPresentation {
         tfAnmeldePasswort.setText("");
     }
 
-    /**
+    /*
      * Die Eingaben des Nutzers werden eingelesen und mit den in der Datenbank hinterlegten Daten abgeglichen. Wenn die Daten übereinstimmen bekommen der Nutzer die Ausgabe
      * "Anmeldung erfolgreich". Wenn die Daten nicht übereinstimmen bekommt der Nutzer die Ausgabe "Wrong id/password entered" und hat die Möglichkeit wieder auf die
      * Anmeldungsseite zurück zu gehen.

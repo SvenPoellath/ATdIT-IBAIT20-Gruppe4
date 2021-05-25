@@ -11,12 +11,10 @@ import java.awt.event.ItemListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 /**
-* Die Klasse legt das Startfenster fest was erscheint, wenn der Nutzer die Applikation startet
+* Die Klasse laedt da UI des Startfensters
+ * Das ist die Seite welche beim Starten der App angezeigt wird
 */
 public class StartLayer implements SwingPresentation {
-
-
-
 
     private static final JPanel willkommenPanel = new JPanel();
     private static final JPanel eingangsButtonsPanel = new JPanel();
@@ -24,7 +22,10 @@ public class StartLayer implements SwingPresentation {
     private static String[] sprachen;
     private static JComboBox<String> spracheWaelen;
 
-
+    /**
+     * Konstruktor der Klasse StartLayer
+     * Setzt das UI des Startfensters
+     */
     public StartLayer(){
         setStrings();
         setLayout();
@@ -35,19 +36,14 @@ public class StartLayer implements SwingPresentation {
         MasterController.fenster.repaint();
     }
 
-    /**
-    * @method Legt fest wie das Layout der Nutzeroberfläche aussieht
-    */
+
     public void setLayout(){
         willkommenPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         willkommenPanel.setLayout(new FlowLayout());
         eingangsButtonsPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         eingangsButtonsPanel.setLayout(new GridLayout(0,1));
     }
-    /**
-     * @method Fügt die Funktion der einzelnen Buttons dem Layout hinzu
-     *
-     * */
+
     public void addListeners(){
         removeListeners();
         button2.addActionListener(e-> registrierenFensterButtonWurdeGedrueckt());
@@ -55,10 +51,7 @@ public class StartLayer implements SwingPresentation {
         button1.addActionListener(e->anmeldenFensterButtonWurdeGedrueckt());
     }
 
-    /**
-     * @method Entfernt die Funktion der einzelnen Buttons
-     *
-     * */
+
     public void removeListeners() {
         for (ActionListener listener : button1.getActionListeners())
             button1.removeActionListener(listener);
@@ -70,10 +63,6 @@ public class StartLayer implements SwingPresentation {
             spracheWaelen.removeItemListener(listener);
     }
 
-
-    /**
-    * @method verknüpft die Buttons mit den Funktionen die passieren sollen, wenn sie gedrückt werden
-    */
     public void addComponentsToPanels(){
         sprache.removeAll();
         sprache.add(spracheWaelen);
@@ -82,24 +71,18 @@ public class StartLayer implements SwingPresentation {
         eingangsButtonsPanel.add(button1);
     }
     
-    /**
-    * @method fügt die Buttons dem Rahmen hinzu
-    */
+
     public void addPanelsToFrame(){
         MasterController.fenster.add(sprache);
         MasterController.fenster.add(willkommenPanel);
         MasterController.fenster.add(eingangsButtonsPanel);
     }
 
-
     public void removePanelsFromFrame() {
         MasterController.fenster.remove(willkommenPanel);
         MasterController.fenster.remove(eingangsButtonsPanel);
     }
 
-    /**
-    * @method Legt die Schriftzüge der einzelnen Elemente des Layouts fest
-    */
     static void setStrings(){
         button1.setText(App.resourceBundle.getString("sign.in"));
         label1.setText(App.resourceBundle.getString("welcome.to.our.app"));
@@ -108,20 +91,25 @@ public class StartLayer implements SwingPresentation {
         spracheWaelen = new JComboBox<>(sprachen);
     }
     /**
-    * Die Klasse liefert die Funktionalität, die es dem Nutzer ermöglicht die Applikation zu schließen
+    * ruft die Registrierseite auf
     */
     void registrierenFensterButtonWurdeGedrueckt(){
         removePanelsFromFrame();
         App.masterController.loadRegistrierLayer();
     }
+
+    /**
+     * ruft die Anmeldeseite auf
+     */
     void anmeldenFensterButtonWurdeGedrueckt(){
         App.masterController.loadAnmeldeLayer();
         removePanelsFromFrame();
     }
-    /*
-    * @method ermöglicht es die Sprache zu ändern
-    * @param cb
-    */
+
+    /**
+     * Aendert die Anzeigesprache des UIs
+     * @param e gibt mit welche Sprache in der ComboBox ausgewaehlt wurde
+     */
     void spracheWurdeGeaendert(ItemEvent e){
         JComboBox<String> cb = (JComboBox<String>) e.getSource();
         if(cb.getSelectedIndex() == 1){
@@ -132,21 +120,26 @@ public class StartLayer implements SwingPresentation {
         }
         App.masterController.resetAllStrings();
     }
+
     /**
-    * @method setzt die Sprache auf Deutsch
-    */
+     * setzt die UI Sprache auf Deutsch
+     */
     void setSpracheToGerman(){
         Locale.setDefault(Locale.GERMAN);
         App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());
     }
     
     /**
-    * @method setzt die Sprache auf Englisch
+    * setzt die UI Sprache auf Englisch
     */
     void setSpracheToEnglish(){
         Locale.setDefault(Locale.ENGLISH);
         App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());
     }
+
+    /**
+     * setzt alle Strings zurueck
+     */
     void resetAllStrings(){
         setStrings();
         RegistrierLayer.setStrings();

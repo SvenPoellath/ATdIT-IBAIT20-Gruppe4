@@ -13,32 +13,92 @@ import java.time.Year;
 import static atdit_ibait_20.database.App.DATABASE;
 
 /**
-* Die Klasse legt das Layout für die Registrierseite fest und regelt im Detail welche Eingaben für welches Feld zulässig sind
+* Das UI fuer das Registrierfenster wird geladen
+ * Hier kann sich eine Person fuer die App registrieren
 */
 public class RegistrierLayer implements SwingPresentation {
 
+    /**
+     * Hier werden die UI Elemente fuer die Dateneingabe angezeigt, ausser dem Geburtsdatum
+     */
     private static final JPanel datenPanel = new JPanel();
+    /**
+     * Zum Anzeigen des Geburtsdatums
+     */
     private static final JPanel geburtsDatumsPanel = new JPanel();
+    /**
+     * Zum Anzeigen des Zurueck-Knopfes
+     */
     private static final JPanel zurueckPanel = new JPanel();
+    /**
+     * Zum Anzeigen des "Registrieren" Knopfes
+     */
     private static final JPanel registrierButtonPanel = new JPanel();
+    /**
+     * Hierauf werden Fehlermeldungen angezeigt wenn eine Eingabe nicht korrekt war
+     */
     private static final JPanel falscheAngabePanel = new JPanel();
 
+    /**
+     * Feld zum eingeben des Passwortes,
+     * die eingegebenen Zeichen sind nicht lesbar sondern werden als Punkte angezeigt
+     */
     private static final JPasswordField tfRegistrierPasswort = new JPasswordField();
 
+    /**
+     * Array zum speichern der Strings fuer die Anrede-ComboBox
+     */
     private static String[] anredeAuswahl = new String[]{ "*",App.resourceBundle.getString("mister"), App.resourceBundle.getString("mrs")};
+    /**
+     * Array zum Abspericher der Tage fuer die ComboBox
+     */
     private static Integer[] tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
+    /**
+     * Array zum Abspeichern der Monate fuer die ComboBox
+     */
     private static Integer[] monate = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12};
+    /**
+     * Array zum Abspeichern der Jahre fuer die CombBox
+     * Die Länge wird aus dem aktuellen Jahr berechnet, sodass ab 1900 alle Jahre angezeigt werden
+     */
     private static Integer[] jahre = new Integer[(Year.now().getValue()-1899)];
+    /**
+     * Array zum Abspeichern der Familienstand-Moeglichkeiten fuer die ComboBox
+     */
     private static String [] familienstandArten = new String[]{App.resourceBundle.getString("single"),App.resourceBundle.getString("married"),App.resourceBundle.getString("divorced"),App.resourceBundle.getString("widowed")};
 
+    /**
+    Fuer die Anrede
+     */
     static JComboBox<String> cbAnrede = new JComboBox<>(anredeAuswahl);
+    /**
+     * Fuer die Auswahl des Tages des Geburtsdatums
+     */
     static JComboBox<Integer> GeburtsdatumTag = new JComboBox<>(tage);
+    /**
+     * Fuer die Auswahl des Monats des Geburtsdatums
+     */
     static JComboBox<Integer> GeburtsdatumMonat = new JComboBox<>(monate);
+    /**
+     * Fuer die Auswahl des Jahres des Geburtsdatums
+     */
     static JComboBox<Integer> GeburtsdatumJahr = new JComboBox<>(jahre);
+    /**
+     * Fuer die Auswahl des Familienstandes
+     */
     static JComboBox<String> cbFamilienstand = new JComboBox<>(familienstandArten);
 
+    /**
+     * gibt an, ob das Fenster davor schon einmal aufgerufen wurde
+     * als Information ob setStrings aufgerufen werden muss oder nicht
+     */
     static boolean istErsterAufruf = true;
 
+    /**
+     * Konstruktor der Klasse RegistrierLayer
+     * Setzt das UI des Registrierfensters
+     * Falls das Fenster schon einmal aufgerufen wurde werden die Texte der UI Elemente nicht noch einmal gesetzt
+     */
     public RegistrierLayer(){
         if(istErsterAufruf){
             setStrings();
@@ -51,9 +111,7 @@ public class RegistrierLayer implements SwingPresentation {
         MasterController.fenster.validate();
         MasterController.fenster.repaint();
     }
-    /**
-* @method legt die dem Nutzer angezeigten Namen der einzelnen Felder fest sowie die Auswahloptionen des Geburtsdatums
-*/
+
     static void setStrings(){
         label2.setText(App.resourceBundle.getString("title"));
         label3.setText(App.resourceBundle.getString("first.name"));
@@ -83,9 +141,6 @@ public class RegistrierLayer implements SwingPresentation {
         cbFamilienstand = new JComboBox<>(familienstandArten);
     }
 
-/**
-* @method legt fest wie das Layout beim Registrieren aussieht
-*/
     @Override
     public void setLayout() {
         zurueckPanel.setLayout(new FlowLayout());
@@ -95,9 +150,6 @@ public class RegistrierLayer implements SwingPresentation {
 
     }
 
-/**
-* @method legt fest welche Funktionen der zurück und der registrieren Button haben
-*/
     @Override
     public void addListeners() {
         removeListeners();
@@ -113,10 +165,6 @@ public class RegistrierLayer implements SwingPresentation {
             button5.removeActionListener(listener);
     }
 
-
-/**
-* @method fügt die Komponenten ins Panel ein
-*/
     @Override
     public void addComponentsToPanels() {
         registrierButtonPanel.add(button5);
@@ -154,9 +202,6 @@ public class RegistrierLayer implements SwingPresentation {
         falscheAngabePanel.add(label1);
     }
 
-/**
-* @method fügt die Panels dem Frame hinzu
-*/
     @Override
     public void addPanelsToFrame() {
         MasterController.fenster.add(zurueckPanel);
@@ -165,7 +210,14 @@ public class RegistrierLayer implements SwingPresentation {
         MasterController.fenster.add(registrierButtonPanel);
     }
 /**
-* @method überprüft ob gültige Daten eingegeben wurden und gibt dem Nutzer bei Problemen eine Fehlermeldung zurück
+* Es wird ueberprueft ob alle Felder gefuellt sind, falls Eines leer ist wird eine entsprechende Fehlermeldung
+ * auf dem UI angezeigt
+ * Sonderueberpruefungen:
+ * PLZ darf nur Zahlen enthalten
+ * Die Telefonnummer darf nur Zahlen enthalten
+ * Die Sozialversicherungsnummer muss 12 Zeichen haben
+ * Es wird ueberprueft ob die Sozialversicherungsnummer schon in der Datenbank vorhanden ist
+ * @return Ein Boolean welcher angibt ob die Eingaben korrekt sind
 */
     boolean checkInputs(){
         label1.setText(null);
@@ -249,30 +301,18 @@ public class RegistrierLayer implements SwingPresentation {
         }
     }
     /**
-* Die Klasse ermöglicht es dem Nutzer eine Seite zurück zu gehen in der Registrierung
+* Zum Zurueckkehren auf die Startseite
 */
     void zurueckButtonWurdeGedrueckt(){
         removePanelsFromFrame();
         new StartLayer();
     }
+
     /**
-* @method wird vom Nutzer aktiviert wenn er alle seine Daten eingegeben hat. Das bisherige Layout verschwindet.
-* Wenn der Nutzer ungültige Eingaben getätigt hat, weisst das Programm ihn an dieser Stelle darauf hin.
-* @Param Vorname
-* @Param Nachname
-* @Param Geburtsdatum
-* @Param Passwort
-* @Param Anrede
-* @Param PLZ
-* @Param Ort
-* @Param Hausnummer
-* @Param Familienstand
-* @Param Mailadresse
-* @Param Telefonnummer
-* @Param Staatsangehörigkeit
-* @Param Strasse
-* @Param IBAN
-*/
+     * Zuerst wird ueberprueft ob die Angaben vollstaendig sind
+     * Falls ja wird mit der Registrierung in der Methode registrieren() fortgefahren
+     * Davor wird das Geburtsdatum aus den einzelnen Feldern ausgelesen und in ein BasicGeburtsdatum gecastet
+     */
     void registerierButtonWurdeGedrueckt(){
         if(checkInputs()) {
 
@@ -304,22 +344,23 @@ public class RegistrierLayer implements SwingPresentation {
             }
         }
     }
+
     /**
-     * @method fügt alle Daten aus dem Registrieren der Datenbank hinzu und erzeugt damit eine neue Person
-     * @Param Vorname
-     * @Param Nachname
-     * @Param Geburtsdatum
-     * @Param Passwort
-     * @Param Anrede
-     * @Param PLZ
-     * @Param Ort
-     * @Param Hausnummer
-     * @Param Familienstand
-     * @Param Mailadresse
-     * @Param Telefonnummer
-     * @Param Staatsangehörigkeit
-     * @Param Strasse
-     * @Param IBAN
+     * Es wird eine neue Person auf der Datenbank angelegt und die Vertragsuebersicht aufgerufen
+     * @param versicherungsNummer die eingegebene Versicherungsnummer
+     * @param vorname der eingegebene Vorname
+     * @param nachname der eingegebene Nachname
+     * @param neuesGeburtsDatum das eingegebene Geburtsdatum
+     * @param passwort das eingegebene Passwort
+     * @param anrede die eingegebene Anrede
+     * @param plz die eingegebene Postleitzahl
+     * @param ort der eingegebene Wohnort
+     * @param hausnummer die eingegebene Hausnummer
+     * @param familienstand der eingegebene Familienstand
+     * @param mailAdresse die eingegebene E-Mail Adresse
+     * @param telefonNummer die eingegebene Telefonnummer
+     * @param staatsangehoerigkeit die eingegebene Staatsangehoerigkeit
+     * @param strasse die eingegebene Strasse
      */
     public void registrieren(String versicherungsNummer,
                              String vorname,
@@ -357,7 +398,7 @@ public class RegistrierLayer implements SwingPresentation {
         App.masterController.loadVertragsuebersicht(person);
     }
     /**
-    * @method leert alle Boxen nach der Registrierung wieder
+    * Die ComboBoxen werden zurueckgesetzt um beim neuladen der Seite keine alten Daten stehen zu haben
     */
     public void clearAllComboBoxes(){
         cbFamilienstand.setSelectedIndex(0);
@@ -367,7 +408,7 @@ public class RegistrierLayer implements SwingPresentation {
         GeburtsdatumJahr.setSelectedIndex(0);
     }
     /**
-    * @method sorgt dafür dass die Panels vom Frame wieder verschwinden
+    *
     */
     public void removePanelsFromFrame(){
         MasterController.fenster.remove(registrierButtonPanel);

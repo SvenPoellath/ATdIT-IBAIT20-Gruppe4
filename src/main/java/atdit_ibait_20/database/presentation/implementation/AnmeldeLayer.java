@@ -12,7 +12,8 @@ import static atdit_ibait_20.database.App.DATABASE;
 import static atdit_ibait_20.database.App.resourceBundle;
 
 /**
- * Die Klasse legt fest welche grafischen Komponenten das FrontEnd
+ * In der Klasse wird das UI fuer das Anmeldefenster geladen
+ * Hier kann der Benutzer sich fuer die App anmelden
  */
 public class AnmeldeLayer implements SwingPresentation {
 
@@ -24,7 +25,8 @@ public class AnmeldeLayer implements SwingPresentation {
     private static final JPasswordField tfAnmeldePasswort = new JPasswordField();
 
     /**
-     * Das genaue Aussehen des Layoutes wird in den @Method der Setter festgelegt
+     * Konstruktor der Klasse AnmeldeLayer
+     * Hier wird das UI geladen
      */
     public AnmeldeLayer(){
         setStrings();
@@ -35,6 +37,7 @@ public class AnmeldeLayer implements SwingPresentation {
         MasterController.fenster.validate();
         MasterController.fenster.repaint();
     }
+
     static void setStrings(){
         label2.setText(App.resourceBundle.getString("nick.name"));
         label3.setText(App.resourceBundle.getString("password"));
@@ -69,9 +72,6 @@ public class AnmeldeLayer implements SwingPresentation {
 
     }
 
-
-
-
     public void addComponentsToPanels() {
         zurueckPanel.add(button3);
         anmeldungsPanel.add(label2);
@@ -97,22 +97,18 @@ public class AnmeldeLayer implements SwingPresentation {
         MasterController.fenster.remove(fehlerPanel);
     }
 
-
+    /**
+     * Die eingegebenen LogIn Daten werden geleert
+     * damit beim erneuten Laden der Seite keine Daten der vorherigen Person angezeigt werden
+     */
     static void resetLogin() {
         textField1.setText("");
         tfAnmeldePasswort.setText("");
     }
 
-    /*
-     * Die Eingaben des Nutzers werden eingelesen und mit den in der Datenbank hinterlegten Daten abgeglichen. Wenn die Daten übereinstimmen bekommen der Nutzer die Ausgabe
-     * "Anmeldung erfolgreich". Wenn die Daten nicht übereinstimmen bekommt der Nutzer die Ausgabe "Wrong id/password entered" und hat die Möglichkeit wieder auf die
-     * Anmeldungsseite zurück zu gehen.
-     * @param anmeldeName
-     * @param anmeldePasswort
-     * @method anmelden
-     * @method anmeldenCheck
-     * @method zurueck
-     **/
+    /**
+     * Entfernt alle angezeigten Panels
+     */
 
     public void anmelden() {
         removePanelsFromFrame();
@@ -121,7 +117,16 @@ public class AnmeldeLayer implements SwingPresentation {
         anmeldenCheck(anmeldeName, anmeldePasswort);
     }
 
+    /**
+     * Ueberprueft die eingegebenen Daten
+     * @param anmeldeName Sozialversicherungsnummer, auf Datenabnkebene ID zur Anmeldung
+     * @param anmeldePasswort Passwort zur Anmeldung
+     */
     public void anmeldenCheck(String anmeldeName, String anmeldePasswort) {
+/*        bei Änderungen in der Methode welche die Konsolenausgabe ändern
+        bitte die TestMethoden in AnmeldeTestLayer
+        anpassen oder die Tests durch @Disable oder @Ignore ausschalten*/
+
         Person person;
         if (DATABASE.check_Login(anmeldeName, anmeldePasswort)) {
             person = DATABASE.get_person_by_id(anmeldeName);
@@ -135,6 +140,9 @@ public class AnmeldeLayer implements SwingPresentation {
         }
     }
 
+    /**
+     * um auf die Startseite zurueckzukommen
+     */
     public void zurueck(){
         removePanelsFromFrame();
         MasterController.fenster.remove(StartLayer.sprache);

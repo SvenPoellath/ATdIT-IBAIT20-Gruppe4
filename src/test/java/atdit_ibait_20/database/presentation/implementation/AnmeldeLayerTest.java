@@ -11,6 +11,13 @@ import java.io.PrintStream;
 
 class AnmeldeLayerTest{
 
+/*  Der Test prüft auf die Konsolenausgabe
+    Falls die Tests failen kann eine Änderung der Methode anmeldenCheck der Grund sein
+    Um das Problem zu Lösen kann entweder die Änderung der Methode rückgängig geacht werden,
+    die TestMethoden angepasst werden
+    oder falls beides nicht möglich oder zu aufwändig ist können die Methoden durch @Disable oder durch
+    @Ignore übersprungen werden*/
+
 
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();

@@ -14,15 +14,11 @@ import java.awt.event.ItemListener;
 
 import static atdit_ibait_20.database.App.DATABASE;
 
-    /*
-    * Legt fest welche Elemente das Layout enthalten soll und wie es aussehen soll, wenn man einen Vertrag hinzufügen will.
-    * @param versicherungsArten
-    * @param buchungsArten
-    * @param anzahlDerTage
-    * @param land
-    * @param tagesPreis
-    * @param betrag
-    */
+/**
+ * Die Klasse legt das UI der Vertragsbuchungsseite fest
+ * Sie beschreibt alle Ablaeufe zum Buchen eines Vertrages
+ * Momentan ist nur die Gepaecksversicherung implementiert
+ */
 public class VertragHinzufuegenLayer implements SwingPresentation {
     static final int monatlicherPreis = 300;
     static final int jahresPreis =3000;
@@ -48,6 +44,11 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     static int betrag;
     private final Person angemeldetePerson;
 
+    /**
+     * Konstruktor der Klasse VertragHinzufuegenLayer
+     * laedt das UI des Vertragsbuchungsfensters
+     * @param person die in der App angemeldete Person
+     */
     public VertragHinzufuegenLayer(Person person){
         angemeldetePerson = person;
         tagesPreis=50;
@@ -60,9 +61,6 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         MasterController.fenster.repaint();
     }
 
-    /**
-    * @method legt fest welche Schriftzüge die einzelnen Elemente tragen
-    */
     static void setStrings(){
         label6.setText(App.resourceBundle.getString("payment.type"));
         label7.setText(App.resourceBundle.getString("days.of.visiting"));
@@ -88,10 +86,6 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         buchungsArt = new JComboBox<>(buchungsArten);
     }
 
-
-    /**
-    * @method Legt fest welche Art das Layout haben soll
-    */
     @Override
     public void setLayout() {
         vertragsDaten.setLayout(new GridLayout(0,2));
@@ -100,9 +94,6 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         label12.setBorder(BorderFactory.createEmptyBorder(0,100,0,100));
     }
 
-    /**
-    * @method Verbindet die grafischen Elemente mit ihrer Funktionalität
-    */
     @Override
     public void addListeners() {
         removeListeners();
@@ -112,9 +103,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         button8.addActionListener(e->this.preisButtonWurdeGedrueckt());
         button9.addActionListener(e->this.IBANButtonWurdeGedrueckt());
     }
-/**
-    * @method Entfernt die Funktionsweise der grafischen Elemente
-    */
+
     public void removeListeners() {
         for (ItemListener listener : buchungsArt.getItemListeners())
             buchungsArt.removeItemListener(listener);
@@ -131,9 +120,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         for (ActionListener listener : button9.getActionListeners())
             button9.removeActionListener(listener);
     }
-/**
-    * @method Fügt die Komponenten dem Panel hinzu
-    */
+
     @Override
     public void addComponentsToPanels() {
         vertragsDaten.removeAll();
@@ -149,9 +136,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         neueIBAN.add(button9);
         hinzugefuegt.add(label15);
     }
-/**
-    * @method Fügt die Panels dem Frame hinzu
-    */
+
     @Override
     public void addPanelsToFrame() {
         MasterController.fenster.add(vertragsDaten);
@@ -159,9 +144,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         MasterController.fenster.add(hinzufuegen);
         MasterController.fenster.add(fehlerPanel);
     }
-/**
-    * @method Entfernt die Panels vom Frame
-    */
+
 
         public void removePanelsFromFrame() {
             MasterController.fenster.remove(vertragsDaten);
@@ -170,11 +153,10 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
             MasterController.fenster.remove(fehlerPanel);
         }
 
-        /**
-    * @method Legt die Funktionsweise fest was passiert wenn der Nutzer den Hinzufügen Button drückt
-    */
-
-
+    /**
+     * ueberprueft ob die Eingaben stimmen, d.h. das fuer jede ComboBox eine Auswahl getroffen wurde
+     * ruft die Methode setPreis() zum berechnen des Preises auf
+     */
     public void preisButtonWurdeGedrueckt(){
         preise.removeAll();
         eingabenStimmen();
@@ -182,27 +164,39 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         hinzufuegen.add(button7);
         MasterController.fenster.validate();
     }
+
+    /**
+     * ueberprueft die Eingaben
+     * wenn diese stimmen wird die Seite neu geladen, damit wenn gewuenscht ein weiterer Vertrag gebucht werden kann
+     */
     public void hinzufuegeButtonWurdeGedrueckt(){
         if(eingabenStimmen()){
             neuerVertragHinzufuegen();
         }
     }
 
+    /**
+     * ruft eine weitere Methode auf um zu ueberpruefen ob die eingegebene IBAN zulaessig ist
+     */
     public void IBANButtonWurdeGedrueckt(){
         String IBAN = textField2.getText();
         eingegebeneIBANPruefen(IBAN);
         MasterController.fenster.validate();
     }
     /**
-    * @method Legt fest wie die Änderung von Nutzerdaten bestätigt werden sollen
+    * wenn eine Versicherungsart ausgewaehlt wird, werden die Buchungsartoptionen angezeigt
     */
     public void versicherungsArtWurdeGeaendert(){
         displayBuchungsartOptionen();
         MasterController.fenster.validate();
     }
+
     /**
-    * @method Legt fest was passiert wenn die Buchungsart geändert wird
-    */
+     * Falls die Option "nur fuer eine Reise" ausgewaehlt wurde werden weitere UI Elemente geladen
+     * um weitere Informatinen zu der Reise eingeben zu koennen
+     * Falls eine adere Option gewaehlt wurde werden diese Angaben wieder entfernt
+     * @param e gibt an welche Buchungsoption gewaehlt wurde
+     */
     public void buchungsArtWurdeGeaendert(ItemEvent e){
         hideAngabenZurReise();
         MasterController.fenster.validate();
@@ -212,23 +206,38 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
             MasterController.fenster.validate();
         }
     }
-    
+
+    /**
+     * zeigt nach Auswahltder Versicherungsart die ComboBox zur Auswahl der Buchungsart Optionen an
+     */
     public void displayBuchungsartOptionen(){
         vertragsDaten.add(label6);
         vertragsDaten.add(buchungsArt);
     }
+
+    /**
+     * zeigt weitere UI Elemente um die Angaben zu der fuer die Versicherung relevante machen zu koennen
+     */
     public void displayAngabenZurReise(){
         vertragsDaten.add(label7);
         vertragsDaten.add(anzahlDerTage);
         vertragsDaten.add(label8);
         vertragsDaten.add(land);
     }
+
+    /**
+     * entfernt die Angaben zu der fuer die Versicherung relevante Reise
+     */
     public void hideAngabenZurReise(){
         vertragsDaten.remove(label7);
         vertragsDaten.remove(anzahlDerTage);
         vertragsDaten.remove(label8);
         vertragsDaten.remove(land);
     }
+
+    /**
+     * je nach ausgewaehlter Versicherungsart wird die entsprechende Methode zur Preisberechnung aufgerufen
+     */
     public void setPreis(){
         if(versicherungsArt.getSelectedItem().equals(App.resourceBundle.getString("luggage.insurance"))){
             Object buchungsArtObjekt = buchungsArt.getSelectedItem();
@@ -236,10 +245,12 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
                 eingabenStimmen();
         }
     }
-    /*
-    * @method Gibt die monatlichen oder jährlichen Preise der Gepäcksversicherung aus
-    * @param preise
-    */
+
+    /**
+     * berechnet den Preis fuer die Gepaecksversicherung je nach ausgewaehlter Buchungsart
+     * @param buchungsArtObjekt gibt an, welche Buchungsart ausgewaehlt wurde
+     * @return den berechneten Preis fuer die Gepaecksversicherung
+     */
     public int setPreisForLuggageInsurance(Object buchungsArtObjekt){
         if(buchungsArtObjekt.equals(App.resourceBundle.getString("monthly"))) {
             preise.add(label9);
@@ -261,14 +272,22 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         }
     }
 
+    /**
+     * wird aufgerufen wenn bei der Gepaecksversicherung "nur fuer eine Reise" ausgewaehlt wurde
+     * berechnet aus der Anzahl der Tage fuer die verreist wird den Preis der Versicherung
+     * @param anzahlDerTageObjekt gibt mit, wie viele Tage verreist wird
+     * @return den Peis fuer die Gepackversicherung wenn "nur fuer eine Reise" gewaehlt wurde
+     */
     public int setPreisForLuggageInsurancePerTrip(int anzahlDerTageObjekt){
         tagesPreis = (anzahlDerTageObjekt + 1)*50;
         return tagesPreis;
     }
 
+
     /**
-    * @method fügt bei der Person die label hinzu bzw. ändert sie
-    **/
+     * ueberpruft ob die eingaben Stimmen, d.h. dass fuer sowohl Versicherungsart als auch Buchungsart ausgewaehlt wurden
+     * @return true wenn alle Angaben gemacht wurden, ansonsten false
+     */
     public boolean eingabenStimmen(){
         boolean angabenStimmen;
         fehlerPanel.removeAll();
@@ -291,18 +310,20 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         MasterController.fenster.validate();
         return angabenStimmen;
     }
+
     /**
-    * @method Fügt beim Vertrag die IBAN hinzu
-    */
+     * wird angezeigt falls fuer die Person noch keine IBAN hinterlegt ist
+     */
     public void displayIBANHinzufuegePanel(){
         MasterController.fenster.remove(hinzufuegen);
         MasterController.fenster.add(neueIBAN);
         MasterController.fenster.add(hinzufuegen);
         MasterController.fenster.validate();
     }
+
     /**
-    * @method Fügt einen neuen Vertrag in der Datenbank hinzu
-    */
+     * erstellt einen neuen Vertrag un der Datenbank
+     */
     public void neuerVertragHinzufuegen(){
         System.out.println("Contract added.");
         BasicVertrag vertrag = new BasicVertrag(versicherungsArt.getSelectedItem().toString(),
@@ -314,8 +335,10 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     }
 
     /**
-    * @method überprüft die Korrektheit der eingegeben IBAN in der Datenbank
-    **/
+     * ueberprueft ob die eingegebene IBAN zulaessig ist, d.h. dass sie 22 Zeichen hat
+     * ansonsten wird ein Fehler ausgegeben
+     * @param IBAN die eingegebene IBAN
+     */
     public void eingegebeneIBANPruefen(String IBAN){
         if(IBAN.length()==22) {
             angemeldetePerson.setIBAN(IBAN);

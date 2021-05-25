@@ -33,8 +33,8 @@ class VertragHinzufuegenLayerTest {
     static String staat = "EN";
     static String strasse = "cba";
 
-    @BeforeAll
-    public static void setUp(){
+    @BeforeEach
+    public void setUp(){
         person = new BasicPerson(id, vorname, nachname, geburtsdatum, passwort, anrede,
                 plz, ort, hausnummer, familienstand, mail, telefonnr, staat, strasse);
         App.DATABASE.create_tables();
@@ -42,8 +42,8 @@ class VertragHinzufuegenLayerTest {
         Vertrag = new VertragHinzufuegenLayer(person);
     }
 
-    @AfterAll
-    public static void tearDown(){
+    @AfterEach
+    public void tearDown(){
         App.DATABASE.delete_person_by_id(id);
     }
 
@@ -66,13 +66,13 @@ class VertragHinzufuegenLayerTest {
     public void setPreisPerTripFuenfTageTest(){
         Assertions.assertEquals(ExpectedFuenfTage, Vertrag.setPreisForLuggageInsurancePerTrip(FuenfTage));
     }
-/*
+
     @Test
     @Order(1)
     public void eingegebeneIBANPruefenTestIBANFalsch() {
         Vertrag.eingegebeneIBANPruefen(IBANFalsch);
         Assertions.assertEquals(null,person.getIBAN());
-    }*/
+    }
 
     @Test
     @Order(2)

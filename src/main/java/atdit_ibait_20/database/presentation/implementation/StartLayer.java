@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 /**
 * Die Klasse legt das Startfenster fest was erscheint, wenn der Nutzer die Applikation startet
-**/
+*/
 public class StartLayer implements SwingPresentation {
 
 
@@ -36,8 +36,8 @@ public class StartLayer implements SwingPresentation {
     }
 
     /**
-    * @setLayout Legt fest welche Art von Layout die Nutzeroberfläche hat
-    **/
+    * @method Legt fest wie das Layout der Nutzeroberfläche aussieht
+    */
     public void setLayout(){
         willkommenPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         willkommenPanel.setLayout(new FlowLayout());
@@ -45,7 +45,7 @@ public class StartLayer implements SwingPresentation {
         eingangsButtonsPanel.setLayout(new GridLayout(0,1));
     }
     /**
-     * @addListeners Fügt die einzelnen Buttons dem Layout hinzu
+     * @method Fügt die Funktion der einzelnen Buttons dem Layout hinzu
      *
      * */
     public void addListeners(){
@@ -55,6 +55,10 @@ public class StartLayer implements SwingPresentation {
         button1.addActionListener(e->anmeldenFensterButtonWurdeGedrueckt());
     }
 
+    /**
+     * @method Entfernt die Funktion der einzelnen Buttons
+     *
+     * */
     public void removeListeners() {
         for (ActionListener listener : button1.getActionListeners())
             button1.removeActionListener(listener);
@@ -68,8 +72,8 @@ public class StartLayer implements SwingPresentation {
 
 
     /**
-    * @addComponentsToPanels verknüpft die Buttons mit den Funktionen die passieren sollen, wenn sie gedrückt werden
-    **/
+    * @method verknüpft die Buttons mit den Funktionen die passieren sollen, wenn sie gedrückt werden
+    */
     public void addComponentsToPanels(){
         sprache.removeAll();
         sprache.add(spracheWaelen);
@@ -79,8 +83,8 @@ public class StartLayer implements SwingPresentation {
     }
     
     /**
-    * @addPanelsToFrame fügt die Buttons dem Rahmen hinzu
-    **/
+    * @method fügt die Buttons dem Rahmen hinzu
+    */
     public void addPanelsToFrame(){
         MasterController.fenster.add(sprache);
         MasterController.fenster.add(willkommenPanel);
@@ -94,8 +98,8 @@ public class StartLayer implements SwingPresentation {
     }
 
     /**
-    * @setString Legt die Schriftzüge der einzelnen Elemente des Layouts fest
-    **/
+    * @method Legt die Schriftzüge der einzelnen Elemente des Layouts fest
+    */
     private static void setStrings(){
         button1.setText(App.resourceBundle.getString("sign.in"));
         label1.setText(App.resourceBundle.getString("welcome.to.our.app"));
@@ -106,7 +110,7 @@ public class StartLayer implements SwingPresentation {
     }
     /**
     * Die Klasse liefert die Funktionalität, die es dem Nutzer ermöglicht die Applikation zu schließen
-    **/
+    */
     void registrierenFensterButtonWurdeGedrueckt(){
         removePanelsFromFrame();
         App.masterController.loadRegistrierLayer();
@@ -116,8 +120,9 @@ public class StartLayer implements SwingPresentation {
         removePanelsFromFrame();
     }
     /**
-    * Die Klasse ermöglicht es die Sprache zu ändern
-    **/
+    * @method ermöglicht es die Sprache zu ändern
+    * @param cb
+    */
     void spracheWurdeGeaendert(ItemEvent e){
         JComboBox<String> cb = (JComboBox<String>) e.getSource();
         if(cb.getSelectedIndex() == 1){
@@ -128,10 +133,17 @@ public class StartLayer implements SwingPresentation {
         }
         resetAllStrings();
     }
+    /**
+    * @method setzt die Sprache auf Deutsch
+    */
     void setSpracheToGerman(){
         Locale.setDefault(Locale.GERMAN);
         App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());
     }
+    
+    /**
+    * @method setzt die Sprache auf Englisch
+    */
     void setSpracheToEnglish(){
         Locale.setDefault(Locale.ENGLISH);
         App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());

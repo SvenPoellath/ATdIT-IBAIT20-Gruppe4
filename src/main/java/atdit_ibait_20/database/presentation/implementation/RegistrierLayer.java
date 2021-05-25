@@ -14,7 +14,7 @@ import static atdit_ibait_20.database.App.DATABASE;
 
 /**
 * Die Klasse legt das Layout für die Registrierseite fest und regelt im Detail welche Eingaben für welches Feld zulässig sind
-**/
+*/
 public class RegistrierLayer implements SwingPresentation {
 
     private static final JPanel datenPanel = new JPanel();
@@ -52,8 +52,8 @@ public class RegistrierLayer implements SwingPresentation {
         MasterController.fenster.repaint();
     }
     /**
-* @setString legt die dem Nutzer angezeigten Namen der einzelnen Felder fest sowie die Auswahloptionen des Geburtsdatums
-**/
+* @method legt die dem Nutzer angezeigten Namen der einzelnen Felder fest sowie die Auswahloptionen des Geburtsdatums
+*/
     static void setStrings(){
         label2.setText(App.resourceBundle.getString("title"));
         label3.setText(App.resourceBundle.getString("first.name"));
@@ -164,8 +164,8 @@ public class RegistrierLayer implements SwingPresentation {
         MasterController.fenster.add(registrierButtonPanel);
     }
 /**
-* @checkInputs überprüft ob gültige Daten eingegeben wurden und gibt dem Nutzer bei Problemen eine Fehlermeldung zurück
-**/
+* @method überprüft ob gültige Daten eingegeben wurden und gibt dem Nutzer bei Problemen eine Fehlermeldung zurück
+*/
     boolean checkInputs(){
         label1.setText(null);
 

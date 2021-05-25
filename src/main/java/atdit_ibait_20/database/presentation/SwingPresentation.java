@@ -1,7 +1,9 @@
 package atdit_ibait_20.database.presentation;
 
 import javax.swing.*;
-
+/** 
+* Legt fest welche Bestandteile das Layout haben kann
+*/
 public interface SwingPresentation {
     JButton button1 = new JButton();
     JButton button2 = new JButton();

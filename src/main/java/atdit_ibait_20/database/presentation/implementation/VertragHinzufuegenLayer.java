@@ -15,8 +15,14 @@ import java.awt.event.ItemListener;
 import static atdit_ibait_20.database.App.DATABASE;
 
     /**
-    * Legt fest welche Elemente das Layout enthalten soll, wenn man einen Vertrag hinzufügen will.
-    **/
+    * Legt fest welche Elemente das Layout enthalten soll und wie es aussehen soll, wenn man einen Vertrag hinzufügen will.
+    * @param versicherungsArten
+    * @param buchungsArten
+    * @param anzahlDerTage
+    * @param land
+    * @param tagesPreis
+    * @param betrag
+    */
 public class VertragHinzufuegenLayer implements SwingPresentation {
     static final int monatlicherPreis = 300;
     static final int jahresPreis =3000;
@@ -55,8 +61,8 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     }
 
     /**
-    * @setStringt legt fest welche Schriftzüge die einzelnen Elemente tragen
-    **/
+    * @method legt fest welche Schriftzüge die einzelnen Elemente tragen
+    */
     static void setStrings(){
         label6.setText(App.resourceBundle.getString("payment.type"));
         label7.setText(App.resourceBundle.getString("days.of.visiting"));
@@ -84,8 +90,8 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
 
 
     /**
-    * @setLayout Legt fest welche Art das Layout haben soll
-    **/
+    * @method Legt fest welche Art das Layout haben soll
+    */
     @Override
     public void setLayout() {
         vertragsDaten.setLayout(new GridLayout(0,2));
@@ -95,8 +101,8 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     }
 
     /**
-    * @addListener Verbindet die Elemtente mit der Art ihres Auswahlmenüs
-    **/
+    * @method Verbindet die grafischen Elemente mit ihrer Funktionalität
+    */
     @Override
     public void addListeners() {
         removeListeners();
@@ -106,7 +112,9 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         button8.addActionListener(e->this.preisButtonWurdeGedrueckt());
         button9.addActionListener(e->this.IBANButtonWurdeGedrueckt());
     }
-
+/**
+    * @method Entfernt die Funktionsweise der grafischen Elemente
+    */
     public void removeListeners() {
         for (ItemListener listener : buchungsArt.getItemListeners())
             buchungsArt.removeItemListener(listener);
@@ -123,7 +131,9 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         for (ActionListener listener : button9.getActionListeners())
             button9.removeActionListener(listener);
     }
-
+/**
+    * @method Fügt die Komponenten dem Panel hinzu
+    */
     @Override
     public void addComponentsToPanels() {
         vertragsDaten.removeAll();
@@ -139,7 +149,9 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         neueIBAN.add(button9);
         hinzugefuegt.add(label15);
     }
-
+/**
+    * @method Fügt die Panels dem Frame hinzu
+    */
     @Override
     public void addPanelsToFrame() {
         MasterController.fenster.add(vertragsDaten);
@@ -147,7 +159,9 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         MasterController.fenster.add(hinzufuegen);
         MasterController.fenster.add(fehlerPanel);
     }
-
+/**
+    * @method Entfernt die Panels vom Frame
+    */
 
         public void removePanelsFromFrame() {
             MasterController.fenster.remove(vertragsDaten);
@@ -157,8 +171,8 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         }
 
         /**
-    * Legt die Funktionsweise fest was passiert wenn der Nutzer den Hinzufügen Button drückt
-    **/
+    * @method Legt die Funktionsweise fest was passiert wenn der Nutzer den Hinzufügen Button drückt
+    */
 
 
     public void preisButtonWurdeGedrueckt(){
@@ -179,10 +193,16 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         eingegebeneIBANPruefen(IBAN);
         MasterController.fenster.validate();
     }
+    /**
+    * @method Legt fest wie die Änderung von Nutzerdaten bestätigt werden sollen
+    */
     public void versicherungsArtWurdeGeaendert(){
         displayBuchungsartOptionen();
         MasterController.fenster.validate();
     }
+    /**
+    * @method Legt fest was passiert wenn die Buchungsart geändert wird
+    */
     public void buchungsArtWurdeGeaendert(ItemEvent e){
         hideAngabenZurReise();
         MasterController.fenster.validate();
@@ -192,6 +212,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
             MasterController.fenster.validate();
         }
     }
+    
     public void displayBuchungsartOptionen(){
         vertragsDaten.add(label6);
         vertragsDaten.add(buchungsArt);
@@ -216,8 +237,9 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         }
     }
     /**
-    * @ZeitraumIf Gibt die monatlichen oder jährlichen Preise der Gepäcksversicherung aus
-    **/
+    * @method Gibt die monatlichen oder jährlichen Preise der Gepäcksversicherung aus
+    * @param preise
+    */
     public int setPreisForLuggageInsurance(Object buchungsArtObjekt){
         if(buchungsArtObjekt.equals(App.resourceBundle.getString("monthly"))) {
             preise.add(label9);
@@ -245,7 +267,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     }
 
     /**
-    * @PersonenIf fügt bei der Person die label16 zu bzw. ändert sie
+    * @method fügt bei der Person die label hinzu bzw. ändert sie
     **/
     public boolean eingabenStimmen(){
         boolean angabenStimmen;
@@ -269,12 +291,18 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
         MasterController.fenster.validate();
         return angabenStimmen;
     }
+    /**
+    * @method Fügt beim Vertrag die IBAN hinzu
+    */
     public void displayIBANHinzufuegePanel(){
         MasterController.fenster.remove(hinzufuegen);
         MasterController.fenster.add(neueIBAN);
         MasterController.fenster.add(hinzufuegen);
         MasterController.fenster.validate();
     }
+    /**
+    * @method Fügt einen neuen Vertrag in der Datenbank hinzu
+    */
     public void neuerVertragHinzufuegen(){
         System.out.println("Contract added.");
         BasicVertrag vertrag = new BasicVertrag(versicherungsArt.getSelectedItem().toString(),
@@ -286,7 +314,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
     }
 
     /**
-    * @IBANIf überträgt die Änderung der label16 an die Datenbank
+    * @method überprüft die Korrektheit der eingegeben IBAN in der Datenbank
     **/
     public void eingegebeneIBANPruefen(String IBAN){
         if(IBAN.length()==22) {

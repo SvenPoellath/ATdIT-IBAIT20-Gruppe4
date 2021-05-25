@@ -5,7 +5,8 @@ import atdit_ibait_20.database.model.Person;
 
 import java.util.ArrayList;
 /**
-* Es wird eine Klasse Person erstellt, die das Interface Person implementiert. Weiterhin werden verschiedene primitive Datentypen sowie ein Array angelegt
+* Es wird eine Klasse Person erstellt, die das Interface Person implementiert.
+ * Hier werden alle Informationen zur Person abgespeichert
 */
 public class BasicPerson implements Person {
     private String Sozialversicherungsnummer;
@@ -23,23 +24,8 @@ public class BasicPerson implements Person {
     private long telefonnummer;
     private String Staatsangehoerigkeit;
     private String Strasse;
-/**
-* @Method Im folgenden werden jeder Methode die richtigen Variablen zugeordnet. Durch den set Aufruf, wird es möglich die Daten außerhalb der Klasse zu bearbeiten
-* @Param Vorname
-* @Param Nachname
-* @Param Geburtsdatum
-* @Param Passwort
-* @Param Anrede
-* @Param PLZ
-* @Param Ort
-* @Param Hausnummer
-* @Param Familienstand
-* @Param Mailadresse
-* @Param Telefonnummer
-* @Param Staatsangehörigkeit
-* @Param Strasse
-* @Param IBAN
-*/
+    private String IBAN;
+
     public void setSozialversicherungsnummer(String sozialversicherungsnummer) {
         Sozialversicherungsnummer = sozialversicherungsnummer;
     }
@@ -100,25 +86,25 @@ public class BasicPerson implements Person {
         this.IBAN = IBAN;
     }
 
-    private String IBAN;
     /**
-    * Es wird ein Konstruktur für BasicPerson angelegt. Darin werden alle Attribute übergeben.
-    * @Param Vorname
-    * @Param Nachname
-    * @Param Geburtsdatum
-    * @Param Passwort
-    * @Param Anrede
-    * @Param PLZ
-    * @Param Ort
-    * @Param Hausnummer
-    * @Param Familienstand
-    * @Param Mailadresse
-    * @Param Telefonnummer
-    * @Param Staatsangehörigkeit
-    * @Param Strasse
-    * @Param IBAN
-    */
-
+     * dieser Konstruktor wird aufgerufen wenn alle Variablen der Person befuellt werden
+     * @param sozialversicherungsnummer
+     * @param vorname
+     * @param nachname
+     * @param geburtsdatum
+     * @param passwort
+     * @param anrede
+     * @param plz
+     * @param ort
+     * @param hausnummer
+     * @param familienstand
+     * @param mailadresse
+     * @param telefonnummer
+     * @param staatsangehoerigkeit
+     * @param strasse
+     * @param vertraege bei anderen nicht vorhanden
+     * @param iban bei anderen nicht vorhanden
+     */
     public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum,
                        String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand,
                        String mailadresse, long telefonnummer, String staatsangehoerigkeit, String strasse,
@@ -142,10 +128,32 @@ public class BasicPerson implements Person {
         this.IBAN = iban;
     }
 
+    /**
+     * Dieser Konstruktor dient der Erstellung einer Person im Programm, damit dieser die angemeldetet Person
+     * weiter uebergeben werden kann
+     */
     public BasicPerson() {
 
     }
 
+    /**
+     * Dieser Konstruktor wird aufgerufen wenn der Person alle Parameter bis auf die IBAN uebergeben werden
+     * @param sozialversicherungsnummer
+     * @param vorname
+     * @param nachname
+     * @param geburtsdatum
+     * @param passwort
+     * @param anrede
+     * @param plz
+     * @param ort
+     * @param hausnummer
+     * @param familienstand
+     * @param mailadresse
+     * @param telefonnummer
+     * @param staatsangehoerigkeit
+     * @param strasse
+     * @param vertraege
+     */
     public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum,
                        String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand,
                        String mailadresse, long telefonnummer, String staatsangehoerigkeit, String strasse,
@@ -154,6 +162,23 @@ public class BasicPerson implements Person {
                 mailadresse, telefonnummer, staatsangehoerigkeit, strasse, vertraege, null);
     }
 
+    /**
+     * Dieser Konstruktor wird aufgerufen wenn alle Parameter bis auf Vertraege und IBAN uebergeben werden
+     * @param sozialversicherungsnummer
+     * @param vorname
+     * @param nachname
+     * @param geburtsdatum
+     * @param passwort
+     * @param anrede
+     * @param plz
+     * @param ort
+     * @param hausnummer
+     * @param familienstand
+     * @param mailadresse
+     * @param telefonnummer
+     * @param staatsangehoerigkeit
+     * @param strasse
+     */
     public BasicPerson(String sozialversicherungsnummer, String vorname, String nachname, BasicGeburtsdatum geburtsdatum,
                        String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand,
                        String mailadresse, long telefonnummer, String staatsangehoerigkeit, String strasse) {
@@ -161,29 +186,13 @@ public class BasicPerson implements Person {
                 mailadresse, telefonnummer, staatsangehoerigkeit, strasse, null);
     }
 /**
-* @Methode ermöglicht es Verträge hinzuzufügen
+* es wird ein Vertrag in die ArrayList der Person hinzugefuegt
 */
 
     public void addVertrag(Vertrag vertrag) {
         Vertraege.add(vertrag);
     }
-/**
-* Es wird für jedes Attribut der Parameter angelegt, damit man von außerhalb der Klasse darauf zugreifen kann
-* @Param Vorname
-* @Param Nachname
-* @Param Geburtsdatum
-* @Param Passwort
-* @Param Anrede
-* @Param PLZ
-* @Param Ort
-* @Param Hausnummer
-* @Param Familienstand
-* @Param Mailadresse
-* @Param Telefonnummer
-* @Param Staatsangehörigkeit
-* @Param Strasse
-* @Param IBAN
-*/
+
     @Override
     public String getSozialversicherungsnummer() {
         return this.Sozialversicherungsnummer;

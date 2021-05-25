@@ -2,17 +2,14 @@ package atdit_ibait_20.database.model.implementation;
 
 import atdit_ibait_20.database.model.Geburtsdatum;
 /**
-* BasicGeburtsdatum soll alle Parameter des Geburtsdatum der Datenbank enthalten
-* @Param GeburstdatumTag
-* @Param GeburtsdatumMonat
-* @Param GeburstdatumJahr
+* BasicGeburtsdatum erstellt die Verbindung zur Datenbank und inplementiert das Interface Geburtsdatum
 */
 public class BasicGeburtsdatum implements Geburtsdatum {
     private final int GeburtsdatumTag;
     private final int GeburtsdatumMonat;
     private final int GeburtsdatumJahr;
 /**
-* Der Konstruktor weisst die Werte aus der Datenbank den Werten im Quellcode zu 
+* Der Konstruktor uebergibt die Daten des Geburtsdatums aus dem UI an die Klasse
 */
     public BasicGeburtsdatum(int geburtsdatumTag, int geburtsdatumMonat, int geburtsdatumJahr) {
         GeburtsdatumTag = geburtsdatumTag;
@@ -21,7 +18,7 @@ public class BasicGeburtsdatum implements Geburtsdatum {
     }
 
 /**
-* Die Werte werden in Integer gecastet
+* Das Datum aus dem Datenbankeintrag wird in den jeweiligen Tag, Monat und das JAhr aufgeteilt und an die Klasse uebergeben
 */
     public BasicGeburtsdatum(String database_entry) {
         String[] geburtstag = database_entry.split("-");

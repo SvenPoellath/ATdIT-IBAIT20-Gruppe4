@@ -16,8 +16,8 @@ public class App {
     public static MasterController masterController = new MasterController();
 
     /**
-    * @Methode Main startet die Applikation und baut die Verbindung zur Datenbank auf
-    **/
+    * @method Startet die Applikation und baut die Verbindung zur Datenbank auf
+    */
     public static void main (String[] args) {
 
         masterController.loadStartLayer();

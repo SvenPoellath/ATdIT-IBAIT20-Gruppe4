@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
     /**
     * Anlegen der Elemente für das Layout der Vertragsübersicht
-    **/
+    */
 public class Vertragsuebersicht implements SwingPresentation {
     private static final JPanel add = new JPanel();
     private static final JMenuBar menuBar = new JMenuBar();
@@ -34,8 +34,8 @@ public class Vertragsuebersicht implements SwingPresentation {
     }
 
     /**
-    * Genaue Einteilung wie vorhandene Verträge angezeigt werden sollen. 
-    **/
+    * @method Genaue Einteilung wie vorhandene Verträge angezeigt werden sollen. 
+    */
     public static void addVorhandeneVertraegetoGUI(Person person){
         if(person.getVertraege() != null) {
             for (int i = 0; i < person.getVertraege().size(); i++) {
@@ -64,8 +64,8 @@ public class Vertragsuebersicht implements SwingPresentation {
     }
     
     /**
-    * @setString Schriftzüge der Elemente des Layouts werden festgelegt
-    **/
+    * @method Schriftzüge der Elemente des Layouts werden festgelegt
+    */
     static void setStrings(){
         einstellungen.setText(App.resourceBundle.getString("settings"));
         home.setText(App.resourceBundle.getString("home"));
@@ -81,13 +81,15 @@ public class Vertragsuebersicht implements SwingPresentation {
 
 
     /**
-    * @setLayout Legt die Art des Layoutes fest, welches verwendet wird
+    * @method Legt die Art des Layoutes fest, welches verwendet wird
     **/
     @Override
     public void setLayout() {
         add.setLayout(new GridLayout(0,1));
     }
-    
+    /**
+    * @method Legt die Funktionsweise einzelner Buttons fest
+    */
     @Override
     public void addListeners() {
         removeListeners();
@@ -96,7 +98,9 @@ public class Vertragsuebersicht implements SwingPresentation {
         home.addActionListener(e->vertragsuebersichtWurdeAusgewaelt());
         button6.addActionListener(e->vertraghinzufuegenWurdeGedrueckt());
     }
-
+/**
+    * @method Entfernt die Funktionsweise einzelner Buttons
+    */
     public void removeListeners() {
         for (ActionListener listener : einstellungen.getActionListeners())
             einstellungen.removeActionListener(listener);
@@ -107,7 +111,9 @@ public class Vertragsuebersicht implements SwingPresentation {
         for (ActionListener listener : button6.getActionListeners())
             button6.removeActionListener(listener);
     }
-
+/**
+    * @method Fügt die einzelnen Komponenten den Panels hinzu
+    */
     @Override
     public void addComponentsToPanels() {
         menu.add(home);
@@ -116,17 +122,26 @@ public class Vertragsuebersicht implements SwingPresentation {
         menuBar.add(menu);
     }
 
+/**
+    * @method fügt die Panels dem Frame hinzu 
+    */
     @Override
     public void addPanelsToFrame() {
         MasterController.fenster.setJMenuBar(menuBar);
         MasterController.fenster.add(add);
     }
 
+/**
+    * @method entfernt die Panels vom Frame
+    */
         @Override
         public void removePanelsFromFrame() {
             MasterController.fenster.remove(add);
         }
 
+/**
+    * @method legt die Funktionsweise von Vertrag hinzufügen fest
+    */
         public void vertraghinzufuegenWurdeGedrueckt(){
             MasterController.fenster.remove(add);
             App.masterController.loadVertragHinzufuegenLayer(angemeldetePerson);

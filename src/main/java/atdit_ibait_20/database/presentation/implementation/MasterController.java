@@ -13,7 +13,9 @@ import java.awt.*;
 */
 public class MasterController {
     static final JFrame fenster = new JFrame();
+    static String woBinIch = "";
     public void loadStartLayer(){
+        woBinIch = "start";
         fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
         fenster.pack();
@@ -24,28 +26,49 @@ public class MasterController {
         SwingPresentation.clearAllTextFields();
     }
     public void loadAnmeldeLayer(){
+        woBinIch = "anmelden";
         fenster.setSize(250, 325);
         SwingPresentation.clearAllTextFields();
         new AnmeldeLayer();
     }
     public void loadEinstellungsLayer(Person angemeldetePerson){
+        woBinIch = "einstellungen";
         MasterController.fenster.setSize(1300,500);
         SwingPresentation.clearAllTextFields();
         new EinstellungsLayer(angemeldetePerson);
     }
     public void loadRegistrierLayer(){
+        woBinIch = "registrieren";
         MasterController.fenster.setSize(400,600);
         SwingPresentation.clearAllTextFields();
         new RegistrierLayer();
     }
     public void loadVertragHinzufuegenLayer(Person angemeldetePerson){
+        woBinIch = "vertragHinzufuegen";
         MasterController.fenster.setSize(400,400);
         SwingPresentation.clearAllTextFields();
         new VertragHinzufuegenLayer(angemeldetePerson);
     }
     public void loadVertragsuebersicht(Person angemeldetePerson){
+        woBinIch = "vertragsübersicht";
         MasterController.fenster.setSize(400,400);
         SwingPresentation.clearAllTextFields();
         new Vertragsuebersicht(angemeldetePerson);
+    }
+    public void resetAllStrings(){
+        if(woBinIch.equals("start")){
+            StartLayer.setStrings();
+        }else if(woBinIch.equalsIgnoreCase("anmelden")){
+            AnmeldeLayer.setStrings();
+        }else if(woBinIch.equalsIgnoreCase("registrieren")){
+            RegistrierLayer.setStrings();
+        }else if(woBinIch.equalsIgnoreCase("einstellungen")){
+            EinstellungsLayer.setStrings();
+        }else if(woBinIch.equalsIgnoreCase("vertragHinzufuegen")){
+            VertragHinzufuegenLayer.setStrings();
+        }else if(woBinIch.equalsIgnoreCase("vertragsübersicht")){
+            Vertragsuebersicht.setStrings();
+        }
+        MasterController.fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
     }
 }

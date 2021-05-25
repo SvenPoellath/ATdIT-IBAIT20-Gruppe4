@@ -100,10 +100,9 @@ public class StartLayer implements SwingPresentation {
     /**
     * @method Legt die Schriftzüge der einzelnen Elemente des Layouts fest
     */
-    private static void setStrings(){
+    static void setStrings(){
         button1.setText(App.resourceBundle.getString("sign.in"));
         label1.setText(App.resourceBundle.getString("welcome.to.our.app"));
-        MasterController.fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
         button2.setText(App.resourceBundle.getString("register"));
         sprachen = new String[]{App.resourceBundle.getString("choose.your.language"), App.resourceBundle.getString("german"), App.resourceBundle.getString("english")};
         spracheWaelen = new JComboBox<>(sprachen);
@@ -131,7 +130,7 @@ public class StartLayer implements SwingPresentation {
         else if(cb.getSelectedIndex() == 2){
             setSpracheToEnglish();
         }
-        resetAllStrings();
+        App.masterController.resetAllStrings();
     }
     /**
     * @method setzt die Sprache auf Deutsch
@@ -147,14 +146,6 @@ public class StartLayer implements SwingPresentation {
     void setSpracheToEnglish(){
         Locale.setDefault(Locale.ENGLISH);
         App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());
-    }
-    void resetAllStrings(){
-        setStrings();
-        RegistrierLayer.setStrings();
-        AnmeldeLayer.setStrings();
-        EinstellungsLayer.setStrings();
-        VertragHinzufuegenLayer.setStrings();
-        Vertragsuebersicht.setStrings();
     }
 }
 

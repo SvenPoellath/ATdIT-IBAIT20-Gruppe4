@@ -168,23 +168,27 @@ public class RegistrierLayer implements SwingPresentation {
 */
     boolean checkInputs(){
         label1.setText(null);
+        if(textField1.getText().equals("")||textField2.getText().equals("")||textField3.getText().equals("")||textField4.getText().equals("")||textField5.getText().equals("")||textField6.getText().equals("")||textField7.getText().equals("")||textField8.getText().equals("")||textField9.getText().equals("")||textField10.getText().equals("")){
+            label1.setText(App.resourceBundle.getString("please.fill.in.all.the.gaps"));
+        }
+        else {
+            if (!DATABASE.check_id(textField3.getText())) {
+                label1.setText(App.resourceBundle.getString("social.security.number") + " " + App.resourceBundle.getString("is.taken"));
+            }
 
-        if(!DATABASE.check_id(textField3.getText())) {
-            label1.setText(App.resourceBundle.getString("social.security.number") + " " + App.resourceBundle.getString("is.taken"));
-        }
-
-        if(textField3.getText().length()!=12){
-            label1.setText(App.resourceBundle.getString("invalid")+" "+App.resourceBundle.getString("social.security.number"));
-        }
-        try{
-            Integer.parseInt(textField4.getText());
-        }catch (NumberFormatException nfe){
-            label1.setText(App.resourceBundle.getString("invalid")+" "+App.resourceBundle.getString("postcode"));
-        }
-        try{
-            Long.parseLong(textField9.getText());
-        }catch (NumberFormatException nfe){
-            label1.setText(App.resourceBundle.getString("invalid")+" "+App.resourceBundle.getString("phone.number"));
+            if (textField3.getText().length() != 12) {
+                label1.setText(App.resourceBundle.getString("invalid") + " " + App.resourceBundle.getString("social.security.number"));
+            }
+            try {
+                Integer.parseInt(textField4.getText());
+            } catch (NumberFormatException nfe) {
+                label1.setText(App.resourceBundle.getString("invalid") + " " + App.resourceBundle.getString("postcode"));
+            }
+            try {
+                Long.parseLong(textField9.getText());
+            } catch (NumberFormatException nfe) {
+                label1.setText(App.resourceBundle.getString("invalid") + " " + App.resourceBundle.getString("phone.number"));
+            }
         }
         if (label1.getText()!=null){
             MasterController.fenster.add(falscheAngabePanel);

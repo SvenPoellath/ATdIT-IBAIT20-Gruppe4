@@ -57,12 +57,7 @@ public class BasicVertrag implements Vertrag {
         Buchungsart = buchungsart;
         EURBetrag = eurBetrag;
     }
-/**
-* @Method getter ermöglicht das Zugreifen auf die Parameter von außerhalb der Klasse
-* @Param Versicherungsart
-* @Param Buchungsart
-* @Param EURBetrag
-*/
+
     @Override
     public String getVersicherungsart() {
         return this.Versicherungsart;

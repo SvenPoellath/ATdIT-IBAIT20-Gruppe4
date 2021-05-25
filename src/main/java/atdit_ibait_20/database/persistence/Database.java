@@ -4,9 +4,8 @@ import atdit_ibait_20.database.model.Person;
 import atdit_ibait_20.database.model.Vertrag;
 
 /**
-* Legt verschiedene Methoden an mit deren Hilfe bei implementierung die Datenbank leichter bearbeitet werden können. 
-* Durch das Interface können leichter Methoden hinzugefügt und entfernt werden
-*/
+ * Das Interface dient zur einfachen Implementierung verschiedener Datenbank Services
+ */
 public interface Database {
 
     void create_tables();

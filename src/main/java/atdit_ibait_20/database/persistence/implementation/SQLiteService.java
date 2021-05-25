@@ -12,12 +12,16 @@ import java.sql.*;
 import static atdit_ibait_20.database.persistence.implementation.PasswordService.*;
 /**
 * Die Klasse DatabaseService wird erstellt um eine Verbindung mit der Datenbank herzustellen.
-* Es wird versucht eine Verbindung über den String URL herzustellen und darüber auf die Datenbank zuzugreifen.
+ * Hier sind alle Methoden abgelegt die zum Erstellen, Aendern oder Loeschen von Datenbankeintraegen notwendig sind
 */
 public class SQLiteService implements Database {
 
     public static final String URL = "jdbc:sqlite:src/main/java/atdit_ibait_20/database/persistence/database.sqlite";
 
+    /**
+     * ew wird eine Verbindung zur Datenbank aufgebaut
+     * @return die Verbindung zur Datenbank
+     */
     public Connection connect() {
 
         Connection conn = null;
@@ -30,9 +34,12 @@ public class SQLiteService implements Database {
         }
         return conn;
     }
-/**
-* @Method führt die Verbindung zur Datenbank aus
-*/
+
+    /**
+     * Es werden die Befehle auf der Datenbank ausgefuehrt
+     * @param sql der auszufuehrende Befehl
+     * @param conn die Verbindung zur Datenbank
+     */
     public void execute(String sql, Connection conn) {
         try {
             if (conn != null) {
@@ -44,9 +51,11 @@ public class SQLiteService implements Database {
                 System.out.println(e.getMessage());
             }
         }
-/**
-* @Method schliesst die Verbindung zur Datenbank
-*/
+
+    /**
+     * schliesst die Verbindung zur Datenbank
+     * @param conn Verbindung welche geschlossen werden soll
+     */
     public void close(Connection conn) {
         try {
             if (conn != null)
@@ -56,9 +65,10 @@ public class SQLiteService implements Database {
             System.out.println(e.getMessage());
         }
     }
-/**
-* @Method Die Methode erlaubt es verschiedene Tabellen in der Datenbank anzulegen und mit Attributen zu befüllen.
-*/
+
+    /**
+     * Erstellt beim ersten Ausfuehren der App die Tabellen der Datenbank, falls diese noch nicht existieren
+     */
     public void create_tables() {
         Connection conn = connect();
         String sql = """
@@ -96,11 +106,10 @@ public class SQLiteService implements Database {
         close(conn);
     }
 
-/**
-* @Method erlaubt es Personen mit verschiedenen Attributen anzulegen, in der Datenbank zu speichern und das Passwort zu verschlüsseln
-* @Param salt
-* @Param securePassword
-*/
+    /**
+     * E wird ein Eintrag einer Person auf der Datenbank erstellt
+     * @param person Die zu erstellende Person
+     */
     public void create_person_entry(Person person) {
         Connection conn = connect();
 
@@ -133,9 +142,12 @@ public class SQLiteService implements Database {
 
         close(conn);
     }
-/**
-* @Method erlaubt es neue Verträge anzulegen und in der Datenbank zu speichern
-*/
+
+    /**
+     * Es wird ein neuer Vertrag in der Datenbank erstellt
+     * @param contract der zu erstellende Vertrag
+     * @param person_id die ID der Person, welche den Vertrag abschliesst
+     */
     public void create_contract_entry(Vertrag contract, String person_id) {
         Connection conn = connect();
         String sql = "INSERT INTO contract(order_number,person_id,insurance_type,booking_type,price) VALUES(?,?,?,?,?)";
@@ -153,9 +165,12 @@ public class SQLiteService implements Database {
 
         close(conn);
     }
-/**
-* @Method erlaubt es auf die Datenbank zuzugreifen und mit Hilfe der ID die Daten einer Person abzufragen
-*/
+
+    /**
+     * Gibt den Eintrag einer Person von der Datenbank anhand des Primaerschluessels ID zurueck
+     * @param id Sozialversicherungsnummer der abgefragten Person
+     * @return die Person, zu der Daten abgefragt wurden
+     */
     public BasicPerson get_person_by_id(String id) {
         String sql = "SELECT id, form_of_address, first_name, last_name, birth_date, nationality, marital_status, zip_code, city, street, house_number, email_address, phone_number, label16 FROM person WHERE id = ?";
         Connection conn = connect();
@@ -186,10 +201,11 @@ public class SQLiteService implements Database {
     get_contract_by_id(returnPerson);
     return returnPerson;
     }
-/**
-* @Method erlaubt es mithilfe der ID des Vertrages alle weiteren Informationen des Vertrages von der Datenbank einzusehen,
-* die Daten zu ändern und neue Verträge anzulegen
-*/
+
+    /**
+     * gibt die Vertraege zu einer Person anhand der ID zurueck
+     * @param person Die Person zu der die Vertraege abgefragt werden
+     */
     public void get_contract_by_id(Person person) {
         String sql = "SELECT order_number,person_id,insurance_type,booking_type,price FROM contract WHERE person_id = ?";
         try (PreparedStatement pstmt = connect().prepareStatement(sql)) {
@@ -208,30 +224,55 @@ public class SQLiteService implements Database {
         System.out.println("All contracts for id: " + person.getSozialversicherungsnummer() + " added.");
     }
 
+    /**
+     * Ermoegllicht die Aenderung von Eintraegen einer Person welche als String typisiert sind
+     * @param id Sozialversicherungsnummer der Person
+     * @param entry Spalte der Datenbanktabelle
+     * @param value Wert welcher eingetragen werden soll
+     */
     public void update_person_by_id( String id, String entry, String value) {
         String sql = "UPDATE person SET " + entry + "='" + value + "' WHERE id='" + id + "'";
         Connection conn = connect();
         execute(sql,conn);
     }
-
+    /**
+     * Ermoegllicht die Aenderung von Eintraegen einer Person welche als Integer typisiert sind
+     * @param id Sozialversicherungsnummer der Person
+     * @param entry Spalte der Datenbanktabelle
+     * @param value Wert welcher eingetragen werden soll
+     */
     public void update_person_by_id(String id, String entry, Integer value) {
         String sql = "UPDATE person SET " + entry + "=" + value + " WHERE id='" + id + "'";
         Connection conn = connect();
         execute(sql,conn);
     }
-
+    /**
+     * Ermoegllicht die Aenderung von Eintraegen einer Person welche als Long typisiert sind
+     * @param id Sozialversicherungsnummer der Person
+     * @param entry Spalte der Datenbanktabelle
+     * @param value Wert welcher eingetragen werden soll
+     */
     public void update_person_by_id(String id, String entry, Long value) {
         String sql = "UPDATE person SET " + entry + "=" + value + " WHERE id='" + id + "'";
         Connection conn = connect();
         execute(sql,conn);
     }
 
+    /**
+     * Loescht eine Person aus der Datenbank
+     * @param id Sozialversicherungsnummer der zu loeschenden Person
+     */
     public void delete_person_by_id(String id) {
         String sql = "DELETE FROM person WHERE id='" + id + "'";
         Connection conn = connect();
         execute(sql,conn);
     }
 
+    /**
+     * erlaubt das Aendern des Passwortes
+     * @param id Sozialversicherungsnummer der Person, welche ihr Passwort aendert
+     * @param password das neue Passwort welches eingetragen werden soll
+     */
     public void update_password_by_id(String id, String password) {
         String salt = getSalt();
         String securePassword = generateSecurePassword(password,salt);
@@ -240,10 +281,13 @@ public class SQLiteService implements Database {
         update_person_by_id(id,"salt",salt);
 
     }
-/**
-* @Method Überprüft ob die ID Korrekt ist
-* @param id
-*/
+
+    /**
+     * ueberprueft ob die eingegebene Sozialversicherungsnummer schon auf der Datenbank vorhanden ist
+     * Dient zur Sicherung des Primaerschluessels
+     * @param id Sozialversciherungsnummer, welche ueberprueft werden soll
+     * @return true falls die ID noch nicht vergeben ist, false falls doch
+     */
     @Override
     public boolean check_id(String id) {
         String sql = "SELECT (count(*) > 0) as found FROM person WHERE id=?";
@@ -273,12 +317,11 @@ public class SQLiteService implements Database {
     }
 
     /**
-* @Method überprüft ob die vom Nutzer eingegebenen Anmeldeinformationen mit den in der Datenbank übereinstimmen.
-* Wenn das Passwort stimmt, wird der Nutzer erfolgreich verifiziert.
-* @param salt
-* @param securePassword
-*/
-
+     * ueberprueft die bei der Anmeldung uebergebenen Daten mit den Eintraegen auf der Datenbank
+     * @param id Sozialversicherungsnummer der Person, welche sich anmeldet
+     * @param providedPassword Passwort welches eingegeben wurde
+     * @return true falls die Eitraege uebereinstimmen, false falls nicht
+     */
     public boolean check_Login(String id, String providedPassword) {
 
         String salt = null;
@@ -300,9 +343,12 @@ public class SQLiteService implements Database {
 
     return verifyUserPassword(providedPassword,securePassword,salt);
     }
-/**
-* @Method überprüft ob die Bestellnummer des Kunden noch frei ist.
-*/
+
+    /**
+     * ueberprueft ob die generierte Vertragsnummer noch nicht vergeben ist
+     * @param orderNumber die generierte Vertragsnummer
+     * @return true falls noch nicht vergeben, false falls doch
+     */
     public boolean check_order_number(String orderNumber) {
         boolean returnValue = true;
         Connection conn = connect();

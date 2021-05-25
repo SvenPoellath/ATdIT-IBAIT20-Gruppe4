@@ -168,28 +168,75 @@ public class RegistrierLayer implements SwingPresentation {
 */
     boolean checkInputs(){
         label1.setText(null);
-        if(textField1.getText().equals("")||textField2.getText().equals("")||textField3.getText().equals("")||textField4.getText().equals("")||textField5.getText().equals("")||textField6.getText().equals("")||textField7.getText().equals("")||textField8.getText().equals("")||textField9.getText().equals("")||textField10.getText().equals("")){
-            label1.setText(App.resourceBundle.getString("please.fill.in.all.the.gaps"));
-        }
-        else {
-            if (!DATABASE.check_id(textField3.getText())) {
-                label1.setText(App.resourceBundle.getString("social.security.number") + " " + App.resourceBundle.getString("is.taken"));
-            }
+        String invalid_m = App.resourceBundle.getString("invalid.m");
+        String invalid_f = App.resourceBundle.getString("invalid.f");
+        String invalid_it = App.resourceBundle.getString("invalid.it");
 
-            if (textField3.getText().length() != 12) {
-                label1.setText(App.resourceBundle.getString("invalid") + " " + App.resourceBundle.getString("social.security.number"));
-            }
-            try {
-                Integer.parseInt(textField4.getText());
-            } catch (NumberFormatException nfe) {
-                label1.setText(App.resourceBundle.getString("invalid") + " " + App.resourceBundle.getString("postcode"));
-            }
+        if (new String(tfRegistrierPasswort.getPassword()).length() == 0){
+            label1.setText(invalid_it+" "+App.resourceBundle.getString("password"));
+        }
+        //ID
+        if(textField3.getText().length()!=12){
+            label1.setText(invalid_f+" "+App.resourceBundle.getString("social.security.number"));
+        }
+        else if(!DATABASE.check_id(textField3.getText())) {
+            label1.setText(App.resourceBundle.getString("social.security.number") + " " + App.resourceBundle.getString("is.taken"));
+        }
+        //phone number
+        if(textField9.getText().length() != 0) {
             try {
                 Long.parseLong(textField9.getText());
             } catch (NumberFormatException nfe) {
-                label1.setText(App.resourceBundle.getString("invalid") + " " + App.resourceBundle.getString("phone.number"));
+                label1.setText(invalid_f + " " + App.resourceBundle.getString("phone.number"));
             }
         }
+        else {
+            label1.setText(invalid_f + " " + App.resourceBundle.getString("phone.number"));
+        }
+        //mail address
+        if (textField8.getText().length() == 0){
+            label1.setText(invalid_f + " " + App.resourceBundle.getString("e.mail.address"));
+        }
+        //house number
+        if(textField7.getText().length() == 0){
+            label1.setText(invalid_f+" "+App.resourceBundle.getString("house.number"));
+        }
+        //street
+        if(textField6.getText().length() == 0){
+            label1.setText(invalid_f+" "+App.resourceBundle.getString("street"));
+        }
+        //city
+        if(textField5.getText().length() == 0){
+            label1.setText(invalid_m+" "+App.resourceBundle.getString("city"));
+        }
+        //postcode
+        if (textField4.getText().length() != 0){
+            try{
+                Integer.parseInt(textField4.getText());
+            }catch (NumberFormatException nfe){
+                label1.setText(invalid_f+" "+App.resourceBundle.getString("postcode"));
+            }
+        }
+        else if (textField4.getText().length() != 5) {
+            label1.setText(invalid_f+" "+App.resourceBundle.getString("postcode"));
+        }
+        //nationality
+        if(textField10.getText().length() == 0){
+            label1.setText(invalid_f+" "+App.resourceBundle.getString("nationality"));
+        }
+        //surname
+        if(textField2.getText().length() == 0){
+            label1.setText(invalid_m+ " "+App.resourceBundle.getString("surname"));
+        }
+        //forename
+        if(textField1.getText().length() == 0){
+            label1.setText(invalid_m+ " "+App.resourceBundle.getString("forename"));
+        }
+        //title
+        if(cbAnrede.getSelectedItem() == "*"){
+            label1.setText((invalid_m+ " "+ App.resourceBundle.getString("title")));
+        }
+
         if (label1.getText()!=null){
             MasterController.fenster.add(falscheAngabePanel);
             MasterController.fenster.repaint();
@@ -256,24 +303,37 @@ public class RegistrierLayer implements SwingPresentation {
             }
         }
     }
-/**
-* @method fügt alle Daten aus dem Registrieren der Datenbank hinzu und erzeugt damit eine neue Person
-* @Param Vorname
-* @Param Nachname
-* @Param Geburtsdatum
-* @Param Passwort
-* @Param Anrede
-* @Param PLZ
-* @Param Ort
-* @Param Hausnummer
-* @Param Familienstand
-* @Param Mailadresse
-* @Param Telefonnummer
-* @Param Staatsangehörigkeit
-* @Param Strasse
-* @Param IBAN
-*/
-    public void registrieren(String versicherungsNummer, String vorname, String nachname, BasicGeburtsdatum neuesGeburtsDatum, String passwort, String anrede, int plz, String ort, String hausnummer, String familienstand, String mailAdresse, long telefonNummer, String staatsangehoerigkeit, String strasse) {
+    /**
+     * @method fügt alle Daten aus dem Registrieren der Datenbank hinzu und erzeugt damit eine neue Person
+     * @Param Vorname
+     * @Param Nachname
+     * @Param Geburtsdatum
+     * @Param Passwort
+     * @Param Anrede
+     * @Param PLZ
+     * @Param Ort
+     * @Param Hausnummer
+     * @Param Familienstand
+     * @Param Mailadresse
+     * @Param Telefonnummer
+     * @Param Staatsangehörigkeit
+     * @Param Strasse
+     * @Param IBAN
+     */
+    public void registrieren(String versicherungsNummer,
+                             String vorname,
+                             String nachname,
+                             BasicGeburtsdatum neuesGeburtsDatum,
+                             String passwort,
+                             String anrede,
+                             int plz,
+                             String ort,
+                             String hausnummer,
+                             String familienstand,
+                             String mailAdresse,
+                             long telefonNummer,
+                             String staatsangehoerigkeit,
+                             String strasse) {
         BasicPerson person = new BasicPerson(
                 versicherungsNummer,
                 vorname,

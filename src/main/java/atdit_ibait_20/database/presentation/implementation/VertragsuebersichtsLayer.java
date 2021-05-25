@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
     /**
     * Anlegen der Elemente für das Layout der Vertragsübersicht
     */
-public class Vertragsuebersicht implements SwingPresentation {
+public class VertragsuebersichtsLayer implements SwingPresentation {
     private static final JPanel add = new JPanel();
     private static final JMenuBar menuBar = new JMenuBar();
     private static final JMenu menu = new JMenu(App.resourceBundle.getString("menu"));
@@ -21,7 +21,7 @@ public class Vertragsuebersicht implements SwingPresentation {
 
 
     private static Person angemeldetePerson;
-    public Vertragsuebersicht(Person person){
+    public VertragsuebersichtsLayer(Person person){
         angemeldetePerson = person;
         setStrings();
         setLayout();

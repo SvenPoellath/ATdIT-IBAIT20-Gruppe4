@@ -53,7 +53,7 @@ public class MasterController {
         woBinIch = "vertragsübersicht";
         MasterController.fenster.setSize(400,400);
         SwingPresentation.clearAllTextFields();
-        new Vertragsuebersicht(angemeldetePerson);
+        new VertragsuebersichtsLayer(angemeldetePerson);
     }
     public void resetAllStrings(){
         if(woBinIch.equals("start")){
@@ -67,7 +67,7 @@ public class MasterController {
         }else if(woBinIch.equalsIgnoreCase("vertragHinzufuegen")){
             VertragHinzufuegenLayer.setStrings();
         }else if(woBinIch.equalsIgnoreCase("vertragsübersicht")){
-            Vertragsuebersicht.setStrings();
+            VertragsuebersichtsLayer.setStrings();
         }
         MasterController.fenster.setTitle(App.resourceBundle.getString("health.insurance.app"));
     }

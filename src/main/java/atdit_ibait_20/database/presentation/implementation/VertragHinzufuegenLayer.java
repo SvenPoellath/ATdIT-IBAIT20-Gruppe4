@@ -14,7 +14,7 @@ import java.awt.event.ItemListener;
 
 import static atdit_ibait_20.database.App.DATABASE;
 
-    /**
+    /*
     * Legt fest welche Elemente das Layout enthalten soll und wie es aussehen soll, wenn man einen Vertrag hinzufügen will.
     * @param versicherungsArten
     * @param buchungsArten
@@ -236,7 +236,7 @@ public class VertragHinzufuegenLayer implements SwingPresentation {
                 eingabenStimmen();
         }
     }
-    /**
+    /*
     * @method Gibt die monatlichen oder jährlichen Preise der Gepäcksversicherung aus
     * @param preise
     */

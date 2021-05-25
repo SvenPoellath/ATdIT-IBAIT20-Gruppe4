@@ -19,7 +19,6 @@ public class App {
     * @method Startet die Applikation und baut die Verbindung zur Datenbank auf
     */
     public static void main (String[] args) {
-
         masterController.loadStartLayer();
         DATABASE.create_tables();
     }

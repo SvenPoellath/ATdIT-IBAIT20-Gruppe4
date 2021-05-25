@@ -118,7 +118,7 @@ public class StartLayer implements SwingPresentation {
         App.masterController.loadAnmeldeLayer();
         removePanelsFromFrame();
     }
-    /**
+    /*
     * @method ermöglicht es die Sprache zu ändern
     * @param cb
     */
@@ -146,6 +146,14 @@ public class StartLayer implements SwingPresentation {
     void setSpracheToEnglish(){
         Locale.setDefault(Locale.ENGLISH);
         App.resourceBundle = ResourceBundle.getBundle(App.RESOURCE_BUNDLE_PATH,Locale.getDefault());
+    }
+    void resetAllStrings(){
+        setStrings();
+        RegistrierLayer.setStrings();
+        AnmeldeLayer.setStrings();
+        EinstellungsLayer.setStrings();
+        VertragHinzufuegenLayer.setStrings();
+        VertragsuebersichtsLayer.setStrings();
     }
 }
 

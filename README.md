@@ -169,5 +169,5 @@ Telefon: 12345678
 
 Bei Fragen zur Installation der Entwicklerversion schauen Sie bitte hier  
 Um den Programmaufbau zu verstehen finden Sie [hier](https://github.com/SvenPoellath/ATdIT-IBAIT20-Gruppe4/tree/main/Programm) weitere Informationen  
-Zum Ausführen und Durchlaufen des Programms schauen Sie auf die Betriebsanleitung.
+Zum Ausführen und Durchlaufen des Programms schauen Sie auf die [Betriebsanleitung](https://github.com/SvenPoellath/ATdIT-IBAIT20-Gruppe4/tree/main/Projekt/Betriebsanleitung_ModVer).
 

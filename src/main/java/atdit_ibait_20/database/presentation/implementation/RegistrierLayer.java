@@ -28,7 +28,7 @@ public class RegistrierLayer implements SwingPresentation {
     private static String[] anredeAuswahl = new String[]{ "*",App.resourceBundle.getString("mister"), App.resourceBundle.getString("mrs")};
     private static Integer[] tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
     private static Integer[] monate = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12};
-    private static Integer[] jahre = new Integer[(Year.now().getValue()-1899)];
+    static Integer[] jahre = new Integer[(Year.now().getValue()-1899)];
     private static String [] familienstandArten = new String[]{App.resourceBundle.getString("single"),App.resourceBundle.getString("married"),App.resourceBundle.getString("divorced"),App.resourceBundle.getString("widowed")};
 
     static JComboBox<String> cbAnrede = new JComboBox<>(anredeAuswahl);
@@ -119,6 +119,8 @@ public class RegistrierLayer implements SwingPresentation {
 */
     @Override
     public void addComponentsToPanels() {
+        datenPanel.removeAll();
+        geburtsDatumsPanel.removeAll();
         registrierButtonPanel.add(button5);
         datenPanel.add(label2);
         datenPanel.add(cbAnrede);
@@ -172,16 +174,28 @@ public class RegistrierLayer implements SwingPresentation {
         String invalid_m = App.resourceBundle.getString("invalid.m");
         String invalid_f = App.resourceBundle.getString("invalid.f");
         String invalid_it = App.resourceBundle.getString("invalid.it");
-
+        textField1.setBorder(null);
+        textField2.setBorder(null);
+        textField3.setBorder(null);
+        textField4.setBorder(null);
+        textField5.setBorder(null);
+        textField6.setBorder(null);
+        textField7.setBorder(null);
+        textField8.setBorder(null);
+        textField9.setBorder(null);
+        textField10.setBorder(null);
+        tfRegistrierPasswort.setBorder(null);
         if (new String(tfRegistrierPasswort.getPassword()).length() == 0){
             label1.setText(invalid_it+" "+App.resourceBundle.getString("password"));
         }
         //ID
         if(textField3.getText().length()!=12){
             label1.setText(invalid_f+" "+App.resourceBundle.getString("social.security.number"));
+            textField3.setBorder(BorderFactory.createLineBorder(Color.red,1));
         }
         else if(!DATABASE.check_id(textField3.getText())) {
             label1.setText(App.resourceBundle.getString("social.security.number") + " " + App.resourceBundle.getString("is.taken"));
+            textField3.setBorder(BorderFactory.createLineBorder(Color.red,1));
         }
         //phone number
         if(textField9.getText().length() != 0) {
@@ -189,26 +203,32 @@ public class RegistrierLayer implements SwingPresentation {
                 Long.parseLong(textField9.getText());
             } catch (NumberFormatException nfe) {
                 label1.setText(invalid_f + " " + App.resourceBundle.getString("phone.number"));
+                textField9.setBorder(BorderFactory.createLineBorder(Color.red,1));
             }
         }
         else {
             label1.setText(invalid_f + " " + App.resourceBundle.getString("phone.number"));
+            textField9.setBorder(BorderFactory.createLineBorder(Color.red,1));
         }
         //mail address
         if (textField8.getText().length() == 0){
             label1.setText(invalid_f + " " + App.resourceBundle.getString("e.mail.address"));
+            textField8.setBorder(BorderFactory.createLineBorder(Color.red,1));
         }
         //house number
         if(textField7.getText().length() == 0){
             label1.setText(invalid_f+" "+App.resourceBundle.getString("house.number"));
+            textField7.setBorder(BorderFactory.createLineBorder(Color.red,1));
         }
         //street
         if(textField6.getText().length() == 0){
             label1.setText(invalid_f+" "+App.resourceBundle.getString("street"));
+            textField6.setBorder(BorderFactory.createLineBorder(Color.red,1));
         }
         //city
         if(textField5.getText().length() == 0){
-            label1.setText(invalid_m+" "+App.resourceBundle.getString("city"));
+            label1.setText(invalid_f+" "+App.resourceBundle.getString("city"));
+            textField5.setBorder(BorderFactory.createLineBorder(Color.red,1));
         }
         //postcode
         if (textField4.getText().length() != 0){
@@ -216,26 +236,31 @@ public class RegistrierLayer implements SwingPresentation {
                 Integer.parseInt(textField4.getText());
             }catch (NumberFormatException nfe){
                 label1.setText(invalid_f+" "+App.resourceBundle.getString("postcode"));
+                textField4.setBorder(BorderFactory.createLineBorder(Color.red,1));
             }
         }
         else if (textField4.getText().length() != 5) {
             label1.setText(invalid_f+" "+App.resourceBundle.getString("postcode"));
+            textField4.setBorder(BorderFactory.createLineBorder(Color.red,1));
         }
         //nationality
         if(textField10.getText().length() == 0){
             label1.setText(invalid_f+" "+App.resourceBundle.getString("nationality"));
+            textField10.setBorder(BorderFactory.createLineBorder(Color.red,1));
         }
         //surname
         if(textField2.getText().length() == 0){
             label1.setText(invalid_m+ " "+App.resourceBundle.getString("surname"));
+            textField2.setBorder(BorderFactory.createLineBorder(Color.red,1));
         }
         //forename
         if(textField1.getText().length() == 0){
             label1.setText(invalid_m+ " "+App.resourceBundle.getString("forename"));
+            textField1.setBorder(BorderFactory.createLineBorder(Color.red,1));
         }
         //title
         if(cbAnrede.getSelectedItem() == "*"){
-            label1.setText((invalid_m+ " "+ App.resourceBundle.getString("title")));
+            label1.setText((invalid_f+ " "+ App.resourceBundle.getString("title")));
         }
 
         if (label1.getText()!=null){

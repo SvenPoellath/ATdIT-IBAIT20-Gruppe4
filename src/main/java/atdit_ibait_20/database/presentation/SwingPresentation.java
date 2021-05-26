@@ -3,8 +3,10 @@ package atdit_ibait_20.database.presentation;
 import javax.swing.*;
 /** 
 * Legt fest welche Bestandteile das Layout haben kann
+ * Die UI Elemente werden in den jeweiligen Klassen gesetzt
 */
 public interface SwingPresentation {
+
     JButton button1 = new JButton();
     JButton button2 = new JButton();
     JButton button3 = new JButton();
@@ -47,12 +49,40 @@ public interface SwingPresentation {
     JTextField textField9 = new JTextField();
     JTextField textField10 = new JTextField();
 
-    public static void setStrings() {}
+    /**
+     *setzt die Texte fuer die UI Felder
+     */
+    static void setStrings() {}
+
+    /**
+     * erstellt das Grundraster des Layouts
+     */
     void setLayout();
+
+    /**
+     * weisst jedem Button den entsprechenden Listener zu
+     */
     void addListeners();
+
+    /**
+     * Die UI Komponenten werden auf die Panels geladen
+     */
     void addComponentsToPanels();
+
+    /**
+     * Die Panels werden zum Frame hinzugefuegt
+     */
     void addPanelsToFrame();
+
+    /**
+     * Es werden alle Panels entfernt um eine neue Seite laden zu koennen
+     */
     void removePanelsFromFrame();
+
+    /**
+     * Es werden alle Textfelder geleert um beim erneuten laden einer Seite die vorherigen Einträge nicht mehr angezeigt
+     * zu bekommen
+     */
     static void clearAllTextFields(){
         textField1.setText(null);
         textField2.setText(null);

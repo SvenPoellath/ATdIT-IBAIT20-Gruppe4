@@ -8,9 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-    /**
-    * Anlegen der Elemente für das Layout der Vertragsübersicht
-    */
+/**
+ * Die Klasse erstellt das UI fuer die Vertragsuebersichtsseite
+ * Hier werden die laufenden Vertraege der angemeldeten Person angezeigt
+ * Von hier aus koennen neue Vertraege gebucht werden
+ */
 public class VertragsuebersichtsLayer implements SwingPresentation {
     private static final JPanel add = new JPanel();
     private static final JMenuBar menuBar = new JMenuBar();
@@ -21,6 +23,12 @@ public class VertragsuebersichtsLayer implements SwingPresentation {
 
 
     private static Person angemeldetePerson;
+
+    /**
+     * Konstruktor der Klasse VertragsuebersichtsLayer
+     * Laedt das UI der Vertragsuebersichtsseite
+     * @param person die in der App angemeldete Person
+     */
     public VertragsuebersichtsLayer(Person person){
         angemeldetePerson = person;
         setStrings();
@@ -34,7 +42,7 @@ public class VertragsuebersichtsLayer implements SwingPresentation {
     }
 
     /**
-    * @method Genaue Einteilung wie vorhandene Verträge angezeigt werden sollen. 
+    * laedt die von der Person gebuchten Vertraege ins GUI
     */
     public static void addVorhandeneVertraegetoGUI(Person person){
         if(person.getVertraege() != null) {
@@ -62,10 +70,7 @@ public class VertragsuebersichtsLayer implements SwingPresentation {
             }
         }
     }
-    
-    /**
-    * @method Schriftzüge der Elemente des Layouts werden festgelegt
-    */
+
     static void setStrings(){
         einstellungen.setText(App.resourceBundle.getString("settings"));
         home.setText(App.resourceBundle.getString("home"));
@@ -79,17 +84,11 @@ public class VertragsuebersichtsLayer implements SwingPresentation {
         add.add(button6);
     }
 
-
-    /**
-    * @method Legt die Art des Layoutes fest, welches verwendet wird
-    **/
     @Override
     public void setLayout() {
         add.setLayout(new GridLayout(0,1));
     }
-    /**
-    * @method Legt die Funktionsweise einzelner Buttons fest
-    */
+
     @Override
     public void addListeners() {
         removeListeners();
@@ -98,9 +97,7 @@ public class VertragsuebersichtsLayer implements SwingPresentation {
         home.addActionListener(e->vertragsuebersichtWurdeAusgewaelt());
         button6.addActionListener(e->vertraghinzufuegenWurdeGedrueckt());
     }
-/**
-    * @method Entfernt die Funktionsweise einzelner Buttons
-    */
+
     public void removeListeners() {
         for (ActionListener listener : einstellungen.getActionListeners())
             einstellungen.removeActionListener(listener);
@@ -111,9 +108,7 @@ public class VertragsuebersichtsLayer implements SwingPresentation {
         for (ActionListener listener : button6.getActionListeners())
             button6.removeActionListener(listener);
     }
-/**
-    * @method Fügt die einzelnen Komponenten den Panels hinzu
-    */
+
     @Override
     public void addComponentsToPanels() {
         menu.add(home);
@@ -122,31 +117,26 @@ public class VertragsuebersichtsLayer implements SwingPresentation {
         menuBar.add(menu);
     }
 
-/**
-    * @method fügt die Panels dem Frame hinzu 
-    */
     @Override
     public void addPanelsToFrame() {
         MasterController.fenster.setJMenuBar(menuBar);
         MasterController.fenster.add(add);
     }
 
-/**
-    * @method entfernt die Panels vom Frame
-    */
         @Override
         public void removePanelsFromFrame() {
             MasterController.fenster.remove(add);
         }
 
-/**
-    * @method legt die Funktionsweise von Vertrag hinzufügen fest
-    */
+    /**
+     * leadt die Vertragsbuchungsseite wenn der Vertrag Hinzufuegen Konopf gedrueckt wurde
+     */
         public void vertraghinzufuegenWurdeGedrueckt(){
             MasterController.fenster.remove(add);
             App.masterController.loadVertragHinzufuegenLayer(angemeldetePerson);
             MasterController.fenster.validate();
     }
+
     public void removeAllPanelsFromFrame(){
         removePanelsFromFrame();
         MasterController.fenster.remove(VertragHinzufuegenLayer.neueIBAN);
@@ -158,16 +148,31 @@ public class VertragsuebersichtsLayer implements SwingPresentation {
         MasterController.fenster.remove(VertragHinzufuegenLayer.hinzufuegen);
         MasterController.fenster.remove(VertragHinzufuegenLayer.preise);
     }
+
+    /**
+     * laedt die Einstellungsseite falls ueber das Menu Einstellungen ausgewaehlt wurde
+     */
     public void einstellungenWurdenAusgewaelt(){
         removeAllPanelsFromFrame();
         App.masterController.loadEinstellungsLayer(angemeldetePerson);
         MasterController.fenster.validate();
     }
+
+    /**
+     * laedt die Vertragsuebersicht, falls ueber das Menu Vertragsuebersicht ausgewahlt wurde
+     */
     public void vertragsuebersichtWurdeAusgewaelt(){
         removeAllPanelsFromFrame();
         App.masterController.loadVertragsuebersicht(angemeldetePerson);
         MasterController.fenster.validate();
     }
+
+    /**
+     * loggt die angemeldetet Person aus
+     * Die Startseite wird angezeigt
+     * Dort werden alle vorherigen Eingaben zurueckgesetzt
+     * Die MenuBar wir ausgeblendet
+     */
     public void logoutWurdeAusgewaelt(){
         removeAllPanelsFromFrame();
         MasterController.fenster.setJMenuBar(null);

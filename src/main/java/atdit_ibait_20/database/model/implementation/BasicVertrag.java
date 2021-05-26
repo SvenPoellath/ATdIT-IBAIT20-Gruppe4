@@ -16,9 +16,11 @@ public class BasicVertrag implements Vertrag {
     private final String Auftragsnummer;
     private final String Buchungsart;
     private final int EURBetrag;
-/**
-* generateAuftragsnummer ist eine Methode, die eine zufällige Nummer für die Buchung der Versicherung generiert
-*/
+
+    /**
+     * es wird fuer den jeweiligen VErtrag eine Auftragsnummer generiert, welche einziartig ist
+     * @return die einzigartige, generierte Auftragsnummer
+     */
     public String generateAuftragsnummer() {
         int LENGTH = 12;
         int ITERATIONS = 1;
@@ -55,12 +57,7 @@ public class BasicVertrag implements Vertrag {
         Buchungsart = buchungsart;
         EURBetrag = eurBetrag;
     }
-/**
-* @Method getter ermöglicht das Zugreifen auf die Parameter von außerhalb der Klasse
-* @Param Versicherungsart
-* @Param Buchungsart
-* @Param EURBetrag
-*/
+
     @Override
     public String getVersicherungsart() {
         return this.Versicherungsart;

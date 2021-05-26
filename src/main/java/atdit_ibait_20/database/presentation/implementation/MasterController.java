@@ -40,6 +40,7 @@ public class MasterController {
         woBinIch = "anmelden";
         fenster.setSize(250, 325);
         SwingPresentation.clearAllTextFields();
+        RegistrierLayer.setStrings();
         new AnmeldeLayer();
     }
 

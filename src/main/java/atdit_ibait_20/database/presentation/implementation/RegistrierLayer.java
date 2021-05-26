@@ -28,7 +28,7 @@ public class RegistrierLayer implements SwingPresentation {
     private static String[] anredeAuswahl = new String[]{ "*",App.resourceBundle.getString("mister"), App.resourceBundle.getString("mrs")};
     private static Integer[] tage = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
     private static Integer[] monate = new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12};
-    private static Integer[] jahre = new Integer[(Year.now().getValue()-1899)];
+    static Integer[] jahre = new Integer[(Year.now().getValue()-1899)];
     private static String [] familienstandArten = new String[]{App.resourceBundle.getString("single"),App.resourceBundle.getString("married"),App.resourceBundle.getString("divorced"),App.resourceBundle.getString("widowed")};
 
     static JComboBox<String> cbAnrede = new JComboBox<>(anredeAuswahl);
@@ -119,6 +119,8 @@ public class RegistrierLayer implements SwingPresentation {
 */
     @Override
     public void addComponentsToPanels() {
+        datenPanel.removeAll();
+        geburtsDatumsPanel.removeAll();
         registrierButtonPanel.add(button5);
         datenPanel.add(label2);
         datenPanel.add(cbAnrede);
